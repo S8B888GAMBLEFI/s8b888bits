@@ -1,0 +1,2444 @@
+/*
+= ACCOUNT SECTION
+------------------------------------------------------------------------------------- */
+.account-overlay-outer {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	padding-top: 120px;
+	background-color: $color-black;
+	box-sizing: border-box;
+
+	@include breakpoint(960) {
+		padding-top: 90px;
+	}
+
+	@include breakpoint(640) {
+		overflow: auto;
+		padding-top: 150px;
+	}
+
+	.account-overlay-content {
+		overflow-y: auto;
+		overflow-x: hidden;
+		position: relative;
+		max-width: 1440px;
+		height: 100%;
+		padding: 0 80px;
+		margin: 0 auto;
+
+		@include breakpoint(1200) {
+			padding: 0 30px;
+		}
+
+		@include breakpoint(640) {
+			overflow: hidden;
+			height: auto;
+			padding: 0 10px;
+		}
+
+		&::-webkit-scrollbar {
+			background-color: #282930;
+		}
+
+		&::-webkit-scrollbar-button {
+			background-color: #2D2E37;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background-color: #1A1B20;
+		}
+	}
+
+	.account-overlay-footer {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		@include flexbox();
+		justify-content: space-between;
+		z-index: 4;
+		width: 100%;
+		padding: 20px 30px;
+		background-color: $color-black;
+		box-sizing: border-box;
+
+		.modal-close {
+			position: relative;
+			display: block;
+			left: auto;
+			bottom: auto;
+
+			&:before {
+				display: inline-block;
+				transform: translateX(-50%) translateY(-50%) translateZ(0px) rotate(45deg) scale(1, 1);
+				width: 45px;
+				height: 8px;
+				content: "";
+				border-radius: 6px;
+				background-color: $color-primary;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transition: all 300ms ease-in-out;
+			}
+
+			&:after {
+				display: inline-block;
+				transform: translateX(-50%) translateY(-50%) translateZ(0px) rotate(-45deg) scale(1, 1);
+				width: 45px;
+				height: 8px;
+				content: "";
+				border-radius: 6px;
+				background-color: $color-primary;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transition: all 300ms ease-in-out;
+			}
+
+			&:hover {
+
+				&::after,
+				&::before {
+					background-color: $color-white;
+				}
+			}
+		}
+
+		p {
+			margin: 0;
+			text-align: right;
+
+			strong {
+				font-weight: 700;
+				color: $color-primary;
+			}
+		}
+
+		@include breakpoint(960) {
+			padding: 0 20px;
+		}
+
+		@include breakpoint(640) {
+			position: relative;
+		}
+	}
+
+	.account-overlay-tab-nav {
+		position: fixed;
+		width: calc(100% - 160px);
+		@include flexbox();
+		justify-content: space-around;
+		margin-left: -9px;
+		margin-right: -9px;
+		margin-bottom: 43px;
+		padding-bottom: 10px;
+		background-color: $color-black;
+
+		z-index: 3;
+		overflow-x: auto;
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+
+		&::-webkit-scrollbar {
+			display: none;
+			width: 0;
+			background: transparent;
+		}
+
+		@include breakpoint(3800) {
+			width: calc(100% - 2250px);
+		}
+
+		@include breakpoint(3600) {
+			width: calc(100% - 2050px);
+		}
+
+		@include breakpoint(3400) {
+			width: calc(100% - 1760px);
+		}
+
+		@include breakpoint(3200) {
+			width: calc(100% - 1450px);
+		}
+
+		@include breakpoint(2960) {
+			width: calc(100% - 1420px);
+		}
+
+		@include breakpoint(2676) {
+			width: calc(100% - 1140px);
+		}
+
+		@include breakpoint(2400) {
+			width: calc(100% - 850px);
+		}
+
+		@include breakpoint(2340) {
+			width: calc(100% - 800px);
+		}
+
+		@include breakpoint(2200) {
+			width: calc(100% - 450px);
+		}
+
+		@include breakpoint(1980) {
+			width: calc(100% - 450px);
+		}
+
+		@include breakpoint(1920) {
+			width: calc(100% - 450px);
+		}
+
+		@include breakpoint(1600) {
+			width: calc(100% - 160px);
+		}
+
+		@include breakpoint(1440) {
+			width: calc(100% - 130px);
+		}
+
+		@include breakpoint(1280) {
+			width: calc(100% - 100px);
+		}
+
+		@include breakpoint(1200) {
+			width: calc(100% - 60px);
+		}
+
+		@include breakpoint(768) {
+			position: relative;
+			width: auto;
+			display: grid;
+			grid-template-columns: repeat(3, minmax(100px, 1fr));
+			grid-gap: 5px;
+		}
+
+		@include breakpoint(640) {
+			display: block;
+			overflow: hidden;
+			margin-left: -5px;
+			margin-right: -5px;
+		}
+
+		li {
+			flex-grow: 1;
+			margin: 0 3px;
+			font-family: $font-baloo;
+			font-style: normal;
+			font-weight: 400;
+			font-size: 22px;
+			line-height: 24px;
+			text-align: center;
+
+			@include breakpoint(1200) {
+				font-size: 18px;
+			}
+
+			@include breakpoint(1024) {
+				font-size: 16px;
+			}
+
+			@include breakpoint(960) {
+				margin: 0 4px;
+			}
+
+			@include breakpoint(768) {
+				margin-bottom: 5px;
+
+				&:last-child {
+					//grid-column-start: 1; grid-column-end: 4;
+					float: left;
+					width: calc(50% - 8px);
+					margin-bottom: 8px;
+					font-size: 20px;
+				}
+			}
+
+			@include breakpoint(640) {
+				float: left;
+				width: calc(50% - 8px);
+				margin-bottom: 8px;
+				font-size: 20px;
+
+				&:last-child {
+					/*float: none; clear: both;
+					width: auto;*/
+					float: left;
+					width: calc(50% - 8px);
+					margin-bottom: 8px;
+					font-size: 20px;
+				}
+			}
+
+			a {
+				display: block;
+				padding: 15px 15px 15px 60px;
+				color: $color-white;
+				background-position: 7px 50%;
+				background-repeat: no-repeat;
+				background-color: #737887;
+				border-radius: 8px;
+
+				@include breakpoint(1200) {
+					padding: 15px 10px 15px 50px;
+				}
+
+				@include breakpoint(1024) {
+					padding-left: 40px;
+					background-size: auto 30px;
+				}
+
+				@include breakpoint(320) {
+					font-size: 18px;
+				}
+
+				&:active {
+					background-color: $color-primary;
+				}
+
+				&:after {
+					display: none;
+				}
+
+				&.dashboard {
+					background-image: url(/pictures/image-icons/account/active/icon-tab-dashboard.svg);
+
+					&.active {
+						background-image: url(/pictures/image-icons/account/active/icon-tab-dashboard.svg);
+					}
+				}
+
+				&.profile {
+					background-image: url(/pictures/image-icons/account/active/icon-tab-profile.svg);
+
+					&.active {
+						background-image: url(/pictures/image-icons/account/active/icon-tab-profile.svg);
+					}
+
+					@include breakpoint(1024) {
+						background-size: auto 25px;
+					}
+				}
+
+				&.deposit {
+					background-image: url(/pictures/image-icons/account/active/icon-tab-deposit.svg);
+
+					&.active {
+						background-image: url(/pictures/image-icons/account/active/icon-tab-deposit.svg);
+					}
+				}
+
+				&.withdrawal {
+					background-image: url(/pictures/image-icons/account/active/icon-tab-withdrawal.svg);
+
+					&.active {
+						background-image: url(/pictures/image-icons/account/active/icon-tab-withdrawal.svg);
+					}
+				}
+
+				&.security {
+					background-image: url(/pictures/image-icons/account/active/icon-tab-security.svg);
+
+					&.active {
+						background-image: url(/pictures/image-icons/account/active/icon-tab-security.svg);
+					}
+				}
+
+				&.limits {
+					background-image: url(/pictures/image-icons/account/active/icon-tab-limits.svg);
+
+					&.active {
+						background-image: url(/pictures/image-icons/account/active/icon-tab-limits.svg);
+					}
+
+					@include breakpoint(1024) {
+						background-size: auto 25px;
+					}
+				}
+
+				&.history {
+					background-image: url(/pictures/image-icons/account/active/icon-tab-history.svg);
+
+					&.active {
+						background-image: url(/pictures/image-icons/account/active/icon-tab-history.svg);
+					}
+				}
+
+				&.modal-close {
+					position: relative;
+					width: 30px;
+					height: 30px;
+					top: -5px;
+					left: 0px;
+					background-color: transparent;
+
+					&::before {
+						display: inline-block;
+						transform: translateX(-50%) translateY(-50%) translateZ(0px) rotate(45deg) scale(1, 1);
+						width: 50px;
+						height: 8px;
+						content: "";
+						border-radius: 6px;
+						background-color: $color-primary;
+						position: absolute;
+						left: 50%;
+						top: 50%;
+						transition: all 300ms ease-in-out;
+					}
+
+					&::after {
+						display: inline-block;
+						transform: translateX(-50%) translateY(-50%) translateZ(0px) rotate(-45deg) scale(1, 1);
+						width: 50px;
+						height: 8px;
+						content: "";
+						border-radius: 6px;
+						background-color: $color-primary;
+						position: absolute;
+						left: 50%;
+						top: 50%;
+						transition: all 300ms ease-in-out;
+					}
+
+					&:hover {
+
+						&::after,
+						&::before {
+							background-color: $color-white;
+						}
+					}
+				}
+			}
+
+			&.active {
+				background-color: transparent;
+
+				a {
+					background-color: $color-primary;
+				}
+			}
+		}
+	}
+
+	.account-overlay-tab-content {
+		padding-bottom: 100px;
+		padding-top: 70px;
+
+		@include breakpoint(768) {
+			padding-top: 0;
+		}
+
+		@include breakpoint(640) {
+			padding-bottom: 10px;
+		}
+
+		.tab-content {
+			display: none;
+			color: $color-white;
+
+			&.active {
+				display: block;
+			}
+		}
+
+		.tab-boxes {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(200px, 1fr));
+			grid-gap: 17px;
+
+			@include breakpoint(960) {
+				display: block;
+			}
+
+			.box {
+				padding: 15px 26px;
+				background: #212121;
+				box-shadow: 0px 5px 10px $color-black;
+				border-radius: 20px;
+
+				&.margin-top {
+					margin-top: 20px;
+				}
+
+				@include breakpoint(960) {
+					margin-bottom: 20px;
+				}
+
+				@include breakpoint(640) {
+					padding: 10px;
+					border-radius: 10px;
+				}
+
+				// Typography
+				h4 {
+					margin-bottom: 15px;
+					font-size: 26px;
+					line-height: 30px;
+					color: $color-primary;
+					font-family: $font-baloo;
+					font-style: normal;
+					font-weight: 400;
+					letter-spacing: 0;
+
+					display: flex;
+					justify-content: space-between;
+					flex-wrap: nowrap;
+
+					>span.unique-player-id {
+						font-family: $font-primary;
+						font-size: 20px;
+						font-weight: 500;
+						letter-spacing: 0;
+						text-align: right;
+					}
+
+					&.limits-title {
+						justify-content: center;
+						margin-top: 10px;
+						margin-bottom: 10px;
+					}
+				}
+
+				h5 {
+					margin-bottom: 20px;
+					font-size: 22px;
+					line-height: 34px;
+					color: #E5E5E5;
+					letter-spacing: 0.44px;
+
+					&.space-top {
+						$font-family: $font-baloo;
+						font-size: 22px;
+						font-weight: 400;
+						font-style: normal;
+						color: #E5E5E5;
+						text-align: center;
+						letter-spacing: 0;
+						line-height: 24px;
+					}
+				}
+
+				h6 {
+					font-family: $font-primary;
+					font-size: 20px;
+					line-height: 24px;
+					color: #A1AFC3;
+					letter-spacing: 0.04px;
+					font-weight: 700;
+				}
+
+				p {
+					font-family: $font-primary;
+					font-size: 16px;
+					font-weight: 600;
+					font-style: normal;
+					color: #E5E5E5;
+					letter-spacing: 0;
+					line-height: 20px;
+
+					&.acc-info-txt {
+						a {
+							font-family: $font-primary;
+							font-size: 18px;
+							font-weight: 700;
+							color: $color-primary;
+							letter-spacing: 0.444px;
+							text-decoration-line: underline;
+
+							&:hover {
+								text-decoration-line: none;
+							}
+						}
+					}
+
+					&.limits-info-txt {
+						font-family: $font-primary;
+						font-size: 16px;
+						font-weight: 600;
+						color: #E5E5E5;
+						letter-spacing: 0;
+						line-height: 20px;
+						margin-top: 20px;
+						margin-bottom: 30px;
+					}
+
+					&.deactivate-account-info-txt {
+						font-family: $font-primary;
+						font-size: 18px;
+						font-weight: bold;
+						color: #A1AFC3;
+						letter-spacing: 0;
+						line-height: 25px;
+					}
+
+					&.file-upload-info-txt {
+						font-family: $font-primary;
+						font-size: 16px;
+						font-weight: 600;
+						color: #E5E5E5;
+						letter-spacing: 0;
+						line-height: 20px;
+						text-align: center;
+					}
+
+					&.file-upload-info-bottom-txt {
+						font-family: $font-baloo;
+						font-size: 20px;
+						font-weight: 400;
+						font-style: normal;
+						color: #737887;
+						letter-spacing: 0;
+						line-height: 26px;
+						text-align: center;
+						text-decoration-line: underline;
+					}
+
+					&.description-text {
+						font-family: $font-primary;
+						font-size: 16px;
+						font-weight: 600;
+						color: #E5E5E5;
+						text-align: center;
+						letter-spacing: 0;
+						line-height: 20px;
+					}
+
+					&.time-notification {
+						font-family: $font-baloo;
+						font-style: normal;
+						font-weight: 400;
+						font-size: 22px;
+						line-height: 24px;
+						color: $color-primary;
+						margin-top: 5px;
+						margin-bottom: 5px;
+					}
+
+					&.timeout-text {
+						font-family: $font-baloo;
+						font-style: normal;
+						font-weight: 400;
+						font-size: 26px;
+						line-height: 30px;
+						color: #3AD29F;
+						margin-top: 5px;
+						margin-bottom: 5px;
+					}
+
+					&.promotion-code-information {
+						font-family: $font-baloo;
+						font-style: normal;
+						font-weight: 400;
+						font-size: 24px;
+						line-height: 28px;
+						color: #A1AFC3;
+					}
+
+					&.voucher-code-information {
+						font-family: $font-baloo;
+						font-style: normal;
+						font-weight: 400;
+						font-size: 24px;
+						line-height: 28px;
+						color: #A1AFC3;
+					}
+				}
+
+				.acc-box-title {
+					@include flexbox();
+					justify-content: space-between;
+					align-items: center;
+					margin-bottom: 40px;
+
+					h4 {
+						margin-bottom: 0;
+					}
+
+					.acc-cal-toolbar {
+						margin-bottom: 0;
+
+						>ul {
+							margin-left: 30px;
+						}
+					}
+				}
+
+				// Layout
+				.two-cols {
+					@include flexbox();
+					margin: 0 -35px;
+
+					@include breakpoint(1024) {
+						margin: 0 -15px;
+					}
+
+					@include breakpoint(768) {
+						display: block;
+						margin: 0;
+					}
+
+					.col {
+						flex: 0 0 50%;
+						padding: 0 35px;
+						box-sizing: border-box;
+
+						@include breakpoint(1024) {
+							padding: 0 15px;
+						}
+
+						@include breakpoint(640) {
+							padding: 0;
+						}
+
+						&.has-btn-reposition {
+							@include breakpoint(768) {
+								@include flexbox();
+								flex-direction: column;
+
+								.box-btn-reposition {
+									order: 2;
+								}
+							}
+						}
+					}
+				}
+
+				// Extended wrapper
+				.box-wrapper-extended {
+					margin-left: -16px;
+					margin-right: -16px;
+
+					@include breakpoint(640) {
+						margin-left: 0;
+						margin-right: 0;
+					}
+				}
+
+				// Boxed items
+				.currency-item {
+					@include flexbox();
+					align-items: center;
+					padding: 10px 20px;
+					margin-bottom: 15px;
+					background: linear-gradient(135deg, #2D2E37 0%, #1A1B20 100%);
+					box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.501748);
+					border-radius: 15px;
+
+					@include breakpoint(1024) {
+						padding: 10px 10px;
+					}
+
+					figure {
+						flex: 0 1 40px;
+						width: 70px;
+						margin-right: 25px;
+
+						img {
+							display: block;
+							height: 50px;
+							width: auto;
+							margin: 0 auto;
+						}
+
+						@include breakpoint(1280) {
+							width: 50px;
+							margin-right: 15px;
+
+							img {
+								height: 50px;
+							}
+						}
+
+						@include breakpoint(1024) {
+							width: 50px;
+							margin-right: 10px;
+
+							img {
+								height: 50px;
+							}
+						}
+
+						@include breakpoint(960) {
+							width: 40px;
+							margin-right: 10px;
+
+							img {
+								height: 50px;
+							}
+						}
+
+						@include breakpoint(640) {
+							width: 30px;
+							margin-right: 10px;
+
+							img {
+								height: 30px;
+							}
+						}
+					}
+
+					p {
+						flex: 1;
+						color: #E5E5E5;
+						font-family: $font-baloo;
+						font-size: 24px;
+						font-weight: 400;
+						font-style: normal;
+						letter-spacing: 0;
+						line-height: 32px;
+						text-align: left;
+
+						span {
+							font-family: $font-baloo;
+							margin-right: 10px;
+							font-size: 24px;
+							font-weight: 400;
+							font-style: normal;
+							letter-spacing: 0;
+							line-height: 32px;
+							color: #E5E5E5;
+
+							@include breakpoint(1440) {
+								font-size: 32px;
+								line-height: 46px;
+							}
+
+							@include breakpoint(1400) {
+								font-size: 30px;
+								line-height: 44px;
+							}
+
+							@include breakpoint(1280) {
+								font-size: 28px;
+								line-height: 42px;
+							}
+
+							@include breakpoint(1024) {
+								font-size: 26px;
+								line-height: 40px;
+							}
+
+							@include breakpoint(960) {
+								font-size: 24px;
+								line-height: 28px;
+							}
+
+							@include breakpoint(768) {
+								font-size: 22px;
+								line-height: 26px;
+							}
+
+							@include breakpoint(640) {
+								font-size: 20px;
+								line-height: 24px;
+							}
+
+							@include breakpoint(375) {
+								font-size: 18px;
+								line-height: 22px;
+							}
+
+							@include breakpoint(375) {
+								font-size: 16px;
+								line-height: 20px;
+							}
+
+							@include breakpoint(320) {
+								font-size: 14px;
+								line-height: 18px;
+							}
+						}
+
+						@include breakpoint(1440) {
+							font-size: 24px;
+							line-height: 28px;
+						}
+
+						@include breakpoint(1400) {
+							font-size: 22px;
+							line-height: 26px;
+						}
+
+						@include breakpoint(1280) {
+							font-size: 18px;
+							line-height: 22px;
+						}
+
+						@include breakpoint(1024) {
+							font-size: 22px;
+							line-height: 26px;
+						}
+
+						@include breakpoint(960) {
+							font-size: 22px;
+							line-height: 26px;
+						}
+
+						@include breakpoint(768) {
+							font-size: 24px;
+							line-height: 28px;
+						}
+
+						@include breakpoint(640) {
+							font-size: 22px;
+							line-height: 26px;
+						}
+
+						@include breakpoint(375) {
+							font-size: 18px;
+							line-height: 22px;
+						}
+
+						@include breakpoint(320) {
+							font-size: 16px;
+							line-height: 20px;
+						}
+					}
+
+					.action {
+						display: block;
+						flex: 0 0 30%;
+
+						p {
+							font-size: 22px;
+							font-family: $font-baloo;
+							font-weight: 400;
+							font-style: normal;
+							letter-spacing: 0;
+							line-height: 24px;
+							color: $color-primary;
+							white-space: nowrap;
+
+							@include breakpoint(1024) {
+								font-size: 16px;
+							}
+
+							@include breakpoint(640) {
+								font-size: 14px;
+							}
+
+							&.status {
+								font-family: $font-baloo;
+								font-style: normal;
+								font-weight: 400;
+								font-size: 24px;
+								line-height: 32px;
+								letter-spacing: 0.14px;
+
+								@include breakpoint(1440) {
+									font-size: 22px;
+									line-height: 24px;
+								}
+
+								@include breakpoint(1400) {
+									font-size: 20px;
+									line-height: 22px;
+								}
+
+								@include breakpoint(1280) {
+									font-size: 18px;
+									line-height: 22px;
+								}
+
+								@include breakpoint(1024) {
+									font-size: 16px;
+									line-height: 18px;
+								}
+
+								@include breakpoint(960) {
+									font-size: 16px;
+									line-height: 18px;
+								}
+
+								@include breakpoint(768) {
+									font-size: 22px;
+									line-height: 24px;
+								}
+
+								@include breakpoint(640) {
+									font-size: 18px;
+									line-height: 22px;
+								}
+
+								@include breakpoint(375) {
+									font-size: 16px;
+									line-height: 20px;
+								}
+
+								@include breakpoint(320) {
+									font-size: 14px;
+									line-height: 18px;
+								}
+							}
+						}
+
+						.check-outer {
+							label {
+								padding-left: 0;
+								padding-right: 50px;
+								line-height: 40px;
+
+								@include breakpoint(1024) {
+									font-size: 14px;
+									white-space: nowrap;
+								}
+
+								@include breakpoint(640) {
+									padding-right: 45px;
+								}
+
+								&:before,
+								&:after {
+									left: auto;
+									right: 0;
+								}
+
+								&:after {
+									right: 8px;
+								}
+							}
+						}
+					}
+				}
+
+				.exchange-item {
+					@include flexbox();
+					align-items: center;
+					padding: 10px 20px;
+					margin-bottom: 15px;
+					background: linear-gradient(135deg, #2D2E37 0%, #1A1B20 100%);
+					box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.501748);
+					border-radius: 15px;
+
+					@include breakpoint(1024) {
+						padding: 10px 10px;
+					}
+
+					figure {
+						flex: 0 1 40px;
+						width: 70px;
+						margin-right: 35px;
+
+						img {
+							display: block;
+							height: 50px;
+							width: auto;
+							margin: 0 auto;
+						}
+
+						@include breakpoint(1024) {
+							width: 50px;
+
+							img {
+								height: 50px;
+							}
+						}
+
+						@include breakpoint(960) {
+							width: 30px;
+
+							img {
+								height: 30px;
+							}
+						}
+
+						@include breakpoint(768) {
+							width: 30px;
+
+							img {
+								height: 30px;
+							}
+						}
+
+						@include breakpoint(640) {
+							width: 30px;
+							margin-right: 10px;
+
+							img {
+								height: 30px;
+							}
+						}
+					}
+
+					p {
+						flex: 1;
+						font-size: 20px;
+						line-height: 36px;
+						color: $color-grey;
+						font-weight: 700;
+						height: 50px;
+
+						span {
+							font-family: $font-baloo;
+							font-size: 24px;
+							font-weight: 400;
+							font-style: normal;
+							color: #A1AFC3;
+							letter-spacing: 0.14px;
+							line-height: 32px;
+							margin-right: 10px;
+							position: relative;
+
+							@include breakpoint(1440) {
+								font-size: 22px;
+								line-height: 46px;
+							}
+
+							@include breakpoint(1366) {
+								font-size: 22px;
+								line-height: 46px;
+							}
+
+							@include breakpoint(1280) {
+								font-size: 20px;
+								line-height: 44px;
+							}
+
+							@include breakpoint(1200) {
+								font-size: 18px;
+								line-height: 44px;
+							}
+
+							@include breakpoint(1080) {
+								font-size: 16px;
+								line-height: 42px;
+							}
+
+							@include breakpoint(1024) {
+								font-size: 18px;
+								line-height: 42px;
+							}
+
+							@include breakpoint(960) {
+								font-size: 18px;
+								line-height: 42px;
+							}
+
+							@include breakpoint(768) {
+								font-size: 18px;
+								line-height: 50px;
+							}
+
+							@include breakpoint(640) {
+								font-size: 18px;
+								line-height: 40px;
+							}
+
+							@include breakpoint(375) {
+								font-size: 18px;
+								line-height: 26px;
+							}
+
+							@include breakpoint(320) {
+								font-size: 16px;
+								line-height: 24px;
+							}
+						}
+
+						span:nth-child(2) {
+							font-family: $font-baloo;
+							font-size: 20px;
+							line-height: 26px;
+							font-weight: 400;
+							font-style: normal;
+							color: #E5E5E5;
+							margin-top: 10px;
+							margin-right: 70px;
+							position: relative;
+							text-decoration: underline;
+							text-underline-offset: 4px;
+							text-transform: uppercase;
+							float: right;
+
+							@include breakpoint(1366) {
+								font-size: 20px;
+								line-height: 24px;
+								margin-right: 50px;
+							}
+
+							@include breakpoint(1280) {
+								font-size: 18px;
+								line-height: 22px;
+								margin-right: 40px;
+							}
+
+							@include breakpoint(1200) {
+								font-size: 18px;
+								line-height: 20px;
+								margin-right: 30px;
+							}
+
+							@include breakpoint(1080) {
+								font-size: 16px;
+								line-height: 20px;
+								margin-right: 20px;
+							}
+
+							@include breakpoint(1024) {
+								font-size: 16px;
+								line-height: 18px;
+								margin-right: 10px;
+							}
+
+							@include breakpoint(768) {
+								font-size: 14px;
+								line-height: 18px;
+								margin-right: 10px;
+							}
+						}
+
+						input {
+							max-width: 280px;
+							height: 35px;
+							float: right;
+							text-transform: uppercase;
+							font-family: $font-baloo;
+							font-size: 20px;
+							font-weight: 400;
+							font-style: normal;
+							letter-spacing: 0;
+							line-height: 26px;
+							padding-top: 5px;
+							padding-bottom: 5px;
+							margin-top: 0px;
+							color: #E5E5E5;
+
+							&:placeholder {
+								color: #E5E5E5;
+							}
+
+							&:placeholder-shown {
+								color: #E5E5E5;
+							}
+
+							@include breakpoint(1366) {
+								max-width: 250px;
+								height: 30px;
+								font-size: 20px;
+								line-height: 24px;
+							}
+
+							@include breakpoint(1280) {
+								max-width: 225px;
+								height: 25px;
+								font-size: 18px;
+								line-height: 22px;
+							}
+
+							@include breakpoint(1200) {
+								max-width: 210px;
+								height: 22px;
+								font-size: 18px;
+								line-height: 20px;
+							}
+
+							@include breakpoint(1080) {
+								max-width: 200px;
+								height: 20px;
+								font-size: 16px;
+								line-height: 18px;
+							}
+
+							@include breakpoint(1024) {
+								max-width: 180px;
+								height: 20px;
+								font-size: 16px;
+								line-height: 18px;
+							}
+
+							@include breakpoint(768) {
+								max-width: 180px;
+							}
+
+							@include breakpoint(375) {
+								max-width: 130px;
+							}
+						}
+
+						@include breakpoint(1440) {
+							font-size: 18px;
+							line-height: 22px;
+						}
+
+						@include breakpoint(1280) {
+							font-size: 18px;
+							line-height: 22px;
+						}
+
+						@include breakpoint(1024) {
+							font-size: 16px;
+							line-height: 20px;
+						}
+					}
+
+					.action {
+						display: block;
+						flex: 0 0 10%;
+
+						p {
+							font-size: 19px;
+							line-height: 29px;
+							color: $color-primary;
+							white-space: nowrap;
+
+							@include breakpoint(1024) {
+								font-size: 16px;
+							}
+
+							@include breakpoint(640) {
+								font-size: 14px;
+							}
+						}
+
+						.check-outer {
+							label {
+								padding-left: 0;
+								padding-right: 50px;
+								line-height: 40px;
+
+								@include breakpoint(1024) {
+									font-size: 14px;
+									white-space: nowrap;
+								}
+
+								@include breakpoint(640) {
+									padding-right: 45px;
+								}
+
+								&:before,
+								&:after {
+									left: auto;
+									right: 0;
+								}
+
+								&:after {
+									right: 8px;
+								}
+							}
+						}
+					}
+				}
+
+				.button-item {
+					@include flexbox();
+					flex-flow: row-reverse;
+					padding: 25px 20px;
+					margin-right: 0px;
+					margin-bottom: 15px;
+					margin-left: auto;
+					border-radius: 15px;
+
+					@include breakpoint(1024) {
+						padding: 10px 10px;
+					}
+
+					a {
+						align-content: flex-end;
+					}
+				}
+
+				// Reposition button
+				.box-btn-reposition {
+					padding: 24px 0;
+					margin-bottom: 15px;
+					text-align: right;
+
+					@include breakpoint(1024) {
+						padding: 15px 0;
+					}
+
+					@include breakpoint(640) {
+						.btn {
+							display: block;
+						}
+					}
+				}
+
+				// Buttons
+				.btn-wrapper {
+					padding-top: 10px;
+
+					.btn {
+						min-width: 230px;
+
+						@include breakpoint(640) {
+							font-size: 24px;
+							line-height: 28px;
+						}
+
+						@include breakpoint(375) {
+							font-size: 22px;
+							line-height: 26px;
+						}
+
+						@include breakpoint(320) {
+							font-size: 20px;
+							line-height: 24px;
+						}
+
+						&.wider {
+							min-width: 450px;
+
+							@include breakpoint(1024) {
+								min-width: 260px;
+							}
+						}
+					}
+
+					&.wide {
+						@include flexbox();
+						justify-content: space-between;
+					}
+
+					&.items-center {
+						text-align: center;
+					}
+
+					@include breakpoint(1280) {
+						.btn {
+							min-width: 150px;
+						}
+					}
+
+					@include breakpoint(1200) {
+						.btn {
+							min-width: 150px;
+						}
+					}
+
+					@include breakpoint(640) {
+						.btn {
+							padding-left: 30px;
+							padding-right: 30px;
+							min-width: 100px;
+						}
+					}
+				}
+
+				// Table - Simple
+				.table-simple-outer {
+					font-family: $font-baloo;
+					font-size: 22px;
+					font-weight: 400;
+					font-style: normal;
+					letter-spacing: 0;
+					line-height: 24px;
+					color: #A1AFC3;
+
+					table {
+						width: 100%;
+
+						tr {
+							th {
+								width: 55%;
+							}
+
+							th,
+							td {
+								padding-right: 10px;
+								font-family: $font-primary;
+								font-style: normal;
+								font-weight: 600;
+								font-size: 16px;
+								line-height: 20px;
+								color: #E5E5E5;
+								text-align: left;
+
+								@include breakpoint(640) {
+									font-size: 18px;
+									line-height: 21px;
+								}
+							}
+						}
+
+						thead {
+							tr {
+
+								th,
+								td {
+									font-family: $font-baloo;
+									font-size: 22px;
+									font-weight: 400;
+									font-style: normal;
+									letter-spacing: 0;
+									line-height: 24px;
+									color: #E5E5E5;
+
+									@include breakpoint(640) {
+										font-size: 20px;
+										line-height: 25px;
+									}
+								}
+
+								&:last-child {
+
+									th,
+									td {
+										padding-bottom: 10px;
+									}
+								}
+							}
+						}
+
+						tbody {
+
+							tr,
+							td {
+								font-family: $font-primary;
+								font-style: normal;
+								font-weight: 600;
+								font-size: 16px;
+								line-height: 20px;
+								color: #E5E5E5;
+
+								@include breakpoint(640) {
+									font-size: 19px;
+									line-height: 29px;
+								}
+							}
+
+							&:last-child {
+
+								th,
+								td {
+									padding-bottom: 10px;
+								}
+							}
+						}
+
+						tfoot {
+							tr {
+
+								th,
+								td {
+									font-family: $font-baloo;
+									padding-top: 10px;
+									font-size: 22px;
+									font-weight: 400;
+									font-style: normal;
+									letter-spacing: 0;
+									line-height: 24px;
+									color: #E5E5E5;
+
+									@include breakpoint(640) {
+										font-size: 22px;
+										line-height: 28px;
+									}
+								}
+							}
+						}
+					}
+				}
+
+				// Table extended
+				.table-extended-outer {
+					@include breakpoint(1280) {
+						overflow: hidden;
+						overflow-x: auto;
+					}
+
+					table {
+						width: 100%;
+
+						tr {
+
+							td,
+							th {
+								padding: 10px 5px;
+								font-size: 16px;
+								line-height: 18px;
+								color: #A1AFC3;
+								text-align: center;
+								vertical-align: middle;
+
+								@include breakpoint(960) {
+									font-size: 12px;
+								}
+							}
+						}
+
+						thead {
+							font-family: $font-baloo;
+
+							tr {
+								background: linear-gradient(135deg, #2D2E37 0%, #1A1B20 100%);
+								box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.50);
+								border-radius: 15px;
+
+								td,
+								th {
+									position: relative;
+									font-family: $font-baloo;
+									font-size: 18px;
+									line-height: 16px;
+									letter-spacing: 0.444px;
+									font-weight: 400;
+									font-style: normal;
+									text-align: center;
+									color: #A1AFC3;
+									padding: 15px 10px 15px 10px;
+
+									@include breakpoint(960) {
+										font-size: 14px;
+									}
+
+									&:after {
+										content: "";
+										position: absolute;
+										top: 15%;
+										right: 0;
+										opacity: 0.25;
+										width: 1px;
+										height: 70%;
+										background-color: #A1AFC3;
+									}
+
+									&:first-child {
+										border-radius: 15px 0 0 15px;
+									}
+
+									&:last-child {
+										border-radius: 0 15px 15px 0;
+
+										&:after {
+											display: none;
+										}
+									}
+								}
+							}
+						}
+
+						tbody {
+							tr {
+								td {
+									a {
+										font-family: $font-secondary;
+										color: $color-white;
+									}
+								}
+							}
+						}
+					}
+				}
+
+				// Calendar toolbar
+				.acc-cal-toolbar {
+					@include flexbox();
+					justify-content: space-between;
+					margin-bottom: 20px;
+
+					>.col {
+						@include flexbox();
+						align-items: center;
+
+						@include breakpoint(640) {
+							flex-wrap: wrap;
+						}
+
+						.acc-cal-box {
+							margin-right: 10%;
+						}
+					}
+				}
+
+				// Bottom box
+				&.has-acc-bottom-box {
+					position: relative;
+					padding-bottom: 150px;
+				}
+
+				.acc-bottom-box {
+					position: relative;
+					left: 0;
+					bottom: 0;
+					width: 100%;
+					padding: 20px 25px;
+					box-sizing: border-box;
+
+					@include breakpoint(640) {
+						padding: 10px;
+					}
+				}
+
+				// Slider nav
+				.acc-slider-nav {
+					@include flexbox();
+					justify-content: space-between;
+					align-items: center;
+
+					li {
+						margin: 0;
+
+						@include breakpoint(640) {
+							font-size: 16px;
+						}
+
+						a {
+							display: block;
+							position: relative;
+							width: 60px;
+							height: 60px;
+							text-indent: -9999px;
+							background: none;
+							border: 0;
+							outline: none;
+							cursor: pointer;
+
+							&:before {
+								content: "";
+								position: absolute;
+								left: 50%;
+								top: 50%;
+								width: 0;
+								height: 0;
+								border-style: solid;
+								border-width: 0 11px 16px 11px;
+								border-color: transparent transparent $color-primary transparent;
+								@include transition(all 300ms ease-in-out);
+							}
+
+							&.prev {
+								left: 0;
+
+								&:before {
+									@include transform($y: -50%, $x: -50%);
+								}
+							}
+
+							&.next {
+								right: 0;
+
+								&:before {
+									@include transform($y: -50%, $x: -50%, $r: -180deg);
+								}
+							}
+
+							&:hover {
+								&:before {
+									border-color: transparent transparent $color-white transparent;
+								}
+							}
+						}
+					}
+				}
+
+				// Docs box
+				.acc-docs-outer {
+					text-align: center;
+
+					.doc-info {
+						padding: 5px;
+						margin: 10px 0 20px;
+						background-color: $color-black;
+						border-radius: 15px;
+
+						h6 {
+							color: #4ECB4A;
+							line-height: 35px;
+							font-family: $font-baloo;
+							font-style: normal;
+							font-weight: 400;
+							font-size: 25px;
+						}
+
+						p {
+							line-height: 35px;
+							font-weight: 700;
+						}
+
+						&.upload-file {
+							position: relative;
+
+							input {
+								position: absolute;
+								left: 0;
+								top: 0;
+								opacity: 0;
+								z-index: 2;
+								width: 100%;
+								height: 100%;
+
+								@include breakpoint(768) {
+									font-size: 18px;
+									line-height: 22px;
+								}
+							}
+
+							label {
+								position: relative;
+								z-index: 1;
+								font-family: $font-baloo;
+								font-style: normal;
+								font-weight: 400;
+								font-size: 25px;
+								line-height: 35px;
+								color: #737887;
+
+								&.file-added {
+									color: #4ECB4A;
+								}
+							}
+						}
+
+						&.upload-file,
+						&.verified,
+						&.kyc-verified,
+						&.email-verified,
+						&.not-verified {
+							position: relative;
+
+							&:after {
+								content: "";
+								position: absolute;
+								top: 0;
+								right: 0;
+								width: 45px;
+								height: 45px;
+								text-align: center;
+								line-height: 45px;
+							}
+						}
+
+						&.upload-file {
+							&:after {
+								//content: "\002B";
+								background-image: url("/pictures/icon-browse-file.svg");
+								background-size: 35px 35px;
+								background-repeat: no-repeat;
+								margin-top: 4px;
+								color: $color-primary;
+								line-height: 50px;
+								font-family: $font-baloo;
+								font-style: normal;
+								font-weight: 400;
+								font-size: 25px;
+							}
+						}
+
+						&.verified {
+							h6 {
+								color: #4ECB4A;
+								line-height: 35px;
+								font-family: $font-baloo;
+								font-style: normal;
+								font-weight: 400;
+								font-size: 25px;
+							}
+
+							&:after {
+								//content: "\2713";
+								background-image: url("/pictures/icon-uploaded-file.svg");
+								background-size: 35px 35px;
+								background-repeat: no-repeat;
+								margin-top: 4px;
+								color: #4ECB4A;
+								line-height: 50px;
+								font-family: $font-baloo;
+								font-style: normal;
+								font-weight: 400;
+								font-size: 25px;
+							}
+						}
+
+						&.not-verified {
+							h6 {
+								color: $color-grey;
+								line-height: 35px;
+							}
+
+							&:after {
+								color: $color-grey;
+								font-size: 25px;
+							}
+						}
+
+						&.email-verified {
+							h6 {
+								color: $color-primary;
+								line-height: 35px;
+							}
+
+							&:after {
+								color: $color-primary;
+								font-size: 25px;
+							}
+						}
+
+						&.kyc-verified {
+							h6 {
+								color: #4ECB4A;
+								line-height: 35px;
+								font-family: $font-baloo;
+								font-style: normal;
+								font-weight: 400;
+								font-size: 25px;
+							}
+
+							&:after {
+								background-image: url("/pictures/icon-uploaded-file.svg");
+								background-size: 35px 35px;
+								background-repeat: no-repeat;
+								margin-top: 4px;
+								color: #4ECB4A;
+								line-height: 50px;
+								font-family: $font-baloo;
+								font-style: normal;
+								font-weight: 400;
+								font-size: 25px;
+							}
+						}
+					}
+
+					.btn-wrapper {
+						padding-top: 40px;
+					}
+
+					a {
+						text-decoration: underline;
+						font-size: 22px;
+						line-height: 45px;
+						color: #A3A9B7;
+						letter-spacing: 0.44px;
+					}
+				}
+
+				// Acc status
+				.acc-status-outer {
+					text-align: center;
+
+					>p {
+						font-family: $font-baloo;
+						margin-bottom: 20px;
+
+						strong {
+							font-family: $font-primary;
+							font-style: normal;
+							font-weight: 600;
+							font-size: 16px;
+							line-height: 20px;
+							text-align: center;
+							color: #A1AFC3;
+							word-wrap: break-word;
+						}
+
+						&.limit-information {
+							font-family: $font-primary;
+							font-style: normal;
+							font-weight: 600;
+							font-size: 16px;
+							line-height: 20px;
+							color: #A1AFC3;
+						}
+
+						&.promotion-code-information {
+							font-family: $font-baloo;
+							font-style: normal;
+							font-weight: 400;
+							font-size: 24px;
+							line-height: 28px;
+							color: #A1AFC3;
+						}
+
+						&.voucher-code-information {
+							font-family: $font-baloo;
+							font-style: normal;
+							font-weight: 400;
+							font-size: 24px;
+							line-height: 28px;
+							color: #A1AFC3;
+						}
+
+						a {
+							color: $color-primary;
+							text-align: center;
+							font-size: 18px;
+							font-family: $font-primary;
+							font-weight: 700px;
+							letter-spacing: 0.444px;
+							text-decoration-line: underline;
+
+							&:hover {
+								text-decoration-line: none;
+							}
+						}
+					}
+
+					h4 {
+						margin-bottom: 0;
+						font-size: 22px;
+						font-family: $font-baloo;
+						font-style: normal;
+						font-weight: 400;
+						font-size: 24px;
+						line-height: 32px;
+						letter-spacing: 0.14px;
+						color: $color-primary;
+					}
+
+					.white-link {
+						color: $color-white;
+						font-size: 24px;
+						text-decoration: underline;
+					}
+
+					.btn-wrapper {
+						+h4 {
+							padding-top: 20px;
+						}
+					}
+
+					.acc-status-action {
+						max-width: 375px;
+						margin: 30px auto 10px;
+						padding: 18px;
+						background: linear-gradient(135deg, #2D2E37 0%, #1A1B20 100%);
+						box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.501748);
+						border-radius: 15px;
+						box-sizing: border-box;
+
+						p {
+							margin-bottom: 20px;
+							font-family: $font-primary;
+						}
+
+						h5 {
+							margin-bottom: 10px;
+							font-family: $font-primary;
+							color: $color-white;
+							font-weight: 700;
+
+							&.icon-wihdraw,
+							&.icon-withdraw {
+								background: url(/pictures/image-icons/account/icon-tab-security.svg) 100% 50% no-repeat;
+								background-size: 40px auto;
+							}
+						}
+
+						figure {
+							display: block;
+							padding: 35px;
+							background-color: $color-black;
+							border-radius: 10px;
+
+							img {
+								display: block;
+								max-width: 100%;
+								height: auto;
+								margin: 0 auto;
+							}
+						}
+					}
+
+					input.boxed-info-field {
+						height: 50px;
+						font-family: 'Baloo';
+						font-style: normal;
+						font-weight: 400;
+						font-size: 22px;
+						line-height: 28px;
+						color: #E5E5E5;
+						letter-spacing: -0.24px;
+
+						@include breakpoint(768) {
+							font-size: 18px;
+							line-height: 22px;
+						}
+
+						.small-space {
+							margin: 10px 0 5px;
+						}
+
+						&::placeholder {
+							color: #E5E5E5;
+
+							@include breakpoint(768) {
+								font-size: 18px;
+								line-height: 22px;
+							}
+						}
+					}
+
+					form {
+						input.boxed-info-field {
+							width: 90%;
+							height: 50px;
+							font-family: 'Baloo';
+							font-style: normal;
+							font-weight: 400;
+							font-size: 24px;
+							line-height: 28px;
+							color: #E5E5E5;
+							letter-spacing: -0.24px;
+							padding-right: 60px;
+
+							@include breakpoint(768) {
+								font-size: 18px;
+								line-height: 22px;
+							}
+
+							.small-space {
+								margin: 10px 0 5px;
+							}
+
+							&::placeholder {
+								color: #E5E5E5;
+
+								@include breakpoint(768) {
+									font-size: 18px;
+									line-height: 22px;
+								}
+							}
+						}
+
+						.scanner-field-container {
+							position: relative;
+							display: flex;
+							-ms-flex-wrap: wrap;
+							flex-wrap: wrap;
+							-webkit-box-align: stretch;
+							-ms-flex-align: stretch;
+							align-items: stretch;
+							width: 100%;
+
+							input.boxed-info-field {
+								height: 50px;
+								font-family: 'Baloo';
+								font-style: normal;
+								font-weight: 400;
+								font-size: 24px;
+								line-height: 28px;
+								color: #E5E5E5;
+								letter-spacing: -0.24px;
+								padding-right: 60px;
+
+								@include breakpoint(768) {
+									font-size: 18px;
+									line-height: 22px;
+								}
+
+								.small-space {
+									margin: 10px 0 5px;
+								}
+
+								&::placeholder {
+									color: #E5E5E5;
+
+									@include breakpoint(768) {
+										font-size: 18px;
+										line-height: 22px;
+									}
+								}
+							}
+
+							.scanner-append {
+								display: flex;
+								position: absolute;
+								right: 10px;
+								top: 15px;
+
+								button {
+									background: transparent;
+									border: none;
+									width: 50px;
+									height: 50px;
+								}
+							}
+						}
+					}
+
+				}
+
+				// Split form wrapper
+				.acc-split-form {
+					@include flexbox();
+					justify-content: space-between;
+					align-items: center;
+					margin-bottom: 34px;
+
+					@include breakpoint(640) {
+						display: block;
+					}
+
+					ul {
+						flex: 0 0 70%;
+
+						@include breakpoint(1200) {
+							flex: 0 0 80%;
+						}
+					}
+
+					@include breakpoint(1200) {
+						figure {
+							flex: 0 0 20%;
+
+							img {
+								display: block;
+								max-width: 100%;
+								height: auto;
+							}
+						}
+					}
+
+					@include breakpoint(640) {
+						figure {
+							margin-bottom: 20px;
+
+							img {
+								max-width: 140px;
+								height: auto;
+								margin: 0 auto;
+							}
+						}
+					}
+				}
+
+				// Info slider
+				.acc-info-slider-outer {
+					position: relative;
+
+					.acc-info-slide {
+						padding-bottom: 10px;
+
+						h3 {
+							min-height: 72px;
+							font-size: 36px;
+							line-height: 36px;
+							color: $color-light-yellow;
+
+							&.available-bonus-promo {
+								min-height: 42px;
+								font-family: $font-baloo;
+								font-size: 26px;
+								line-height: 30px;
+								color: $color-light-yellow;
+								font-weight: 400;
+							}
+						}
+
+						p {
+							margin-bottom: 10px;
+							font-size: 24px;
+							line-height: 22px;
+							color: #737887;
+
+							&.info {
+								font-size: 20px;
+								color: $color-secondary;
+							}
+
+							&.available-bonus-promo {
+								min-height: 42px;
+								font-family: $font-baloo;
+								font-size: 36px;
+								line-height: 36px;
+								color: $color-light-yellow;
+								font-weight: 400;
+							}
+
+							&.campaign-description {
+								font-family: $font-baloo;
+								font-size: 26px;
+								line-height: 30px;
+								color: #E5E5E5;
+							}
+
+							&.bonus-promo-code-info {
+								font-family: $font-baloo;
+								font-style: normal;
+								font-size: 24px;
+								line-height: 28px;
+								color: #E5E5E5;
+								font-weight: 600;
+							}
+
+							&.bonus-promo-code {
+								font-family: $font-baloo;
+								font-style: normal;
+								font-size: 26px;
+								line-height: 30px;
+								color: $color-light-yellow;
+								font-weight: 400;
+							}
+						}
+					}
+
+					.slick-arrow {
+						position: absolute;
+						top: -50px;
+						right: -10px;
+						left: auto;
+
+						background: none;
+						border: 0;
+						outline: none;
+						cursor: pointer;
+						text-indent: -9999px;
+
+						&.slick-prev {
+							right: 40px;
+
+							&::before {
+								-webkit-transform: translateX(-50%) translateY(-50%) translateZ(0px) rotate(45deg) scale(1, 1);
+								-moz-transform: translateX(-50%) translateY(-50%) translateZ(0px) rotate(45deg) scale(1, 1);
+								-ms-transform: translateX(-50%) translateY(-50%) translateZ(0px) rotate(45deg) scale(1, 1);
+								-o-transform: translateX(-50%) translateY(-50%) translateZ(0px) rotate(45deg) scale(1, 1);
+								transform: translateX(-50%) translateY(-50%) translateZ(0px) rotate(45deg) scale(1, 1);
+							}
+						}
+
+						&::before {
+							content: "";
+							position: absolute;
+							left: 50%;
+							top: 50%;
+							width: 22px;
+							height: 22px;
+							border-left: $color-primary solid 3px;
+							border-bottom: $color-primary solid 3px;
+							-moz-transition: all 300ms ease-in-out;
+							-o-transition: all 300ms ease-in-out;
+							-webkit-transition: all 300ms ease-in-out;
+							transition: all 300ms ease-in-out;
+						}
+
+						&.slick-next {
+							right: 10px;
+
+							&::before {
+								-webkit-transform: translateX(-50%) translateY(-50%) translateZ(0px) rotate(-135deg) scale(1, 1);
+								-moz-transform: translateX(-50%) translateY(-50%) translateZ(0px) rotate(-135deg) scale(1, 1);
+								-ms-transform: translateX(-50%) translateY(-50%) translateZ(0px) rotate(-135deg) scale(1, 1);
+								-o-transform: translateX(-50%) translateY(-50%) translateZ(0px) rotate(-135deg) scale(1, 1);
+								transform: translateX(-50%) translateY(-50%) translateZ(0px) rotate(-135deg) scale(1, 1);
+							}
+						}
+					}
+				}
+
+				// Inner columns
+				.inner-box-columns {
+					@include flexbox();
+					justify-content: space-between;
+					align-items: flex-start;
+
+					@include breakpoint(768) {
+						display: block;
+					}
+
+					.col {
+						flex: 0 0 50%;
+						box-sizing: border-box;
+
+						&:first-child {
+							padding-right: 50px;
+
+							@include breakpoint(768) {
+								padding-right: 0;
+								margin-bottom: 20px;
+							}
+						}
+
+						h4 {
+							font-family: $font-baloo;
+							font-style: normal;
+							font-weight: 400;
+							font-size: 24px;
+							line-height: 32px;
+							letter-spacing: 0.14px;
+							display: block;
+						}
+					}
+				}
+
+				// Single box adjustments
+				&.full-width {
+					grid-column-start: 1;
+					grid-column-end: 3;
+
+					.btn-right {
+
+						.btn {
+							min-width: 200px;
+						}
+					}
+				}
+			}
+
+			// Variations
+			&.grid-1 {
+				.box {
+					&:nth-child(3) {
+						grid-column-start: 1;
+						grid-column-end: 3;
+					}
+				}
+			}
+
+			&.grid-2 {
+				.box {
+					&:nth-child(1) {
+						grid-column-start: 1;
+						grid-column-end: 3;
+					}
+				}
+			}
+		}
+	}
+}
+
+.acc-cal-box {
+	@include flexbox();
+	justify-content: space-between;
+	padding: 10px 0;
+	background: linear-gradient(135deg, #2D2E37 0%, #1A1B20 100%);
+	box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.501748);
+	border-radius: 15px;
+
+	li {
+		padding: 10px 5px 0px 10px;
+		font-family: $font-baloo;
+		font-size: 22px;
+		text-align: center;
+		font-weight: 400;
+		letter-spacing: 0;
+		line-height: 22px;
+
+		@include breakpoint(1200) {
+			padding: 0 10px;
+		}
+
+		&.label {
+			color: #A1AFC3;
+
+			@include breakpoint(768) {
+				display: none;
+			}
+		}
+
+		&.date {
+			padding: 10px 5px 0px 10px;
+			min-width: 135px;
+			color: $color-primary;
+
+			@include breakpoint(1200) {
+				min-width: 95px;
+				font-size: 16px;
+				padding: 0 10px;
+			}
+
+			@include breakpoint(375) {
+				padding: 8px 10px;
+			}
+		}
+
+		&.trigger {
+			img {
+				display: block;
+				margin: 0 auto;
+			}
+		}
+	}
+}

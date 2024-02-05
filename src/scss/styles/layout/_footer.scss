@@ -1,0 +1,243 @@
+/*
+= FOOTER
+------------------------------------------------------------------------------------- */
+footer {
+	.footer-wrapper {
+		max-width: 1560px;
+		margin: 0 auto;
+		padding: 25px 30px;
+		//border-top: 1px solid $color-5;
+		border-bottom: 1px solid $color-5;
+		box-sizing: border-box;
+
+		@include breakpoint(640) {
+			border-top: 0;
+		}
+
+		.footer-cols {
+			@include flexbox();
+			justify-content: space-between;
+			flex-flow: wrap;
+			margin-bottom: 0px;
+			padding-bottom: 10px;
+
+			@include breakpoint(640) {
+				display: block;
+			}
+
+			>.col {
+				flex: 0 0 20%;
+
+				@include breakpoint(1024) {
+					flex: 0 0 40%;
+				}
+
+				.logo {
+					display: block;
+					margin-top: 10px;
+					margin-bottom: 20px;
+
+					@include breakpoint(640) {
+						img {
+							display: block;
+							margin: 0 auto;
+						}
+					}
+				}
+
+				h5 {
+					margin-bottom: 16px;
+					font-family: $font-primary;
+					font-size: 22px;
+					line-height: 26px;
+					color: $color-primary;
+					font-weight: 700;
+					text-transform: uppercase;
+				}
+
+				.lang-switcher-form {
+					margin-bottom: 34px;
+				}
+
+				p {
+					font-family: $font-primary;
+					font-style: normal;
+					font-size: 16px;
+					line-height: 19px;
+					color: #A3ABB6;
+					font-weight: 700;
+
+					strong {
+						color: $color-primary;
+						font-weight: 700;
+					}
+
+					>a {
+						color: $color-grey;
+						font-weight: 400;
+
+						&:hover {
+							color: $color-white;
+						}
+					}
+
+					&.title {
+						margin-bottom: 16px;
+						font-family: $font-baloo;
+						font-style: normal;
+						font-weight: 400;
+						font-size: 24px;
+						line-height: 22px;
+						color: $color-primary;
+					}
+
+					&.casino-time {
+						font-family: $font-poppins;
+						font-style: normal;
+						font-weight: 500;
+						font-size: 18px;
+						line-height: 26px;
+						letter-spacing: -0.25px;
+						color: #A2B0C3;
+						padding-bottom: 10px;
+
+						img {
+							vertical-align: middle;
+						}
+					}
+
+					&.casino-date {
+						font-family: $font-poppins;
+						font-style: normal;
+						font-weight: 500;
+						font-size: 18px;
+						line-height: 26px;
+						letter-spacing: -0.25px;
+						color: #A2B0C3;
+						padding-top: 10px;
+						padding-bottom: 10px;
+
+						img {
+							vertical-align: middle;
+						}
+					}
+
+				}
+
+				.social-menu {
+					@include breakpoint(640) {
+						text-align: center;
+
+						li {
+							margin: 0 10px;
+						}
+					}
+				}
+
+				.footer-icons {
+					@include flexbox();
+					align-items: center;
+					padding-top: 20px;
+					margin-left: -7px;
+
+					li {
+						img {
+							display: block;
+							margin: 0 7px;
+						}
+					}
+				}
+
+				.page-nav {
+					@include breakpoint(640) {
+						display: block;
+						text-align: center;
+					}
+
+					.col {
+						@include breakpoint(768) {
+							margin-right: 30px;
+						}
+
+						@include breakpoint(640) {
+							margin-bottom: 50px;
+							margin-right: 0;
+						}
+
+						ul {
+							li {
+								margin-bottom: 10px;
+
+								a {
+									color: #A2B0C3;
+									font-family: $font-baloo;
+									font-size: 16px;
+									font-style: normal;
+									font-weight: 400;
+									line-height: 20px;
+								}
+							}
+						}
+					}
+				}
+
+				&:last-child {
+					flex: 0 0 250px;
+
+					@include breakpoint(1024) {
+						display: none;
+					}
+				}
+			}
+
+			>.col-40 {
+				flex: 0 0 40%;
+
+				p.company-name {
+					color: #FF0066;
+					font-family: Poppins;
+					font-size: 14px;
+					font-style: normal;
+					font-weight: 400;
+					line-height: 20px;
+					text-align: right;
+				}
+			}
+		}
+
+		p {
+			&.small {
+				font-family: $font-baloo;
+				text-align: center;
+				font-size: 12px;
+				line-height: 18px;
+				color: $color-grey;
+				font-weight: 400;
+				font-style: normal;
+
+				a {
+					color: $color-primary;
+					text-decoration: underline;
+				}
+
+				.underline {
+					text-decoration: underline;
+					font-weight: 500;
+				}
+
+				&.left {
+					text-align: left;
+				}
+
+				.app-version {
+					font-family: $font-baloo;
+					font-size: 16px;
+					line-height: 20px;
+					color: #FF0066;
+					font-weight: 400;
+					font-style: normal;
+				}
+			}
+		}
+	}
+}

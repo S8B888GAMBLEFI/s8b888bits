@@ -1,0 +1,308 @@
+/*
+= BUTTONS GLOBAL
+------------------------------------------------------------------------------------- */
+.btn {
+	display: inline-block;
+	min-width: 148px;
+	padding: 10px 14px 10px 14px;
+	font-size: 34px;
+	line-height: 38px;
+	color: $color-white;
+	font-weight: 400;
+	text-transform: uppercase;
+	text-align: center;
+	background-color: $color-primary;
+	border-radius: 15px;
+	border: 0;
+	box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.75336);
+	outline: none;
+	cursor: pointer;
+	font-family: $font-baloo;
+	font-style: normal;
+	@include transition(all 300ms ease-in-out);
+
+	&:hover {
+		background-color: darken($color-primary, 10%);
+	}
+
+	// Variations
+	&.login {
+		font-size: 20px;
+		line-height: 20px;
+		font-family: $font-baloo;
+		font-style: normal;
+		font-weight: 400;
+		letter-spacing: 0;
+		color: $color-black;
+		background-color: $color-light-yellow;
+		text-transform: capitalize;
+
+		&:hover {
+			background-color: darken($color-light-yellow, 10%);
+		}
+	}
+
+	&.signup {
+		font-size: 20px;
+		line-height: 20px;
+		font-family: $font-baloo;
+		font-style: normal;
+		font-weight: 400;
+		letter-spacing: 0;
+		color: $color-white;
+		background-color: $color-primary;
+		text-transform: capitalize;
+
+		&:hover {
+			background-color: darken($color-primary, 10%);
+		}
+	}
+
+	&.icon-metamask {
+		position: relative;
+		padding-top: 10px;
+		padding-left: 50px;
+		height: 50px;
+		color: $color-black;
+		font-family: $font-baloo;
+		font-style: normal;
+		font-weight: 400;
+		font-size: 20px;
+		text-align: center;
+		background-color: $color-light-yellow;
+		line-height: 20px;
+		width: 230px;
+
+		@include breakpoint(640) {
+			display: block;
+		}
+
+		&:after {
+			content: "";
+			position: absolute;
+			left: 10px;
+			top: 50%;
+			@include transform($y: -50%);
+			width: 25px;
+			height: 25px;
+			background: url(/pictures/icon-metamask.png) 0% 0% rgba(0, 0, 0, 0) no-repeat;
+			@include transition(all 300ms ease-in-out);
+			background-size: 25px 25px;
+		}
+
+		&:hover {
+			background-color: darken($color-light-yellow, 10%);
+
+			&:after {
+				@include transform($y: -50%, $x: 2px);
+			}
+		}
+	}
+
+	&.buy-tokens {
+		position: relative;
+		padding-top: 10px;
+		height: 50px;
+		width: 230px;
+		color: $color-black;
+		font-family: $font-baloo;
+		font-style: normal;
+		font-weight: 400;
+		font-size: 20px;
+		text-align: center;
+		background-color: $color-light-yellow;
+		line-height: 20px;
+
+		align-self: center;
+
+		@include breakpoint(640) {
+			display: block;
+		}
+
+		&:hover {
+			background-color: darken($color-light-yellow, 10%);
+
+			&:after {
+				@include transform($y: -50%, $x: 2px);
+			}
+		}
+	}
+
+	&.unlock-proof-pass {
+		background-color: $color-45;
+		text-transform: capitalize;
+		font-family: $font-baloo;
+		font-size: 20px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 20px;
+		height: 50px;
+		width: 380px;
+		border-radius: 15px;
+
+		@include breakpoint(640) {
+			width: 280px;
+		}
+	}
+
+	&.generate-whitelist-code {
+		background-color: $color-9;
+		text-transform: capitalize;
+		font-family: $font-baloo;
+		font-size: 20px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 20px;
+		height: 50px;
+		width: 380px;
+		border-radius: 15px;
+
+		@include breakpoint(640) {
+			width: 280px;
+		}
+	}
+
+	&.list-nfts {
+		position: relative;
+		background-color: $color-9;
+
+		&:hover {
+			background-color: darken($color-9, 10%);
+		}
+
+		color: $color-white;
+		text-transform: none;
+		font-family: $font-poppins;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 20px;
+		padding: 10px 15px 10px 15px;
+
+		@include breakpoint(960) {
+			width: 170px;
+			max-width: 170px;
+			font-size: 16px;
+			line-height: 16px;
+			padding: 10px 10px 10px 10px;
+		}
+
+		@include breakpoint(640) {
+			width: 140px;
+			max-width: 140px;
+			font-size: 16px;
+			line-height: 16px;
+			padding: 10px 10px 10px 10px;
+		}
+	}
+
+	&.connect-wallet {
+		position: relative;
+		padding-top: 10px;
+		padding-left: 50px;
+		height: 50px;
+		color: $color-black;
+		font-family: $font-baloo;
+		font-style: normal;
+		font-weight: 400;
+		font-size: 20px;
+		text-align: center;
+		background-color: $color-light-yellow;
+		line-height: 20px;
+		width: 230px;
+
+		@include breakpoint(640) {
+			display: block;
+		}
+
+		&:after {
+			content: "";
+			position: absolute;
+			left: 10px;
+			top: 50%;
+			@include transform($y: -50%);
+			width: 25px;
+			height: 25px;
+			background: url(/pictures/icon-metamask.png) 0% 0% rgba(0, 0, 0, 0) no-repeat;
+			@include transition(all 300ms ease-in-out);
+			background-size: 25px 25px;
+		}
+
+		&:hover {
+			background-color: darken($color-light-yellow, 10%);
+
+			&:after {
+				@include transform($y: -50%, $x: 2px);
+			}
+		}
+	}
+
+	&.signup-email {
+		color: $color-white;
+		font-family: $font-baloo;
+		font-size: 20px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 20px;
+		text-transform: none;
+		width: 160px;
+		height: 30px;
+		padding: 3px 16px;
+		align-self: center;
+
+		@include breakpoint(640) {
+			margin: 0 auto;
+		}
+	}
+
+	&.stake-max {
+		font-size: 20px;
+		line-height: 20px;
+		font-family: $font-baloo;
+		font-style: normal;
+		font-weight: 400;
+		letter-spacing: 0;
+		color: $color-white;
+		background-color: $color-primary;
+		text-transform: capitalize;
+		height: 44px;
+
+		&:hover {
+			background-color: darken($color-primary, 10%);
+		}
+	}
+
+	&.approve {
+		font-size: 20px;
+		line-height: 20px;
+		font-family: $font-baloo;
+		font-style: normal;
+		font-weight: 400;
+		letter-spacing: 0;
+		color: $color-black;
+		background-color: $color-7;
+		text-transform: capitalize;
+		height: 44px;
+
+		&:hover {
+			background-color: darken($color-7, 10%);
+		}
+	}
+
+	&.claim {
+		font-size: 20px;
+		line-height: 20px;
+		font-family: $font-baloo;
+		font-style: normal;
+		font-weight: 400;
+		letter-spacing: 0;
+		color: $color-black;
+		background-color: $color-quaternary;
+		text-transform: capitalize;
+		height: 44px;
+
+		&:hover {
+			background-color: darken($color-quaternary, 10%);
+		}
+	}
+}

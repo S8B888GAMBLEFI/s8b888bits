@@ -1,0 +1,1892 @@
+/*
+= FORMS GLOBAL
+------------------------------------------------------------------------------------- */
+// Custom select boxes
+.select {
+	display: inline-block;
+	position: relative;
+	color: $color-black;
+	cursor: pointer;
+
+	.s-hidden {
+		visibility: hidden;
+		margin: 0;
+		padding: 0;
+		padding-right: 10px;
+		border: 0;
+	}
+
+	.styledSelect {
+		//position:absolute; 
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		padding: 0 10px;
+		color: #737887;
+		font-weight: 700;
+		font-size: 12px;
+		line-height: 20px;
+
+		&:after {
+			content: "";
+			position: absolute;
+			top: 9px;
+			right: 0px;
+			width: 0;
+			height: 0;
+			border: 4px solid transparent;
+			border-color: #737887 transparent transparent transparent;
+		}
+
+		&:active,
+		&.active {
+			background-color: $color-black;
+		}
+	}
+
+	.options {
+		display: none;
+		position: absolute;
+		top: 100%;
+		right: 0;
+		left: 0;
+		z-index: 999;
+		margin: 0 0;
+		padding: 0 0;
+		list-style: none;
+		background-color: $color-black;
+
+		li {
+			padding: 2px 10px;
+			color: #737887;
+			font-weight: 700;
+			font-size: 12px;
+			line-height: 20px;
+		}
+	}
+}
+
+.select-small {
+	display: inline-block;
+	position: relative;
+	color: $color-black;
+	cursor: pointer;
+
+	.s-hidden {
+		visibility: hidden;
+		margin: 0;
+		padding: 0;
+		padding-right: 10px;
+		border: 0;
+	}
+
+	.styledSelect {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		padding: 0 10px;
+		color: #737887;
+		font-weight: 700;
+		font-size: 12px;
+		line-height: 20px;
+
+		&:after {
+			content: "";
+			position: absolute;
+			top: 9px;
+			right: 6px;
+			width: 0;
+			height: 0;
+			border: 4px solid transparent;
+			border-color: #737887 transparent transparent transparent;
+		}
+
+		&:active,
+		&.active {
+			background-color: $color-black;
+		}
+	}
+
+	.options {
+		display: none;
+		position: absolute;
+		top: 100%;
+		right: 0;
+		left: 0;
+		z-index: 999;
+		margin: 0 0;
+		padding: 0 0;
+		list-style: none;
+		background-color: $color-black;
+
+		li {
+			padding: 2px 10px;
+			color: #737887;
+			font-weight: 700;
+			font-size: 12px;
+			line-height: 20px;
+		}
+	}
+}
+
+// Custom checkboxes
+.check-outer {
+	display: block;
+	position: relative;
+
+	label {
+		display: block;
+		position: relative;
+		z-index: 1;
+		padding-left: 50px;
+		font-size: 17px;
+		line-height: 21px;
+		color: $color-grey;
+
+		&:before {
+			content: "";
+			position: absolute;
+			left: 0;
+			top: 3px;
+			width: 36px;
+			height: 36px;
+			border: $color-primary solid 3px;
+			border-radius: 50%;
+			box-sizing: border-box;
+		}
+
+		&:after {
+			content: "";
+			position: absolute;
+			left: 8px;
+			top: 11px;
+			opacity: 0;
+			width: 20px;
+			height: 20px;
+			background-color: $color-primary;
+			border-radius: 50%;
+		}
+	}
+
+	input[type="checkbox"],
+	input[type="radio"] {
+		opacity: 0;
+		position: absolute;
+		z-index: 2;
+		width: 40px;
+		height: 40px;
+		background: none;
+		border: 0;
+
+		&:checked {
+			+label {
+				&:after {
+					opacity: 1;
+				}
+			}
+		}
+	}
+
+	&.multi-line {
+		label {
+			&:before {
+				top: calc(50% - 18px);
+			}
+
+			&:after {
+				top: calc(50% - 10px);
+			}
+		}
+	}
+}
+
+.check-outer-centered {
+	display: block;
+	position: relative;
+	padding-bottom: 10px;
+
+	#consent-1 {
+		position: absolute;
+		top: 32px;
+		left: 20px;
+
+		@include breakpoint(640) {
+			left: 140px;
+			top: 0px;
+		}
+	}
+
+	label {
+		display: block;
+		position: relative;
+		z-index: 1;
+		top: 35px;
+		left: -220px;
+		padding-left: 50px;
+		padding-bottom: 10px;
+		font-size: 17px;
+		line-height: 21px;
+		color: $color-grey;
+
+		@include breakpoint(640) {
+			left: 0px;
+			top: 0px;
+			height: 40px;
+		}
+
+		&:before {
+			content: "";
+			position: absolute;
+			left: calc(50% - 8px);
+			top: 3px;
+			width: 36px;
+			height: 36px;
+			border: $color-primary solid 3px;
+			border-radius: 50%;
+			box-sizing: border-box;
+		}
+
+		&:after {
+			content: "";
+			position: absolute;
+			left: 50%;
+			top: 11px;
+			opacity: 0;
+			width: 20px;
+			height: 20px;
+			background-color: $color-primary;
+			border-radius: 50%;
+		}
+	}
+
+	input[type="checkbox"],
+	input[type="radio"] {
+		opacity: 0;
+		position: absolute;
+		z-index: 2;
+		width: 40px;
+		height: 40px;
+		background: none;
+		border: 0;
+
+		&:checked {
+			+label {
+				&:after {
+					opacity: 1;
+				}
+			}
+		}
+	}
+
+	&.multi-line {
+		label {
+			&:before {
+				top: calc(50% - 18px);
+			}
+
+			&:after {
+				top: calc(50% - 10px);
+			}
+		}
+	}
+}
+
+// Modal forms
+.form-modal {
+	text-align: center;
+
+	>li {
+		margin-bottom: 15px;
+
+		@include breakpoint(640) {
+			margin-bottom: 15px;
+		}
+
+		input[type="text"],
+		input[type="email"],
+		input[type="password"],
+		input[type="number"],
+		input[type="tel"] {
+			width: 100%;
+			height: 70px;
+			margin: 0 0 9px;
+			padding: 0;
+			font-family: $font-baloo;
+			font-style: normal;
+			letter-spacing: 0;
+			font-size: 24px;
+			line-height: 25px;
+			color: #A1AFC3;
+			text-align: center;
+			font-weight: 400;
+			background: linear-gradient(120deg, #2D2E37 0%, #1A1B20 100%);
+			box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.501748);
+			border-radius: 15px;
+			border: 0;
+			outline: none;
+
+			@include breakpoint(768) {
+				font-size: 18px;
+				line-height: 22px;
+			}
+
+			@include breakpoint(640) {
+				height: 40px;
+				font-size: 16px;
+			}
+
+			&::placeholder {
+				color: #A1AFC3;
+
+				@include breakpoint(768) {
+					font-size: 18px;
+					line-height: 22px;
+				}
+
+				@include breakpoint(640) {
+					font-size: 16px;
+				}
+			}
+
+			&.alt {
+				font-weight: 500;
+				background: #161818;
+				border-radius: 40px;
+				box-shadow: none;
+
+				&::placeholder {
+					text-transform: none;
+				}
+			}
+		}
+
+		.open-closed-password {
+			position: relative;
+			display: flex;
+			-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
+			-webkit-box-align: stretch;
+			-ms-flex-align: stretch;
+			align-items: stretch;
+
+			input {
+				border: none;
+				padding: 0;
+				flex: 1 1 auto;
+				width: 1%;
+				margin: 0;
+			}
+
+			.password-append {
+				display: flex;
+				position: absolute;
+				right: 10px;
+				top: 0px;
+				height: 100%;
+
+				button {
+					border: none;
+					background: transparent;
+					width: 50px;
+				}
+			}
+		}
+
+		.error {
+			display: block;
+			font-family: $font-baloo;
+			font-size: 22px;
+			font-weight: 400;
+			font-style: normal;
+			color: $color-primary;
+			line-height: 24px;
+
+			&.large {
+				font-size: 22px;
+				line-height: 26px;
+				font-weight: 700;
+			}
+
+			@include breakpoint(640) {
+				font-size: 14px;
+				line-height: 18px;
+
+				&.large {
+					font-size: 14px;
+					line-height: 18px;
+				}
+			}
+		}
+
+		p {
+			padding-top: 10px;
+			font-size: 20px;
+			color: #E5E5E5;
+			font-family: $font-baloo;
+			font-weight: 400;
+			font-style: normal;
+			text-align: center;
+			letter-spacing: 0;
+			line-height: 26px;
+
+			@include breakpoint(640) {
+				font-size: 14px;
+
+				br {
+					display: none;
+				}
+			}
+
+			&.small-block {
+				font-size: 16px;
+				font-weight: 400;
+				font-style: normal;
+				color: #A3ABB6;
+				text-align: center;
+				letter-spacing: 0;
+				line-height: 22px;
+
+				a {
+					color: $color-primary;
+					text-decoration: none;
+
+					&:hover {
+						text-decoration: none;
+					}
+				}
+			}
+
+			&.underline {
+				text-decoration-line: underline;
+
+				@include breakpoint(375) {
+					font-size: 16px;
+					line-height: 18px;
+				}
+			}
+
+			&.important {
+				color: #FF0066;
+				font-size: 16px;
+				line-height: 22px;
+				font-weight: 400;
+				font-style: normal;
+				letter-spacing: 0;
+			}
+		}
+
+		.link {
+			font-family: $font-baloo;
+			font-size: 22px;
+			font-weight: 400;
+			font-style: normal;
+			color: $color-primary;
+			text-decoration: none;
+			line-height: 24px;
+		}
+
+		.select {
+			display: block;
+			width: 100%;
+			height: 80px;
+			background-color: $color-black;
+			border-radius: 40px;
+
+			@include breakpoint(640) {
+				height: 40px;
+				border-radius: 20px;
+			}
+
+			.s-hidden {
+				width: 100%;
+				height: 100%;
+				padding: 0;
+			}
+
+			.styledSelect {
+				font-size: 36px;
+				line-height: 80px;
+				color: #BFC4CA;
+				font-weight: 400;
+				text-transform: uppercase;
+
+				//text-align: left;
+				@include breakpoint(640) {
+					font-size: 16px;
+					line-height: 40px;
+				}
+
+				&:after {
+					top: 16px;
+					right: auto;
+					left: 18px;
+					width: 50px;
+					height: 50px;
+					background: url(/pictures/image-icons/icon-arrow-down.svg) 50% 50% no-repeat rgba(225, 0, 80, 0.36);
+					border: 0;
+					border-radius: 50%;
+					@include transition(all 200ms ease-in-out);
+
+					@include breakpoint(640) {
+						top: 5px;
+						left: 5px;
+						width: 30px;
+						height: 30px;
+						background-size: 10px auto;
+					}
+				}
+
+				&:active,
+				&.active {
+					background-color: $color-black;
+					border-radius: 40px 40px 0 0;
+
+					@include breakpoint(640) {
+						border-radius: 20px 20px 0 0;
+					}
+
+					&:after {
+						@include transform($r: 180deg);
+					}
+				}
+			}
+
+			.options {
+				padding-top: 10px;
+				padding-bottom: 10px;
+				border-radius: 0 0 40px 40px;
+
+				@include breakpoint(640) {
+					border-radius: 0 0 20px 20px;
+				}
+
+				li {
+					font-size: 24px;
+					line-height: 40px;
+					font-weight: 500;
+
+					@include breakpoint(640) {
+						font-size: 18px;
+						line-height: 24px;
+					}
+				}
+			}
+		}
+
+		.select-small {
+			display: block;
+			width: 100%;
+			height: 80px;
+			background-color: #161818;
+			border-radius: 40px;
+
+			@include breakpoint(640) {
+				height: 40px;
+				border-radius: 20px;
+			}
+
+			.s-hidden {
+				width: 100%;
+				height: 100%;
+				padding: 0;
+			}
+
+			.styledSelect {
+				font-size: 20px;
+				line-height: 80px;
+				color: #A1AFC3;
+				font-weight: 400;
+				text-align: left;
+
+				//text-transform: uppercase;
+				@include breakpoint(640) {
+					font-size: 16px;
+					line-height: 40px;
+				}
+
+				&:after {
+					top: 16px;
+					right: auto;
+					left: 18px;
+					width: 50px;
+					height: 50px;
+					background: url(/pictures/image-icons/icon-arrow-down.svg) 50% 50% no-repeat $color-black;
+					border: 0;
+					border-radius: 50%;
+
+					@include breakpoint(640) {
+						top: 5px;
+						left: 5px;
+						width: 30px;
+						height: 30px;
+						background-size: 10px auto;
+					}
+				}
+
+				&:active,
+				&.active {
+					background-color: $color-black;
+					border-radius: 40px 40px 0 0;
+
+					@include breakpoint(640) {
+						border-radius: 20px 20px 0 0;
+					}
+
+					&:after {
+						@include transform($r: 180deg);
+					}
+				}
+			}
+
+			.options {
+				padding-top: 10px;
+				padding-bottom: 10px;
+				border-radius: 0 0 40px 40px;
+
+				@include breakpoint(640) {
+					border-radius: 0 0 20px 20px;
+				}
+
+				li {
+					font-size: 22px;
+					line-height: 40px;
+					font-weight: 500;
+
+					@include breakpoint(640) {
+						font-size: 18px;
+						line-height: 24px;
+					}
+				}
+			}
+		}
+
+		&.narrow {
+			max-width: 475px;
+			margin-top: 25px;
+			margin-right: auto;
+			margin-left: auto;
+		}
+
+		&.centered {
+			margin-right: auto;
+			margin-left: auto;
+			text-align: center;
+
+			div {
+				text-align: center;
+				display: inline-block;
+				padding-left: 0px;
+				padding-right: 0px;
+			}
+		}
+
+		h6 {
+			margin-top: 10px;
+			margin-bottom: 0;
+			font-family: $font-baloo;
+			font-size: 24px;
+			font-weight: 400;
+			color: #A3ABB6;
+			text-align: center;
+			letter-spacing: 0;
+			line-height: 25px;
+
+			a {
+				font-family: $font-baloo;
+				font-size: 16px;
+				font-weight: 400;
+				font-style: normal;
+				color: #A3ABB6;
+				text-align: center;
+				letter-spacing: 0;
+				line-height: 22px;
+				text-decoration: underline;
+			}
+
+			&.t_and_c {
+				font-size: 16px;
+				font-weight: 400;
+				font-style: normal;
+				color: #A3ABB6;
+				text-align: center;
+				letter-spacing: 0;
+				line-height: 22px;
+
+				a {
+					color: $color-primary;
+					text-decoration: none;
+
+					&:hover {
+						text-decoration: none;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+// Search form
+.search-form {
+	position: relative;
+	background-color: #1A1B20;
+	border-radius: 15px;
+
+	input,
+	button {
+		background: none;
+		border: 0;
+		box-sizing: border-box;
+		appearance: none;
+		-webkit-appearance: none;
+		outline: none;
+	}
+
+	.search-field {
+		width: 100%;
+		height: 55px;
+		padding: 0 60px 0 18px;
+		font-family: $font-baloo;
+		font-size: 16px;
+		color: #FF0066;
+		font-style: normal;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 22px;
+		letter-spacing: -0.24px;
+
+		&::placeholder {
+			font-family: $font-baloo;
+			font-style: normal;
+			font-weight: 400;
+			font-size: 16px;
+			line-height: 22px;
+			color: #FF0066;
+			letter-spacing: -0.24px;
+		}
+	}
+
+	button {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 55px;
+		height: 55px;
+
+		svg {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			@include transform($x: -50%, $y: -50%);
+			fill: $color-primary;
+		}
+	}
+}
+
+// Language switcher
+.lang-switcher-form {
+	label {
+		font-size: 12px;
+		line-height: 20px;
+		color: $color-white;
+		font-weight: 700;
+	}
+}
+
+// Account forms
+.error {
+	display: block;
+	font-family: $font-baloo;
+	font-size: 20px;
+	font-weight: 400;
+	font-style: normal;
+	line-height: 22px;
+	color: $color-primary;
+	padding: 10px 0px 10px 0px;
+
+	&.large {
+		font-size: 22px;
+		line-height: 26px;
+		font-weight: 700;
+	}
+
+	@include breakpoint(640) {
+		font-size: 14px;
+
+		&.large {
+			font-size: 14px;
+		}
+	}
+}
+
+.success {
+	display: block;
+	font-size: 18px;
+	line-height: 21px;
+	color: $color-green;
+	padding: 10px 0px 10px 0px;
+
+	&.large {
+		font-size: 22px;
+		line-height: 26px;
+		font-weight: 700;
+	}
+
+	@include breakpoint(640) {
+		font-size: 14px;
+
+		&.large {
+			font-size: 14px;
+		}
+	}
+}
+
+.warning {
+	display: block;
+	font-size: 18px;
+	line-height: 21px;
+	color: $color-secondary;
+	padding: 10px 0px 10px 0px;
+
+	&.large {
+		font-size: 22px;
+		line-height: 26px;
+		font-weight: 700;
+	}
+
+	@include breakpoint(640) {
+		font-size: 14px;
+
+		&.large {
+			font-size: 14px;
+		}
+	}
+}
+
+.acc-simple-form {
+	>li {
+		margin-bottom: 25px;
+
+		input[type="text"],
+		input[type="email"],
+		input[type="password"],
+		input[type="number"],
+		input[type="tel"],
+		.select {
+			width: 100%;
+			height: 45px;
+			padding: 0 18px;
+			font-family: $font-baloo;
+			font-size: 20px;
+			font-weight: 400;
+			font-style: normal;
+			letter-spacing: 0;
+			line-height: 26px;
+			color: #A1AFC3;
+			background: transparent;
+			border: #A1AFC3 solid 1.5px;
+			border-radius: 15px;
+			box-sizing: border-box;
+			outline: none;
+
+			@include breakpoint(768) {
+				font-size: 18px;
+				line-height: 24px;
+			}
+
+			&::placeholder {
+				color: #A3ABB6;
+				text-decoration-line: underline;
+
+				@include breakpoint(768) {
+					font-size: 18px;
+					line-height: 24px;
+				}
+			}
+
+			&:disabled {
+				font-family: $font-baloo;
+				font-size: 20px;
+				font-weight: 400;
+				font-style: normal;
+				color: #42434D;
+				letter-spacing: 0;
+				line-height: 26px;
+				text-align: center;
+				text-decoration-line: underline;
+
+				@include breakpoint(768) {
+					font-size: 18px;
+					line-height: 24px;
+				}
+			}
+
+			&.verified {
+				color: $color-green;
+				text-decoration-line: underline;
+
+				&::placeholder {
+					color: $color-green;
+					text-decoration-line: underline;
+				}
+
+				&:disabled {
+					color: $color-green;
+					text-decoration-line: underline;
+				}
+			}
+
+			&.not-verified {
+				color: $color-secondary;
+				text-decoration-line: underline;
+
+				&::placeholder {
+					color: $color-secondary;
+					text-decoration-line: underline;
+				}
+
+				&:disabled {
+					color: $color-secondary;
+					text-decoration-line: underline;
+				}
+			}
+
+			&.file-name {
+				text-decoration-line: underline;
+
+				&::placeholder {
+					text-decoration-line: underline;
+				}
+			}
+
+			&.upload-time {
+				text-decoration-line: underline;
+
+				&::placeholder {
+					text-decoration-line: underline;
+				}
+			}
+
+			&.icon-field {
+				padding-left: 60px;
+				background-position: 15px 50%;
+				background-repeat: no-repeat;
+
+				&.user {
+					background-image: url(/pictures/image-icons/icon-form-user.svg);
+				}
+
+				&.email {
+					background-image: url(/pictures/image-icons/icon-form-envelope.svg);
+				}
+
+				&::placeholder {
+					color: #42434D;
+				}
+			}
+		}
+
+		.error {
+			display: block;
+			font-family: $font-baloo;
+			font-size: 16px;
+			line-height: 22px;
+			font-weight: 400;
+			font-style: normal;
+			color: $color-primary;
+
+			&.large {
+				font-size: 22px;
+				line-height: 26px;
+				font-weight: 700;
+			}
+
+			@include breakpoint(640) {
+				font-size: 14px;
+
+				&.large {
+					font-size: 14px;
+				}
+			}
+		}
+
+		.select {
+			padding: 0;
+
+			.styledSelect {
+				padding: 8px 18px;
+				font-family: $font-baloo;
+				font-size: 20px;
+				line-height: 26px;
+				color: #A3ABB6;
+				font-weight: 400;
+				text-transform: none !important;
+				text-align: left;
+				text-decoration-line: underline;
+
+				@include breakpoint(768) {
+					font-size: 18px;
+					line-height: 24px;
+				}
+
+				&::placeholder {
+					color: #A1AFC3;
+					text-decoration-line: underline;
+
+					@include breakpoint(768) {
+						font-size: 18px;
+						line-height: 24px;
+					}
+				}
+
+				&:after {
+					top: 0;
+					right: 0;
+					left: auto;
+					width: 40px;
+					height: 40px;
+					background: url(/pictures/image-icons/icon-arrow-down-pink.svg) 50% 50% no-repeat transparent;
+					border: 0;
+					@include transition(all 200ms ease-in-out);
+
+					@include breakpoint(640) {
+						background-size: 14px auto;
+					}
+				}
+
+				&:active,
+				&.active {
+					background: none;
+
+					&:after {
+						@include transform($r: 180deg);
+					}
+				}
+			}
+
+			.options {
+				padding-top: 10px;
+				padding-bottom: 10px;
+				border-radius: 0;
+				background-color: rgba($color-grey-dark, 0.92);
+				-ms-overflow-style: none;
+				/* IE and Edge */
+				scrollbar-width: none;
+
+				&::-webkit-scrollbar {
+					display: none;
+					width: 0;
+					/* Remove scrollbar space */
+					background: transparent;
+					/* Optional: just make scrollbar invisible */
+				}
+
+				li {
+					font-size: 20px;
+					line-height: 26px;
+					font-weight: 400;
+					color: #A3ABB6;
+					border-radius: 0 !important;
+
+					@include breakpoint(768) {
+						font-size: 18px;
+						line-height: 24px;
+					}
+				}
+			}
+		}
+	}
+}
+
+.two-col-layout {
+	@include flexbox();
+	justify-content: space-between;
+	flex-wrap: wrap;
+
+	>li {
+		flex: 0 0 48%;
+
+		@include breakpoint(1024) {
+			flex: 0 0 48%;
+		}
+	}
+
+	@include breakpoint(640) {
+		display: block;
+
+		>li {
+			margin-bottom: 10px;
+		}
+	}
+}
+
+.two-three-layout {
+	@include flexbox();
+	justify-content: space-between;
+	flex-wrap: wrap;
+
+	>li {
+		flex: 0 0 30%;
+
+		@include breakpoint(1024) {
+			flex: 0 0 33%;
+		}
+	}
+
+	@include breakpoint(640) {
+		display: block;
+
+		>li {
+			margin-bottom: 10px;
+		}
+	}
+
+	&.extended {
+		position: relative;
+		padding-right: 50px;
+
+		@include breakpoint(640) {
+			padding-top: 20px;
+			margin-bottom: 20px;
+			border-top: #A3ABB6 solid 1px;
+		}
+
+		>li {
+			flex: 0 0 32%;
+			margin-bottom: 15px;
+
+			label {
+				display: block;
+				margin-bottom: 5px;
+				font-family: $font-baloo;
+				text-align: center;
+				font-size: 22px;
+				line-height: 24px;
+				color: #A3ABB6;
+
+				&.hidden {
+					display: none;
+
+					@include breakpoint(640) {
+						display: block;
+						text-align: left;
+						font-size: 18px;
+						line-height: 21px;
+					}
+				}
+			}
+
+			input {
+				text-align: center;
+
+				@include breakpoint(768) {
+					font-size: 18px;
+					line-height: 22px;
+				}
+			}
+		}
+
+		.row-button-holder {
+			position: absolute;
+			bottom: 3px;
+			right: 0;
+
+			@include breakpoint(640) {
+				margin-bottom: 0;
+			}
+		}
+
+		&.labels {
+			@include breakpoint(640) {
+				display: none;
+			}
+
+			li {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	&.extended-layout {
+		width: 600px;
+		margin-left: -60px;
+
+		@include breakpoint(640) {
+			width: inherit;
+			margin-left: inherit;
+		}
+	}
+}
+
+.horizontal-layout {
+	@include flexbox();
+	justify-content: space-between;
+	flex-wrap: nowrap;
+	align-items: center;
+
+	>li {
+		flex: 0 0 19%;
+	}
+
+	@include breakpoint(640) {
+		display: block;
+
+		>li {
+			margin-bottom: 10px;
+
+			.btn.wide {
+				min-width: 150px;
+				width: auto;
+				margin: 0 auto;
+			}
+		}
+	}
+}
+
+.acc-simpleform-bottom {
+	padding-bottom: 20px;
+	text-align: center;
+
+	p {
+		margin-bottom: 44px;
+
+		strong {
+			font-weight: 700;
+
+			&.form-info {
+				font-family: $font-baloo;
+				font-size: 20px;
+				font-weight: 400;
+				font-style: normal;
+				color: #737887;
+				text-align: center;
+				letter-spacing: 0;
+				line-height: 26px;
+				text-decoration-line: underline;
+			}
+		}
+	}
+
+	.check-outer {
+		display: block;
+		max-width: 320px;
+		margin: 0 auto 60px;
+
+		label {
+			font-family: $font-baloo;
+			font-style: normal;
+			padding-top: 10px;
+			color: $color-primary;
+			font-weight: 500;
+		}
+	}
+
+	.btn {
+		min-width: 230px;
+	}
+}
+
+
+.boxed-info-field {
+	font-family: $font-primary;
+	width: 100%;
+	height: 52px;
+	padding: 5px;
+	margin: 30px 0 20px;
+	font-size: 20px;
+	font-weight: bold;
+	color: #A1AFC3;
+	text-align: center;
+	letter-spacing: 1px;
+	background: linear-gradient(135deg, #2D2E37 0%, #1A1B20 100%);
+	box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.501748);
+	border: 0;
+	border-radius: 15px;
+	outline: none;
+
+	@include breakpoint(768) {
+		font-size: 18px;
+		line-height: 22px;
+	}
+
+	&::placeholder {
+		color: #A1AFC3;
+
+		@include breakpoint(768) {
+			font-size: 18px;
+			line-height: 22px;
+		}
+	}
+
+	&.small-space {
+		margin: 10px 0 5px;
+	}
+
+	&.outer-space {
+		margin: 10px 0 !important;
+
+		@include breakpoint(640) {
+			font-size: 12px;
+			font-weight: 400;
+		}
+	}
+}
+
+.boxed-info-textfield {
+	width: 100%;
+	min-height: 35px;
+	padding: 5px;
+	margin: 30px 0 20px;
+	font-size: 20px;
+	font-weight: 700;
+	color: #A1AFC3;
+	text-align: center;
+	background: linear-gradient(135deg, #2D2E37 0%, #1A1B20 100%);
+	box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.501748);
+	border: 0;
+	border-radius: 15px;
+	outline: none;
+	resize: none;
+	font-family: $font-secondary;
+
+	&::placeholder {
+		color: #A1AFC3;
+	}
+
+	&.small-space {
+		margin: 10px 0 5px;
+	}
+
+	&.outer-space {
+		margin: 10px 0 !important;
+
+		@include breakpoint(640) {
+			font-size: 12px;
+			font-weight: 400;
+		}
+	}
+}
+
+.support-box {
+	background: $color-black;
+	//max-width: 75%;
+	padding: 40px;
+	margin: 50px auto 50px auto;
+	border: 0;
+	border-radius: 15px;
+	outline: none;
+
+	@include breakpoint(768) {
+		padding: 10px;
+	}
+}
+
+
+
+// Special forms
+.acc-quick-form {
+	@include flexbox();
+	justify-content: space-between;
+	align-items: flex-end;
+	padding-top: 20px;
+
+	.acc-quick-outer {
+		flex: 0 0 50%;
+
+		.boxed-info-field {
+			margin: 0 0 5px;
+
+			@include breakpoint(1024) {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	@include breakpoint(640) {
+		display: block;
+		max-width: 300px;
+		margin: 0 auto;
+		text-align: center;
+	}
+}
+
+.acc-center-form {
+	@include flexbox();
+	justify-content: center;
+	flex-wrap: wrap;
+
+	@include breakpoint(1200) {
+		display: block;
+	}
+
+	li {
+		flex: 0 0 40%;
+		margin-bottom: 40px;
+		padding: 0 50px;
+		box-sizing: border-box;
+
+		@include breakpoint(1200) {
+			padding: 0 20px;
+		}
+
+		&.wide {
+			margin-left: 20%;
+			margin-right: 20%;
+			text-align: center;
+
+			@include breakpoint(1200) {
+				margin-left: 0;
+				margin-right: 0;
+			}
+		}
+
+		.open-closed-password {
+			position: relative;
+			display: flex;
+			-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
+			-webkit-box-align: stretch;
+			-ms-flex-align: stretch;
+			align-items: stretch;
+			width: 112%;
+
+			@include breakpoint(1024) {
+				width: 105%;
+			}
+
+			input {
+				font-family: $font-baloo;
+				font-style: normal;
+				font-size: 20px;
+				font-weight: 400;
+				color: #E5E5E5;
+				line-height: 26px;
+				text-align: center;
+				border: none;
+				flex: 1 1 auto;
+				width: 1%;
+				margin: 0;
+				height: 48px;
+				padding: 5px 55px 5px 15px;
+
+				@include breakpoint(1024) {
+					padding: 5px 55px 5px 5px;
+				}
+
+				@include breakpoint(768) {
+					font-size: 18px;
+					line-height: 24px;
+				}
+
+				&::placeholder {
+					color: #A1AFC3;
+
+					@include breakpoint(768) {
+						font-size: 18px;
+						line-height: 24px;
+					}
+				}
+			}
+
+			.password-append {
+				display: flex;
+				position: absolute;
+				right: 0px;
+				top: 10px;
+
+				button {
+					border: none;
+					background: transparent;
+					width: 50px;
+				}
+			}
+		}
+
+		.select {
+			@include breakpoint(640) {
+				height: 80px;
+
+				.styledSelect {
+					padding-right: 40px;
+				}
+			}
+		}
+	}
+
+	.boxed-info-field {
+		margin: 0;
+		font-family: $font-baloo;
+		font-style: normal;
+		font-weight: 400;
+		font-size: 20px;
+		line-height: 26px;
+		color: #E5E5E5;
+		max-width: 660px;
+
+		&.wide {
+			color: #A1AFC3;
+			max-width: none;
+			text-decoration-line: none;
+
+			&::placeholder {
+				color: #A1AFC3;
+				text-decoration-line: none;
+			}
+		}
+
+		&::placeholder {
+			color: #A1AFC3;
+			text-decoration-line: none;
+
+			@include breakpoint(768) {
+				font-size: 18px;
+			}
+
+			@include breakpoint(640) {
+				font-size: 16px;
+			}
+		}
+
+		@include breakpoint(768) {
+			font-size: 18px;
+		}
+
+		@include breakpoint(640) {
+			font-size: 16px;
+		}
+	}
+
+	&.single-item {
+		display: block;
+
+		li {
+			margin-bottom: 34px;
+		}
+	}
+
+	.select {
+		width: 100%;
+		height: 62px;
+		font-size: 20px;
+		font-weight: 700;
+		color: #A1AFC3;
+		text-align: center;
+		font-weight: 400;
+		background: linear-gradient(135deg, #2D2E37 0%, #1A1B20 100%);
+		box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.501748);
+		border: 0;
+		border-radius: 15px;
+		outline: none;
+
+		@include breakpoint(768) {
+			font-size: 16px;
+		}
+
+		.styledSelect {
+			font-family: $font-primary;
+			font-size: 20px;
+			font-weight: bold;
+			color: #A1AFC3;
+			text-align: center;
+			letter-spacing: 1px;
+			line-height: 62px;
+
+			@include breakpoint(768) {
+				font-size: 16px;
+			}
+
+			&:after {
+				top: 0;
+				right: 0;
+				left: auto;
+				width: 62px;
+				height: 62px;
+				background: url(/pictures/image-icons/icon-arrow-down-pink.svg) 50% 50% no-repeat transparent;
+				border: 0;
+				@include transition(all 200ms ease-in-out);
+
+				@include breakpoint(768) {
+					background-size: 14px auto;
+				}
+			}
+
+			&:active,
+			&.active {
+				background: none;
+
+				&:after {
+					@include transform($r: 180deg);
+				}
+			}
+		}
+
+		.options {
+			padding-top: 12px;
+			padding-bottom: 12px;
+			border-radius: 0;
+			background-color: rgba($color-grey-dark, 0.92);
+
+			li {
+				margin: 0;
+				//font-size: 14px;
+				font-size: 18px;
+				line-height: 21px;
+				font-weight: 400;
+				color: #A3ABB6;
+				border-radius: 0 !important;
+			}
+		}
+
+		&.outer-space {
+			margin: 10px 0;
+		}
+	}
+
+	&.narrow-wrapper {
+		max-width: 860px;
+		margin: 0 auto;
+
+		&>li {
+			text-align: center;
+
+			.select {
+				.styledSelect {
+					font-family: $font-baloo;
+					font-style: normal;
+					font-weight: 400;
+					font-size: 20px;
+					line-height: 26px;
+					color: #E5E5E5;
+					padding-top: 20px;
+
+					&::placeholder {
+						color: #A1AFC3;
+					}
+				}
+			}
+		}
+	}
+
+	p {
+		.important-text {
+			text-transform: uppercase;
+			color: $color-primary;
+			font-weight: 700;
+			margin: 20px 0 20px 0;
+			display: inline-block;
+		}
+	}
+}
+
+.acc-quick-form,
+.acc-center-form,
+.acc-row-form {
+	label {
+		display: block;
+		margin-bottom: 10px;
+		font-family: $font-baloo;
+		color: #A1AFC3;
+		font-size: 24px;
+		line-height: 28px;
+		font-weight: 400;
+		font-style: normal;
+		text-align: center;
+		letter-spacing: 0;
+
+		@include breakpoint(1200) {
+			font-size: 18px;
+			line-height: 24px;
+			white-space: nowrap;
+		}
+	}
+}
+
+// ROW FORMS
+.acc-row-outer {
+	margin-bottom: 30px;
+
+	h4 {
+		margin-bottom: 5px !important;
+	}
+
+	p {
+		margin-bottom: 20px;
+	}
+
+	&.acc-row-split {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(100px, 1fr));
+		grid-gap: 60px;
+
+		@include breakpoint(1024) {
+			display: block;
+		}
+	}
+}
+
+.acc-row-form {
+	@include flexbox();
+	justify-content: space-between;
+	align-items: flex-end;
+	margin: 0 -30px;
+
+	@include breakpoint(1024) {
+		display: block;
+	}
+
+	>li {
+		flex: 1;
+		padding: 0 30px;
+
+		&:last-child {
+			text-align: right;
+		}
+
+		@include breakpoint(1024) {
+			margin-bottom: 30px;
+		}
+
+		>label {
+			margin-bottom: 10px;
+
+			@include breakpoint(1366) {
+				font-size: 18px;
+				line-height: 24px;
+				white-space: nowrap;
+			}
+		}
+
+		.boxed-info-field {
+			margin: 0;
+			font-size: 24px;
+			font-family: $font-baloo;
+			line-height: 28px;
+			letter-spacing: -0.24px;
+			color: #E5E5E5;
+
+			@include breakpoint(768) {
+				font-size: 18px;
+				line-height: 22px;
+			}
+
+			&::placeholder {
+				color: #A1AFC3;
+
+				@include breakpoint(768) {
+					font-size: 18px;
+					line-height: 22px;
+				}
+			}
+		}
+
+		.btn {
+			min-width: 200px;
+
+			@include breakpoint(1080) {
+				min-width: 180px;
+			}
+
+			@include breakpoint(1024) {
+				display: block;
+				margin: 0 auto;
+			}
+		}
+
+		&.inline {
+			@include flexbox();
+			justify-content: space-between;
+			align-items: center;
+
+			label {
+				margin-bottom: 0;
+				white-space: nowrap;
+			}
+
+			@include breakpoint(1280) {
+				display: block;
+
+				label {
+					text-align: left;
+				}
+			}
+		}
+
+		&.wide {
+			flex: 0 0 40%;
+
+			@include breakpoint(1200) {
+				flex: 1;
+			}
+		}
+	}
+
+	&.acc-row-mobile-narrow {
+		@include breakpoint(1024) {
+			max-width: 400px;
+			margin: 0 auto;
+		}
+	}
+}
+
+.row-line-radios {
+	@include flexbox();
+	justify-content: space-between;
+	align-items: center;
+	padding-left: 60px;
+
+	@include breakpoint(1280) {
+		padding-left: 0;
+	}
+
+	label {
+		margin: 0 10px;
+		padding-top: 7px;
+		color: $color-primary;
+		white-space: normal;
+	}
+
+	input:checked {
+		+label {
+			color: $color-green;
+
+			&:before {
+				border: $color-green solid 3px;
+			}
+
+			&:after {
+				background-color: $color-green;
+			}
+		}
+	}
+}
+
+/* Webkit browsers like Safari and Chrome */
+
+input[type=number] {
+	appearance: textfield;
+	-moz-appearance: textfield;
+
+	@include breakpoint(768) {
+		font-size: 18px;
+		line-height: 22px;
+	}
+}
+
+input[type=number]::-webkit-inner-spin-button {
+	display: none;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	appearance: none;
+	-moz-appearance: textfield;
+	margin: 0;
+}
+
+input:focus::placeholder {
+	opacity: 0;
+}

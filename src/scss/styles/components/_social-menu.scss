@@ -1,0 +1,30 @@
+/*
+= SOCIAL MENU
+------------------------------------------------------------------------------------- */
+.social-menu {
+	margin-bottom: 10px;
+
+	li {
+		display: inline-block;
+		margin-right: 10px;
+
+		a,
+		button {
+			display: block;
+			background-color: transparent;
+			border: none;
+
+			svg {
+				fill: $color-primary;
+				@include transition(all 200ms ease-in-out);
+			}
+
+			&:hover {
+				svg {
+					color: $color-white;
+					fill: $color-white;
+				}
+			}
+		}
+	}
+}

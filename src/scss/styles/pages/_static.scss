@@ -1,0 +1,16 @@
+/*
+= GENERAL PAGE STYLES
+------------------------------------------------------------------------------------- */
+.static-page-entry {
+	max-width: 1440px;
+	padding: 50px 0 50px;
+	margin: 0 auto;
+
+	@include breakpoint(1980) {
+		padding: 30px 0 30px;
+	}
+
+	@include breakpoint(960) {
+		padding: 10px 0 10px;
+	}
+}
