@@ -24,7 +24,7 @@ _Have another more specific idea? You may want to check out our vibrant collecti
 2. **Navigate site's directory**
 
   ```shell
-    cd ultimate777-casino-react-client-888bits-ver2/
+    cd presale-888bits/
   ```
 3. **Run npm install to install dependencies for project from package.json**
 
