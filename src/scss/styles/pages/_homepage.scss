@@ -357,7 +357,7 @@ hr {
 		@include flexbox();
 		flex-direction: column;
 		flex-wrap: nowrap;
-		justify-content: space-between;
+		justify-content: flex-start;
 		align-content: flex-start;
 		align-items: stretch;
 		gap: 20px;
@@ -366,6 +366,11 @@ hr {
 			flex-direction: row;
 			flex-basis: 100%;
 			align-content: flex-start;
+		}
+
+		@include breakpoint(1200) {
+			flex-direction: column;
+			flex-basis: 100%;
 		}
 
 		.account {
@@ -417,6 +422,106 @@ hr {
 
 					.message {
 						color: $color-32;
+						text-align: center;
+						font-family: $font-poppins;
+						font-size: 16px;
+						font-style: normal;
+						font-weight: 500;
+						line-height: 24px;
+					}
+				}
+			}
+		}
+
+		.wallet {
+			order: 2;
+
+			padding: 15px 26px;
+			background: $color-37;
+			box-shadow: 0px 5px 10px $color-black;
+			border-radius: 20px;
+
+			@include breakpoint(1600) {
+				flex: 1 1 auto;
+			}
+
+			@include breakpoint(960) {
+				flex: 1 1 100%;
+			}
+
+			@include breakpoint(640) {
+				padding: 15px 8px;
+			}
+
+			.title {
+				color: $color-41;
+				text-align: center;
+				font-family: $font-baloo;
+				font-size: 28px;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 32px;
+				letter-spacing: -0.5px;
+			}
+
+			.single-col {
+				@include flexbox();
+				flex-direction: column;
+				margin: 0 auto;
+
+				.col {
+					flex: 100%;
+					padding: 10px 10px;
+					box-sizing: border-box;
+
+					&.centered {
+						text-align: center;
+					}
+
+					.username {
+						color: $color-white;
+						font-family: $font-baloo;
+						font-size: 22px;
+						font-style: normal;
+						font-weight: 400;
+						line-height: 28px;
+						letter-spacing: -0.5px;
+					}
+
+					.uid {
+						color: $color-white;
+						font-family: $font-poppins;
+						font-size: 16px;
+						font-style: normal;
+						font-weight: 700;
+						line-height: 24px;
+					}
+
+					.verification-status {
+						@include flexbox();
+						color: $color-12;
+						font-family: $font-poppins;
+						font-size: 16px;
+						font-style: normal;
+						font-weight: 500;
+						line-height: 24px;
+						text-transform: uppercase;
+						align-items: center;
+						justify-content: space-around;
+					}
+
+					.account-balance {
+						color: $color-quaternary;
+						text-align: center;
+						font-family: $font-poppins;
+						font-size: 16px;
+						font-style: normal;
+						font-weight: 500;
+						line-height: 24px;
+					}
+
+					.account-balance-value {
+						color: $color-white;
 						text-align: center;
 						font-family: $font-poppins;
 						font-size: 16px;
@@ -598,8 +703,8 @@ hr {
 		border-radius: 20px;
 
 		@include breakpoint(960) {
-			flex: 1 1 100%;
-			padding: 10px;
+			flex: 1;
+			padding: 0px;
 		}
 
 		.header-section {
@@ -839,8 +944,8 @@ hr {
 		border-radius: 20px;
 
 		@include breakpoint(960) {
-			flex: 1 1 100%;
-			padding: 10px;
+			flex: 1;
+			padding: 0px;
 		}
 
 		.header-section {
@@ -1080,7 +1185,7 @@ hr {
 		border-radius: 20px;
 
 		@include breakpoint(960) {
-			flex: 1 1 100%;
+			flex: 1;
 			padding: 10px;
 		}
 
@@ -1147,6 +1252,8 @@ hr {
 				line-height: 40px;
 				letter-spacing: -1px;
 				margin-bottom: 40px;
+				padding-right: 10px;
+				padding-left: 10px;
 			}
 
 			.list-channels {
@@ -1187,11 +1294,10 @@ hr {
 			margin-bottom: 20px;
 
 			@include breakpoint(960) {
-				background-size: 100% 50%;
+				background-size: 100% 100%;
 				background-position: 50%;
 				height: inherit;
 			}
-
 
 			position: relative;
 
@@ -1205,10 +1311,13 @@ hr {
 				flex-direction: column;
 				justify-content: space-between;
 				gap: 10px;
-				margin-top: 20px;
-				margin-bottom: 10px;
-				margin-left: 20px;
+				margin: 20px 20px 10px 20px;
 				width: 95%;
+
+				@include breakpoint(768) {
+					gap: 5px;
+					margin: 20px 10px 10px 10px;
+				}
 
 				.connect-wallet {
 					position: absolute;
@@ -1224,6 +1333,11 @@ hr {
 					font-weight: 400;
 					line-height: 32px;
 					letter-spacing: -0.5px;
+
+					@include breakpoint(768) {
+						font-size: 20px;
+						line-height: 22px;
+					}
 				}
 
 				.current-status {
@@ -1247,11 +1361,14 @@ hr {
 						font-size: 34px;
 					}
 
+					@include breakpoint(768) {
+						font-size: 30px;
+						line-height: 32px;
+					}
+
 					@include breakpoint(640) {
 						flex-direction: column;
 					}
-
-
 				}
 
 				.token-status {
@@ -1264,6 +1381,11 @@ hr {
 					text-transform: uppercase;
 					color: $color-7;
 					text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
+
+					@include breakpoint(768) {
+						font-size: 24px;
+						line-height: 22px;
+					}
 
 					&.filled {
 						color: $color-7;
@@ -1279,6 +1401,11 @@ hr {
 						letter-spacing: -1;
 						text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
 						text-transform: uppercase;
+
+						@include breakpoint(768) {
+							font-size: 24px;
+							line-height: 22px;
+						}
 					}
 
 					&.in-progress {
@@ -1290,6 +1417,11 @@ hr {
 						font-weight: 400;
 						line-height: 28px;
 						letter-spacing: -1px;
+
+						@include breakpoint(768) {
+							font-size: 24px;
+							line-height: 22px;
+						}
 					}
 
 					&.not-started {
@@ -1301,6 +1433,11 @@ hr {
 						letter-spacing: -1;
 						text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
 						text-transform: none;
+
+						@include breakpoint(768) {
+							font-size: 24px;
+							line-height: 22px;
+						}
 					}
 
 					&.default {
@@ -1312,6 +1449,11 @@ hr {
 						letter-spacing: -1;
 						text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
 						text-transform: none;
+
+						@include breakpoint(768) {
+							font-size: 24px;
+							line-height: 22px;
+						}
 					}
 
 					@include flexbox();
@@ -1338,6 +1480,11 @@ hr {
 						font-size: 22px;
 						font-size: 26px;
 					}
+
+					@include breakpoint(768) {
+						font-size: 20px;
+						line-height: 24px;
+					}
 				}
 			}
 
@@ -1348,12 +1495,17 @@ hr {
 			@include flexbox();
 			flex-direction: column;
 			gap: 10px;
-
 			border-radius: 20px;
 			background-color: $color-5;
-
+			margin-right: 10px;
 			margin-bottom: 20px;
-			padding: 20px;
+			margin-left: 10px;
+			padding-bottom: 10px;
+
+			@include breakpoint(768) {
+				margin-right: 5px;
+				margin-left: 5px;
+			}
 
 			.title {
 				color: $color-primary;
@@ -1363,7 +1515,7 @@ hr {
 				font-weight: 400;
 				line-height: 40px;
 				letter-spacing: -1px;
-				margin: 0px 20px 20px 20px;
+				margin: 10px 20px 10px 20px;
 			}
 
 			.round-price {
@@ -1414,6 +1566,8 @@ hr {
 				line-height: 32px;
 				letter-spacing: -0.5px;
 				margin-bottom: 20px;
+				padding-right: 10px;
+				padding-left: 10px;
 
 				&.small {
 					font-size: 18px;
@@ -1605,6 +1759,8 @@ hr {
 			font-style: normal;
 			font-weight: 400;
 			line-height: 20px;
+			padding-right: 10px;
+			padding-left: 10px;
 		}
 
 		.footer-description-1 {
@@ -1617,6 +1773,8 @@ hr {
 			line-height: 20px;
 			margin-top: 10px;
 			margin-bottom: 20px;
+			padding-right: 10px;
+			padding-left: 10px;
 		}
 	}
 
@@ -1629,8 +1787,8 @@ hr {
 		border-radius: 20px;
 
 		@include breakpoint(960) {
-			flex: 1 1 100%;
-			padding: 10px;
+			flex: 1;
+			padding: 0px;
 		}
 
 		.header-section {
@@ -1769,8 +1927,8 @@ hr {
 		border-radius: 20px;
 
 		@include breakpoint(960) {
-			flex: 1 1 100%;
-			padding: 10px;
+			flex: 1;
+			padding: 0px;
 		}
 
 		.header-section {
@@ -1984,15 +2142,19 @@ hr {
 		background: $color-37;
 		box-shadow: 0px 5px 10px $color-black;
 		border-radius: 20px;
+		padding: 20px;
 
 		@include breakpoint(960) {
-			flex: 1 1 100%;
+			flex: 1;
 			padding: 10px;
 		}
 
 		@include breakpoint(768) {
 			@include flexbox();
 			flex-direction: column;
+			padding-top: 10px;
+			padding-right: 10px;
+			padding-left: 10px;
 		}
 
 		.header-section {
@@ -2038,6 +2200,7 @@ hr {
 			letter-spacing: -0.25px;
 
 			margin-bottom: 20px;
+			padding-left: 10px;
 		}
 
 		hr {
@@ -2066,9 +2229,11 @@ hr {
 				justify-content: flex-start;
 				align-self: stretch;
 				gap: 16px;
+				flex-grow: 1;
+				flex-basis: 0;
 				border-radius: 20px;
 				background-color: $color-42;
-				padding-top: 20px;
+				padding-top: 0px;
 
 				img {
 					border-top-left-radius: 20px;
@@ -2078,6 +2243,7 @@ hr {
 					background-color: lightgray 50%;
 					background-size: cover;
 
+					width: 100%;
 				}
 
 				.title-level-1 {
@@ -2134,8 +2300,8 @@ hr {
 		border-radius: 20px;
 
 		@include breakpoint(960) {
-			flex: 1 1 100%;
-			padding: 10px;
+			flex: 1;
+			padding: 0px;
 		}
 
 		.header-section {
@@ -2356,8 +2522,8 @@ hr {
 		border-radius: 20px;
 
 		@include breakpoint(960) {
-			flex-grow: 1 1 100%;
-			padding: 10px;
+			flex-grow: 1;
+			padding: 0px;
 		}
 
 		@include breakpoint(768) {
@@ -2431,7 +2597,7 @@ hr {
 
 			.item {
 				width: 100%;
-				max-width: 300px;
+				max-width: 260px;
 				height: 170px;
 				border-radius: 30px;
 				background-color: #ED713C;
@@ -2442,6 +2608,22 @@ hr {
 				gap: 10px;
 				align-items: flex-start;
 				justify-content: flex-start;
+
+				&:nth-child(1) {
+					background-color: #3B5A6F;
+				}
+
+				&:nth-child(2) {
+					background-color: #FFCC33;
+				}
+
+				&:nth-child(3) {
+					background-color: #77CA60;
+				}
+
+				&:nth-child(4) {
+					background-color: #9C2CF3;
+				}
 
 				@include breakpoint(640) {
 					width: 280px;
@@ -2495,11 +2677,12 @@ hr {
 				@include flexbox();
 				border-radius: 20px;
 				background-color: $color-5;
-				padding: 20px 20px 40px 20px;
+				padding: 20px 10px 40px 10px;
 				align-items: flex-start;
 				align-self: stretch;
 				flex-direction: column;
 				gap: 20px;
+				max-width: 500px;
 
 				@include breakpoint(640) {
 					padding: 20px 10px 20px 10px;
@@ -2531,12 +2714,12 @@ hr {
 					align-self: center;
 					align-items: center;
 					justify-content: space-between;
-					gap: 20px;
+					gap: 10px;
 					border-radius: 20px;
 					background-color: $color-black;
 					height: 70px;
 					width: -webkit-fill-available;
-					padding: 10px 20px 10px 20px;
+					padding: 5px 10px 5px 10px;
 
 					@include breakpoint(640) {
 						flex-direction: column;
@@ -2597,12 +2780,12 @@ hr {
 
 				.button-actions {
 					@include flexbox();
-					padding: 20px;
+					padding: 0px 20px 20px 20px;
 					justify-content: space-between;
 					align-items: flex-start;
 					align-self: center;
 					gap: 20px;
-					height: 90px;
+					height: 50px;
 					flex-direction: row;
 
 					@include breakpoint(640) {

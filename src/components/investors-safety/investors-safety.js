@@ -5,9 +5,9 @@ class InvestorsSafety extends React.Component {
         return (
             <section className="investors-safety">
                 <div className="header-section">
-                    <div className="title">
+                    <h2 className="title">
                         Collaborative Forces
-                    </div>
+                    </h2>
                 </div>
 
                 <p className="mini-title">
@@ -29,7 +29,7 @@ class InvestorsSafety extends React.Component {
                 <hr />
 
                 <div className="content">
-                    <div className="item">
+                    <a href="https://www.proofplatform.io" className="item">
                         <img src="/pictures/background/investors-safety-1.png" alt="Proof Platform" width="260" height="208" loading="lazy" />
 
                         <div className="title-level-1">
@@ -42,9 +42,9 @@ class InvestorsSafety extends React.Component {
                             Proof platform crafted a full suite of tried and tested tools for launching your token, custom designed to maximize your chance of success.
                             PROOF has you covered all.
                         </div>
-                    </div>
+                    </a>
 
-                    <div className="item">
+                    <a href="https://www.sourcehat.com" className="item">
                         <img src="/pictures/background/investors-safety-2.png" alt="Audited" width="260" height="208" loading="lazy" />
 
                         <div className="title-level-1">
@@ -57,9 +57,9 @@ class InvestorsSafety extends React.Component {
                             1700+ smart contract audits covering all major project types and protocols, securing a total of over $50 billion U.S. dollars in on-chain value.
                             Review of solidity code, no matter how complex.
                         </div>
-                    </div>
+                    </a>
 
-                    <div className="item">
+                    <a href="https://www.assuredefi.com" className="item">
                         <img src="/pictures/background/investors-safety-3.png" alt="Kyc Verified" width="260" height="208" loading="lazy" />
 
                         <div className="title-level-1">
@@ -72,9 +72,9 @@ class InvestorsSafety extends React.Component {
                             Assure DeFi® is the market leader and pioneer of project KYC Verification and Code Audits.
                             Add Trust, Credibility and boost your visibility by getting verified today.
                         </div>
-                    </div>
+                    </a>
 
-                    <div className="item">
+                    <a href="https://www.curacao-egaming.com" className="item">
                         <img src="/pictures/background/investors-safety-4.png" alt="Licensed Casino" width="260" height="208" loading="lazy" />
 
                         <div className="title-level-1">
@@ -86,11 +86,10 @@ class InvestorsSafety extends React.Component {
                         <div className="description">
                             888BITS.COM is licensed and regulated by CyberLuck Curaçao N.V., Pareraweg 45, Willemstad, Curaçao, license no. 8048/JAZ1668-022.
                         </div>
-                    </div>
-
+                    </a>
                 </div>
 
-            </section>
+            </section >
         );
     }
 }

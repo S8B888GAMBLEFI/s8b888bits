@@ -6,9 +6,9 @@ class InvestorsVipNft extends React.Component {
         return (
             <section className="investors-vip-nft">
                 <div className="header-section">
-                    <div className="title">
+                    <h2 className="title">
                         Investors VIP NFT
-                    </div>
+                    </h2>
                 </div>
 
                 <p className="description">

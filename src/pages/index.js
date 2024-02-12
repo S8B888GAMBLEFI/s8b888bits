@@ -4,21 +4,8 @@ import Layout from "../components/layout/layout";
 import SeoHead from "../components/seo-head";
 import * as config from "../configuration/Config";
 
-//import Account from "../components/account/account";
-//import NftCard from "../components/nft-card/nft-card";
-
 import FundsRaisingRounds from "../components/funds-raising-rounds/funds-raising-rounds";
-//import ConnectYourWallet from "../components/connect-your-wallet/connect-your-wallet";
-//import BuyTokens from "../components/buy-tokens/buy-tokens";
-
-//import PrivateSaleStatus from "../components/private-sale-status/private-sale-status";
-//import InvestorsVipNft from "../components/investors-vip-nft/investors-vip-nft";
-import PresaleSeedRound from "../components/presale-seed-round/presale-seed-round";
 import InvestorsSafety from "../components/investors-safety/investors-safety";
-
-import Staking from "../components/staking/staking";
-
-
 import SignupEmailForUpdates from "../components/signup-email-for-updates/signup-email-for-updates";
 
 class IndexPage extends React.Component {
@@ -31,37 +18,14 @@ class IndexPage extends React.Component {
         </>
 
         <div className="portals">
-          {/*}
-          <div className="left">
-            <Account />
-            <NftCard />
-          </div>
-          */}
+
           <div className="center">
             <FundsRaisingRounds />
-            {/*
-            <ConnectYourWallet />
-            */}
-            {/*
-            <BuyTokens />
-            */}
 
-            {/*
-              <PrivateSaleStatus />
-            */}
           </div>
           <div className="full-width">
-            {/*
-            <PresaleSeedRound />
-            */}
-            <InvestorsSafety />
-            {
-              /*
-              <InvestorsVipNft />
-              */
-            }
 
-            <Staking />
+            <InvestorsSafety />
           </div>
 
         </div>

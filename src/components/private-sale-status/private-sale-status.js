@@ -6,9 +6,9 @@ class PrivateSaleStatus extends React.Component {
         return (
             <section className="private-sale-status">
                 <div className="header-section">
-                    <div className="title">
+                    <h2 className="title">
                         Private sale status
-                    </div>
+                    </h2>
                 </div>
                 <p className="description">
                     Prior to its launch, you have the opportunity to purchase $S8B on its most offordable price during the private sale phase.

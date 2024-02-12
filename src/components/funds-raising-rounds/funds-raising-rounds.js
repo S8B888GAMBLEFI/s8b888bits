@@ -472,9 +472,9 @@ class FundsRaisingRounds extends React.Component {
         return (
             <section className="funds-raising-rounds">
                 <div className="header-section">
-                    <div className="title">
+                    <h2 className="title">
                         Funds Raising Rounds
-                    </div>
+                    </h2>
                 </div>
                 <hr />
                 <p className="description">
@@ -492,41 +492,41 @@ class FundsRaisingRounds extends React.Component {
 
                 <div className="connect-with-us">
 
-                    <div className="title">
+                    <h2 className="title">
                         Connect with us
-                    </div>
+                    </h2>
 
                     <div className="list-channels">
-                        <div className="item">
+                        <a href="https://t.me/officialchat888bits" className="item">
                             <img src="/pictures/connect-with-us/telegram.svg" alt="Telegram" loading="lazy" />
                             <span>
                                 Telegram
                             </span>
-                        </div>
-                        <div className="item">
+                        </a>
+                        <a href="http://twitter.com/BITS888" className="item">
                             <img src="/pictures/connect-with-us/twitter.svg" alt="Twitter" loading="lazy" />
                             <span>
                                 Twitter
                             </span>
-                        </div>
-                        <div className="item">
+                        </a>
+                        <a href="https://docs.888bits.com" className="item">
                             <img src="/pictures/connect-with-us/gitbook.svg" alt="Gitbook" loading="lazy" />
                             <span>
                                 Gitbook
                             </span>
-                        </div>
-                        <div className="item">
+                        </a>
+                        <a href="https://discord.gg/888bits" className="item">
                             <img src="/pictures/connect-with-us/discord.svg" alt="Discord" loading="lazy" />
                             <span>
                                 Discord
                             </span>
-                        </div>
-                        <div className="item">
+                        </a>
+                        <a href="https://s8b.888bits.com/static/pdf/s8b-whitepaper.pdf" className="item">
                             <img src="/pictures/connect-with-us/whitepaper.svg" alt="WhitePaper" loading="lazy" />
                             <span>
                                 Whitepaper
                             </span>
-                        </div>
+                        </a>
                     </div>
                 </div>
 
@@ -552,9 +552,9 @@ class FundsRaisingRounds extends React.Component {
                 </div>
 
                 <div className="seed-section">
-                    <div className="title">
+                    <h2 className="title">
                         Seed round
-                    </div>
+                    </h2>
 
                     <div className="round-price">
                         Seed round price: 1 $S8B = ${this.state.seedRoundS8BInUSD}
@@ -707,19 +707,12 @@ class FundsRaisingRounds extends React.Component {
                             <span>
                                 {this.state.strategicPresaleRound.currentStatus}
                             </span>
-
-                            <button type="button" className="btn unlock-proof-pass">
-                                Unlock with Proof Pass
-                            </button>
                         </div>
 
                         <div className={"token-status " + this.state.strategicPresaleRound.status}>
                             <span>
                                 {this.state.strategicPresaleRound.statusText}
                             </span>
-                            <button type="button" className="btn generate-whitelist-code">
-                                Generate Whitelist Code
-                            </button>
                         </div>
 
                         <div className="raised">
@@ -729,9 +722,9 @@ class FundsRaisingRounds extends React.Component {
                 </div>
 
                 <div className="seed-section">
-                    <div className="title">
+                    <h2 className="title">
                         Strategic round Roundup: Opening Soon!
-                    </div>
+                    </h2>
 
                     <div className="round-price">
                         Strategic round price: 1 S8B = ${this.state.strategicRoundS8BInUSD}
@@ -779,7 +772,7 @@ class FundsRaisingRounds extends React.Component {
                                             strategicRoundS8BAmount: amountInToken,
                                         }, () => {
                                             this.refStrategicRoundUSDT.current.value = '';
-                                            this.refStrategicRoundS8B.current.value = amountInToken;
+                                            this.refStrategicRoundS8B.current.value = amountInToken.toFixed(config.getMinimumFractionDigits('S8B'));
                                         });
 
                                     }}
@@ -813,7 +806,7 @@ class FundsRaisingRounds extends React.Component {
                                         }, () => {
                                             this.refStrategicRoundUSDC.current.value = '';
 
-                                            this.refStrategicRoundS8B.current.value = amountInToken;
+                                            this.refStrategicRoundS8B.current.value = amountInToken.toFixed(config.getMinimumFractionDigits('S8B'));
                                         });
 
                                     }}
@@ -845,13 +838,13 @@ class FundsRaisingRounds extends React.Component {
                                             let amount = event.target.value / (this.state.usdtInUSD / this.state.strategicRoundS8BInUSD);
 
                                             this.refStrategicRoundUSDC.current.value = '';
-                                            this.refStrategicRoundUSDT.current.value = amount;
+                                            this.refStrategicRoundUSDT.current.value = amount.toFixed(config.getMinimumFractionDigits('USDT'));;
                                         }
 
                                         if (this.state?.strategicRoundCurrencyFrom === 'USDC' && event.target.value) {
                                             let amount = event.target.value / (this.state.usdcInUSD / this.state.strategicRoundS8BInUSD);
 
-                                            this.refStrategicRoundUSDC.current.value = amount;
+                                            this.refStrategicRoundUSDC.current.value = amount.toFixed(config.getMinimumFractionDigits('USDC'));;
                                             this.refStrategicRoundUSDT.current.value = '';
                                         }
                                     }}></input>
@@ -895,9 +888,9 @@ class FundsRaisingRounds extends React.Component {
                 </div>
 
                 <div className="seed-section">
-                    <div className="title">
+                    <h2 className="title">
                         Public presale round
-                    </div>
+                    </h2>
 
                     <div className="round-price">
                         Strategic round price: 1 S8B = ${this.state.publicPresaleRoundS8BInUSD}
@@ -943,7 +936,7 @@ class FundsRaisingRounds extends React.Component {
                                             publicPresaleRoundS8BAmount: amountInToken,
                                         }, () => {
                                             this.refPublicPresaleRoundUSDT.current.value = '';
-                                            this.refPublicPresaleRoundS8B.current.value = amountInToken;
+                                            this.refPublicPresaleRoundS8B.current.value = amountInToken.toFixed(config.getMinimumFractionDigits('S8B'));
                                         });
 
                                     }}
@@ -977,7 +970,7 @@ class FundsRaisingRounds extends React.Component {
                                         }, () => {
                                             this.refPublicPresaleRoundUSDC.current.value = '';
 
-                                            this.refPublicPresaleRoundS8B.current.value = amountInToken;
+                                            this.refPublicPresaleRoundS8B.current.value = amountInToken.toFixed(config.getMinimumFractionDigits('S8B'));
                                         });
 
                                     }}></input>
@@ -1008,13 +1001,13 @@ class FundsRaisingRounds extends React.Component {
                                             let amount = event.target.value / (this.state.usdtInUSD / this.state.publicPresaleRoundS8BInUSD);
 
                                             this.refPublicPresaleRoundUSDC.current.value = '';
-                                            this.refPublicPresaleRoundUSDT.current.value = amount;
+                                            this.refPublicPresaleRoundUSDT.current.value = amount.toFixed(config.getMinimumFractionDigits('S8B'));
                                         }
 
                                         if (this.state?.publicPresaleRoundCurrencyFrom === 'USDC' && event.target.value) {
                                             let amount = event.target.value / (this.state.usdcInUSD / this.state.publicPresaleRoundS8BInUSD);
 
-                                            this.refPublicPresaleRoundUSDC.current.value = amount;
+                                            this.refPublicPresaleRoundUSDC.current.value = amount.toFixed(config.getMinimumFractionDigits('S8B'));
                                             this.refPublicPresaleRoundUSDT.current.value = '';
                                         }
                                     }}></input>

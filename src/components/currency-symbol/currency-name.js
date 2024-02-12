@@ -31,6 +31,8 @@ class CurrencySymbol extends React.Component {
                 return 'LITECOIN';
             case 'BCH':
                 return 'BITCOIN CASH';
+            case 'S8B':
+                return 'S888B';
             default:
                 return currency;
         }

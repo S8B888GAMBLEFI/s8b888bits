@@ -491,6 +491,7 @@ class Header extends React.Component {
                   <Link to="/" title="Launchpad"
                     className={this.state?.selectedMenu?.selectedLaunchpad ? "active" : null}
                     onClick={(event) => {
+                      this.props.deleteSubmenuDialogStatusAction();
                       this.setState({
                         selectedMenu: {
                           selectedLaunchpad: true,
@@ -504,14 +505,28 @@ class Header extends React.Component {
                   </Link>
                 </li>
                 <li>
-                  <a href="https://docs.888bits.com/">
+                  <Link to="/staking/" title="Staking"
+                    className={this.state?.selectedMenu?.selectedStaking ? "active" : null}
+                    onClick={(event) => {
+                      this.props.deleteSubmenuDialogStatusAction();
+                      this.setState({
+                        selectedMenu: {
+                          selectedLaunchpad: false,
+                          selectedStaking: true,
+                          selectedClaimRevenueShare: false,
+                          selectedWheelOfFortune: false,
+                        }
+                      })
+                    }}
+                  >
                     <FormattedMessage id="Staking" />
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <Link to="/claim-revenue-share/" title="Claim Revenue Share"
                     className={this.state?.selectedMenu?.selectedClaimRevenueShare ? "active" : null}
                     onClick={(event) => {
+                      this.props.deleteSubmenuDialogStatusAction();
                       this.setState({
                         selectedMenu: {
                           selectedLaunchpad: false,
@@ -528,6 +543,7 @@ class Header extends React.Component {
                   <Link to="/wheel-of-fortune/" title="Wheel of Fortune"
                     className={this.state?.selectedMenu?.selectedWheelOfFortune ? "active" : null}
                     onClick={(event) => {
+                      this.props.deleteSubmenuDialogStatusAction();
                       this.setState({
                         selectedMenu: {
                           selectedLaunchpad: false,

@@ -3,8 +3,8 @@ module.exports = {
   siteMetadata: {
     productName: '888bits',
     title: `888BITS`,
-    url: "https://uat.s8b.888bits.com/",
-    siteUrl: "https://uat.s8b.888bits.com/",
+    url: "https://s8b.888bits.com/",
+    siteUrl: "https://s8b.888bits.com/",
     description: `Play the finest casino games online, slots, live casino, roulette and more! Discover our growing selection of at 888bits.com. Get lucky and place your bets at 888bits.com casino today! Provably fair & Live dealer. Unique bonus & promotion spins. BTC, ETH, DOGE, LTC, BCH, USDT, USDTT...`,
     author: `@888bits`,
     keywords: '888bits, Casino, Crypto, Slots, Live dealer, Virtual games, Instant games, Gamble, Crypto Casino Games, Crash Game, Bitcoin Gambling Games, Crypto Games, Ethereum Game, Bcgame, Crypto Gambling Games, Play Live Casino Online Free, Best Crypto Casino Games, Best Crypto Games, Online Crypto Casino Games, Online Blockchain Games, Online Casino Slot Games'
@@ -16,7 +16,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        siteUrl: `https://uat.s8b.888bits.com/`,
+        siteUrl: `https://s8b.888bits.com/`,
       },
     },
     {

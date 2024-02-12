@@ -10,6 +10,11 @@
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
+	<url>
+        <loc>https://s8b.888bits.com/staking/</loc>
+        <changefreq>daily</changefreq>
+        <priority>0.7</priority>
+    </url>
     <url>
         <loc>https://s8b.888bits.com/claim-revenue-share/</loc>
         <changefreq>daily</changefreq>

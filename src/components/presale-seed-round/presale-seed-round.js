@@ -391,9 +391,9 @@ class PresaleSeedRound extends React.Component {
         return (
             <section className="presale-seed-round">
                 <div className="header-section">
-                    <div className="title">
+                    <h2 className="title">
                         Funds Raising Status
-                    </div>
+                    </h2>
                 </div>
 
                 <p className="description">
@@ -430,19 +430,12 @@ class PresaleSeedRound extends React.Component {
                             <span>
                                 {this.state.strategicPresaleRound.currentStatus}
                             </span>
-
-                            <button type="button" className="btn unlock-proof-pass">
-                                Unlock with Proof Pass
-                            </button>
                         </div>
 
                         <div className={"token-status " + this.state.strategicPresaleRound.status}>
                             <span>
                                 {this.state.strategicPresaleRound.statusText}
                             </span>
-                            <button type="button" className="btn generate-whitelist-code">
-                                Generate Whitelist Code
-                            </button>
                         </div>
 
                         <div className="raised">

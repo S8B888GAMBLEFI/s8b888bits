@@ -5,10 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage } from "gatsby-plugin-react-intl";
 import { setSubmenuDialogStatusAction, deleteSubmenuDialogStatusAction } from "../../redux/actions/submenuDialog/SubmenuDialogActions";
-/*
-import { setAuthenticatedPlayerDialogStatusAction, deleteAuthenticatedPlayerDialogStatusAction }
-    from "../../redux/actions/authenticatedPlayerDialog/AuthenticatedPlayerDialogActions";
-    */
+
 import Clock from "./parts/clock";
 import moment from "moment";
 import * as config from "../../configuration/Config";
@@ -22,8 +19,7 @@ class SubmenuDialog extends React.Component {
     static propTypes = {
         submenuDialogStatus: PropTypes.object,
 
-        //setAuthenticatedPlayerDialogStatusAction: PropTypes.func,
-        //deleteAuthenticatedPlayerDialogStatusAction: PropTypes.func,
+        setSubmenuDialogStatusAction: PropTypes.func,
         deleteSubmenuDialogStatusAction: PropTypes.func,
     }
 
@@ -70,7 +66,6 @@ class SubmenuDialog extends React.Component {
                                 <ul>
                                     <li>
                                         <a title="Company" href={config.CASINO_BASE_URL + "about/company/"} onClick={(event) => {
-                                            //this.props.deleteAuthenticatedPlayerDialogStatusAction();
                                             this.props.deleteSubmenuDialogStatusAction();
                                         }}>
                                             <FormattedMessage id="Company" />
@@ -79,7 +74,6 @@ class SubmenuDialog extends React.Component {
 
                                     <li>
                                         <a title="Bonuses and promotions" href={config.CASINO_BASE_URL + "promo/"} onClick={(event) => {
-                                            //this.props.deleteAuthenticatedPlayerDialogStatusAction();
                                             this.props.deleteSubmenuDialogStatusAction();
                                         }}>
                                             <FormattedMessage id="Bonuses and promotions" />
@@ -88,7 +82,6 @@ class SubmenuDialog extends React.Component {
 
                                     <li>
                                         <a title="Fairness and RNG Testing Methods" href={config.CASINO_BASE_URL + "about/fairness-and-rng-testing-methods/"} onClick={(event) => {
-                                            //this.props.deleteAuthenticatedPlayerDialogStatusAction();
                                             this.props.deleteSubmenuDialogStatusAction();
                                         }}>
                                             <FormattedMessage id="Fairness and RNG Testing Methods" />
@@ -97,7 +90,6 @@ class SubmenuDialog extends React.Component {
 
                                     <li>
                                         <a href="https://docs.888bits.com/" title="S8B GambleFi" onClick={(event) => {
-                                            //this.props.deleteAuthenticatedPlayerDialogStatusAction();
                                             this.props.deleteSubmenuDialogStatusAction();
                                         }}>
                                             <FormattedMessage id="S8B GambleFi" />
@@ -106,7 +98,6 @@ class SubmenuDialog extends React.Component {
 
                                     <li>
                                         <a title="Anti-Money Laundering Policy" href={config.CASINO_BASE_URL + "resources/aml-policy/"} onClick={(event) => {
-                                            //this.props.deleteAuthenticatedPlayerDialogStatusAction();
                                             this.props.deleteSubmenuDialogStatusAction();
                                         }}>
                                             <FormattedMessage id="Anti-Money Laundering Policy" />
@@ -115,7 +106,6 @@ class SubmenuDialog extends React.Component {
 
                                     <li>
                                         <a title="Privacy and Management Policy" href={config.CASINO_BASE_URL + "resources/privacy-policy/"} onClick={(event) => {
-                                            //this.props.deleteAuthenticatedPlayerDialogStatusAction();
                                             this.props.deleteSubmenuDialogStatusAction();
                                         }}>
                                             <FormattedMessage id="Privacy and Management Policy" />
@@ -130,7 +120,6 @@ class SubmenuDialog extends React.Component {
                                 <ul>
                                     <li>
                                         <a title="Gaming Terms and Conditions" href={config.CASINO_BASE_URL + "about/terms-and-conditions/"} onClick={(event) => {
-                                            //this.props.deleteAuthenticatedPlayerDialogStatusAction();
                                             this.props.deleteSubmenuDialogStatusAction();
                                         }}>
                                             <FormattedMessage id="Gaming Terms and Conditions" />
@@ -139,7 +128,6 @@ class SubmenuDialog extends React.Component {
 
                                     <li>
                                         <a title="Player Account and Bonus Conditions" href={config.CASINO_BASE_URL + "about/player-account/"} onClick={(event) => {
-                                            //this.props.deleteAuthenticatedPlayerDialogStatusAction();
                                             this.props.deleteSubmenuDialogStatusAction();
                                         }}>
                                             <FormattedMessage id="Player Account and Bonus Conditions" />
@@ -148,7 +136,6 @@ class SubmenuDialog extends React.Component {
 
                                     <li>
                                         <a title="Responsible Gambling Agreement" href={config.CASINO_BASE_URL + "resources/responsible-gaming/"} onClick={(event) => {
-                                            //this.props.deleteAuthenticatedPlayerDialogStatusAction();
                                             this.props.deleteSubmenuDialogStatusAction();
                                         }}>
                                             <FormattedMessage id="Responsible Gambling Agreement" />
@@ -156,7 +143,6 @@ class SubmenuDialog extends React.Component {
                                     </li>
                                     <li>
                                         <a title="Self-Exclusion Policy" href={config.CASINO_BASE_URL + "resources/self-exclusion/"} onClick={(event) => {
-                                            //this.props.deleteAuthenticatedPlayerDialogStatusAction();
                                             this.props.deleteSubmenuDialogStatusAction();
                                         }}>
                                             <FormattedMessage id="Self-Exclusion Policy" />
@@ -164,7 +150,6 @@ class SubmenuDialog extends React.Component {
                                     </li>
                                     <li>
                                         <a title="Dispute and Complaint Policy" href={config.CASINO_BASE_URL + "resources/support-and-complaints/"} onClick={(event) => {
-                                            //this.props.deleteAuthenticatedPlayerDialogStatusAction();
                                             this.props.deleteSubmenuDialogStatusAction();
                                         }}>
                                             <FormattedMessage id="Dispute and Complaint Policy" />
@@ -173,7 +158,6 @@ class SubmenuDialog extends React.Component {
 
                                     <li>
                                         <a title="KYC Policy" href={config.CASINO_BASE_URL + "resources/kyc-policy/"} onClick={(event) => {
-                                            //this.props.deleteAuthenticatedPlayerDialogStatusAction();
                                             this.props.deleteSubmenuDialogStatusAction();
                                         }}>
                                             <FormattedMessage id="KYC Policy" />
@@ -190,7 +174,6 @@ class SubmenuDialog extends React.Component {
                             <ul className="social-menu">
                                 <li>
                                     <a href="https://t.me/Official888bits" target={"_blank"} onClick={(event) => {
-                                        //this.props.deleteAuthenticatedPlayerDialogStatusAction();
                                         this.props.deleteSubmenuDialogStatusAction();
                                     }}>
                                         <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -200,7 +183,6 @@ class SubmenuDialog extends React.Component {
                                 </li>
                                 <li>
                                     <a href="https://twitter.com/BITS888" target={"_blank"} onClick={(event) => {
-                                        //this.props.deleteAuthenticatedPlayerDialogStatusAction();
                                         this.props.deleteSubmenuDialogStatusAction();
                                     }}>
                                         <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -215,7 +197,6 @@ class SubmenuDialog extends React.Component {
                                             window.tidioChatApi.show();
                                             window.tidioChatApi.open();
                                         }
-                                        //this.props.deleteAuthenticatedPlayerDialogStatusAction();
                                         this.props.deleteSubmenuDialogStatusAction();
                                     }}>
                                         <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -259,8 +240,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => (
     bindActionCreators({
-        deleteSubmenuDialogStatusAction,
         setSubmenuDialogStatusAction,
+        deleteSubmenuDialogStatusAction,
 
         //setAuthenticatedPlayerDialogStatusAction,
         //deleteAuthenticatedPlayerDialogStatusAction,

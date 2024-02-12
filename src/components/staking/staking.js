@@ -32,7 +32,7 @@ class Staking extends React.Component {
                             Balance
                         </span>
                         <span className="balance">
-                            $5,750,20
+                            500,000.00 $S8B ($2,000.00)
                         </span>
                     </div>
                     <div className="item">
@@ -41,7 +41,7 @@ class Staking extends React.Component {
                             Total Staked
                         </span>
                         <span className="balance">
-                            $5,750,20
+                            2,000,000.00 $S8B ($5,750,20)
                         </span>
                     </div>
                     <div className="item">
@@ -120,7 +120,7 @@ class Staking extends React.Component {
                     </div>
                     <div className="unstake">
                         <div className="title">
-                            Stake
+                            Unstake
                         </div>
                         <p className="description">
                             Build your 401 Pension FUNDSSS HEREEEE BITCHEEES
@@ -140,7 +140,7 @@ class Staking extends React.Component {
                                 </div>
                             </div>
 
-                            <input type="number" className="amount" placeholder="Enter Stake Amount"
+                            <input type="number" className="amount" placeholder="Enter Unstake Amount"
                                 maxLength={10}
                                 autoComplete="new-password"
                                 min="0.0000001"
@@ -154,7 +154,7 @@ class Staking extends React.Component {
                                 event.preventDefault();
                                 //this.getExchangeRate();
                             }}>
-                                Stake Max
+                                Unstake Max
                             </button>
                             <button type="button" className="btn approve" onClick={(event) => {
                                 event.preventDefault();
