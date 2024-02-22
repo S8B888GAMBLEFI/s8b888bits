@@ -4,9 +4,11 @@ import Layout from "../components/layout/layout";
 import SeoHead from "../components/seo-head";
 import * as config from "../configuration/Config";
 
+/*
 import Account from "../components/shared/account/account";
 import Wallet from "../components/shared/wallet/wallet"
 import Staking from "../components/staking/staking";
+*/
 
 class StakingPage extends React.Component {
 
@@ -17,6 +19,12 @@ class StakingPage extends React.Component {
                     <h1 className="display-none">Staking</h1>
                 </>
 
+                <br />
+                Staking
+                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                {/*
                 <div className="portals">
 
                     <div className="left">
@@ -28,7 +36,7 @@ class StakingPage extends React.Component {
                         <Staking />
                     </div>
                 </div>
-
+                */}
 
             </Layout>
         )

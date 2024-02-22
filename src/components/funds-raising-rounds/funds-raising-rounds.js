@@ -480,7 +480,10 @@ class FundsRaisingRounds extends React.Component {
                 <p className="description">
                     We, open an exclusive opportunity to purchase tokens at a discounted rate before they are available to the wider public (TGE).
                     This early access allows participants to become involved in a new project at its nascent stage, ahead of the official coin/token launch
-                    where the general public can invest. As exclusive means granting early access privileges.
+                    where the general public can invest.
+                    <br />
+                    As exclusive means granting early access privileges.
+                    <br />
                     Engaging in a pre-sale enables investors to acquire tokens at a preferential 'early-bird' price, prior to their public release.
                 </p>
 
@@ -515,10 +518,10 @@ class FundsRaisingRounds extends React.Component {
                                 Gitbook
                             </span>
                         </a>
-                        <a href="https://discord.gg/888bits" className="item">
-                            <img src="/pictures/connect-with-us/discord.svg" alt="Discord" loading="lazy" />
+                        <a href="https://s8b.888bits.com/static/pdf/s8b-pitchdeck.pdf" className="item">
+                            <img src="/pictures/connect-with-us/pitch-deck.svg" alt="Pitch Deck" loading="lazy" />
                             <span>
-                                Discord
+                                Pitch Deck
                             </span>
                         </a>
                         <a href="https://s8b.888bits.com/static/pdf/s8b-whitepaper.pdf" className="item">
@@ -532,7 +535,7 @@ class FundsRaisingRounds extends React.Component {
 
                 <hr />
 
-                <div className="realtime-statistic-section">
+                <div className="realtime-statistic-section seed-presale-round">
                     <div className="content">
                         <div className="message-status">
                             {this.state.seedPresaleRound.tokenPriceText}
@@ -557,7 +560,7 @@ class FundsRaisingRounds extends React.Component {
                     </h2>
 
                     <div className="round-price">
-                        Seed round price: 1 $S8B = ${this.state.seedRoundS8BInUSD}
+                        Seed round price: 1 S8B = ${this.state.seedRoundS8BInUSD}
                     </div>
 
                     <p className="description">
@@ -698,7 +701,7 @@ class FundsRaisingRounds extends React.Component {
 
                 <hr />
 
-                <div className="realtime-statistic-section">
+                <div className="realtime-statistic-section strategic-presale-round">
                     <div className="content">
                         <div className="message-status">
                             {this.state.strategicPresaleRound.tokenPriceText}
@@ -855,7 +858,7 @@ class FundsRaisingRounds extends React.Component {
 
                 <hr />
 
-                <div className="realtime-statistic-section">
+                <div className="realtime-statistic-section public-presale-round">
                     <div className="content">
                         {
                             (!this.state.isMobile && !this.state?.loginStatus && this.state.isMetaMaskSupported) &&

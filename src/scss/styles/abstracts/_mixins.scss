@@ -156,6 +156,12 @@
         }
     }
 
+    @else if $point ==412 {
+        @media (max-width: 412px) {
+            @content ;
+        }
+    }
+
     @else if $point ==medium-mobile {
         @media (max-width: 375px) {
             @content ;

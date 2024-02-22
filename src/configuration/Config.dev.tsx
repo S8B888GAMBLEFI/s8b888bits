@@ -15,7 +15,7 @@ export const APP_STATE_TO_STORAGE_NAME = 'dev_presale_888bits_com';
 //GDPR cookie name for privacy policy modal dialog
 export const GDPR_COOKIE_NAME = 'GDPR_DEV_PRESALE_888BITS_COM';
 
-export const cryptoCurrencyList = ['LTC', 'LTCT', 'BTC', 'ETH', 'ZEC', 'XMR', 'USDT', 'DOGE', 'MBTC', 'METH', 'μBTC', 'μETH', 'mBTC', 'uBTC', 'mETH', 'BCH', 'USDTT', 'USDTE'];
+export const cryptoCurrencyList = ['LTC', 'LTCT', 'BTC', 'ETH', 'ZEC', 'XMR', 'USDT', 'DOGE', 'MBTC', 'METH', 'μBTC', 'μETH', 'mBTC', 'uBTC', 'mETH', 'BCH', 'USDTT', 'USDTE', 'S8B'];
 
 export const getMinimumFractionDigits = (currency: string) => {
     if (currency) {
@@ -28,6 +28,9 @@ export const getMinimumFractionDigits = (currency: string) => {
             return 2;
         }
         if (testCurrency === 'USDTT'.toUpperCase()) {
+            return 2;
+        }
+        if (testCurrency === 'S8B'.toUpperCase()) {
             return 2;
         }
         if (testCurrency === 'DOGE'.toUpperCase()) {
@@ -58,6 +61,9 @@ export const getMinimumFractionDigits = (currency: string) => {
             return 2;
         }
         if (currency === 'USDTT') {
+            return 2;
+        }
+        if (currency === 'S8B') {
             return 2;
         }
         if (currency === 'DOGE') {

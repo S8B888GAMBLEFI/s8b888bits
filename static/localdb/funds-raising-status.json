@@ -10,14 +10,14 @@
         "token-price-text": "Strategic presale round - token price $0.004",
         "current-status": "$S8B 115,555,555.0000",
         "status": "default",
-        "status-text": "Investor Roundup: Opening Soon!",
+        "status-text": "Investor Roundup: NOT ACTIVE!",
         "raised-text": "13% of token supply, $462,222.22 to be raised in this round."
     },
     "public-presale-round": {
         "token-price-text": "Public presale round - token price $0.055",
         "current-status": "$S8B 71,111,111.00",
         "status": "default",
-        "status-text": "Investor Roundup: Opening Soon!",
+        "status-text": "Investor Roundup: NOT ACTIVE!",
         "raised-text": "8% of token supply, $391,111.11 to be raised in this round."
     }
 }
