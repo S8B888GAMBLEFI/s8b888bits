@@ -1,23 +1,23 @@
 {
     "seed-presale-round": {
         "token-price-text": "Seed presale round token price $0.0025",
-        "current-status": "$S8B 62,222,222.22",
+        "current-status": "$S8B 62,222,222.16",
         "status": "in-progress",
         "status-text": "In Progress",
         "raised-text": "7% of token supply, $155,555.55 raised."
     },
     "strategic-presale-round": {
-        "token-price-text": "Strategic presale round - token price $0.004",
-        "current-status": "$S8B 115,555,555.0000",
-        "status": "default",
+        "token-price-text": "Strategic presale round - token price $0.00375",
+        "current-status": "$S8B 79,999,999.92",
+        "status": "not-active",
         "status-text": "Investor Roundup: NOT ACTIVE!",
-        "raised-text": "13% of token supply, $462,222.22 to be raised in this round."
+        "raised-text": "9% of token supply, $300,000.00 to be raised."
     },
     "public-presale-round": {
-        "token-price-text": "Public presale round - token price $0.055",
-        "current-status": "$S8B 71,111,111.00",
-        "status": "default",
+        "token-price-text": "Public presale round - token price $0.005",
+        "current-status": "$S8B 88,888,888.88",
+        "status": "not-active",
         "status-text": "Investor Roundup: NOT ACTIVE!",
-        "raised-text": "8% of token supply, $391,111.11 to be raised in this round."
+        "raised-text": "10% of token supply, $444,444.44 to be raised."
     }
 }

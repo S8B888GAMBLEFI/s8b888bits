@@ -570,7 +570,7 @@ class FundsRaisingRounds extends React.Component {
 
                     <p className="description-2">
                         The seed presale round is allocated 7% of the total token supply, which amounts to 62,222,222.22 $S8B tokens.
-                        In this round, each wallet is limited to a maximum investment of $5,555.00, equivalent to 2,222,220.00 $S8B tokens,
+                        In this round, each wallet is limited to a maximum investment of $5,555.56, equivalent to 2,222,220.00 $S8B tokens,
                         representing 0.25% of the total token supply.
                     </p>
 
@@ -739,8 +739,8 @@ class FundsRaisingRounds extends React.Component {
                     </p>
 
                     <p className="description-2">
-                        The seed presale round is allocated 13% of the total token supply, which amounts to 115,555,555.55 $S8B tokens.
-                        In this round, each wallet is limited to a maximum investment of $5,333.00, equivalent to 1,333,333.00 $S8B tokens,
+                        The seed presale round is allocated 9% of the total token supply, which amounts to 79,999,999.92 $S8B tokens.
+                        In this round, each wallet is limited to a maximum investment of $5,000.00, equivalent to 1,333,333.00 $S8B tokens,
                         representing 0.15% of the total token supply.
                     </p>
 
@@ -905,7 +905,7 @@ class FundsRaisingRounds extends React.Component {
 
                     <p className="description-2">
                         The seed presale round is allocated 8% of the total token supply, which amounts to 71,111,111.00 $S8B tokens.
-                        In this round, each wallet is limited to a maximum investment of $4,888.00, equivalent to 888,888.00 $S8B tokens, representing 0.10% of the total token supply.
+                        In this round, each wallet is limited to a maximum investment of $4,444.00, equivalent to 8.888,888.88 $S8B tokens, representing 0.10% of the total token supply.
                     </p>
 
                     <hr />
@@ -1032,7 +1032,7 @@ class FundsRaisingRounds extends React.Component {
                 <div className="footer-description-1">
                     Tokens purchased during the presale rounds are subject to a various cliff and vesting schedules.
                     <br />
-                    Immediately following the Token Generation Event (TGE), 26.037% of total supply are released to their respective holders, the remaining are gradually distributed according to a predetermined cliff and vesting schedule depends on investment seed.
+                    Immediately following the Token Generation Event (TGE), 25.81% of total supply are released to their respective holders, the remaining are gradually distributed according to a predetermined cliff and vesting schedule depends on investment seed.
                     <br />
                     For public round presale, 50% will be released at TGE, with vesting of 1 months.
                 </div>
