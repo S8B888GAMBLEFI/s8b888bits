@@ -487,12 +487,6 @@ class FundsRaisingRounds extends React.Component {
                     Engaging in a pre-sale enables investors to acquire tokens at a preferential 'early-bird' price, prior to their public release.
                 </p>
 
-                <p className="restriction-description">
-                    Due to regulatory constraints and the requirements of our gambling license,
-                    residents of the United States of America are prohibited from participating in our pre-sale and
-                    from playing with real money in our casino. It is the sole responsibility of U.S. residents to refrain from such activities.
-                </p>
-
                 <div className="connect-with-us">
 
                     <h2 className="title">
@@ -892,11 +886,11 @@ class FundsRaisingRounds extends React.Component {
 
                 <div className="seed-section">
                     <h2 className="title">
-                        Public presale round
+                        Public round Roundup: Opening Soon!
                     </h2>
 
                     <div className="round-price">
-                        Strategic round price: 1 S8B = ${this.state.publicPresaleRoundS8BInUSD}
+                        Public round price: 1 S8B = ${this.state.publicPresaleRoundS8BInUSD}
                     </div>
 
                     <p className="description">
@@ -904,7 +898,7 @@ class FundsRaisingRounds extends React.Component {
                     </p>
 
                     <p className="description-2">
-                        The seed presale round is allocated 8% of the total token supply, which amounts to 71,111,111.00 $S8B tokens.
+                        The seed presale round is allocated 10% of the total token supply, which amounts to 88,888,88.88 $S8B tokens.
                         In this round, each wallet is limited to a maximum investment of $4,444.00, equivalent to 8.888,888.88 $S8B tokens, representing 0.10% of the total token supply.
                     </p>
 
