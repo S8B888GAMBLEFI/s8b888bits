@@ -11,6 +11,7 @@ import Web3 from "web3";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { setMetamaskConfigurationAction, deleteMetamaskConfigurationAction } from "../../redux/actions/metamaskConfiguration/MetamaskConfigurationActions";
 import { setSubmenuDialogStatusAction, deleteSubmenuDialogStatusAction } from "../../redux/actions/submenuDialog/SubmenuDialogActions";
+import { setAccountInformationAction, deleteAccountInformationAction } from "../../redux/actions/accountInformation/AccountInformationActions";
 
 class Header extends React.Component {
 
@@ -39,12 +40,16 @@ class Header extends React.Component {
   static propTypes = {
     metamaskConfiguration: PropTypes.any,
     submenuDialogStatus: PropTypes.object,
+    accountInformation: PropTypes.object,
 
     setMetamaskConfigurationAction: PropTypes.func,
     deleteMetamaskConfigurationAction: PropTypes.func,
 
     setSubmenuDialogStatusAction: PropTypes.func,
     deleteSubmenuDialogStatusAction: PropTypes.func,
+
+    setAccountInformationAction: PropTypes.func,
+    deleteAccountInformationAction: PropTypes.func,
   }
 
   static defaultProps = {
@@ -208,14 +213,14 @@ class Header extends React.Component {
       }
 
       if (config.ENVIRONMENT_SITE === "LOCAL") {
-        if (chainId !== config.CHAINS.GOERLI.hex) { //sepolia
+        if (chainId !== config.CHAINS.SEPOLIA.hex) { //sepolia
           try {
 
             await window.ethereum.request({
               method: "wallet_switchEthereumChain",
               params: [
                 {
-                  chainId: config.CHAINS.GOERLI.hex.toString()
+                  chainId: config.CHAINS.SEPOLIA.hex.toString()
                 }
               ]
             });
@@ -279,6 +284,12 @@ class Header extends React.Component {
             this.setState({
               accounts: result,
               balance: balance,//this.formatBalance(balance)
+            }, () => {
+              this.props.setAccountInformationAction({
+                ...this.props.accountInformation,
+                accounts: result,
+                balance: balance,
+              })
             })
           }
         })
@@ -315,14 +326,14 @@ class Header extends React.Component {
       }
 
       if (config.ENVIRONMENT_SITE === "LOCAL") {
-        if (chainId !== config.CHAINS.GOERLI.hex) { //sepolia
+        if (chainId !== config.CHAINS.SEPOLIA.hex) { //sepolia
           try {
 
             await window.ethereum.request({
               method: "wallet_switchEthereumChain",
               params: [
                 {
-                  chainId: config.CHAINS.GOERLI.hex.toString()
+                  chainId: config.CHAINS.SEPOLIA.hex.toString()
                 }
               ]
             });
@@ -402,6 +413,11 @@ class Header extends React.Component {
         chainId: chainId,
       }, () => {
         this.props.setMetamaskConfigurationAction(metamaskConfigurationJSON);
+        this.props.setAccountInformationAction({
+          ...this.props.accountInformation,
+          accounts: accounts,
+          balance: balance,
+        });
 
         window.ethereum.on('accountsChanged', this.accountsChanged);
         window.ethereum.on('chainChanged', this.chainChanged)
@@ -427,6 +443,7 @@ class Header extends React.Component {
       loginStatus: false
     }, () => {
       this.props.deleteMetamaskConfigurationAction();
+      this.props.deleteAccountInformationAction();
       //window.ethereum?.removeListener('accountsChanged', this.refreshAccounts);
     })
   }
@@ -649,10 +666,12 @@ const mapStateToProps = state => {
 
   const { metamaskConfiguration } = state.metamaskConfiguration;
   const { submenuDialogStatus } = state.submenuDialogStatus;
+  const { accountInformation } = state.accountInformation;
 
   return {
     metamaskConfiguration,
-    submenuDialogStatus
+    submenuDialogStatus,
+    accountInformation
   };
 }
 
@@ -663,6 +682,9 @@ const mapDispatchToProps = dispatch => (
 
     setSubmenuDialogStatusAction,
     deleteSubmenuDialogStatusAction,
+
+    setAccountInformationAction,
+    deleteAccountInformationAction,
   }, dispatch)
 );
 

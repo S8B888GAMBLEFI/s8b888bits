@@ -8,18 +8,18 @@ const initialState = {
 }
 
 let AuthenticatedPlayerDialogStatusReducer = (state = initialState, action) => {
-    switch(action.type) {
-        case SET_AUTHENTICATED_PLAYER_DIALOG_STATUS: 
+    switch (action.type) {
+        case SET_AUTHENTICATED_PLAYER_DIALOG_STATUS:
             return {
-                ...state, 
+                ...state,
                 authenticatedPlayerDialogStatus: action.payload,
             };
-        case DELETE_AUTHENTICATED_PLAYER_DIALOG_STATUS: 
+        case DELETE_AUTHENTICATED_PLAYER_DIALOG_STATUS:
             return {
                 initialState
-            };     
-        default: 
-            return state;    
+            };
+        default:
+            return state;
     }
 };
 

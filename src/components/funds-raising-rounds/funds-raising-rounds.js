@@ -254,14 +254,14 @@ class FundsRaisingRounds extends React.Component {
             }
 
             if (config.ENVIRONMENT_SITE === "LOCAL") {
-                if (chainId !== config.CHAINS.GOERLI.hex) { //goerli
+                if (chainId !== config.CHAINS.SEPOLIA.hex) { //sepolia
                     try {
 
                         await window.ethereum.request({
                             method: "wallet_switchEthereumChain",
                             params: [
                                 {
-                                    chainId: config.CHAINS.GOERLI.hex.toString()
+                                    chainId: config.CHAINS.SEPOLIA.hex.toString()
                                 }
                             ]
                         });
@@ -387,14 +387,14 @@ class FundsRaisingRounds extends React.Component {
             }
 
             if (config.ENVIRONMENT_SITE === "LOCAL") {
-                if (chainId !== config.CHAINS.GOERLI.hex) { //goerli
+                if (chainId !== config.CHAINS.SEPOLIA.hex) { //sepolia
                     try {
 
                         await window.ethereum.request({
                             method: "wallet_switchEthereumChain",
                             params: [
                                 {
-                                    chainId: config.CHAINS.GOERLI.hex.toString()
+                                    chainId: config.CHAINS.SEPOLIA.hex.toString()
                                 }
                             ]
                         });

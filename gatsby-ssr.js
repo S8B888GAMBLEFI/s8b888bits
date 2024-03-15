@@ -29,5 +29,5 @@ export const wrapRootElement = ({ element }) => (
 );
 
 export const onRenderBody = ({ setHtmlAttributes }) => {
-    setHtmlAttributes({ lang: "en" });
+    setHtmlAttributes({ key: 1, lang: "en" });
 };

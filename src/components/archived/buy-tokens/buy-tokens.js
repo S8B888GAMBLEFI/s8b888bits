@@ -6,12 +6,8 @@ import { injectIntl } from "gatsby-plugin-react-intl"
 import Web3 from "web3";
 import * as config from "../../configuration/Config";
 import detectEthereumProvider from "@metamask/detect-provider";
-import {
-    STAKE_TOKEN_ADDRESSES, STAKE_TOKEN_ABI,
-    STAKE_CONTRACT_ABI, STAKE_CONTRACT_ADDRESSES
-} from "../../configuration/Config";
 import { setMetamaskConfigurationAction, deleteMetamaskConfigurationAction } from "../../redux/actions/metamaskConfiguration/MetamaskConfigurationActions";
-import { ethers } from "ethers";
+
 import WalletCryptoCurrencyIcon from "../currency-icon/wallet-crypto-currency-icon";
 
 class BuyTokens extends React.Component {
@@ -44,12 +40,16 @@ class BuyTokens extends React.Component {
 
     }
 
-    privateSaleTokenInUSD = 0.0025;
+    privateSaleTokenInUSD = 0.0004;
+    listingSaleTokenInUSD = 0.005;
     ethInUSD = 2243.06;
     usdtInUSD = 1.01;
     usdcInUSD = 1.00;
 
     refEthValue = null;
+    refUsdtValue = null;
+    refUsdcValue = null;
+
     refTokenValue = null;
 
     contractABI = [
@@ -584,6 +584,8 @@ class BuyTokens extends React.Component {
         super(props, context);
 
         this.refEthValue = React.createRef();
+        this.refUsdtValue = React.createRef();
+        this.refUsdcValue = React.createRef();
         this.refTokenValue = React.createRef();
     }
 
@@ -600,16 +602,6 @@ class BuyTokens extends React.Component {
         if (this.props?.metamaskConfiguration) {
             metamaskConfiguration = JSON.parse(this.props.metamaskConfiguration);
         }
-
-        await fetch("/localdb/funds-raising-rounds.json")
-            .then(response => response.json())
-            .then(json => {
-                this.ethInUSD = json.ethInUSD;
-                this.usdcInUSD = json.usdcInUSD;
-                this.usdtInUSD = json.usdtInUSD;
-            }).catch(reason => {
-
-            })
 
         this.setState({
             provider: provider,
@@ -754,17 +746,17 @@ class BuyTokens extends React.Component {
             //
             let toAddress = accounts[0];
 
-            let stakeTokenContract = new this.state.web3Instance.eth.Contract(STAKE_TOKEN_ABI, STAKE_TOKEN_ADDRESSES, { from: STAKE_TOKEN_ADDRESSES, gas: 10000000 })
+            let contract = new this.state.web3Instance.eth.Contract(this.contractABI, this.contractAddress, { from: this.walletAddress, gas: 10000000 })
 
-            await stakeTokenContract.methods.balanceOf(toAddress)
+            await contract.methods.balanceOf(toAddress)
                 .call({
-                    from: STAKE_TOKEN_ADDRESSES
+                    from: this.walletAddress
                 })
                 .then((response) => {
                     //console.log(response);
-                    /*this.setState({
+                    this.setState({
                         tokenBalance: response
-                    })*/
+                    })
                 })
                 .catch((error) => {
                     console.error(error);
@@ -900,7 +892,7 @@ class BuyTokens extends React.Component {
                         });
                         this.setState({
                             accounts: result,
-                            balance: balance, //this.formatBalance(balance)
+                            balance: balance,//this.formatBalance(balance)
                         })
                     }
                 })
@@ -918,23 +910,23 @@ class BuyTokens extends React.Component {
                     <div className="title">
                         Buy tokens
                     </div>
-                    {/*
+                    {
                         (!this.state?.loginStatus && this.state.isMetaMaskSupported) &&
                         <button type="button" className="btn connect-wallet" onClick={(event) => {
                             this.loginMetaMask();
                         }}>
                             Connect Wallet
                         </button>
-                    */}
-                    {/*
+                    }
+                    {
                         (this.state?.loginStatus === true && this.state?.tokenBalance) &&
                         <div>{this.state.tokenBalance.toString()}</div>
-                */}
+                    }
                 </div>
                 <hr />
                 <div className="main-section">
                     <div className="sale-price">
-                        Seed round price: 1 S8B = $0.0025
+                        Private sale price: 1 $S8B = $0.0004
                     </div>
                     <div className="message">
                         Amount of currency you investing
@@ -946,7 +938,8 @@ class BuyTokens extends React.Component {
                                 this.setState({
                                     selectedCurrencyFrom: 'ETH'
                                 }, () => {
-
+                                    this.refUsdtValue.current.value = '';
+                                    this.refUsdcValue.current.value = '';
                                 })
                             }
                         }>
@@ -967,6 +960,8 @@ class BuyTokens extends React.Component {
                                             selectedCurrencyFrom: 'ETH',
                                             tokenAmount: amountInToken,
                                         }, () => {
+                                            this.refUsdtValue.current.value = '';
+                                            this.refUsdcValue.current.value = '';
 
                                             this.refTokenValue.current.value = amountInToken;
                                         });
@@ -975,6 +970,77 @@ class BuyTokens extends React.Component {
                             </div>
                         </div>
 
+                        <div className="enter-amount" onClick={
+                            (event) => {
+                                this.setState({
+                                    selectedCurrencyFrom: 'USDT'
+                                }, () => {
+                                    this.refEthValue.current.value = '';
+                                    this.refUsdcValue.current.value = '';
+                                })
+                            }
+                        }>
+                            <div className="currency">
+                                <WalletCryptoCurrencyIcon currency="USDT" width={30} height={30} />
+                                <div className="name">
+                                    USDT
+                                </div>
+                            </div>
+                            <div className="input-amount">
+                                <input type="number" placeholder="Enter Amount"
+                                    ref={this.refUsdtValue}
+                                    onChange={(event) => {
+                                        let amountInToken = event.target.value * (this.usdtInUSD / this.privateSaleTokenInUSD);
+
+                                        this.setState({
+                                            selectedCurrencyFrom: 'USDT',
+                                            tokenAmount: amountInToken,
+                                        }, () => {
+                                            this.refEthValue.current.value = '';
+                                            this.refUsdcValue.current.value = '';
+
+                                            this.refTokenValue.current.value = amountInToken;
+                                        });
+
+                                    }}></input>
+                            </div>
+                        </div>
+
+                        <div className="enter-amount" onClick={
+                            (event) => {
+                                this.setState({
+                                    selectedCurrencyFrom: 'USDC'
+                                }, () => {
+                                    this.refEthValue.current.value = '';
+                                    this.refUsdtValue.current.value = '';
+                                })
+                            }
+                        }>
+                            <div className="currency">
+                                <WalletCryptoCurrencyIcon currency="USDC" width={30} height={30} />
+                                <div className="name">
+                                    USDC
+                                </div>
+                            </div>
+                            <div className="input-amount">
+                                <input type="number" placeholder="Enter Amount"
+                                    ref={this.refUsdcValue}
+                                    onChange={(event) => {
+                                        let amountInToken = event.target.value * (this.usdcInUSD / this.privateSaleTokenInUSD);
+
+                                        this.setState({
+                                            selectedCurrencyFrom: 'USDC',
+                                            tokenAmount: amountInToken,
+                                        }, () => {
+                                            this.refEthValue.current.value = '';
+                                            this.refUsdtValue.current.value = '';
+
+                                            this.refTokenValue.current.value = amountInToken;
+                                        });
+
+                                    }}></input>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="message">
@@ -999,6 +1065,24 @@ class BuyTokens extends React.Component {
                                             let amount = event.target.value / (this.ethInUSD / this.privateSaleTokenInUSD);
 
                                             this.refEthValue.current.value = amount;
+                                            this.refUsdtValue.current.value = '';
+                                            this.refUsdcValue.current.value = '';
+                                        }
+
+                                        if (this.state?.selectedCurrencyFrom === 'USDT' && event.target.value) {
+                                            let amount = event.target.value / (this.usdtInUSD / this.privateSaleTokenInUSD);
+
+                                            this.refEthValue.current.value = '';
+                                            this.refUsdtValue.current.value = amount;
+                                            this.refUsdcValue.current.value = '';
+                                        }
+
+                                        if (this.state?.selectedCurrencyFrom === 'USDC' && event.target.value) {
+                                            let amount = event.target.value / (this.usdcInUSD / this.privateSaleTokenInUSD);
+
+                                            this.refEthValue.current.value = '';
+                                            this.refUsdtValue.current.value = '';
+                                            this.refUsdcValue.current.value = amount;
                                         }
                                     }}
                                 ></input>
@@ -1010,74 +1094,97 @@ class BuyTokens extends React.Component {
 
                         let tokenAmount = this.refTokenValue.current.value;
 
-                        let tokenPrice = this.refEthValue.current.value;
-
-                        console.log("BUY TOKENS");
-
                         if (this.state?.loginStatus && tokenAmount > 0 && this.state?.accounts) {
 
-                            let playerAddress = this.state.accounts[0];
+                            let toAddress = this.state.accounts[0];
 
-                            console.log("player address=" + playerAddress);
+                            let contract = new this.state.web3Instance.eth.Contract(this.contractABI, this.contractAddress, { from: this.walletAddress, gas: 10000000 })
 
-                            let stakeTokenContract = new this.state.web3Instance.eth.Contract(STAKE_TOKEN_ABI, STAKE_TOKEN_ADDRESSES, { from: playerAddress, gas: 10000000 });
+                            await contract.methods.balanceOf(this.walletAddress)
+                                .call({
+                                    from: this.walletAddress
+                                })
+                                .then((response) => {
+                                    //console.log(response);
+                                })
+                                .catch((error) => {
+                                    console.error(error);
+                                })
+                                ;
 
-                            const fromAddress = "0x8D520016daeF63195F249D6F72fAe1ea984ed4Ac";
-
-                            console.log(tokenPrice);
-                            console.log(ethers.parseUnits(tokenPrice, "ether"));
-
-                            await this.state.web3Instance.eth.sendTransaction({
-                                from: playerAddress,
-                                to: fromAddress,
-                                value: ethers.parseUnits(tokenPrice, "ether"),
-                                gas: 1_000_000
-                            }).then(async (receipt) => {
-                                console.log(receipt);
-
-                                await stakeTokenContract.methods.approve(fromAddress, ethers.parseEther(tokenAmount))
-                                    .send({
-                                        from: fromAddress,
-                                        gas: 1_000_000
+                            await contract.methods.balanceOf(toAddress)
+                                .call({
+                                    from: this.walletAddress
+                                })
+                                .then((response) => {
+                                    //console.log(response);
+                                    this.setState({
+                                        tokenBalance: response
                                     })
-                                    .then(async (response) => {
-                                        console.log(response);
+                                })
+                                .catch((error) => {
+                                    console.error(error);
+                                })
+                                ;
 
-                                        await stakeTokenContract.methods.transferFrom(fromAddress, playerAddress, ethers.parseEther(tokenAmount))
-                                            .send({
-                                                from: fromAddress,
-                                                gas: 1_000_000
-                                            })
-                                            .then((response) => {
-                                                console.log(response);
-                                            })
-                                            .catch((error) => {
-                                                console.error(error);
-                                            })
-                                            ;
+
+                            let chargeAmount = 0.00002;
+                            /*if (this.state.selectedCurrencyFrom === 'ETH') {
+                                chargeAmount = this.refEthValue.current.value;
+                            }
+                            else if (this.state.selectedCurrencyFrom === 'USDT') {
+                                
+                            }*/
+
+
+                            await contract.methods.transfer(toAddress, tokenAmount)
+                                .send({
+                                    from: this.walletAddress,
+                                    //value: this.state.web3Instance.utils.toWei(chargeAmount, 'ether')
+                                })
+                                .then((response) => {
+                                    //console.log(response);
+                                })
+                                .catch((error) => {
+                                    console.error(error);
+                                })
+                                ;
+
+
+                            await contract.methods.balanceOf(this.walletAddress)
+                                .call({
+                                    from: this.walletAddress
+                                })
+                                .then((response) => {
+                                    //console.log(response);
+                                })
+                                .catch((error) => {
+                                    console.error(error);
+                                })
+                                ;
+
+                            await contract.methods.balanceOf(toAddress)
+                                .call({
+                                    from: this.walletAddress
+                                })
+                                .then((response) => {
+                                    //console.log(response);
+                                    this.setState({
+                                        tokenBalance: response
                                     })
-                                    .catch((error) => {
-                                        console.error(error);
-                                    });
-                            }).catch((error) => {
-                                console.error(error);
-                            });
-
-                            //TRANSFER TOKENS
-
-                            //return;
-
-
-
-
-
-
-                            //END TRANSFER TOKENS
+                                })
+                                .catch((error) => {
+                                    console.error(error);
+                                })
+                                ;
                         }
                     }}>
                         Buy tokens
                     </button>
 
+                    <div className="listing-price">
+                        Listing price: 1$S8B = $0.005
+                    </div>
                 </div>
             </section >
         );

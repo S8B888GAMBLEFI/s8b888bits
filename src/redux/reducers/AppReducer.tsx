@@ -9,6 +9,7 @@ import { combineReducers } from 'redux';
 import { LoggedInSubmenuDialogStatusReducer } from './loggedInSubmenuDialog/LoggedInSubmenuDialogReducer';
 import { MetamaskConfigurationReducer } from './metamaskConfiguration/MetamaskConfigurationReducer';
 import { SubmenuDialogStatusReducer } from './submenuDialog/SubmenuDialogReducer';
+import { AccountInformationReducer } from './accountInformation/AccountInformationReducer';
 // EXPORT APP REDUCER
 
 export const AppReducer = combineReducers({
@@ -18,4 +19,5 @@ export const AppReducer = combineReducers({
     loggedInSubmenuDialogStatus: LoggedInSubmenuDialogStatusReducer,
     metamaskConfiguration: MetamaskConfigurationReducer,
     submenuDialogStatus: SubmenuDialogStatusReducer,
+    accountInformation: AccountInformationReducer,
 });

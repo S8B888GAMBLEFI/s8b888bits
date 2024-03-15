@@ -13,7 +13,7 @@ const deleteAuthenticatedPlayerDialogStatusAction = () => ({
     payload: {}
 });
 
-export { 
+export {
     setAuthenticatedPlayerDialogStatusAction,
     deleteAuthenticatedPlayerDialogStatusAction
 };

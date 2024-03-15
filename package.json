@@ -24,6 +24,7 @@
     "crypto-js": "^4.0.0",
     "date-fns": "^2.0.0",
     "eslint": "^8.46.0",
+    "ethers": "^6.11.1",
     "gatsby": "^5.0.0",
     "gatsby-plugin-canonical-urls": "^5.11.0",
     "gatsby-plugin-image": "^3.11.0",

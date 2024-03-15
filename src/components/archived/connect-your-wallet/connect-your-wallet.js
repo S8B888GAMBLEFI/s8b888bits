@@ -4,11 +4,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { injectIntl } from "gatsby-plugin-react-intl"
 import Web3 from "web3";
-import * as config from "../../configuration/Config";
+import * as config from "../../../configuration/Config";
 import detectEthereumProvider from "@metamask/detect-provider";
-import { setMetamaskConfigurationAction, deleteMetamaskConfigurationAction } from "../../redux/actions/metamaskConfiguration/MetamaskConfigurationActions";
+import { setMetamaskConfigurationAction, deleteMetamaskConfigurationAction } from "../../../redux/actions/metamaskConfiguration/MetamaskConfigurationActions";
 
-import WalletCryptoCurrencyIcon from "../currency-icon/wallet-crypto-currency-icon";
+import WalletCryptoCurrencyIcon from "../../currency-icon/wallet-crypto-currency-icon";
 
 
 class ConnectYourWallet extends React.Component {
@@ -120,14 +120,14 @@ class ConnectYourWallet extends React.Component {
             }
 
             if (config.ENVIRONMENT_SITE === "LOCAL") {
-                if (chainId !== config.CHAINS.GOERLI.hex) { //sepolia
+                if (chainId !== config.CHAINS.SEPOLIA.hex) { //sepolia
                     try {
 
                         await window.ethereum.request({
                             method: "wallet_switchEthereumChain",
                             params: [
                                 {
-                                    chainId: config.CHAINS.GOERLI.hex.toString()
+                                    chainId: config.CHAINS.SEPOLIA.hex.toString()
                                 }
                             ]
                         });
@@ -253,14 +253,14 @@ class ConnectYourWallet extends React.Component {
             }
 
             if (config.ENVIRONMENT_SITE === "LOCAL") {
-                if (chainId !== config.CHAINS.GOERLI.hex) { //sepolia
+                if (chainId !== config.CHAINS.SEPOLIA.hex) { //sepolia
                     try {
 
                         await window.ethereum.request({
                             method: "wallet_switchEthereumChain",
                             params: [
                                 {
-                                    chainId: config.CHAINS.GOERLI.hex.toString()
+                                    chainId: config.CHAINS.SEPOLIA.hex.toString()
                                 }
                             ]
                         });

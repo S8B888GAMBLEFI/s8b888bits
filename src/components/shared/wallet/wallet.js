@@ -1,5 +1,6 @@
 
 import React from "react";
+import PropTypes from "prop-types"
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage } from "gatsby-plugin-react-intl";
@@ -7,12 +8,19 @@ import {
     isMobile
 } from "react-device-detect";
 import WalletCryptoCurrencyIcon from "../../currency-icon/wallet-crypto-currency-icon";
+import { ethers } from "ethers";
 
 class Wallet extends React.Component {
     state = {
+        isMobile: isMobile,
+        accountInformation: null,
+
+        ethInUSD: 0
     }
 
     static propTypes = {
+
+        accountInformation: PropTypes.object,
     }
 
     _isMounted = false;
@@ -21,8 +29,19 @@ class Wallet extends React.Component {
         super(props, context);
     }
 
-    componentDidMount() {
+    componentDidMount = async () => {
         this._isMounted = true;
+
+
+        await fetch("/localdb/funds-raising-rounds.json")
+            .then(response => response.json())
+            .then(json => {
+                this.setState({
+                    ethInUSD: json.ethInUSD
+                })
+            }).catch(reason => {
+
+            })
 
 
         window.addEventListener('resize', () => {
@@ -33,8 +52,12 @@ class Wallet extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-
-
+        if (JSON.stringify(this.props.accountInformation) !== JSON.stringify(prevProps.accountInformation)) {
+            //console.log(this.props.accountInformation);
+            this.setState({
+                accountInformation: this.props.accountInformation
+            })
+        }
     }
 
     componentWillUnmount() {
@@ -64,7 +87,10 @@ class Wallet extends React.Component {
                             Account Balance
                         </div>
                         <div className="account-balance-value">
-                            1.12345678
+                            {
+                                this.state?.accountInformation?.balance &&
+                                parseFloat(ethers.formatEther(this.state?.accountInformation?.balance)).toFixed(8)
+                            }
                         </div>
                     </div>
                     <div className="col centered">
@@ -75,7 +101,66 @@ class Wallet extends React.Component {
                             Value in USD
                         </div>
                         <div className="account-balance-value">
-                            1.12345678
+                            {
+                                this.state?.accountInformation?.balance &&
+                                ((ethers.formatEther(this.state?.accountInformation?.balance) * this.state.ethInUSD).toFixed(2))
+                            }
+                        </div>
+                    </div>
+                    <div className="col centered">
+                        <div>
+                            <WalletCryptoCurrencyIcon currency="S8B" width={40} height={40} />
+                        </div>
+                        <div className="account-balance">
+                            Token Balance
+                        </div>
+                        <div className="account-balance-value">
+                            {
+                                this.state?.accountInformation?.stakeTokenBalance &&
+                                this.state?.accountInformation?.stakeTokenBalance
+                            }
+                        </div>
+                    </div>
+                    <div className="col centered">
+                        <div>
+                            <WalletCryptoCurrencyIcon currency="S8B" width={40} height={40} />
+                        </div>
+                        <div className="account-balance">
+                            Reward Collected
+                        </div>
+                        <div className="account-balance-value">
+                            {
+                                this.state?.accountInformation?.rewardTokenBalance &&
+                                this.state?.accountInformation?.rewardTokenBalance
+                            }
+                        </div>
+                    </div>
+                    <div className="col centered">
+                        <div>
+                            <WalletCryptoCurrencyIcon currency="S8B" width={40} height={40} />
+                        </div>
+                        <div className="account-balance">
+                            Tokens Staked
+                        </div>
+                        <div className="account-balance-value">
+                            {
+                                this.state?.accountInformation?.totalStakedBalance &&
+                                this.state?.accountInformation?.totalStakedBalance
+                            }
+                        </div>
+                    </div>
+                    <div className="col centered">
+                        <div>
+                            <WalletCryptoCurrencyIcon currency="S8B" width={40} height={40} />
+                        </div>
+                        <div className="account-balance">
+                            Reward to claim
+                        </div>
+                        <div className="account-balance-value">
+                            {
+                                this.state?.accountInformation?.rewardsStakedBalance &&
+                                this.state?.accountInformation?.rewardsStakedBalance
+                            }
                         </div>
                     </div>
                     <div className="col centered">
@@ -100,8 +185,12 @@ class Wallet extends React.Component {
 
 const mapStateToProps = state => {
 
-    return {
+    const { metamaskConfiguration } = state.metamaskConfiguration;
+    const { accountInformation } = state.accountInformation;
 
+    return {
+        metamaskConfiguration,
+        accountInformation
     };
 }
 

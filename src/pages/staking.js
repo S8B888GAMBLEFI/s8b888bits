@@ -4,7 +4,6 @@ import Layout from "../components/layout/layout";
 import SeoHead from "../components/seo-head";
 import * as config from "../configuration/Config";
 
-
 import Account from "../components/shared/account/account";
 import Wallet from "../components/shared/wallet/wallet"
 import Staking from "../components/staking/staking";

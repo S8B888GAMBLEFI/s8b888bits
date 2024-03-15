@@ -3,20 +3,20 @@ module.exports = {
   siteMetadata: {
     productName: '888bits',
     title: `888BITS`,
-    url: "https://s8b.888bits.com/",
-    siteUrl: "https://s8b.888bits.com/",
+    url: "https://dev.s8b.888bits.com/",
+    siteUrl: "https://dev.s8b.888bits.com/",
     description: `Play the finest casino games online, slots, live casino, roulette and more! Discover our growing selection of at 888bits.com. Get lucky and place your bets at 888bits.com casino today! Provably fair & Live dealer. Unique bonus & promotion spins. BTC, ETH, DOGE, LTC, BCH, USDT, USDTT...`,
     author: `@888bits`,
     keywords: '888bits, Casino, Crypto, Slots, Live dealer, Virtual games, Instant games, Gamble, Crypto Casino Games, Crash Game, Bitcoin Gambling Games, Crypto Games, Ethereum Game, Bcgame, Crypto Gambling Games, Play Live Casino Online Free, Best Crypto Casino Games, Best Crypto Games, Online Crypto Casino Games, Online Blockchain Games, Online Casino Slot Games'
   },
   flags: {
-    DEV_SSR: false
+    DEV_SSR: true
   },
   plugins: [
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        siteUrl: `https://s8b.888bits.com/`,
+        siteUrl: `https://dev.s8b.888bits.com/`,
       },
     },
     {
@@ -121,7 +121,8 @@ module.exports = {
       },
     },
     `gatsby-plugin-sass`,
-    `gatsby-plugin-no-sourcemaps`,
+
+    //`gatsby-plugin-no-sourcemaps`,
     /*
     {
       resolve: `gatsby-plugin-purgecss`,
@@ -141,7 +142,6 @@ module.exports = {
     */
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
     {
       resolve: `gatsby-plugin-offline`,
       options: {
