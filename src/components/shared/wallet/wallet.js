@@ -107,62 +107,74 @@ class Wallet extends React.Component {
                             }
                         </div>
                     </div>
-                    <div className="col centered">
-                        <div>
-                            <WalletCryptoCurrencyIcon currency="S8B" width={40} height={40} />
+                    {
+                        this.state?.accountInformation?.stakeTokenBalance &&
+                        <div className="col centered">
+                            <div>
+                                <WalletCryptoCurrencyIcon currency="S8B" width={40} height={40} />
+                            </div>
+                            <div className="account-balance">
+                                Token Balance
+                            </div>
+                            <div className="account-balance-value">
+                                {
+                                    this.state?.accountInformation?.stakeTokenBalance &&
+                                    this.state?.accountInformation?.stakeTokenBalance
+                                }
+                            </div>
                         </div>
-                        <div className="account-balance">
-                            Token Balance
+                    }
+                    {
+                        this.state?.accountInformation?.rewardTokenBalance &&
+                        <div className="col centered">
+                            <div>
+                                <WalletCryptoCurrencyIcon currency="S8B" width={40} height={40} />
+                            </div>
+                            <div className="account-balance">
+                                Reward Collected
+                            </div>
+                            <div className="account-balance-value">
+                                {
+                                    this.state?.accountInformation?.rewardTokenBalance &&
+                                    this.state?.accountInformation?.rewardTokenBalance
+                                }
+                            </div>
                         </div>
-                        <div className="account-balance-value">
-                            {
-                                this.state?.accountInformation?.stakeTokenBalance &&
-                                this.state?.accountInformation?.stakeTokenBalance
-                            }
+                    }
+                    {
+                        this.state?.accountInformation?.totalStakedBalance &&
+                        <div className="col centered">
+                            <div>
+                                <WalletCryptoCurrencyIcon currency="S8B" width={40} height={40} />
+                            </div>
+                            <div className="account-balance">
+                                Tokens Staked
+                            </div>
+                            <div className="account-balance-value">
+                                {
+                                    this.state?.accountInformation?.totalStakedBalance &&
+                                    this.state?.accountInformation?.totalStakedBalance
+                                }
+                            </div>
                         </div>
-                    </div>
-                    <div className="col centered">
-                        <div>
-                            <WalletCryptoCurrencyIcon currency="S8B" width={40} height={40} />
+                    }
+                    {
+                        this.state?.accountInformation?.rewardsStakedBalance &&
+                        <div className="col centered">
+                            <div>
+                                <WalletCryptoCurrencyIcon currency="S8B" width={40} height={40} />
+                            </div>
+                            <div className="account-balance">
+                                Reward to claim
+                            </div>
+                            <div className="account-balance-value">
+                                {
+                                    this.state?.accountInformation?.rewardsStakedBalance &&
+                                    this.state?.accountInformation?.rewardsStakedBalance
+                                }
+                            </div>
                         </div>
-                        <div className="account-balance">
-                            Reward Collected
-                        </div>
-                        <div className="account-balance-value">
-                            {
-                                this.state?.accountInformation?.rewardTokenBalance &&
-                                this.state?.accountInformation?.rewardTokenBalance
-                            }
-                        </div>
-                    </div>
-                    <div className="col centered">
-                        <div>
-                            <WalletCryptoCurrencyIcon currency="S8B" width={40} height={40} />
-                        </div>
-                        <div className="account-balance">
-                            Tokens Staked
-                        </div>
-                        <div className="account-balance-value">
-                            {
-                                this.state?.accountInformation?.totalStakedBalance &&
-                                this.state?.accountInformation?.totalStakedBalance
-                            }
-                        </div>
-                    </div>
-                    <div className="col centered">
-                        <div>
-                            <WalletCryptoCurrencyIcon currency="S8B" width={40} height={40} />
-                        </div>
-                        <div className="account-balance">
-                            Reward to claim
-                        </div>
-                        <div className="account-balance-value">
-                            {
-                                this.state?.accountInformation?.rewardsStakedBalance &&
-                                this.state?.accountInformation?.rewardsStakedBalance
-                            }
-                        </div>
-                    </div>
+                    }
                     <div className="col centered">
                         <button className="btn deposit-tab" onClick={(event) => {
 

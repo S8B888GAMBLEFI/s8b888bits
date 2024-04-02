@@ -1,19 +1,19 @@
 
-//DEV
+//UAT
 
-export const ENVIRONMENT_SITE = 'DEV';
+export const ENVIRONMENT_SITE = 'UAT';
 export const IS_DEV_ENV = false;
-export const REST_SERVICE_BASE_URL = "https://dev.888bits.com/api/rest/index";
-export const BASE_URL = "https://dev.s8b.888bits.com/";
-export const CASINO_BASE_URL = "https://dev.888bits.com/";
+export const REST_SERVICE_BASE_URL = "https://uat.888bits.com/api/rest/index";
+export const BASE_URL = "https://uat.s8b.888bits.com/";
+export const CASINO_BASE_URL = "https://uat.888bits.com/";
 export const internetGroupId = '747872399';
 
 //local or session storage protection - player session in web site
 export const ENCRYPT_APP_STATE_TO_STORAGE = true;
 export const ENCRYPT_APP_STATE_TO_STORAGE_SECRET_KEY = 'ultraplus';
-export const APP_STATE_TO_STORAGE_NAME = 'dev_presale_888bits_com';
+export const APP_STATE_TO_STORAGE_NAME = 'uat_presale_888bits_com';
 //GDPR cookie name for privacy policy modal dialog
-export const GDPR_COOKIE_NAME = 'GDPR_DEV_PRESALE_888BITS_COM';
+export const GDPR_COOKIE_NAME = 'GDPR_UAT_PRESALE_888BITS_COM';
 
 export const cryptoCurrencyList = ['LTC', 'LTCT', 'BTC', 'ETH', 'ZEC', 'XMR', 'USDT', 'DOGE', 'MBTC', 'METH', 'μBTC', 'μETH', 'mBTC', 'uBTC', 'mETH', 'BCH', 'USDTT', 'USDTE', 'S8B'];
 
