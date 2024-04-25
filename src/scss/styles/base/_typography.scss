@@ -7,14 +7,11 @@ $font-secondary: 'Baloo 2', cursive;
 $font-baloo: 'Baloo';
 $font-poppins: 'Poppins';
 $font-inter: 'Inter';
+$font-lexend: 'Lexend';
 
 
 body {
-	font-family: $font-primary;
-
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	font-smooth: always;
+	font-family: $font-inter;
 }
 
 h1,
@@ -24,7 +21,7 @@ h4,
 h5,
 h6,
 h7 {
-	font-family: $font-secondary;
+	font-family: $font-inter;
 }
 
 h1,
@@ -71,7 +68,7 @@ h4 {
 	line-height: 38px;
 	color: $color-secondary;
 	font-weight: bold;
-	font-family: $font-baloo;
+	font-family: $font-inter;
 }
 
 h5,
@@ -134,7 +131,7 @@ p {
 		}
 
 		&.about-company {
-			font-family: $font-baloo;
+			font-family: $font-inter;
 			font-style: normal;
 			font-weight: 400;
 			font-size: 34px;
@@ -145,7 +142,7 @@ p {
 
 	h3 {
 		margin-bottom: 30px;
-		font-family: $font-primary;
+		font-family: $font-inter;
 		font-size: 22px;
 		line-height: 29px;
 		color: $color-primary;
@@ -181,7 +178,7 @@ p {
 		}
 
 		&.about-company {
-			font-family: $font-primary;
+			font-family: $font-inter;
 			font-style: normal;
 			font-weight: 500;
 			font-size: 19px;
@@ -203,7 +200,7 @@ p {
 	ul {
 		&.about-company {
 			list-style-type: disc;
-			font-family: $font-primary;
+			font-family: $font-inter;
 			font-style: normal;
 			font-weight: 500;
 			font-size: 19px;
@@ -213,7 +210,7 @@ p {
 			margin-top: 25px;
 
 			&>li {
-				font-family: $font-primary;
+				font-family: $font-inter;
 				font-style: normal;
 				font-weight: 500;
 				font-size: 19px;

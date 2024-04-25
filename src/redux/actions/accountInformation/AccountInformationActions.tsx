@@ -10,7 +10,7 @@ const setAccountInformationAction = (data) => ({
 
 const deleteAccountInformationAction = () => ({
     type: DELETE_ACCOUNT_INFORMATION,
-    payload: null
+    payload: {}
 });
 
 export {

@@ -226,7 +226,7 @@
 		li {
 			flex-grow: 1;
 			margin: 0 3px;
-			font-family: $font-baloo;
+			font-family: $font-inter;
 			font-style: normal;
 			font-weight: 400;
 			font-size: 22px;
@@ -478,7 +478,7 @@
 					font-size: 26px;
 					line-height: 30px;
 					color: $color-primary;
-					font-family: $font-baloo;
+					font-family: $font-inter;
 					font-style: normal;
 					font-weight: 400;
 					letter-spacing: 0;
@@ -488,7 +488,7 @@
 					flex-wrap: nowrap;
 
 					>span.unique-player-id {
-						font-family: $font-primary;
+						font-family: $font-inter;
 						font-size: 20px;
 						font-weight: 500;
 						letter-spacing: 0;
@@ -510,7 +510,7 @@
 					letter-spacing: 0.44px;
 
 					&.space-top {
-						$font-family: $font-baloo;
+						font-family: $font-inter;
 						font-size: 22px;
 						font-weight: 400;
 						font-style: normal;
@@ -522,7 +522,7 @@
 				}
 
 				h6 {
-					font-family: $font-primary;
+					font-family: $font-inter;
 					font-size: 20px;
 					line-height: 24px;
 					color: #A1AFC3;
@@ -531,7 +531,7 @@
 				}
 
 				p {
-					font-family: $font-primary;
+					font-family: $font-inter;
 					font-size: 16px;
 					font-weight: 600;
 					font-style: normal;
@@ -541,7 +541,7 @@
 
 					&.acc-info-txt {
 						a {
-							font-family: $font-primary;
+							font-family: $font-inter;
 							font-size: 18px;
 							font-weight: 700;
 							color: $color-primary;
@@ -555,7 +555,7 @@
 					}
 
 					&.limits-info-txt {
-						font-family: $font-primary;
+						font-family: $font-inter;
 						font-size: 16px;
 						font-weight: 600;
 						color: #E5E5E5;
@@ -566,7 +566,7 @@
 					}
 
 					&.deactivate-account-info-txt {
-						font-family: $font-primary;
+						font-family: $font-inter;
 						font-size: 18px;
 						font-weight: bold;
 						color: #A1AFC3;
@@ -575,7 +575,7 @@
 					}
 
 					&.file-upload-info-txt {
-						font-family: $font-primary;
+						font-family: $font-inter;
 						font-size: 16px;
 						font-weight: 600;
 						color: #E5E5E5;
@@ -585,7 +585,7 @@
 					}
 
 					&.file-upload-info-bottom-txt {
-						font-family: $font-baloo;
+						font-family: $font-inter;
 						font-size: 20px;
 						font-weight: 400;
 						font-style: normal;
@@ -597,7 +597,7 @@
 					}
 
 					&.description-text {
-						font-family: $font-primary;
+						font-family: $font-inter;
 						font-size: 16px;
 						font-weight: 600;
 						color: #E5E5E5;
@@ -607,7 +607,7 @@
 					}
 
 					&.time-notification {
-						font-family: $font-baloo;
+						font-family: $font-inter;
 						font-style: normal;
 						font-weight: 400;
 						font-size: 22px;
@@ -618,7 +618,7 @@
 					}
 
 					&.timeout-text {
-						font-family: $font-baloo;
+						font-family: $font-inter;
 						font-style: normal;
 						font-weight: 400;
 						font-size: 26px;
@@ -629,7 +629,7 @@
 					}
 
 					&.promotion-code-information {
-						font-family: $font-baloo;
+						font-family: $font-inter;
 						font-style: normal;
 						font-weight: 400;
 						font-size: 24px;
@@ -638,7 +638,7 @@
 					}
 
 					&.voucher-code-information {
-						font-family: $font-baloo;
+						font-family: $font-inter;
 						font-style: normal;
 						font-weight: 400;
 						font-size: 24px;
@@ -783,7 +783,7 @@
 					p {
 						flex: 1;
 						color: #E5E5E5;
-						font-family: $font-baloo;
+						font-family: $font-inter;
 						font-size: 24px;
 						font-weight: 400;
 						font-style: normal;
@@ -792,7 +792,7 @@
 						text-align: left;
 
 						span {
-							font-family: $font-baloo;
+							font-family: $font-inter;
 							margin-right: 10px;
 							font-size: 24px;
 							font-weight: 400;
@@ -904,7 +904,7 @@
 
 						p {
 							font-size: 22px;
-							font-family: $font-baloo;
+							font-family: $font-inter;
 							font-weight: 400;
 							font-style: normal;
 							letter-spacing: 0;
@@ -921,7 +921,7 @@
 							}
 
 							&.status {
-								font-family: $font-baloo;
+								font-family: $font-inter;
 								font-style: normal;
 								font-weight: 400;
 								font-size: 24px;
@@ -1072,7 +1072,7 @@
 						height: 50px;
 
 						span {
-							font-family: $font-baloo;
+							font-family: $font-inter;
 							font-size: 24px;
 							font-weight: 400;
 							font-style: normal;
@@ -1139,7 +1139,7 @@
 						}
 
 						span:nth-child(2) {
-							font-family: $font-baloo;
+							font-family: $font-inter;
 							font-size: 20px;
 							line-height: 26px;
 							font-weight: 400;
@@ -1195,7 +1195,7 @@
 							height: 35px;
 							float: right;
 							text-transform: uppercase;
-							font-family: $font-baloo;
+							font-family: $font-inter;
 							font-size: 20px;
 							font-weight: 400;
 							font-style: normal;
@@ -1420,7 +1420,7 @@
 
 				// Table - Simple
 				.table-simple-outer {
-					font-family: $font-baloo;
+					font-family: $font-inter;
 					font-size: 22px;
 					font-weight: 400;
 					font-style: normal;
@@ -1439,7 +1439,7 @@
 							th,
 							td {
 								padding-right: 10px;
-								font-family: $font-primary;
+								font-family: $font-inter;
 								font-style: normal;
 								font-weight: 600;
 								font-size: 16px;
@@ -1459,7 +1459,7 @@
 
 								th,
 								td {
-									font-family: $font-baloo;
+									font-family: $font-inter;
 									font-size: 22px;
 									font-weight: 400;
 									font-style: normal;
@@ -1487,7 +1487,7 @@
 
 							tr,
 							td {
-								font-family: $font-primary;
+								font-family: $font-inter;
 								font-style: normal;
 								font-weight: 600;
 								font-size: 16px;
@@ -1514,7 +1514,7 @@
 
 								th,
 								td {
-									font-family: $font-baloo;
+									font-family: $font-inter;
 									padding-top: 10px;
 									font-size: 22px;
 									font-weight: 400;
@@ -1561,7 +1561,7 @@
 						}
 
 						thead {
-							font-family: $font-baloo;
+							font-family: $font-inter;
 
 							tr {
 								background: linear-gradient(135deg, #2D2E37 0%, #1A1B20 100%);
@@ -1571,7 +1571,7 @@
 								td,
 								th {
 									position: relative;
-									font-family: $font-baloo;
+									font-family: $font-inter;
 									font-size: 18px;
 									line-height: 16px;
 									letter-spacing: 0.444px;
@@ -1615,7 +1615,7 @@
 							tr {
 								td {
 									a {
-										font-family: $font-secondary;
+										font-family: $font-inter;
 										color: $color-white;
 									}
 								}
@@ -1738,7 +1738,7 @@
 						h6 {
 							color: #4ECB4A;
 							line-height: 35px;
-							font-family: $font-baloo;
+							font-family: $font-inter;
 							font-style: normal;
 							font-weight: 400;
 							font-size: 25px;
@@ -1770,7 +1770,7 @@
 							label {
 								position: relative;
 								z-index: 1;
-								font-family: $font-baloo;
+								font-family: $font-inter;
 								font-style: normal;
 								font-weight: 400;
 								font-size: 25px;
@@ -1811,7 +1811,7 @@
 								margin-top: 4px;
 								color: $color-primary;
 								line-height: 50px;
-								font-family: $font-baloo;
+								font-family: $font-inter;
 								font-style: normal;
 								font-weight: 400;
 								font-size: 25px;
@@ -1822,7 +1822,7 @@
 							h6 {
 								color: #4ECB4A;
 								line-height: 35px;
-								font-family: $font-baloo;
+								font-family: $font-inter;
 								font-style: normal;
 								font-weight: 400;
 								font-size: 25px;
@@ -1836,7 +1836,7 @@
 								margin-top: 4px;
 								color: #4ECB4A;
 								line-height: 50px;
-								font-family: $font-baloo;
+								font-family: $font-inter;
 								font-style: normal;
 								font-weight: 400;
 								font-size: 25px;
@@ -1871,7 +1871,7 @@
 							h6 {
 								color: #4ECB4A;
 								line-height: 35px;
-								font-family: $font-baloo;
+								font-family: $font-inter;
 								font-style: normal;
 								font-weight: 400;
 								font-size: 25px;
@@ -1884,7 +1884,7 @@
 								margin-top: 4px;
 								color: #4ECB4A;
 								line-height: 50px;
-								font-family: $font-baloo;
+								font-family: $font-inter;
 								font-style: normal;
 								font-weight: 400;
 								font-size: 25px;
@@ -1910,11 +1910,11 @@
 					text-align: center;
 
 					>p {
-						font-family: $font-baloo;
+						font-family: $font-inter;
 						margin-bottom: 20px;
 
 						strong {
-							font-family: $font-primary;
+							font-family: $font-inter;
 							font-style: normal;
 							font-weight: 600;
 							font-size: 16px;
@@ -1925,7 +1925,7 @@
 						}
 
 						&.limit-information {
-							font-family: $font-primary;
+							font-family: $font-inter;
 							font-style: normal;
 							font-weight: 600;
 							font-size: 16px;
@@ -1934,7 +1934,7 @@
 						}
 
 						&.promotion-code-information {
-							font-family: $font-baloo;
+							font-family: $font-inter;
 							font-style: normal;
 							font-weight: 400;
 							font-size: 24px;
@@ -1943,7 +1943,7 @@
 						}
 
 						&.voucher-code-information {
-							font-family: $font-baloo;
+							font-family: $font-inter;
 							font-style: normal;
 							font-weight: 400;
 							font-size: 24px;
@@ -1955,7 +1955,7 @@
 							color: $color-primary;
 							text-align: center;
 							font-size: 18px;
-							font-family: $font-primary;
+							font-family: $font-inter;
 							font-weight: 700px;
 							letter-spacing: 0.444px;
 							text-decoration-line: underline;
@@ -1969,7 +1969,7 @@
 					h4 {
 						margin-bottom: 0;
 						font-size: 22px;
-						font-family: $font-baloo;
+						font-family: $font-inter;
 						font-style: normal;
 						font-weight: 400;
 						font-size: 24px;
@@ -2001,12 +2001,12 @@
 
 						p {
 							margin-bottom: 20px;
-							font-family: $font-primary;
+							font-family: $font-inter;
 						}
 
 						h5 {
 							margin-bottom: 10px;
-							font-family: $font-primary;
+							font-family: $font-inter;
 							color: $color-white;
 							font-weight: 700;
 
@@ -2034,7 +2034,7 @@
 
 					input.boxed-info-field {
 						height: 50px;
-						font-family: 'Baloo';
+						font-family: $font-inter;
 						font-style: normal;
 						font-weight: 400;
 						font-size: 22px;
@@ -2065,7 +2065,7 @@
 						input.boxed-info-field {
 							width: 90%;
 							height: 50px;
-							font-family: 'Baloo';
+							font-family: $font-inter;
 							font-style: normal;
 							font-weight: 400;
 							font-size: 24px;
@@ -2105,7 +2105,7 @@
 
 							input.boxed-info-field {
 								height: 50px;
-								font-family: 'Baloo';
+								font-family: $font-inter;
 								font-style: normal;
 								font-weight: 400;
 								font-size: 24px;
@@ -2210,7 +2210,7 @@
 
 							&.available-bonus-promo {
 								min-height: 42px;
-								font-family: $font-baloo;
+								font-family: $font-inter;
 								font-size: 26px;
 								line-height: 30px;
 								color: $color-light-yellow;
@@ -2231,7 +2231,7 @@
 
 							&.available-bonus-promo {
 								min-height: 42px;
-								font-family: $font-baloo;
+								font-family: $font-inter;
 								font-size: 36px;
 								line-height: 36px;
 								color: $color-light-yellow;
@@ -2239,14 +2239,14 @@
 							}
 
 							&.campaign-description {
-								font-family: $font-baloo;
+								font-family: $font-inter;
 								font-size: 26px;
 								line-height: 30px;
 								color: #E5E5E5;
 							}
 
 							&.bonus-promo-code-info {
-								font-family: $font-baloo;
+								font-family: $font-inter;
 								font-style: normal;
 								font-size: 24px;
 								line-height: 28px;
@@ -2255,7 +2255,7 @@
 							}
 
 							&.bonus-promo-code {
-								font-family: $font-baloo;
+								font-family: $font-inter;
 								font-style: normal;
 								font-size: 26px;
 								line-height: 30px;
@@ -2342,7 +2342,7 @@
 						}
 
 						h4 {
-							font-family: $font-baloo;
+							font-family: $font-inter;
 							font-style: normal;
 							font-weight: 400;
 							font-size: 24px;
@@ -2399,7 +2399,7 @@
 
 	li {
 		padding: 10px 5px 0px 10px;
-		font-family: $font-baloo;
+		font-family: $font-inter;
 		font-size: 22px;
 		text-align: center;
 		font-weight: 400;

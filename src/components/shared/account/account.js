@@ -22,6 +22,7 @@ class Account extends React.Component {
     }
 
     static propTypes = {
+        session: PropTypes.any,
         metamaskConfiguration: PropTypes.any,
         accountInformation: PropTypes.object,
 
@@ -30,6 +31,7 @@ class Account extends React.Component {
     }
 
     static defaultPropTypes = {
+        session: null,
         accountInformation: null
     }
 
@@ -73,7 +75,7 @@ class Account extends React.Component {
     componentDidUpdate(prevProps, prevState) {
         if (JSON.stringify(this.props.accountInformation) !== JSON.stringify(prevProps.accountInformation)) {
             this.setState({
-                accountInformation: this.props.accountInformation
+                accountInformation: this.props.accountInformation || null
             })
         }
     }
@@ -98,7 +100,7 @@ class Account extends React.Component {
                     Account
                 </div>
                 {
-                    !this.state?.accountInformation &&
+                    !this.props?.session?.loginStatus &&
                     <div className="single-col">
                         <div className="col centered">
                             <div className="message">
@@ -123,13 +125,13 @@ class Account extends React.Component {
                     </div>
                 }
                 {
-                    this.state?.accountInformation &&
+                    this.props?.session?.loginStatus &&
                     <div className="single-col">
                         <div className="col centered">
                             <img src="/pictures/account/dashboard/profile-default.svg" alt="Profile" loading="lazy" />
                         </div>
                         <div className="col centered">
-                            <div className="username">
+                            <div className="username" title={this.state?.accountInformation?.accounts[0]}>
                                 {
                                     this.state?.accountInformation?.accounts &&
                                     this.shortUsername(this.state?.accountInformation?.accounts[0])
@@ -154,10 +156,12 @@ class Account extends React.Component {
 
 const mapStateToProps = state => {
 
+    const { session } = state.session;
     const { metamaskConfiguration } = state.metamaskConfiguration;
     const { accountInformation } = state.accountInformation;
 
     return {
+        session,
         metamaskConfiguration,
         accountInformation
     };

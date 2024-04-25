@@ -97,7 +97,7 @@
 						color: #FFC025;
 						font-size: 64px;
 						line-height: 66px;
-						font-family: 'Baloo';
+						font-family: $font-inter;
 						font-style: normal;
 						font-weight: 400;
 						margin-bottom: 20px;
@@ -126,14 +126,14 @@
 					font-size: 32px;
 					line-height: 36px;
 					color: $color-grey;
-					font-family: 'Baloo';
+					font-family: $font-inter;
 					font-style: normal;
 					font-weight: 400;
 					letter-spacing: 0.32px;
 					color: #D8D8D8;
 
 					&.claim-code {
-						color: #FF0066;
+						color: $color-primary;
 					}
 
 					@include breakpoint(1366) {
@@ -155,11 +155,12 @@
 
 				.more {
 					display: inline-block;
-					font-family: $font-secondary;
+					font-family: $font-inter;
 					font-size: 26px;
 					line-height: 30px;
 					color: $color-secondary;
 					text-decoration-line: underline;
+					text-underline-offset: 3px;
 					@include transition(color 300ms ease-in-out);
 
 					&:hover {
@@ -303,7 +304,7 @@
 			}
 
 			p {
-				font-family: $font-secondary;
+				font-family: $font-inter;
 				font-size: 48px;
 				line-height: 75px;
 				color: $color-white;
@@ -335,9 +336,9 @@
 $duration: 30s;
 
 hr {
-	background-color: $color-6;
+	background-color: $color-52;
 	border: none;
-	height: 2px;
+	height: 1px;
 	margin-bottom: 20px;
 }
 
@@ -346,9 +347,20 @@ hr {
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-content: flex-start;
-	//align-items: flex-start;
 	align-items: stretch;
-	gap: 20px;
+	gap: 16px;
+
+	@include breakpoint(1440) {
+		gap: 16px;
+	}
+
+	@include breakpoint(1024) {
+		gap: 15px;
+	}
+
+	@include breakpoint(375) {
+		gap: 10px;
+	}
 
 	.left {
 		order: 1;
@@ -368,7 +380,7 @@ hr {
 			align-content: flex-start;
 		}
 
-		@include breakpoint(1200) {
+		@include breakpoint(960) {
 			flex-direction: column;
 			flex-basis: 100%;
 		}
@@ -379,25 +391,27 @@ hr {
 			padding-left: 0px;
 
 			padding: 15px 0px;
-			background: $color-37;
-			box-shadow: 0px 5px 10px $color-black;
-			border-radius: 20px;
+			background: $color-46;
+			border-radius: 5px;
 
 			width: 100%;
 
-			@include breakpoint(960) {
+			@include breakpoint(1366) {
+				flex: 1 1 50%;
+			}
+
+			@include breakpoint(640) {
 				flex: 1 1 100%;
 			}
 
 			.title {
 				color: $color-10;
 				text-align: center;
-				font-family: $font-baloo;
+				font-family: $font-inter;
 				font-size: 28px;
 				font-style: normal;
-				font-weight: 400;
-				line-height: 32px;
-				letter-spacing: -0.5px;
+				font-weight: 700;
+				line-height: 36px;
 			}
 
 			.single-col {
@@ -421,18 +435,18 @@ hr {
 					}
 
 					.message {
-						color: $color-32;
+						color: $color-white;
 						text-align: center;
-						font-family: $font-poppins;
-						font-size: 16px;
+						font-family: $font-inter;
+						font-size: 14px;
 						font-style: normal;
-						font-weight: 500;
-						line-height: 24px;
+						font-weight: 400;
+						line-height: 16px;
 					}
 
 					.username {
 						color: $color-white;
-						font-family: $font-baloo;
+						font-family: $font-inter;
 						font-size: 22px;
 						font-style: normal;
 						font-weight: 400;
@@ -442,7 +456,7 @@ hr {
 
 					.balance {
 						color: $color-white;
-						font-family: $font-poppins;
+						font-family: $font-inter;
 						font-size: 16px;
 						font-style: normal;
 						font-weight: 700;
@@ -457,29 +471,29 @@ hr {
 		order: 2;
 
 		padding: 15px 26px;
-		background: $color-37;
-		box-shadow: 0px 5px 10px $color-black;
-		border-radius: 20px;
+		background: $color-46;
+		border-radius: 5px;
 
 		@include breakpoint(1600) {
 			flex: 1 1 auto;
 		}
 
-		@include breakpoint(960) {
-			flex: 1 1 100%;
+		@include breakpoint(1366) {
+			flex: 1 1 50%;
 		}
 
 		@include breakpoint(640) {
+			flex: 1 1 100%;
 			padding: 15px 8px;
 		}
 
 		.title {
 			color: $color-41;
 			text-align: center;
-			font-family: $font-baloo;
+			font-family: $font-inter;
 			font-size: 28px;
 			font-style: normal;
-			font-weight: 400;
+			font-weight: 700;
 			line-height: 32px;
 			letter-spacing: -0.5px;
 		}
@@ -500,7 +514,7 @@ hr {
 
 				.username {
 					color: $color-white;
-					font-family: $font-baloo;
+					font-family: $font-inter;
 					font-size: 22px;
 					font-style: normal;
 					font-weight: 400;
@@ -510,7 +524,7 @@ hr {
 
 				.uid {
 					color: $color-white;
-					font-family: $font-poppins;
+					font-family: $font-inter;
 					font-size: 16px;
 					font-style: normal;
 					font-weight: 700;
@@ -520,7 +534,7 @@ hr {
 				.verification-status {
 					@include flexbox();
 					color: $color-12;
-					font-family: $font-poppins;
+					font-family: $font-inter;
 					font-size: 16px;
 					font-style: normal;
 					font-weight: 500;
@@ -531,9 +545,9 @@ hr {
 				}
 
 				.account-balance {
-					color: $color-quaternary;
+					color: $color-48;
 					text-align: center;
-					font-family: $font-poppins;
+					font-family: $font-inter;
 					font-size: 16px;
 					font-style: normal;
 					font-weight: 500;
@@ -543,7 +557,7 @@ hr {
 				.account-balance-value {
 					color: $color-white;
 					text-align: center;
-					font-family: $font-poppins;
+					font-family: $font-inter;
 					font-size: 16px;
 					font-style: normal;
 					font-weight: 500;
@@ -574,7 +588,7 @@ hr {
 		.title {
 			color: $color-41;
 			text-align: center;
-			font-family: $font-baloo;
+			font-family: $font-inter;
 			font-size: 28px;
 			font-style: normal;
 			font-weight: 400;
@@ -629,7 +643,7 @@ hr {
 						.value {
 							color: $color-primary;
 							text-align: left;
-							font-family: $font-baloo;
+							font-family: $font-inter;
 							font-size: 14px;
 							font-style: normal;
 							font-weight: 400;
@@ -653,7 +667,7 @@ hr {
 
 					.username {
 						color: $color-white;
-						font-family: $font-poppins;
+						font-family: $font-inter;
 						font-size: 14px;
 						font-style: normal;
 						font-weight: 400;
@@ -663,7 +677,7 @@ hr {
 
 				.role {
 					color: $color-white;
-					font-family: $font-poppins;
+					font-family: $font-inter;
 					font-size: 18px;
 					font-style: normal;
 					font-weight: 600;
@@ -696,6 +710,7 @@ hr {
 		flex-direction: row;
 		flex-basis: max-content;
 		align-content: flex-start;
+		justify-content: center;
 	}
 
 }
@@ -710,8 +725,7 @@ hr {
 	justify-content: space-between;
 	align-content: stretch;
 	align-items: stretch;
-	gap: 20px;
-
+	gap: 0px;
 }
 
 .connect-your-wallet {
@@ -739,7 +753,7 @@ hr {
 
 		.title {
 			color: $color-41;
-			font-family: $font-baloo;
+			font-family: $font-inter;
 			font-size: 28px;
 			font-style: normal;
 			font-weight: 400;
@@ -749,9 +763,9 @@ hr {
 	}
 
 	hr {
-		background-color: $color-6;
+		background-color: $color-52;
 		border: none;
-		height: 2px;
+		height: 1px;
 		margin-bottom: 20px;
 	}
 
@@ -763,7 +777,7 @@ hr {
 		.sale-price {
 			color: $color-32;
 			text-align: center;
-			font-family: $font-baloo;
+			font-family: $font-inter;
 			font-size: 28px;
 			font-style: normal;
 			font-weight: 400;
@@ -774,7 +788,7 @@ hr {
 		.message {
 			color: $color-12;
 			text-align: center;
-			font-family: $font-baloo;
+			font-family: $font-inter;
 			font-size: 22px;
 			font-style: normal;
 			font-weight: 400;
@@ -795,7 +809,7 @@ hr {
 
 			.enter-amount {
 				border-radius: 17px;
-				background-color: $color-6;
+				background-color: $color-primary;
 
 				@include flexbox();
 				flex-direction: row;
@@ -809,11 +823,11 @@ hr {
 					align-items: center;
 
 					border-radius: 17px;
-					background-color: $color-black;
+					background-color: $color-46;
 
 					color: $color-white;
 					text-align: center;
-					font-family: $font-poppins;
+					font-family: $font-inter;
 					font-size: 18px;
 					font-style: normal;
 					font-weight: 700;
@@ -824,11 +838,11 @@ hr {
 					.name {
 						color: $color-white;
 						text-align: center;
-						font-family: $font-poppins;
+						font-family: $font-inter;
 						font-size: 18px;
 						font-style: normal;
 						font-weight: 700;
-						line-height: 22px;
+						line-height: 18px;
 						padding-left: 10px;
 					}
 				}
@@ -843,17 +857,18 @@ hr {
 
 						color: $color-white;
 						text-align: center;
-						font-family: $font-poppins;
+						font-family: $font-inter;
 						font-size: 16px;
 						font-style: normal;
 						font-weight: 400;
 						line-height: 20px;
-						text-decoration-line: underline;
+						text-decoration-line: none;
 
 						max-width: 150px;
 
 						&::placeholder {
 							color: $color-white;
+							text-decoration-line: none;
 						}
 					}
 				}
@@ -891,7 +906,7 @@ hr {
 
 					color: $color-white;
 					text-align: center;
-					font-family: $font-poppins;
+					font-family: $font-inter;
 					font-size: 18px;
 					font-style: normal;
 					font-weight: 700;
@@ -902,7 +917,7 @@ hr {
 					.name {
 						color: $color-white;
 						text-align: center;
-						font-family: $font-poppins;
+						font-family: $font-inter;
 						font-size: 18px;
 						font-style: normal;
 						font-weight: 700;
@@ -921,18 +936,20 @@ hr {
 
 						color: $color-white;
 						text-align: center;
-						font-family: $font-baloo;
+						font-family: $font-inter;
 						font-size: 18px;
 						font-style: normal;
 						font-weight: 400;
 						line-height: 24px;
 						letter-spacing: -0.5px;
-						text-decoration-line: underline;
-
+						text-decoration-line: none;
 						max-width: 150px;
 
 						&::placeholder {
 							color: $color-white;
+							text-decoration-line: underline;
+							text-underline-offset: 3px;
+
 						}
 					}
 				}
@@ -943,14 +960,14 @@ hr {
 	.listing-price {
 		color: $color-32;
 		text-align: center;
-		font-family: $font-baloo;
+		font-family: $font-inter;
 		font-size: 28px;
 		font-style: normal;
 		font-weight: 400;
 		line-height: 32px;
 		letter-spacing: -0.5px;
 
-		border-top: 1px solid $color-6;
+		border-top: 1px solid $color-46;
 		padding-top: 10px;
 	}
 }
@@ -958,10 +975,9 @@ hr {
 .buy-tokens-section {
 	order: 1;
 
-	padding: 10px 10px 40px;
-	background: $color-5;
-	//box-shadow: 0px 5px 10px $color-black;
-	border-radius: 20px;
+	padding: 20px;
+	background: $color-49;
+	border-radius: 5px;
 
 	@include breakpoint(960) {
 		flex: 1;
@@ -980,7 +996,7 @@ hr {
 
 		.title {
 			color: $color-41;
-			font-family: $font-baloo;
+			font-family: $font-inter;
 			font-size: 28px;
 			font-style: normal;
 			font-weight: 400;
@@ -990,9 +1006,9 @@ hr {
 	}
 
 	hr {
-		background-color: $color-6;
+		background-color: $color-52;
 		border: none;
-		height: 2px;
+		height: 1px;
 		margin-bottom: 20px;
 	}
 
@@ -1004,7 +1020,7 @@ hr {
 		.sale-price {
 			color: $color-32;
 			text-align: center;
-			font-family: $font-baloo;
+			font-family: $font-inter;
 			font-size: 28px;
 			font-style: normal;
 			font-weight: 400;
@@ -1015,7 +1031,7 @@ hr {
 		.message {
 			color: $color-12;
 			text-align: center;
-			font-family: $font-baloo;
+			font-family: $font-inter;
 			font-size: 22px;
 			font-style: normal;
 			font-weight: 400;
@@ -1054,7 +1070,7 @@ hr {
 
 					color: $color-white;
 					text-align: center;
-					font-family: $font-poppins;
+					font-family: $font-inter;
 					font-size: 18px;
 					font-style: normal;
 					font-weight: 700;
@@ -1065,7 +1081,7 @@ hr {
 					.name {
 						color: $color-white;
 						text-align: center;
-						font-family: $font-poppins;
+						font-family: $font-inter;
 						font-size: 18px;
 						font-style: normal;
 						font-weight: 700;
@@ -1084,17 +1100,18 @@ hr {
 
 						color: $color-white;
 						text-align: center;
-						font-family: $font-poppins;
+						font-family: $font-inter;
 						font-size: 16px;
 						font-style: normal;
 						font-weight: 400;
 						line-height: 20px;
-						text-decoration-line: underline;
-
+						text-decoration-line: none;
 						max-width: 150px;
 
 						&::placeholder {
 							color: $color-white;
+							text-decoration-line: underline;
+							text-underline-offset: 3px;
 						}
 					}
 				}
@@ -1132,7 +1149,7 @@ hr {
 
 					color: $color-white;
 					text-align: center;
-					font-family: $font-poppins;
+					font-family: $font-inter;
 					font-size: 18px;
 					font-style: normal;
 					font-weight: 700;
@@ -1143,7 +1160,7 @@ hr {
 					.name {
 						color: $color-white;
 						text-align: center;
-						font-family: $font-poppins;
+						font-family: $font-inter;
 						font-size: 18px;
 						font-style: normal;
 						font-weight: 700;
@@ -1160,20 +1177,21 @@ hr {
 						outline: none;
 						border: none;
 
-						color: $color-white;
+						color: $color-black;
 						text-align: center;
-						font-family: $font-baloo;
+						font-family: $font-inter;
 						font-size: 18px;
 						font-style: normal;
 						font-weight: 400;
 						line-height: 24px;
 						letter-spacing: -0.5px;
-						text-decoration-line: underline;
-
+						text-decoration-line: none;
 						max-width: 150px;
 
 						&::placeholder {
-							color: $color-white;
+							color: $color-black;
+							text-decoration-line: underline;
+							text-underline-offset: 3px;
 						}
 					}
 				}
@@ -1184,14 +1202,14 @@ hr {
 	.listing-price {
 		color: $color-32;
 		text-align: center;
-		font-family: $font-baloo;
+		font-family: $font-inter;
 		font-size: 28px;
 		font-style: normal;
 		font-weight: 400;
 		line-height: 32px;
 		letter-spacing: -0.5px;
 
-		border-top: 1px solid $color-6;
+		border-top: 1px solid $color-46;
 		padding-top: 10px;
 	}
 }
@@ -1199,14 +1217,24 @@ hr {
 .funds-raising-rounds {
 	order: 1;
 
-	padding: 30px;
-	background: $color-37;
-	box-shadow: 0px 5px 10px $color-black;
-	border-radius: 20px;
+	padding: 0px;
+	border-radius: 5px;
 
 	@include breakpoint(960) {
 		flex: 1;
-		padding: 10px;
+		padding: 0px;
+	}
+
+	.section {
+		@include flexbox();
+		flex-direction: column;
+		gap: 16px;
+		justify-content: center;
+		align-items: flex-start;
+		padding: 16px;
+		border-radius: 5px;
+		background-color: $color-51;
+		margin-bottom: 16px;
 	}
 
 	.header-section {
@@ -1214,6 +1242,7 @@ hr {
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
+		gap: 32px;
 
 		@include breakpoint(960) {
 			flex-direction: column;
@@ -1221,65 +1250,171 @@ hr {
 
 		.title {
 			color: $color-primary;
-			font-family: $font-baloo;
-			font-size: 34px;
+			font-family: $font-inter;
+			font-size: 28px;
 			font-style: normal;
-			font-weight: 400;
-			line-height: 40px;
-			letter-spacing: -1px;
+			font-weight: 800;
+			line-height: normal;
+			padding: 32px 16px 0px 32px;
+
+			@include breakpoint(1440) {
+				font-size: 26px;
+				padding: 28px 12px 0px 12px;
+			}
+
+			@include breakpoint(1024) {
+				font-size: 24px;
+				padding: 24px 12px 0px 12px;
+			}
+
+			@include breakpoint(375) {
+				font-size: 20px;
+				font-weight: 700;
+				padding: 20px 8px 0px 8px;
+			}
 		}
 	}
 
 	hr {
-		background-color: $color-6;
+		background-color: $color-52;
 		border: none;
-		height: 2px;
-		margin-bottom: 20px;
+		height: 1px;
+		margin-bottom: 5px;
+		width: 100%;
 	}
 
 	.description {
 		color: $color-white;
 		text-align: center;
-		font-family: $font-poppins;
+		font-family: $font-inter;
 		font-size: 16px;
 		font-style: normal;
 		font-weight: 500;
 		line-height: 24px;
-		margin-bottom: 40px;
+		margin-bottom: 10px;
+		align-self: center;
+
+		@include breakpoint(1440) {
+			font-size: 14px;
+			line-height: 20px;
+		}
+
+		@include breakpoint(1024) {
+			font-size: 14px;
+			line-height: 20px;
+		}
+
+		@include breakpoint(375) {
+			font-size: 14px;
+			line-height: 20px;
+		}
 	}
 
 	.restriction-description {
-		color: $color-32;
+		color: $color-white;
 		text-align: center;
-		font-family: $font-poppins;
+		font-family: $font-inter;
 		font-size: 14px;
 		font-style: normal;
 		font-weight: 700;
 		line-height: 20px;
-		margin-top: 20px;
-		margin-bottom: 40px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		align-self: center;
+
+		@include breakpoint(1440) {
+			font-size: 14px;
+			line-height: 20px;
+		}
+
+		@include breakpoint(1024) {
+			font-size: 14px;
+			line-height: 20px;
+		}
+
+		@include breakpoint(375) {
+			font-size: 14px;
+			line-height: 20px;
+		}
+	}
+
+	.description-2 {
+		color: $color-white;
+		text-align: center;
+		leading-trim: both;
+		text-edge: cap;
+		font-family: $font-inter;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 20px;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		align-self: center;
+
+		@include breakpoint(1440) {
+			font-size: 14px;
+			line-height: 20px;
+		}
+
+		@include breakpoint(1024) {
+			font-size: 14px;
+			line-height: 20px;
+		}
+
+		@include breakpoint(375) {
+			font-size: 14px;
+			line-height: 20px;
+		}
 	}
 
 	.connect-with-us {
 
-		margin-bottom: 40px;
+		margin-bottom: 20px;
+		align-self: stretch;
 
 		.title {
 			color: $color-primary;
-			font-family: $font-baloo;
-			font-size: 34px;
+			font-family: $font-inter;
+			font-size: 24px;
 			font-style: normal;
-			font-weight: 400;
-			line-height: 40px;
-			letter-spacing: -1px;
-			margin-bottom: 40px;
+			font-weight: 700;
+			line-height: normal;
+			margin-bottom: 20px;
 			padding-right: 10px;
 			padding-left: 10px;
+
+			@include breakpoint(1440) {
+				font-size: 24px;
+				line-height: normal;
+				padding-left: 8px;
+			}
+
+			@include breakpoint(1024) {
+				font-size: 22px;
+				line-height: normal;
+				padding-left: 8px;
+			}
+
+			@include breakpoint(375) {
+				font-size: 20px;
+				line-height: normal;
+				padding-left: 8px;
+			}
+		}
+
+		hr {
+			margin-top: 0px;
+			margin-bottom: 16px;
 		}
 
 		.list-channels {
 			@include flexbox();
-			justify-content: space-around;
+			justify-content: space-evenly;
+			align-items: center;
+			gap: 32px;
+			align-self: stretch;
+			flex-wrap: wrap;
 
 			.item {
 				@include flexbox();
@@ -1294,7 +1429,7 @@ hr {
 				span {
 					color: $color-32;
 					text-align: center;
-					font-family: $font-baloo;
+					font-family: $font-inter;
 					font-size: 14px;
 					font-style: normal;
 					font-weight: 400;
@@ -1306,18 +1441,20 @@ hr {
 	}
 
 	.realtime-statistic-section {
-		border-radius: 30px;
+		border-radius: 5px;
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-image: url('/pictures/background/private-sale-status.png');
 		height: 300px;
-		margin-bottom: 20px;
+
 		position: relative;
 		@include flexbox();
 		align-items: stretch;
-		margin-top: 20px;
-		margin-right: 10px;
-		margin-left: 10px;
+		margin-top: 10px;
+		margin-right: 0px;
+		margin-bottom: 20px;
+		margin-left: 0px;
+		align-self: stretch;
 
 		&.seed-presale-round {
 			background-image: url('/pictures/background/seed-presale-round.png');
@@ -1378,12 +1515,12 @@ hr {
 			flex-direction: column;
 			justify-content: space-between;
 			gap: 10px;
-			margin: 20px 20px 10px 20px;
+			margin: 30px 20px 30px 20px;
 			width: 95%;
 
 			@include breakpoint(768) {
 				gap: 5px;
-				margin: 20px 10px 10px 10px;
+				margin: 20px 10px 20px 10px;
 			}
 
 			.connect-wallet {
@@ -1393,30 +1530,38 @@ hr {
 			}
 
 			.message-status {
-				color: $color-quaternary;
-				font-family: $font-baloo;
+				color: $color-primary;
+				font-family: $font-inter;
 				font-size: 28px;
 				font-style: normal;
-				font-weight: 400;
-				line-height: 32px;
-				letter-spacing: -0.5px;
+				font-weight: 700;
+				line-height: 36px;
 				align-self: flex-start;
 
-				@include breakpoint(768) {
-					font-size: 20px;
-					line-height: 22px;
+				@include breakpoint(1440) {
+					font-size: 28px;
+					line-height: 36px;
+				}
+
+				@include breakpoint(1024) {
+					font-size: 26px;
+					line-height: normal;
+				}
+
+				@include breakpoint(375) {
+					font-size: 24px;
+					line-height: normal;
 				}
 			}
 
 			.current-status {
-				color: $color-7;
+				color: $color-47;
 				text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
-				font-family: $font-baloo;
+				font-family: $font-lexend;
 				font-size: 48px;
 				font-style: normal;
-				font-weight: 400;
+				font-weight: 700;
 				line-height: 40px;
-				letter-spacing: -1px;
 
 				@include flexbox();
 				justify-content: space-between;
@@ -1424,119 +1569,161 @@ hr {
 				align-self: stretch;
 				flex-direction: row;
 
+				@include breakpoint(1440) {
+					font-size: 48px;
+					line-height: 40px;
+				}
+
+				@include breakpoint(1024) {
+					font-size: 46px;
+					line-height: 38px;
+				}
+
 				@include breakpoint(960) {
-					font-size: 30px;
-					font-size: 34px;
+					font-size: 46px;
+					line-height: 38px;
 				}
 
 				@include breakpoint(768) {
-					font-size: 30px;
-					line-height: 32px;
+					font-size: 46px;
+					line-height: 38px;
 				}
 
 				@include breakpoint(640) {
 					flex-direction: column;
 				}
+
+				@include breakpoint(375) {
+					font-size: 42px;
+					line-height: 38px;
+				}
 			}
 
 			.token-status {
-				font-family: $font-baloo;
+				font-family: $font-inter;
 				font-size: 48px;
 				font-style: normal;
 				font-weight: 400;
 				line-height: 40px;
 				letter-spacing: -1px;
-				text-transform: uppercase;
+				text-transform: none;
 				color: $color-7;
 				text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
 
 				@include breakpoint(768) {
 					font-size: 24px;
-					line-height: 22px;
+					line-height: 26px;
 				}
 
-				&.filled {
-					color: $color-7;
+				&.filled,
+				&.completed {
+					color: $color-47;
+					font-size: 28px;
+					font-style: normal;
+					font-weight: 700;
+					line-height: 36px;
+					letter-spacing: -1;
 					text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
+
+					@include breakpoint(768) {
+						font-size: 24px;
+						line-height: 26px;
+					}
 				}
 
 				&.sold-out {
-					color: $color-primary;
-					font-size: 32px;
+					color: $color-47;
+					font-size: 28px;
 					font-style: normal;
-					font-weight: 400;
-					line-height: 28px;
+					font-weight: 700;
+					line-height: 36px;
 					letter-spacing: -1;
 					text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
 					text-transform: uppercase;
 
 					@include breakpoint(768) {
 						font-size: 24px;
-						line-height: 22px;
+						line-height: 26px;
 					}
 				}
 
 				&.in-progress {
-					color: $color-quaternary;
+					color: $color-47;
 					text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
-					font-family: $font-baloo;
-					font-size: 32px;
+					font-family: $font-inter;
+					font-size: 28px;
 					font-style: normal;
-					font-weight: 400;
-					line-height: 28px;
+					font-weight: 700;
+					line-height: 36px;
 					letter-spacing: -1px;
 
 					@include breakpoint(768) {
 						font-size: 24px;
-						line-height: 22px;
+						line-height: 26px;
 					}
 				}
 
 				&.not-started {
-					color: $color-primary;
-					font-size: 32px;
+					color: $color-47;
+					font-size: 28px;
 					font-style: normal;
-					font-weight: 400;
-					line-height: 28px;
+					font-weight: 700;
+					line-height: 36px;
 					letter-spacing: -1;
 					text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
 					text-transform: none;
 
 					@include breakpoint(768) {
 						font-size: 24px;
-						line-height: 22px;
+						line-height: 26px;
+					}
+				}
+
+				&.active {
+					color: $color-48;
+					font-size: 28px;
+					font-style: normal;
+					font-weight: 700;
+					line-height: 36px;
+					letter-spacing: -1;
+					text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
+					text-transform: none;
+
+					@include breakpoint(768) {
+						font-size: 24px;
+						line-height: 26px;
 					}
 				}
 
 				&.default {
-					color: $color-primary;
-					font-size: 32px;
+					color: $color-47;
+					font-size: 28px;
 					font-style: normal;
-					font-weight: 400;
-					line-height: 28px;
+					font-weight: 700;
+					line-height: 36px;
 					letter-spacing: -1;
 					text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
 					text-transform: none;
 
 					@include breakpoint(768) {
 						font-size: 24px;
-						line-height: 22px;
+						line-height: 26px;
 					}
 				}
 
 				&.not-active {
-					color: $color-primary;
-					font-size: 32px;
+					color: $color-53;
+					font-size: 28px;
 					font-style: normal;
-					font-weight: 400;
-					line-height: 28px;
+					font-weight: 700;
+					line-height: 36px;
 					letter-spacing: -1;
 					text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
 					text-transform: none;
 
 					@include breakpoint(768) {
 						font-size: 24px;
-						line-height: 22px;
+						line-height: 26px;
 					}
 				}
 
@@ -1553,21 +1740,25 @@ hr {
 
 			.raised {
 				color: $color-12;
-				font-family: $font-baloo;
+				font-family: $font-inter;
 				font-size: 28px;
 				font-style: normal;
-				font-weight: 400;
-				line-height: 32px;
-				letter-spacing: -0.5px;
+				font-weight: 700;
+				line-height: 36px;
+
+				@include breakpoint(1024) {
+					font-size: 26px;
+					line-height: 34px;
+				}
 
 				@include breakpoint(960) {
 					font-size: 22px;
-					font-size: 26px;
+					line-height: 26px;
 				}
 
 				@include breakpoint(768) {
-					font-size: 20px;
-					line-height: 24px;
+					font-size: 24px;
+					line-height: normal;
 				}
 			}
 		}
@@ -1576,124 +1767,324 @@ hr {
 	.seed-section {
 		@include flexbox();
 		flex-direction: column;
-		gap: 10px;
-		border-radius: 20px;
-		background-color: $color-5;
-		margin-right: 10px;
-		margin-bottom: 20px;
-		margin-left: 10px;
-		padding-bottom: 10px;
+		gap: 16px;
+		justify-content: center;
+		align-items: flex-start;
+		border-radius: 5px;
+		background-color: $color-51;
+		margin-top: 8px;
+		margin-right: 0px;
+		margin-bottom: 16px;
+		margin-left: 0px;
+		padding: 16px;
 
 		@include breakpoint(768) {
-			margin-right: 5px;
-			margin-left: 5px;
+			padding: 8px;
 		}
 
 		.title {
 			color: $color-primary;
-			font-family: $font-baloo;
-			font-size: 34px;
+			font-family: $font-inter;
+			font-size: 32px;
 			font-style: normal;
-			font-weight: 400;
+			font-weight: 800;
 			line-height: 40px;
-			letter-spacing: -1px;
-			margin: 10px 20px 10px 20px;
+			padding: 16px 16px 16px 32px;
+			font-optical-sizing: auto;
+			font-stretch: normal;
+
+			@include breakpoint(1440) {
+				font-size: 28px;
+				line-height: normal;
+				padding: 14px 14px 14px 32px;
+			}
+
+			@include breakpoint(1024) {
+				font-size: 24px;
+				line-height: normal;
+				padding: 12px 12px 12px 28px;
+			}
+
+			@include breakpoint(375) {
+				font-size: 18px;
+				line-height: normal;
+				padding: 8px 8px 8px 8px;
+			}
+
+			.status {
+				&.finished {
+					color: $color-48;
+				}
+
+				&.not-active {
+					color: $color-53
+				}
+			}
 		}
 
 		.round-price {
-			color: $color-quaternary;
+			color: $color-primary;
 			text-align: center;
-			font-family: $font-baloo;
+			font-family: $font-inter;
 			font-size: 28px;
 			font-style: normal;
-			font-weight: 400;
-			line-height: 32px;
-			letter-spacing: -0.5px;
+			font-weight: 700;
+			line-height: 36px;
 			padding: 10px 20px;
-			border-top: 1px solid $color-6;
-			margin: 0px 20px 0px 20px;
+			border-top: 1px solid $color-46;
+			margin: 0px;
+			align-self: stretch;
+
+			@include breakpoint(1440) {
+				font-size: 26px;
+				line-height: normal;
+			}
+
+			@include breakpoint(1024) {
+				font-size: 22px;
+				line-height: normal;
+				padding: 0;
+			}
+
+			@include breakpoint(375) {
+				font-size: 18px;
+				line-height: normal;
+				padding: 0;
+			}
 		}
 
 		.description {
-			color: $color-12;
+			color: $color-white;
 			text-align: center;
-			font-family: $font-poppins;
+			font-family: $font-inter;
 			font-size: 16px;
 			font-style: normal;
 			font-weight: 700;
-			line-height: 24px;
-			padding-right: 20px;
-			padding-left: 20px;
+			line-height: 18px;
+			padding-right: 16px;
+			padding-left: 16px;
+			align-self: stretch;
+
+			@include breakpoint(1440) {
+				font-size: 14px;
+				line-height: normal;
+			}
+
+			@include breakpoint(1024) {
+				font-size: 14px;
+				line-height: normal;
+			}
+
+			@include breakpoint(375) {
+				font-size: 14px;
+				line-height: normal;
+			}
 		}
 
 		.description-2 {
 			color: $color-12;
 			text-align: center;
-			font-family: $font-poppins;
+			font-family: $font-inter;
+			font-size: 16px;
+			font-style: normal;
+			font-weight: 700;
+			line-height: 24px;
+			padding-right: 16px;
+			padding-left: 16px;
+			margin: 5px;
+			align-self: stretch;
+
+			@include breakpoint(1440) {
+				font-size: 14px;
+				line-height: 20px;
+			}
+
+			@include breakpoint(1024) {
+				font-size: 14px;
+				line-height: 20px;
+			}
+
+			@include breakpoint(375) {
+				font-size: 14px;
+				line-height: 20px;
+			}
+		}
+
+		.description-3 {
+			color: $color-12;
+			text-align: center;
+			font-family: $font-inter;
 			font-size: 16px;
 			font-style: normal;
 			font-weight: 500;
 			line-height: 24px;
-			padding-right: 20px;
-			padding-left: 20px;
+			padding-right: 16px;
+			padding-left: 16px;
+			margin: 5px;
+			align-self: stretch;
+
+			@include breakpoint(1440) {
+				font-size: 14px;
+				line-height: normal;
+			}
+
+			@include breakpoint(1024) {
+				font-size: 14px;
+				line-height: normal;
+			}
+
+			@include breakpoint(375) {
+				font-size: 14px;
+				line-height: normal;
+			}
 		}
 
 		.message {
-			color: $color-7;
+			color: $color-47;
 			text-align: center;
-			font-family: $font-baloo;
-			font-size: 28px;
+			font-family: $font-inter;
+			font-size: 18px;
 			font-style: normal;
-			font-weight: 400;
-			line-height: 32px;
+			font-weight: 800;
+			line-height: 24px;
 			letter-spacing: -0.5px;
 			margin-bottom: 20px;
 			padding-right: 10px;
 			padding-left: 10px;
+			align-self: stretch;
 
 			&.small {
-				font-size: 18px;
+				font-size: 20px;
+				line-height: normal;
+				font-weight: 700;
+
+				@include breakpoint(1440) {
+					font-size: 16px;
+					line-height: 24px;
+				}
+
+				@include breakpoint(1024) {
+					font-size: 16px;
+					line-height: 24px;
+				}
+
+				@include breakpoint(375) {
+					font-size: 16px;
+					line-height: 24px;
+				}
+			}
+
+			&.large {
+				font-size: 28px;
+				line-height: 36px;
+
+				@include breakpoint(1440) {
+					font-size: 26px;
+					line-height: 34px;
+				}
+
+				@include breakpoint(1024) {
+					font-size: 20px;
+					line-height: 28px;
+				}
+
+				@include breakpoint(375) {
+					font-size: 16px;
+					line-height: 24px;
+				}
+			}
+
+			&.notice {
+				color: $color-48;
+				font-size: 16px;
+				font-style: normal;
+				font-weight: 700;
 				line-height: 24px;
+				margin-bottom: 0px;
+
+				@include breakpoint(1440) {
+					font-size: 14px;
+					line-height: 20px;
+				}
+
+				@include breakpoint(1024) {
+					font-size: 14px;
+					line-height: 20px;
+				}
+
+				@include breakpoint(375) {
+					font-size: 14px;
+					line-height: 20px;
+				}
 			}
 		}
 
 		a {
-			color: $color-primary;
+			color: $color-53;
 			text-align: center;
-			font-family: $font-baloo;
-			font-size: 26px;
+			font-family: $font-inter;
+			font-size: 18px;
 			font-style: normal;
-			font-weight: 400;
+			font-weight: 700;
 			line-height: 32px;
 			text-decoration-line: underline;
+			text-underline-offset: 3px;
+			align-self: stretch;
+
+			@include breakpoint(1440) {
+				font-size: 18px;
+				line-height: 32px;
+			}
+
+			@include breakpoint(1024) {
+				font-size: 16px;
+				line-height: 24px;
+			}
+
+			@include breakpoint(375) {
+				font-size: 12px;
+				line-height: 16px;
+			}
 		}
 
 		hr {
-			background-color: $color-6;
+			background-color: $color-52;
 			border: none;
-			height: 2px;
-			width: calc(100% - 20px);
+			height: 1px;
+			width: 100%;
 		}
 
 		.check-currency-section {
 			@include flexbox();
 			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: center;
 			gap: 80px;
 			margin: 0 auto;
 
-			@include breakpoint(960) {
+			@include breakpoint(1440) {
+				gap: 60px;
+			}
+
+			@include breakpoint(1024) {
+				gap: 40px;
+			}
+
+			@include breakpoint(640) {
 				flex-direction: column;
 				gap: 20px;
 			}
 
-			.enter-amount {
+			.enter-amount,
+			.receive-amount {
 				border-radius: 17px;
-				background-color: $color-6;
+				background-color: $color-primary;
 
 				@include flexbox();
 				flex-direction: row;
 				flex-shrink: 0;
 				align-items: center;
+				min-width: 300px;
 
 				.currency {
 					@include flexbox();
@@ -1702,54 +2093,60 @@ hr {
 					align-items: center;
 
 					border-radius: 17px;
-					background-color: $color-black;
+					background-color: $color-46;
 
 					color: $color-white;
 					text-align: center;
-					font-family: $font-poppins;
+					font-family: $font-inter;
 					font-size: 18px;
 					font-style: normal;
 					font-weight: 700;
-					line-height: 22px;
+					line-height: 18px;
 
 					padding: 0px 30px 0px 0px;
 
 					.name {
 						color: $color-white;
 						text-align: center;
-						font-family: $font-poppins;
+						font-family: $font-inter;
 						font-size: 18px;
 						font-style: normal;
 						font-weight: 700;
-						line-height: 22px;
+						line-height: 18px;
 						padding-left: 10px;
 					}
 				}
 
 				.input-amount {
-					min-width: 160px;
+					min-width: 165px;
 
 					input {
 						background-color: transparent;
 						outline: none;
 						border: none;
 
-						color: $color-white;
+						color: $color-black;
 						text-align: center;
-						font-family: $font-poppins;
-						font-size: 16px;
+						font-family: $font-inter;
+						font-size: 18px;
 						font-style: normal;
-						font-weight: 400;
-						line-height: 20px;
-						text-decoration-line: underline;
+						font-weight: 700;
+						line-height: 18px;
+						text-decoration-line: none;
 
-						max-width: 150px;
+						max-width: 165px;
 
 						&::placeholder {
-							color: $color-white;
+							color: $color-black;
+							text-decoration-line: none;
+							//text-underline-offset: 3px;
 						}
 					}
 				}
+			}
+
+			.receive-amount {
+				background-color: $color-53;
 			}
 		}
 
@@ -1766,7 +2163,7 @@ hr {
 
 			.enter-amount {
 				border-radius: 17px;
-				background-color: $color-brand;
+				background-color: $color-primary;
 
 				@include flexbox();
 				flex-direction: row;
@@ -1784,7 +2181,7 @@ hr {
 
 					color: $color-white;
 					text-align: center;
-					font-family: $font-poppins;
+					font-family: $font-inter;
 					font-size: 18px;
 					font-style: normal;
 					font-weight: 700;
@@ -1795,7 +2192,7 @@ hr {
 					.name {
 						color: $color-white;
 						text-align: center;
-						font-family: $font-poppins;
+						font-family: $font-inter;
 						font-size: 18px;
 						font-style: normal;
 						font-weight: 700;
@@ -1812,35 +2209,46 @@ hr {
 						outline: none;
 						border: none;
 
-						color: $color-white;
+						color: $color-black;
 						text-align: center;
-						font-family: $font-baloo;
-						font-size: 18px;
+						font-family: $font-inter;
+						font-size: 16px;
 						font-style: normal;
-						font-weight: 400;
+						font-weight: 500;
 						line-height: 24px;
-						letter-spacing: -0.5px;
-						text-decoration-line: underline;
-
+						text-decoration-line: none;
 						max-width: 150px;
 
 						&::placeholder {
-							color: $color-white;
+							color: $color-black;
+							text-decoration-line: underline;
+							text-underline-offset: 3px;
 						}
 					}
 				}
 			}
+		}
+
+		.button-section {
+			@include flexbox();
+			flex-direction: row;
+			gap: 10px;
+			justify-content: center;
+			align-items: center;
+			margin-top: 20px;
+			margin-bottom: 20px;
+			width: 100%;
 		}
 	}
 
 	.footer-description {
 		color: $color-white;
 		text-align: center;
-		font-family: $font-poppins;
+		font-family: $font-inter;
 		font-size: 14px;
 		font-style: normal;
 		font-weight: 400;
-		line-height: 20px;
+		line-height: 16px;
 		padding-right: 10px;
 		padding-left: 10px;
 	}
@@ -1848,11 +2256,11 @@ hr {
 	.footer-description-1 {
 		color: $color-white;
 		text-align: center;
-		font-family: $font-poppins;
+		font-family: $font-inter;
 		font-size: 14px;
 		font-style: normal;
 		font-weight: 700;
-		line-height: 20px;
+		line-height: 18px;
 		margin-top: 10px;
 		margin-bottom: 20px;
 		padding-right: 10px;
@@ -1887,7 +2295,7 @@ hr {
 
 		.title {
 			color: $color-41;
-			font-family: $font-baloo;
+			font-family: $font-inter;
 			font-size: 34px;
 			font-style: normal;
 			font-weight: 400;
@@ -1898,7 +2306,7 @@ hr {
 
 	.description {
 		color: $color-white;
-		font-family: $font-poppins;
+		font-family: $font-inter;
 		font-size: 18px;
 		font-style: normal;
 		font-weight: 500;
@@ -1909,9 +2317,9 @@ hr {
 	}
 
 	hr {
-		background-color: $color-6;
+		background-color: $color-52;
 		border: none;
-		height: 2px;
+		height: 1px;
 		margin-bottom: 20px;
 	}
 
@@ -1943,7 +2351,7 @@ hr {
 			.headline {
 				color: $color-7;
 				text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
-				font-family: $font-baloo;
+				font-family: $font-inter;
 				font-size: 48px;
 				font-style: normal;
 				font-weight: 400;
@@ -1961,7 +2369,7 @@ hr {
 
 			.participants {
 				color: $color-primary;
-				font-family: $font-baloo;
+				font-family: $font-inter;
 				font-size: 40px;
 				font-style: normal;
 				font-weight: 400;
@@ -1979,7 +2387,7 @@ hr {
 
 			.raised {
 				color: $color-32;
-				font-family: $font-baloo;
+				font-family: $font-inter;
 				font-size: 28px;
 				font-style: normal;
 				font-weight: 400;
@@ -2027,7 +2435,7 @@ hr {
 
 		.title {
 			color: $color-41;
-			font-family: $font-baloo;
+			font-family: $font-inter;
 			font-size: 34px;
 			font-style: normal;
 			font-weight: 400;
@@ -2038,7 +2446,7 @@ hr {
 
 	.description {
 		color: $color-white;
-		font-family: $font-poppins;
+		font-family: $font-inter;
 		font-size: 18px;
 		font-style: normal;
 		font-weight: 500;
@@ -2049,9 +2457,9 @@ hr {
 	}
 
 	hr {
-		background-color: $color-6;
+		background-color: $color-52;
 		border: none;
-		height: 2px;
+		height: 1px;
 		margin-bottom: 20px;
 	}
 
@@ -2102,7 +2510,7 @@ hr {
 
 				.price-range {
 					color: $color-12;
-					font-family: $font-poppins;
+					font-family: $font-inter;
 					font-size: 18px;
 					font-style: normal;
 					font-weight: 700;
@@ -2111,7 +2519,7 @@ hr {
 
 				.vip-level {
 					color: $color-white;
-					font-family: $font-baloo;
+					font-family: $font-inter;
 					font-size: 34px;
 					font-style: normal;
 					font-weight: 400;
@@ -2121,7 +2529,7 @@ hr {
 
 				.minted-info {
 					color: $color-32;
-					font-family: $font-baloo;
+					font-family: $font-inter;
 					font-size: 28px;
 					font-style: normal;
 					font-weight: 400;
@@ -2220,11 +2628,11 @@ hr {
 .investors-safety {
 	order: 3;
 
-	padding: 30px;
-	background: $color-37;
-	box-shadow: 0px 5px 10px $color-black;
-	border-radius: 20px;
+	background: $color-51;
+	border-radius: 5px;
 	padding: 20px;
+	margin-bottom: 16px;
+
 
 	@include breakpoint(960) {
 		flex: 1;
@@ -2247,34 +2655,44 @@ hr {
 
 		margin-bottom: 20px;
 
-		@include breakpoint(960) {
-			flex-direction: column;
-		}
-
 		.title {
 			color: $color-primary;
-			font-family: $font-baloo;
-			font-size: 34px;
+			font-family: $font-inter;
+			font-size: 32px;
 			font-style: normal;
-			font-weight: 400;
+			font-weight: 800;
 			line-height: 40px;
-			letter-spacing: -1px;
+
+			@include breakpoint(1440) {
+				font-size: 32px;
+				line-height: normal;
+			}
+
+			@include breakpoint(1024) {
+				font-size: 26px;
+				line-height: normal;
+			}
+
+			@include breakpoint(375) {
+				font-size: 20px;
+				line-height: normal;
+			}
 		}
 	}
 
 	.mini-title {
-		color: $color-7;
-		font-family: $font-baloo;
+		color: $color-47;
+		font-family: $font-inter;
 		font-size: 22px;
 		font-style: normal;
-		font-weight: 400;
+		font-weight: 800;
 		line-height: 28px;
 		letter-spacing: -0.5px;
 	}
 
 	.description {
 		color: $color-white;
-		font-family: $font-poppins;
+		font-family: $font-inter;
 		font-size: 18px;
 		font-style: normal;
 		font-weight: 500;
@@ -2282,13 +2700,13 @@ hr {
 		letter-spacing: -0.25px;
 
 		margin-bottom: 20px;
-		padding-left: 10px;
+		padding-left: 0px;
 	}
 
 	hr {
-		background-color: $color-6;
+		background-color: $color-52;
 		border: none;
-		height: 2px;
+		height: 1px;
 		margin-bottom: 20px;
 	}
 
@@ -2331,7 +2749,7 @@ hr {
 			.title-level-1 {
 				color: $color-12;
 				text-align: center;
-				font-family: $font-poppins;
+				font-family: $font-inter;
 				font-size: 18px;
 				font-style: normal;
 				font-weight: 700;
@@ -2343,14 +2761,13 @@ hr {
 			}
 
 			.title-level-2 {
-				color: $color-7;
+				color: $color-47;
 				text-align: center;
-				font-family: $font-baloo;
+				font-family: $font-inter;
 				font-size: 22px;
 				font-style: normal;
-				font-weight: 400;
+				font-weight: 800;
 				line-height: 28px;
-				letter-spacing: -0.5px;
 				text-transform: uppercase;
 
 				padding-left: 20px;
@@ -2360,7 +2777,7 @@ hr {
 			.description {
 				color: $color-white;
 				text-align: center;
-				font-family: $font-poppins;
+				font-family: $font-inter;
 				font-size: 16px;
 				font-style: normal;
 				font-weight: 500;
@@ -2400,7 +2817,7 @@ hr {
 
 		.title {
 			color: $color-10;
-			font-family: $font-baloo;
+			font-family: $font-inter;
 			font-size: 34px;
 			font-style: normal;
 			font-weight: 400;
@@ -2411,7 +2828,7 @@ hr {
 
 	.description {
 		color: $color-white;
-		font-family: $font-poppins;
+		font-family: $font-inter;
 		font-size: 18px;
 		font-style: normal;
 		font-weight: 500;
@@ -2422,9 +2839,9 @@ hr {
 	}
 
 	hr {
-		background-color: $color-6;
+		background-color: $color-52;
 		border: none;
-		height: 2px;
+		height: 1px;
 		margin-bottom: 20px;
 	}
 
@@ -2469,7 +2886,7 @@ hr {
 
 			.message-status {
 				color: $color-quaternary;
-				font-family: $font-baloo;
+				font-family: $font-inter;
 				font-size: 28px;
 				font-style: normal;
 				font-weight: 400;
@@ -2480,7 +2897,7 @@ hr {
 			.current-status {
 				color: $color-7;
 				text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
-				font-family: $font-baloo;
+				font-family: $font-inter;
 				font-size: 48px;
 				font-style: normal;
 				font-weight: 400;
@@ -2506,7 +2923,7 @@ hr {
 			}
 
 			.token-status {
-				font-family: $font-baloo;
+				font-family: $font-inter;
 				font-size: 48px;
 				font-style: normal;
 				font-weight: 400;
@@ -2535,7 +2952,7 @@ hr {
 				&.in-progress {
 					color: $color-quaternary;
 					text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
-					font-family: $font-baloo;
+					font-family: $font-inter;
 					font-size: 32px;
 					font-style: normal;
 					font-weight: 400;
@@ -2545,6 +2962,17 @@ hr {
 
 				&.not-started {
 					color: $color-primary;
+					font-size: 32px;
+					font-style: normal;
+					font-weight: 400;
+					line-height: 28px;
+					letter-spacing: -1;
+					text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
+					text-transform: none;
+				}
+
+				&.active {
+					color: $color-47;
 					font-size: 32px;
 					font-style: normal;
 					font-weight: 400;
@@ -2594,7 +3022,7 @@ hr {
 
 			.raised {
 				color: $color-32;
-				font-family: $font-baloo;
+				font-family: $font-inter;
 				font-size: 28px;
 				font-style: normal;
 				font-weight: 400;
@@ -2614,12 +3042,10 @@ hr {
 
 .staking-section {
 	order: 4;
-	padding: 30px;
-	background: $color-37;
-	box-shadow: 0px 5px 10px $color-black;
-	border-radius: 20px;
-	padding-right: 10px;
-	padding-left: 10px;
+	background: $color-46;
+	border-radius: 5px;
+	padding-right: 0px;
+	padding-left: 0px;
 
 	@include breakpoint(960) {
 		flex-grow: 1;
@@ -2648,28 +3074,29 @@ hr {
 			@include flexbox();
 			flex-direction: row;
 			align-items: center;
-			color: $color-38;
-			font-family: $font-baloo;
-			font-size: 28px;
+			color: $color-41;
+			font-family: $font-inter;
+			font-size: 24px;
 			font-style: normal;
-			font-weight: 400;
-			line-height: 32px;
+			font-weight: 700;
+			line-height: normal;
 			letter-spacing: -1px;
 			margin-top: 10px;
 			margin-bottom: 20px;
 		}
 
 		hr {
-			background-color: $color-6;
+			background-color: $color-52;
 			border: none;
-			height: 2px;
+			height: 1px;
+			margin-top: 20px;
 			margin-bottom: 20px;
 			width: 100%;
 		}
 
 		.description {
 			color: $color-12;
-			font-family: $font-poppins;
+			font-family: $font-inter;
 			font-size: 16px;
 			font-style: normal;
 			font-weight: 500;
@@ -2690,25 +3117,27 @@ hr {
 		gap: 20px;
 		margin-bottom: 20px;
 
-		@include breakpoint(1200) {
-			flex-direction: column;
+		@include breakpoint(1024) {
+			flex-wrap: wrap;
+			justify-content: space-evenly;
 		}
 
 		@include breakpoint(640) {
+			flex-direction: column;
 			padding: 0px 10px;
 		}
 
 		.item {
 			width: 100%;
 			max-width: 260px;
-			height: 170px;
+			height: 140px;
 			border-radius: 30px;
 			background-color: #ED713C;
 			padding: 10px 20px 20px 20px;
 
 			@include flexbox();
 			flex-direction: column;
-			gap: 10px;
+			gap: 5px;
 			align-items: flex-start;
 			justify-content: flex-start;
 
@@ -2742,7 +3171,7 @@ hr {
 
 			.description {
 				color: $color-42;
-				font-family: $font-poppins;
+				font-family: $font-inter;
 				font-size: 18px;
 				font-style: normal;
 				font-weight: 500;
@@ -2752,7 +3181,7 @@ hr {
 
 			.balance {
 				color: $color-42;
-				font-family: $font-poppins;
+				font-family: $font-inter;
 				font-size: 20px;
 				font-style: normal;
 				font-weight: 700;
@@ -2769,6 +3198,7 @@ hr {
 		flex-direction: row;
 		gap: 20px;
 		margin-bottom: 20px;
+		justify-content: space-between;
 
 		@include breakpoint(1200) {
 			flex-direction: column;
@@ -2779,13 +3209,17 @@ hr {
 
 			@include flexbox();
 			border-radius: 20px;
-			background-color: $color-5;
-			padding: 20px 10px 40px 10px;
+			background-color: $color-51;
+			padding: 20px 15px 40px 15px;
 			align-items: flex-start;
 			align-self: stretch;
 			flex-direction: column;
 			gap: 20px;
 			max-width: 500px;
+
+			@include breakpoint(1024) {
+				max-width: none;
+			}
 
 			@include breakpoint(640) {
 				padding: 20px 10px 20px 10px;
@@ -2793,19 +3227,18 @@ hr {
 
 			.title {
 				color: $color-41;
-				font-family: $font-baloo;
-				font-size: 28px;
+				font-family: $font-inter;
+				font-size: 24px;
 				font-style: normal;
-				font-weight: 400;
-				line-height: 32px;
-				letter-spacing: -0.5px;
+				font-weight: 700;
+				line-height: normal;
 				margin-bottom: 20px;
 			}
 
 			.description {
 				color: $color-12;
 				text-align: center;
-				font-family: $font-poppins;
+				font-family: $font-inter;
 				font-size: 16px;
 				font-style: normal;
 				font-weight: 500;
@@ -2834,8 +3267,9 @@ hr {
 					@include flexbox();
 					flex-direction: row;
 					align-items: center;
+					align-self: center;
 					border-radius: 20px;
-					background-color: $color-5;
+					background-color: $color-49;
 					padding: 0px 10px;
 					height: 50px;
 					width: 180px;
@@ -2849,7 +3283,7 @@ hr {
 						color: $color-white;
 
 						text-align: center;
-						font-family: $font-poppins;
+						font-family: $font-inter;
 						font-size: 16px;
 						font-style: normal;
 						font-weight: 500;
@@ -2860,7 +3294,7 @@ hr {
 				.amount {
 					color: $color-white;
 					text-align: right;
-					font-family: $font-poppins;
+					font-family: $font-inter;
 					font-size: 20px;
 					font-style: normal;
 					font-weight: 400;
@@ -2874,6 +3308,7 @@ hr {
 					&::placeholder {
 						color: $color-white;
 						text-decoration-line: underline;
+						text-underline-offset: 3px;
 					}
 
 					@include breakpoint(640) {
@@ -2892,7 +3327,7 @@ hr {
 				height: 50px;
 				flex-direction: row;
 
-				@include breakpoint(640) {
+				@include breakpoint(480) {
 					flex-direction: column;
 					align-self: flex-start;
 					height: 165px;
@@ -2903,24 +3338,42 @@ hr {
 	}
 
 	hr {
-		background-color: $color-6;
+		background-color: $color-52;
 		border: none;
-		height: 2px;
+		height: 1px;
+		margin-top: 20px;
 		margin-bottom: 20px;
 		width: 100%;
 	}
 
+	.funds-raising-rounds {
+		order: 1;
+
+		padding: 0px;
+		border-radius: 5px;
+
+		@include breakpoint(960) {
+			flex: 1;
+			padding: 10px;
+		}
+
+		.seed-section {
+			margin-right: 0px;
+			margin-left: 0px;
+		}
+
+	}
+
 	.recent-activities {
 		flex-grow: 1;
-		//display: block;
 
 		@include flexbox();
 		flex-direction: column;
 		flex-wrap: nowrap;
 		gap: 20px;
 
-		background-color: $color-5;
-		border-radius: 20px;
+		background-color: $color-51;
+		border-radius: 5px;
 		padding: 20px;
 		box-shadow: none;
 
@@ -2930,12 +3383,11 @@ hr {
 
 		.title {
 			color: $color-38;
-			font-family: $font-baloo;
-			font-size: 28px;
+			font-family: $font-inter;
+			font-size: 24px;
 			font-style: normal;
-			font-weight: 400;
-			line-height: 32px;
-			letter-spacing: -0.5px;
+			font-weight: 800;
+			line-height: normal;
 			margin-bottom: 20px;
 		}
 
@@ -2992,7 +3444,7 @@ hr {
 
 			@include breakpoint(640) {
 				max-width: calc(640px - 15%);
-				width: 480px;
+				width: 540px;
 			}
 
 			@include breakpoint(480) {
@@ -3040,16 +3492,17 @@ hr {
 				thead {
 					tr {
 						th {
-							color: $color-quaternary;
-							font-family: $font-baloo;
-							font-size: 20px;
+							color: $color-48;
+							font-family: $font-inter;
+							font-size: 14px;
 							font-style: normal;
-							font-weight: 400;
+							font-weight: 700;
 							line-height: 20px;
 							text-align: center;
 							padding: 10px;
 							vertical-align: middle;
 							text-wrap: nowrap;
+							letter-spacing: -0.14px;
 						}
 					}
 				}
@@ -3058,11 +3511,11 @@ hr {
 					tr {
 						td {
 							color: $color-white;
-							font-family: $font-poppins;
-							font-size: 18px;
+							font-family: $font-inter;
+							font-size: 14px;
 							font-style: normal;
-							font-weight: 500;
-							line-height: 26px;
+							font-weight: 400;
+							line-height: 16px;
 							letter-spacing: -0.25px;
 							text-align: center;
 							padding: 10px;
@@ -3076,7 +3529,7 @@ hr {
 
 								.amount {
 									color: $color-white;
-									font-family: $font-poppins;
+									font-family: $font-inter;
 									font-size: 18px;
 									font-style: normal;
 									font-weight: 500;
@@ -3086,22 +3539,22 @@ hr {
 
 								.transaction-type {
 									color: $color-32;
-									font-family: $font-poppins;
+									font-family: $font-inter;
 									font-size: 14px;
 									font-style: normal;
 									font-weight: 400;
-									line-height: 20px;
+									line-height: 16px;
 								}
 							}
 
 							.completed {
 								border-radius: 12px;
-								background-color: $color-quaternary;
-								font-family: $font-poppins;
+								background-color: $color-48;
+								font-family: $font-inter;
 								font-size: 14px;
 								font-style: normal;
 								font-weight: 400;
-								line-height: 20px;
+								line-height: 16px;
 								padding: 5px 15px;
 								min-width: 100px;
 								max-width: 120px;
@@ -3111,11 +3564,11 @@ hr {
 							.pending {
 								border-radius: 12px;
 								background-color: $color-39;
-								font-family: $font-poppins;
+								font-family: $font-inter;
 								font-size: 14px;
 								font-style: normal;
 								font-weight: 400;
-								line-height: 20px;
+								line-height: 16px;
 								padding: 5px 15px;
 								min-width: 100px;
 								max-width: 120px;
@@ -3124,12 +3577,12 @@ hr {
 
 							.declined {
 								border-radius: 12px;
-								background-color: $color-40;
-								font-family: $font-poppins;
+								background-color: $color-50;
+								font-family: $font-inter;
 								font-size: 14px;
 								font-style: normal;
 								font-weight: 400;
-								line-height: 20px;
+								line-height: 16px;
 								padding: 5px 15px;
 								min-width: 100px;
 								max-width: 120px;
@@ -3139,11 +3592,11 @@ hr {
 							.canceled {
 								border-radius: 12px;
 								background-color: $color-primary;
-								font-family: $font-poppins;
+								font-family: $font-inter;
 								font-size: 14px;
 								font-style: normal;
 								font-weight: 400;
-								line-height: 20px;
+								line-height: 16px;
 								padding: 5px 15px;
 								min-width: 100px;
 								max-width: 120px;
@@ -3158,98 +3611,124 @@ hr {
 }
 
 .signup-email-for-updates {
-	.row {
 
-		.col-6,
-		.col-md-6,
-		.col-xs-6 {
-			p.title {
-				font-family: $font-baloo;
-				font-size: 32px;
-				font-style: normal;
-				font-weight: 400;
-				line-height: 40px;
-				letter-spacing: -1px;
-				color: #FF0066;
-				text-transform: none;
-			}
+	background: url('/pictures/background/seed-presale-round.png') lightgray 50%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-color: $color-51;
 
-			p.content {
-				font-family: $font-baloo;
-				font-size: 20px;
-				font-style: normal;
-				font-weight: 400;
-				line-height: 28px;
-				letter-spacing: -0.5px;
-				color: #A2B0C3;
-			}
 
-			form {
-				.input-container {
-					display: flex;
-					position: relative;
-					flex-wrap: wrap;
-					align-items: stretch;
+	@include flexbox();
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+	gap: 16px;
 
-					img {
-						display: flex;
-						position: absolute;
-						top: 3px;
-						left: 15px;
-						width: 50px;
-						height: 50px;
-					}
+	border-radius: 5px;
+	padding: 8px 16px 8px 32px;
+	min-height: 96px;
 
-					input[type="email"] {
-						background: transparent;
-						border: 3px solid #FF0066;
-						color: $color-white;
-						font-family: $font-poppins;
-						font-size: 16px;
-						font-style: normal;
-						font-weight: 500;
-						height: 50px;
-						line-height: 24px;
-						border-radius: 15px;
-						text-align: center;
-						width: 490px;
-						margin-right: 10px;
-						outline: none;
 
-						&::placeholder {
-							color: $color-white;
-							text-align: center;
-							font-family: $font-poppins;
-							font-size: 16px;
-							font-style: normal;
-							font-weight: 500;
-							line-height: 24px;
-							text-decoration-line: underline;
-						}
+	@include breakpoint(375) {
+		padding: 8px 8px 8px 8px;
+		justify-content: flex-start;
+	}
 
-						@include breakpoint(768) {
-							width: 640px;
-							margin-bottom: 0px;
-						}
+	div {
+		text-align: left;
 
-						@include breakpoint(640) {
-							width: 375px;
-							margin-bottom: 10px;
-						}
+		&:first-child {
+			color: $color-white;
+			font-family: $font-inter;
+			font-size: 20px;
+			font-style: normal;
+			font-weight: 700;
+			line-height: normal;
+			padding-left: 10px;
+			padding-right: 10px;
+		}
 
-						@include breakpoint(375) {
-							width: 320px;
-							margin-bottom: 10px;
-						}
-
-						@include breakpoint(320) {
-							width: 300px;
-							margin-bottom: 10px;
-						}
-					}
-				}
-			}
+		&:nth-child(2) {
+			color: $color-white;
+			font-family: $font-inter;
+			font-size: 18px;
+			font-style: normal;
+			font-weight: 700;
+			line-height: 22px;
+			text-wrap: pretty;
+			padding-left: 10px;
+			padding-right: 10px;
 		}
 	}
 
+	form {
+		.input-container {
+			display: flex;
+			position: relative;
+			flex-wrap: wrap;
+			align-items: stretch;
+
+			img {
+				display: flex;
+				position: absolute;
+				top: 0px;
+				left: 15px;
+				width: 50px;
+				height: 50px;
+			}
+
+			input[type="email"] {
+				background: transparent;
+				border: 3px solid $color-primary;
+				color: $color-white;
+				font-family: $font-inter;
+				font-size: 16px;
+				font-style: normal;
+				font-weight: 500;
+				height: 40px;
+				line-height: 20px;
+				border-radius: 15px;
+				text-align: center;
+				width: 330px;
+				margin-right: 10px;
+				outline: none;
+
+				&::placeholder {
+					color: $color-white;
+					text-align: center;
+					font-family: $font-inter;
+					font-size: 16px;
+					font-style: normal;
+					font-weight: 500;
+					line-height: 20px;
+					//text-decoration-line: underline;
+				}
+
+				@include breakpoint(768) {
+					width: 330px;
+					margin-bottom: 10px;
+				}
+
+				@include breakpoint(640) {
+					width: 330px;
+					margin-bottom: 10px;
+				}
+
+				@include breakpoint(375) {
+					width: 320px;
+					margin-bottom: 10px;
+				}
+
+				@include breakpoint(320) {
+					width: 300px;
+					margin-bottom: 10px;
+				}
+			}
+
+			.btn {
+				margin: 0 auto;
+			}
+		}
+	}
 }

@@ -7,9 +7,11 @@ import Web3 from "web3";
 import {
     isMobile
 } from "react-device-detect";
-import * as config from "../../configuration/Config";
+import * as config from "../../../configuration/Config";
 import detectEthereumProvider from "@metamask/detect-provider";
-import { setMetamaskConfigurationAction, deleteMetamaskConfigurationAction } from "../../redux/actions/metamaskConfiguration/MetamaskConfigurationActions";
+import { setMetamaskConfigurationAction, deleteMetamaskConfigurationAction } from "../../../redux/actions/metamaskConfiguration/MetamaskConfigurationActions";
+import { setAccountInformationAction, deleteAccountInformationAction } from "../../../redux/actions/accountInformation/AccountInformationActions";
+import { loginPlayerAction, logoutPlayerAction } from "../../../redux/actions/session/SessionActions";
 
 class PresaleSeedRound extends React.Component {
 
@@ -51,10 +53,23 @@ class PresaleSeedRound extends React.Component {
     }
 
     static propTypes = {
+        session: PropTypes.any,
         metamaskConfiguration: PropTypes.any,
+        accountInformation: PropTypes.object,
+
+        loginPlayerAction: PropTypes.func,
+        logoutPlayerAction: PropTypes.func,
 
         setMetamaskConfigurationAction: PropTypes.func,
         deleteMetamaskConfigurationAction: PropTypes.func,
+
+        setAccountInformationAction: PropTypes.func,
+        deleteAccountInformationAction: PropTypes.func,
+
+    }
+
+    static defaultProps = {
+        session: null,
     }
 
     async componentDidMount() {
@@ -257,7 +272,17 @@ class PresaleSeedRound extends React.Component {
                 balance: balance,
                 chainId: chainId,
             }, () => {
+                this.props.loginPlayerAction({
+                    loginStatus: loginStatus,
+                    accounts: accounts,
+                    chainId: chainId,
+                });
                 this.props.setMetamaskConfigurationAction(metamaskConfigurationJSON);
+                this.props.setAccountInformationAction({
+                    ...this.props.accountInformation,
+                    accounts: accounts,
+                    balance: balance,
+                });
 
                 window.ethereum.on('accountsChanged', this.accountsChanged);
                 window.ethereum.on('chainChanged', this.chainChanged)
@@ -355,7 +380,6 @@ class PresaleSeedRound extends React.Component {
         }
     }
 
-
     accountsChanged = (accounts) => {
         //console.log("call accountsChanged");
 
@@ -377,6 +401,13 @@ class PresaleSeedRound extends React.Component {
                         this.setState({
                             accounts: result,
                             balance: balance,//this.formatBalance(balance)
+                        }, () => {
+                            this.props.setAccountInformationAction({
+                                ...this.props.accountInformation,
+                                accounts: result,
+                                balance: balance,
+                            })
+                            this.loginMetaMask();
                         })
                     }
                 })
@@ -447,7 +478,7 @@ class PresaleSeedRound extends React.Component {
                 <div className="main-section">
                     <div className="content">
                         {
-                            (!this.state.isMobile && !this.state?.loginStatus && this.state.isMetaMaskSupported) &&
+                            (!this.state.isMobile && !this.props?.session?.loginStatus && this.state.isMetaMaskSupported) &&
                             <button type="button" className="btn connect-wallet" onClick={(event) => {
                                 this.loginMetaMask();
                             }}>
@@ -483,17 +514,25 @@ class PresaleSeedRound extends React.Component {
 
 const mapStateToProps = state => {
 
+    const { session } = state.session;
     const { metamaskConfiguration } = state.metamaskConfiguration;
+    const { accountInformation } = state.accountInformation;
 
     return {
+        session,
         metamaskConfiguration,
+        accountInformation
     };
 }
 
 const mapDispatchToProps = dispatch => (
     bindActionCreators({
+        loginPlayerAction,
+        logoutPlayerAction,
         setMetamaskConfigurationAction,
         deleteMetamaskConfigurationAction,
+        setAccountInformationAction,
+        deleteAccountInformationAction,
     }, dispatch)
 );
 

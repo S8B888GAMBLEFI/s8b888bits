@@ -14,7 +14,6 @@ class WheelOfFortunePage extends React.Component {
                 </>
 
                 <br />
-                FAQ
                 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

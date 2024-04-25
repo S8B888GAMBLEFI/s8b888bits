@@ -6,7 +6,9 @@ import { injectIntl, FormattedNumber } from "gatsby-plugin-react-intl"
 import BalanceCryptoCurrencyIcon from "../currency-icon/balance-crypto-currency-icon";
 import CurrencyName from "../currency-symbol/currency-name";
 import BuyTokens from "../buy-tokens/buy-tokens";
-import TransactionTypeStatus from "../transaction_type/transaction-type-status";
+//import TransactionTypeStatus from "../transaction_type/transaction-type-status";
+import StrategicRoundBuyTokens from "../strategic-round-buy-tokens/strategic-round-buy-tokens";
+import RecentActivities from "../recent-activities/recent-activities";
 import Web3 from "web3";
 import * as config from "../../configuration/Config";
 import detectEthereumProvider from "@metamask/detect-provider";
@@ -100,13 +102,14 @@ class Staking extends React.Component {
             loginStatus: metamaskConfiguration?.loginStatus || null,
             chainId: metamaskConfiguration?.chainId || null,
             web3Instance: new Web3(window.ethereum),
+            accountInformation: this.props.accountInformation,
         }, () => {
             if (this.state?.accounts && this.state?.balance && this.state?.loginStatus) {
                 window.ethereum.on('accountsChanged', this.accountsChanged);
                 window.ethereum.on('chainChanged', this.chainChanged);
             }
             this.refreshData();
-            this.refreshInterval = setInterval(() => this.refreshData(), 10000);
+            //this.refreshInterval = setInterval(() => this.refreshData(), 10000);
         });
 
     }
@@ -125,23 +128,48 @@ class Staking extends React.Component {
                 chainId: metamaskConfiguration?.chainId || null,
 
             }, () => {
-                this.accountsChanged();
+                //this.accountsChanged();
                 if (this.state?.accounts && this.state?.balance && this.state?.loginStatus) {
                     window.ethereum.on('accountsChanged', this.accountsChanged);
                     window.ethereum.on('chainChanged', this.chainChanged);
                 }
+                this.refreshData();
+                //this.refreshInterval = setInterval(() => this.refreshData(), 10000);
             });
         }
 
         if (JSON.stringify(this.props.accountInformation) !== JSON.stringify(prevProps.accountInformation)) {
-            this.setState({
-                accountInformation: this.props.accountInformation || null
-            }, () => {
-                //console.log(this.props.accountInformation);
-                if (!this.state?.accountInformation) {
+            if (!this.props?.accountInformation || this.props.accountInformation === null) {
+                this.setState({
+                    accountInformation: null,
+                    accounts: null,
+                    chainId: null,
+                    loginStatus: null,
+
+                    balance: null,
+
+                    stakeTokenBalance: null,
+                    rewardTokenBalance: null,
+
+                    totalStakedBalance: null,
+                    rewardsStakedBalance: null,
+
+                    apr: null,
+                    dailyApr: null,
+                }, () => {
                     clearInterval(this.refreshInterval);
-                }
-            })
+                });
+            }
+            else {
+                this.setState({
+                    accountInformation: this.props.accountInformation || null
+                }, () => {
+                    //console.log(this.props.accountInformation);
+                    if (!this.state?.accountInformation) {
+                        clearInterval(this.refreshInterval);
+                    }
+                })
+            }
         }
     }
 
@@ -374,7 +402,10 @@ class Staking extends React.Component {
         if (!this.state?.accounts) {
             return;
         }
-        if (!this.state.web3Instance) {
+        if (!this.state?.accountInformation) {
+            return;
+        }
+        if (!this.state?.web3Instance) {
             return;
         }
 
@@ -437,7 +468,18 @@ class Staking extends React.Component {
             .then((response) => {
                 //console.log(response);
                 //_tokensStaked, _rewards
-                let apr = ((ethers.formatEther(response._rewards) / ethers.formatEther(response._tokensStaked)) * 100) + "";
+
+                let apr = 0.00;
+
+                if (response._rewards === 0n) {
+                    apr = 0.00;
+                }
+                else if (response._tokensStaked === 0n) {
+                    apr = 0.00;
+                }
+                else {
+                    apr = ((ethers.formatEther(response._rewards) / ethers.formatEther(response._tokensStaked)) * 100) + "";
+                }
 
                 apr = apr + "";
 
@@ -457,6 +499,8 @@ class Staking extends React.Component {
                         ...this.props.accountInformation,
                         totalStakedBalance: ethers.formatEther(response._tokensStaked),
                         rewardsStakedBalance: ethers.formatEther(response._rewards),
+                        dailyApr: apr,
+                        apr: apr,
                     })
                 }
             })
@@ -561,8 +605,6 @@ class Staking extends React.Component {
                     </div>
                 </div>
 
-                <hr />
-
                 <div className="stake-and-unstake">
                     <div className="stake">
                         <div className="title">
@@ -654,7 +696,7 @@ class Staking extends React.Component {
                             }}>
                                 Approve
                             </button>
-                            <button type="button" className="btn claim" onClick={async (event) => {
+                            <button type="button" className="btn stake-details" onClick={async (event) => {
                                 event.preventDefault();
 
                                 if (!this.state.rewardsStakedBalance) return;
@@ -671,7 +713,7 @@ class Staking extends React.Component {
 
                                 this.refreshData();
                             }}>
-                                Claim
+                                Details
                             </button>
                         </div>
                     </div>
@@ -746,7 +788,7 @@ class Staking extends React.Component {
                             }}>
                                 Approve
                             </button>
-                            <button type="button" className="btn claim" onClick={async (event) => {
+                            <button type="button" className="btn unstake-details" onClick={async (event) => {
                                 event.preventDefault();
 
                                 if (!this.state.rewardsStakedBalance) return;
@@ -764,139 +806,26 @@ class Staking extends React.Component {
                                 this.refreshData();
 
                             }}>
-                                Claim
+                                Details
                             </button>
                         </div>
                     </div>
                 </div>
 
+                {/*
                 <hr />
 
                 <BuyTokens />
 
                 <hr />
 
-                <div className="recent-activities">
-                    <div className="title">
-                        Recent Activities
-                    </div>
+                <StrategicRoundBuyTokens />
+                */}
 
-                    <div className="block-recent-activities">
-                        <table className="table-recent-activities">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        Coin
-                                    </th>
-                                    <th>
-                                        Transaction
-                                    </th>
-                                    <th>
-                                        ID
-                                    </th>
-                                    <th>
-                                        Date
-                                    </th>
-                                    <th>
-                                        Status
-                                    </th>
-                                    <th>
-                                        Fees
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <BalanceCryptoCurrencyIcon currency="BTC" />
-                                    </td>
-                                    <td>
-                                        <div className="amount">$659.10</div>
-                                        <div className="transaction-type">Withdraw BTC</div>
-                                    </td>
-                                    <td>
-                                        #14525156
-                                    </td>
-                                    <td>
-                                        Mar 21, 2022
-                                    </td>
-                                    <td>
-                                        <TransactionTypeStatus transactionType="AFF_PL_TO" />
-                                    </td>
-                                    <td>
-                                        0.0005
-                                    </td>
-                                </tr>
+                <hr />
 
-                                <tr>
-                                    <td>
-                                        <BalanceCryptoCurrencyIcon currency="USDT" />
-                                    </td>
-                                    <td>
-                                        <div className="amount">$659.10</div>
-                                        <div className="transaction-type">Withdraw USDT</div>
-                                    </td>
-                                    <td>
-                                        #14525156
-                                    </td>
-                                    <td>
-                                        Mar 21, 2022
-                                    </td>
-                                    <td>
-                                        <TransactionTypeStatus transactionType="AFF_PL_TO" />
-                                    </td>
-                                    <td>
-                                        0.0005
-                                    </td>
-                                </tr>
+                <RecentActivities />
 
-                                <tr>
-                                    <td>
-                                        <BalanceCryptoCurrencyIcon currency="USDTT" />
-                                    </td>
-                                    <td>
-                                        <div className="amount">$659.10</div>
-                                        <div className="transaction-type">Withdraw USDTT</div>
-                                    </td>
-                                    <td>
-                                        #14525156
-                                    </td>
-                                    <td>
-                                        Mar 21, 2022
-                                    </td>
-                                    <td>
-                                        <TransactionTypeStatus transactionType="AFF_PL_TO" />
-                                    </td>
-                                    <td>
-                                        0.0005
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <BalanceCryptoCurrencyIcon currency="ETH" />
-                                    </td>
-                                    <td>
-                                        <div className="amount">$659.10</div>
-                                        <div className="transaction-type">Withdraw ETH</div>
-                                    </td>
-                                    <td>
-                                        #14525156
-                                    </td>
-                                    <td>
-                                        Mar 21, 2022
-                                    </td>
-                                    <td>
-                                        <TransactionTypeStatus transactionType="WITHDRAW_REQUEST" />
-                                    </td>
-                                    <td>
-                                        0.0005
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </section >
         );
     }

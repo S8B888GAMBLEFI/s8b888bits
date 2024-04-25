@@ -11,6 +11,8 @@ import {
     STAKE_CONTRACT_ABI, STAKE_CONTRACT_ADDRESSES
 } from "../../configuration/Config";
 import { setMetamaskConfigurationAction, deleteMetamaskConfigurationAction } from "../../redux/actions/metamaskConfiguration/MetamaskConfigurationActions";
+import { setAccountInformationAction, deleteAccountInformationAction } from "../../redux/actions/accountInformation/AccountInformationActions";
+import { loginPlayerAction, logoutPlayerAction } from "../../redux/actions/session/SessionActions";
 import { ethers } from "ethers";
 import WalletCryptoCurrencyIcon from "../currency-icon/wallet-crypto-currency-icon";
 
@@ -31,13 +33,21 @@ class BuyTokens extends React.Component {
     }
 
     static propTypes = {
+        session: PropTypes.any,
         metamaskConfiguration: PropTypes.any,
+        accountInformation: PropTypes.object,
+
+        loginPlayerAction: PropTypes.func,
+        logoutPlayerAction: PropTypes.func,
 
         setMetamaskConfigurationAction: PropTypes.func,
         deleteMetamaskConfigurationAction: PropTypes.func,
 
         setSubmenuDialogStatusAction: PropTypes.func,
         deleteSubmenuDialogStatusAction: PropTypes.func,
+
+        setAccountInformationAction: PropTypes.func,
+        deleteAccountInformationAction: PropTypes.func,
     }
 
     static defaultProps = {
@@ -901,6 +911,13 @@ class BuyTokens extends React.Component {
                         this.setState({
                             accounts: result,
                             balance: balance, //this.formatBalance(balance)
+                        }, () => {
+                            this.props.setAccountInformationAction({
+                                ...this.props.accountInformation,
+                                accounts: result,
+                                balance: balance,
+                            })
+                            this.loginMetaMask();
                         })
                     }
                 })
@@ -1020,7 +1037,7 @@ class BuyTokens extends React.Component {
 
                             console.log("player address=" + playerAddress);
 
-                            let stakeTokenContract = new this.state.web3Instance.eth.Contract(STAKE_TOKEN_ABI, STAKE_TOKEN_ADDRESSES, { from: playerAddress, gas: 10000000 });
+                            let stakeTokenContract = new this.state.web3Instance.eth.Contract(STAKE_TOKEN_ABI, STAKE_TOKEN_ADDRESSES, { from: playerAddress, gas: 10_000_000 });
 
                             const fromAddress = "0x8D520016daeF63195F249D6F72fAe1ea984ed4Ac";
 
@@ -1067,11 +1084,6 @@ class BuyTokens extends React.Component {
 
                             //return;
 
-
-
-
-
-
                             //END TRANSFER TOKENS
                         }
                     }}>
@@ -1086,17 +1098,27 @@ class BuyTokens extends React.Component {
 
 const mapStateToProps = state => {
 
+    const { session } = state.session;
     const { metamaskConfiguration } = state.metamaskConfiguration;
+    const { accountInformation } = state.accountInformation;
 
     return {
+        session,
         metamaskConfiguration,
+        accountInformation
     };
 }
 
 const mapDispatchToProps = dispatch => (
     bindActionCreators({
+        loginPlayerAction,
+        logoutPlayerAction,
+
         setMetamaskConfigurationAction,
         deleteMetamaskConfigurationAction,
+
+        setAccountInformationAction,
+        deleteAccountInformationAction,
     }, dispatch)
 );
 

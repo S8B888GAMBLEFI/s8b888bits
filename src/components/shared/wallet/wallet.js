@@ -11,6 +11,7 @@ import WalletCryptoCurrencyIcon from "../../currency-icon/wallet-crypto-currency
 import { ethers } from "ethers";
 
 class Wallet extends React.Component {
+
     state = {
         isMobile: isMobile,
         accountInformation: null,
@@ -19,8 +20,14 @@ class Wallet extends React.Component {
     }
 
     static propTypes = {
-
+        session: PropTypes.any,
+        metamaskConfiguration: PropTypes.any,
         accountInformation: PropTypes.object,
+    }
+
+    static defaultPropTypes = {
+        session: null,
+        accountInformation: null
     }
 
     _isMounted = false;
@@ -31,6 +38,10 @@ class Wallet extends React.Component {
 
     componentDidMount = async () => {
         this._isMounted = true;
+
+        this.setState({
+            accountInformation: this.props.accountInformation,
+        });
 
 
         await fetch("/localdb/funds-raising-rounds.json")
@@ -55,7 +66,7 @@ class Wallet extends React.Component {
         if (JSON.stringify(this.props.accountInformation) !== JSON.stringify(prevProps.accountInformation)) {
             //console.log(this.props.accountInformation);
             this.setState({
-                accountInformation: this.props.accountInformation
+                accountInformation: this.props.accountInformation || null
             })
         }
     }
@@ -197,10 +208,12 @@ class Wallet extends React.Component {
 
 const mapStateToProps = state => {
 
+    const { session } = state.session;
     const { metamaskConfiguration } = state.metamaskConfiguration;
     const { accountInformation } = state.accountInformation;
 
     return {
+        session,
         metamaskConfiguration,
         accountInformation
     };

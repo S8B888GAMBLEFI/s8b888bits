@@ -2,24 +2,46 @@
 = FOOTER
 ------------------------------------------------------------------------------------- */
 footer {
+	background-color: $color-46;
+	margin-top: 16px;
+
 	.footer-wrapper {
-		max-width: 1560px;
+		max-width: 1380px;
 		margin: 0 auto;
-		padding: 25px 30px;
-		//border-top: 1px solid $color-5;
-		border-bottom: 1px solid $color-5;
+		padding: 25px 25px;
 		box-sizing: border-box;
+
+		@include breakpoint(960) {
+			padding: 25px 25px;
+		}
 
 		@include breakpoint(640) {
 			border-top: 0;
+			padding: 15px 15px;
+		}
+
+		&.block {
+			border-radius: 5px;
+			background-color: $color-51;
+
+			hr {
+				background-color: $color-52;
+				border: none;
+				height: 1px;
+				margin-bottom: 10px;
+			}
 		}
 
 		.footer-cols {
 			@include flexbox();
 			justify-content: space-between;
-			flex-flow: wrap;
+			flex-flow: nowrap;
 			margin-bottom: 0px;
-			padding-bottom: 10px;
+			padding-bottom: 0px;
+
+			@include breakpoint(960) {
+				flex-flow: wrap;
+			}
 
 			@include breakpoint(640) {
 				display: block;
@@ -29,7 +51,7 @@ footer {
 				flex: 0 0 20%;
 
 				@include breakpoint(1024) {
-					flex: 0 0 40%;
+					flex: 0 0 30%;
 				}
 
 				.logo {
@@ -47,7 +69,7 @@ footer {
 
 				h5 {
 					margin-bottom: 16px;
-					font-family: $font-primary;
+					font-family: $font-inter;
 					font-size: 22px;
 					line-height: 26px;
 					color: $color-primary;
@@ -60,7 +82,7 @@ footer {
 				}
 
 				p {
-					font-family: $font-primary;
+					font-family: $font-inter;
 					font-style: normal;
 					font-size: 16px;
 					line-height: 19px;
@@ -83,22 +105,22 @@ footer {
 
 					&.title {
 						margin-bottom: 16px;
-						font-family: $font-baloo;
+						font-family: $font-inter;
 						font-style: normal;
-						font-weight: 400;
-						font-size: 24px;
-						line-height: 22px;
+						font-weight: 800;
+						font-size: 22px;
+						line-height: 28px;
 						color: $color-primary;
 					}
 
 					&.casino-time {
-						font-family: $font-poppins;
+						font-family: $font-inter;
 						font-style: normal;
 						font-weight: 500;
 						font-size: 18px;
 						line-height: 26px;
 						letter-spacing: -0.25px;
-						color: #A2B0C3;
+						color: $color-32;
 						padding-bottom: 10px;
 
 						img {
@@ -107,13 +129,13 @@ footer {
 					}
 
 					&.casino-date {
-						font-family: $font-poppins;
+						font-family: $font-inter;
 						font-style: normal;
 						font-weight: 500;
 						font-size: 18px;
 						line-height: 26px;
 						letter-spacing: -0.25px;
-						color: #A2B0C3;
+						color: $color-32;
 						padding-top: 10px;
 						padding-bottom: 10px;
 
@@ -169,8 +191,8 @@ footer {
 								margin-bottom: 10px;
 
 								a {
-									color: #A2B0C3;
-									font-family: $font-baloo;
+									color: $color-32;
+									font-family: $font-inter;
 									font-size: 16px;
 									font-style: normal;
 									font-weight: 400;
@@ -192,22 +214,31 @@ footer {
 
 			>.col-40 {
 				flex: 0 0 40%;
+				align-self: center;
+
+				@include breakpoint(960) {
+					text-align: center;
+				}
 
 				p.company-name {
-					color: #FF0066;
-					font-family: Poppins;
+					color: $color-primary;
+					font-family: $font-inter;
 					font-size: 14px;
 					font-style: normal;
 					font-weight: 400;
 					line-height: 20px;
 					text-align: right;
+
+					@include breakpoint(960) {
+						text-align: center;
+					}
 				}
 			}
 		}
 
 		p {
 			&.small {
-				font-family: $font-baloo;
+				font-family: $font-inter;
 				text-align: center;
 				font-size: 12px;
 				line-height: 18px;
@@ -229,13 +260,85 @@ footer {
 					text-align: left;
 				}
 
-				.app-version {
-					font-family: $font-baloo;
-					font-size: 16px;
+				&.app-version {
+					color: $color-primary;
+					font-family: $font-inter;
+					font-size: 14px;
 					line-height: 20px;
-					color: #FF0066;
 					font-weight: 400;
 					font-style: normal;
+					text-align: center;
+				}
+			}
+
+			&.description-1 {
+				color: $color-32;
+				text-align: center;
+				font-family: $font-inter;
+				font-size: 14px;
+				font-style: normal;
+				font-weight: 700;
+				line-height: 20px;
+				letter-spacing: -1px;
+				margin-bottom: 20px;
+
+				@include breakpoint(1440) {
+					font-size: 14px;
+					line-height: 18px;
+					font-weight: 700;
+				}
+
+				@include breakpoint(1024) {
+					font-size: 12px;
+					line-height: 16px;
+					font-weight: 600;
+				}
+
+				@include breakpoint(375) {
+					font-size: 10px;
+					line-height: 14px;
+					font-weight: 400;
+				}
+			}
+
+			&.description-2 {
+				color: $color-32;
+				text-align: center;
+				font-family: $font-inter;
+				font-size: 14px;
+				font-style: normal;
+				font-weight: 700;
+				line-height: 20px;
+				letter-spacing: -1px;
+				margin-bottom: 20px;
+
+				>a {
+					color: $color-primary;
+					font-family: $font-inter;
+					font-size: 13px;
+					font-style: normal;
+					font-weight: 600;
+					line-height: 20px;
+					text-decoration-line: underline;
+					letter-spacing: -1px;
+				}
+
+				@include breakpoint(1440) {
+					font-size: 14px;
+					line-height: 18px;
+					font-weight: 700;
+				}
+
+				@include breakpoint(1024) {
+					font-size: 12px;
+					line-height: 16px;
+					font-weight: 600;
+				}
+
+				@include breakpoint(375) {
+					font-size: 10px;
+					line-height: 14px;
+					font-weight: 400;
 				}
 			}
 		}

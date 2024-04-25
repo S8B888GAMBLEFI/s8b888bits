@@ -113,7 +113,7 @@ export const LIMIT_REPORTS_PAST = 6;
 
 export const MINIMUM_FRACTION_DIGITS = 6;
 
-export const APP_VERSION = "1.0.1";
+export const APP_VERSION = "1.3.2";
 
 export const CHAINS = {
     "MAINNET": {

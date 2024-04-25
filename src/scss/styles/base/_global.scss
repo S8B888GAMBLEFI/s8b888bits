@@ -9,8 +9,13 @@ html {
 body {
 	overflow-x: hidden;
 	position: relative;
-	background-color: #000000;
+	background-color: $color-46;
 	-webkit-overflow-scrolling: touch;
+
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-smooth: never;
+	font-optical-sizing: auto;
 }
 
 html,
@@ -27,6 +32,7 @@ body {
 
 .page-outer {
 	padding-top: 108px;
+	background-color: $color-46;
 
 	@include breakpoint(1366) {
 		padding-top: 90px;
@@ -43,9 +49,22 @@ body {
 	padding: 0 30px;
 	box-sizing: border-box;
 
-	@include breakpoint(640) {
+	@include breakpoint(1440) {
+		max-width: 1440px;
+	}
+
+	@include breakpoint(1024) {
+		max-width: 1024px;
 		padding-left: 10px;
 		padding-right: 10px;
+	}
+
+	@include breakpoint(640) {
+		max-width: 640px;
+	}
+
+	@include breakpoint(375) {
+		max-width: 375px;
 	}
 }
 
@@ -66,7 +85,7 @@ body {
 		}
 
 		a {
-			font-family: $font-baloo;
+			font-family: $font-inter;
 			font-style: normal;
 			font-weight: 400;
 			font-size: 22px;

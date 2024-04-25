@@ -14,7 +14,6 @@ class ClaimRevenueSharePage extends React.Component {
                 </>
 
                 <br />
-                Claim Revenue Share
                 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

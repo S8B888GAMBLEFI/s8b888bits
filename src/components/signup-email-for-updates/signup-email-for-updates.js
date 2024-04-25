@@ -27,29 +27,30 @@ class SignupEmailForUpdates extends React.Component {
 
   render() {
     return (
-      <div className="signup-email-for-updates container">
+      <div className="signup-email-for-updates">
 
-        <div className="row">
-          <div className="col-6 col-md-6 col-xs-6">
-            <p className="title">
-              Sign up for updates
-            </p>
-            <p className="content">
-              Don't Miss Out! Subscribe Now for Exclusive Content and Special Offers.
-            </p>
-          </div>
-          <div className="col-6 col-md-6 col-xs-6">
-            <form>
-              <div className="input-container">
-                <img alt="Email" src="/pictures/image-icons/icon-email.svg" loading="lazy" />
-                <input type="email" placeholder="Enter email" />
-                <button type="button" className="btn signup-email">Sign Up</button>
-              </div>
-            </form>
-          </div>
+        <div>
+          Sign up for updates!
         </div>
 
-      </div>
+        <div>
+          Don't Miss Out! Substribe Now for
+          <br />
+          Exclusive Content and Special Offers.
+        </div>
+
+        <div>
+          <form>
+            <div className="input-container">
+              <img alt="Email" src="/pictures/image-icons/icon-email.svg" loading="lazy" />
+              <input type="email" placeholder="Enter email" />
+              <button type="button" className="btn signup-email">Sign Up</button>
+
+            </div>
+          </form>
+        </div>
+
+      </div >
     );
   }
 }

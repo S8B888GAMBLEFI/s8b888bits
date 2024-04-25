@@ -12,6 +12,7 @@ import detectEthereumProvider from "@metamask/detect-provider";
 import { setMetamaskConfigurationAction, deleteMetamaskConfigurationAction } from "../../redux/actions/metamaskConfiguration/MetamaskConfigurationActions";
 import { setSubmenuDialogStatusAction, deleteSubmenuDialogStatusAction } from "../../redux/actions/submenuDialog/SubmenuDialogActions";
 import { setAccountInformationAction, deleteAccountInformationAction } from "../../redux/actions/accountInformation/AccountInformationActions";
+import { loginPlayerAction, logoutPlayerAction } from "../../redux/actions/session/SessionActions";
 
 class Header extends React.Component {
 
@@ -38,9 +39,13 @@ class Header extends React.Component {
   }
 
   static propTypes = {
+    session: PropTypes.any,
     metamaskConfiguration: PropTypes.any,
     submenuDialogStatus: PropTypes.object,
     accountInformation: PropTypes.object,
+
+    loginPlayerAction: PropTypes.func,
+    logoutPlayerAction: PropTypes.func,
 
     setMetamaskConfigurationAction: PropTypes.func,
     deleteMetamaskConfigurationAction: PropTypes.func,
@@ -53,7 +58,7 @@ class Header extends React.Component {
   }
 
   static defaultProps = {
-
+    session: null,
   }
 
   constructor(props, context) {
@@ -290,6 +295,7 @@ class Header extends React.Component {
                 accounts: result,
                 balance: balance,
               })
+              this.loginMetaMask();
             })
           }
         })
@@ -393,7 +399,6 @@ class Header extends React.Component {
 
       let loginStatus = accounts.length > 0;
 
-
       let metamaskConfigurationJSON = JSON.stringify(
         {
           accounts: accounts,
@@ -412,6 +417,11 @@ class Header extends React.Component {
         balance: balance,
         chainId: chainId,
       }, () => {
+        this.props.loginPlayerAction({
+          loginStatus: loginStatus,
+          accounts: accounts,
+          chainId: chainId,
+        });
         this.props.setMetamaskConfigurationAction(metamaskConfigurationJSON);
         this.props.setAccountInformationAction({
           ...this.props.accountInformation,
@@ -420,7 +430,7 @@ class Header extends React.Component {
         });
 
         window.ethereum.on('accountsChanged', this.accountsChanged);
-        window.ethereum.on('chainChanged', this.chainChanged)
+        window.ethereum.on('chainChanged', this.chainChanged);
       })
     } catch (error) {
 
@@ -442,6 +452,7 @@ class Header extends React.Component {
       //balance: null,
       loginStatus: false
     }, () => {
+      this.props.logoutPlayerAction();
       this.props.deleteMetamaskConfigurationAction();
       this.props.deleteAccountInformationAction();
       //window.ethereum?.removeListener('accountsChanged', this.refreshAccounts);
@@ -586,9 +597,9 @@ class Header extends React.Component {
 
           <div className="header-right">
             {
-              <ul className={!this.state?.loginStatus ? "sec-nav" : "sec-nav logged-in"}>
+              <ul className={!this.props?.session?.loginStatus ? "sec-nav" : "sec-nav logged-in"}>
                 {
-                  (!this.state.isMobile && !this.state?.loginStatus && this.state.isMetaMaskSupported) &&
+                  (!this.state.isMobile && !this.props?.session?.loginStatus && this.state.isMetaMaskSupported) &&
                   <li>
                     <button type="button" aria-label="Connect Wallet" className="btn connect-wallet" onClick={
                       (event) => {
@@ -601,7 +612,7 @@ class Header extends React.Component {
                   </li>
                 }
                 {
-                  (!this.state.isMobile && this.state.loginStatus === null && this.state.isMetaMaskSupported === null) &&
+                  (!this.state.isMobile && this.props?.session?.loginStatus === null && this.state.isMetaMaskSupported === null) &&
                   <li>
                     <span className="message">
                       <FormattedMessage id="Detecting Metamask ..." />
@@ -609,7 +620,7 @@ class Header extends React.Component {
                   </li>
                 }
                 {
-                  (!this.state.isMobile && !this.state?.loginStatus && !this.state?.isMetaMaskSupported) &&
+                  (!this.state.isMobile && !this.props?.session?.loginStatus && !this.state?.isMetaMaskSupported) &&
                   <li>
                     <span className="message">
                       <FormattedMessage id="MetaMask is not installed" />
@@ -618,10 +629,10 @@ class Header extends React.Component {
                 }
 
                 {
-                  (this.state?.loginStatus && this.state?.isMetaMaskSupported) &&
+                  (this.props?.session?.loginStatus && this.state?.isMetaMaskSupported && this.state?.accounts?.[0]) &&
                   <li className="account">
                     <button type="button" className="account-trigger active">
-                      <span className="username">
+                      <span className="username" title={this.state.accounts[0]}>
                         {this.shortUsername(this.state.accounts[0])}
                       </span>
                       <br />
@@ -642,7 +653,7 @@ class Header extends React.Component {
                 }
 
                 {
-                  (this.state?.loginStatus && this.state?.isMetaMaskSupported) &&
+                  (this.props?.session?.loginStatus && this.state?.isMetaMaskSupported) &&
                   <li className="logout">
                     <button type="button" aria-label="Logout" onClick={(event) => {
                       event.preventDefault();
@@ -664,11 +675,13 @@ class Header extends React.Component {
 
 const mapStateToProps = state => {
 
+  const { session } = state.session;
   const { metamaskConfiguration } = state.metamaskConfiguration;
   const { submenuDialogStatus } = state.submenuDialogStatus;
   const { accountInformation } = state.accountInformation;
 
   return {
+    session,
     metamaskConfiguration,
     submenuDialogStatus,
     accountInformation
@@ -677,6 +690,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
+    loginPlayerAction,
+    logoutPlayerAction,
+
     setMetamaskConfigurationAction,
     deleteMetamaskConfigurationAction,
 

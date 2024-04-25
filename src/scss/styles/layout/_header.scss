@@ -23,17 +23,32 @@ header {
 		@include flexbox();
 		justify-content: space-between;
 		flex-wrap: nowrap;
-		max-width: 1440px;
+		max-width: 1390px;
 		margin: 0 auto;
 
+		@include breakpoint(1440) {
+			max-width: 1390px;
+		}
+
+		@include breakpoint(1024) {
+			max-width: 1024px;
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+
 		@include breakpoint(640) {
+			max-width: 640px;
 			display: block;
+		}
+
+		@include breakpoint(375) {
+			max-width: 375px;
 		}
 
 		.header-left {
 			@include flexbox();
 			flex-wrap: nowrap;
-			padding: 10px 0;
+			padding: 5px 0;
 
 			@include breakpoint(1024) {
 				padding: 5px 0;
@@ -49,21 +64,28 @@ header {
 				border: none;
 				cursor: pointer;
 
+				@include breakpoint(1600) {
+					height: 40px;
+					margin-top: 20px;
+					margin-left: 0px;
+				}
+
 				@include breakpoint(1440) {
 					height: 40px;
-					margin-top: 5px;
+					margin-top: 20px;
 					margin-right: 5px;
 				}
 
 				@include breakpoint(1400) {
 					height: 40px;
-					margin-top: 5px;
+					margin-top: 15px;
 					margin-right: 10px;
 				}
 
 				@include breakpoint(1366) {
 					background-size: 30px auto;
 					height: 40px;
+					margin-top: 10px;
 					margin-right: 10px;
 				}
 
@@ -108,19 +130,19 @@ header {
 
 					@include breakpoint(1600) {
 						height: 40px;
-						margin-top: 5px;
+						margin-top: 20px;
 						margin-left: 0px;
 					}
 
 					@include breakpoint(1440) {
 						height: 40px;
-						margin-top: 5px;
+						margin-top: 20px;
 						margin-left: 0px;
 					}
 
 					@include breakpoint(1400) {
 						height: 40px;
-						margin-top: 5px;
+						margin-top: 15px;
 						margin-left: 10px;
 					}
 
@@ -179,18 +201,14 @@ header {
 						a {
 							display: block;
 							padding: 25px 5px;
-							color: $color-grey;
-							font-family: $font-baloo;
+							color: $color-12;
+							font-family: $font-inter;
 							font-style: normal;
-							font-weight: 400;
-							font-size: 22px;
+							font-weight: 700;
+							font-size: 18px;
 							line-height: 32px;
 							letter-spacing: -0.5px;
 							@include transition(color 300ms ease-in-out);
-
-							&:hover {
-								color: $color-white;
-							}
 
 							@include breakpoint(1600) {
 								font-size: 26px;
@@ -215,19 +233,21 @@ header {
 
 							@include breakpoint(1280) {
 								display: inline-block;
-								padding: 10px 0;
 								font-size: 20px;
+								line-height: 20px;
+								padding: 20px 0px 15px;
 							}
 
 							@include breakpoint(768) {
-								padding: 5px 2px;
 								font-size: 20px;
 								line-height: normal;
+								padding: 5px 2px;
 							}
 
 							&.active,
-							&.back {
-								color: #FF0066;
+							&.back,
+							&:hover {
+								color: $color-primary;
 							}
 						}
 
@@ -245,7 +265,7 @@ header {
 									height: 3px;
 									//background-color: $color-primary;
 									height: 4px;
-									background-color: #FF0066;
+									background-color: $color-primary;
 								}
 							}
 						}
@@ -316,7 +336,7 @@ header {
 					}
 				}
 
-				@include breakpoint(1280) {
+				@include breakpoint(960) {
 					position: fixed;
 					left: 0;
 					top: 140px;
@@ -363,7 +383,7 @@ header {
 								border-radius: 12px;
 								color: $color-primary;
 								font-size: 24px;
-								font-family: $font-baloo;
+								font-family: $font-inter;
 								$font-style: normal;
 								line-height: 24px;
 								font-weight: 400;
@@ -380,10 +400,10 @@ header {
 					}
 				}
 
-				@include breakpoint(960) {
+				/*@include breakpoint(960) {
 					top: 90px;
 					height: calc(100% - 90px);
-				}
+				}*/
 
 				@include breakpoint(768) {
 					top: 90px;
@@ -407,8 +427,13 @@ header {
 				}
 
 				@include breakpoint(640) {
-					top: 140px;
-					height: calc(100% - 140px);
+					top: 120px;
+					height: calc(100% - 120px);
+				}
+
+				@include breakpoint(375) {
+					top: 100px;
+					height: calc(100% - 100px);
 				}
 
 				&.visible {
@@ -437,6 +462,10 @@ header {
 				flex-wrap: nowrap;
 				padding: 12px 0;
 
+				@include breakpoint(640) {
+					display: none;
+				}
+
 				li {
 					margin: 0 10px;
 
@@ -444,7 +473,7 @@ header {
 						display: block;
 						padding: 10px 5px;
 						color: #FFFFFF;
-						font-family: $font-baloo;
+						font-family: $font-inter;
 						font-style: normal;
 						font-weight: 400;
 						font-size: 22px;
@@ -508,7 +537,7 @@ header {
 						}
 
 						&.account {
-							font-family: $font-secondary;
+							font-family: $font-inter;
 							font-size: 22px;
 							line-height: 26px;
 							font-weight: 700;
@@ -547,7 +576,7 @@ header {
 							a,
 							button {
 								position: relative;
-								padding: 5px 30px 5px 70px;
+								padding: 5px 15px 5px 60px;
 								color: $color-grey;
 								background: url(/pictures/image-icons/icon-profile.svg) 15px 50% no-repeat #282930;
 								border-radius: 20px;
@@ -572,7 +601,7 @@ header {
 								span {
 									display: inline-block;
 									margin-right: 10px;
-									font-family: $font-baloo;
+									font-family: $font-inter;
 									font-size: 22px;
 									font-weight: 400;
 									font-style: normal;
@@ -582,8 +611,8 @@ header {
 								}
 
 								span.username {
-									font-family: $font-baloo;
-									font-size: 20px;
+									font-family: $font-inter;
+									font-size: 18px;
 									font-weight: 400;
 									font-style: normal;
 									color: #A1AFC3;
@@ -603,9 +632,8 @@ header {
 
 								span.balance {
 									text-align: left;
-									//min-width: 115px;
-									font-family: $font-baloo;
-									font-size: 20px;
+									font-family: $font-inter;
+									font-size: 18px;
 									font-weight: 400;
 									font-style: normal;
 									color: #A1AFC3;

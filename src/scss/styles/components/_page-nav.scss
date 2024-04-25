@@ -3,32 +3,51 @@
 ------------------------------------------------------------------------------------- */
 .page-nav {
 	@include flexbox();
+
+	@include breakpoint(1024) {
+		flex-wrap: wrap;
+	}
+
 	.col {
 		margin-right: 150px;
+
+		@include breakpoint(1024) {
+			margin-right: 100px;
+		}
+
 		h5 {
 			margin-bottom: 16px;
-			font-family: $font-primary; font-size: 22px; line-height: 26px; color: $color-primary; font-weight: 700; text-transform: uppercase;
+			font-family: $font-inter;
+			font-size: 22px;
+			line-height: 26px;
+			color: $color-primary;
+			font-weight: 700;
+			text-transform: uppercase;
 		}
+
 		ul {
 			li {
 				margin-bottom: 8px;
-				font-family: $font-primary; 
+				font-family: $font-inter;
 				font-style: normal;
 				font-weight: 400;
-				font-size: 16px; 
-				line-height: 19px; 
+				font-size: 16px;
+				line-height: 19px;
 				letter-spacing: 0.04em;
 				text-indent: 1px;
 				white-space: nowrap;
+
 				a {
 					color: #A3ABB6;
 					@include transition(color 300ms ease-in-out);
+
 					&:hover {
 						color: $color-white;
 					}
 				}
 			}
 		}
+
 		a {
 			img {
 				height: 65px;
@@ -37,26 +56,41 @@
 	}
 
 	@include flexbox();
+
 	.col-narrow {
-		margin-right: 0px;		
+		margin-right: 0px;
 		margin-bottom: 40px;
+
 		h5 {
 			margin-bottom: 16px;
-			font-family: $font-primary; font-size: 22px; line-height: 26px; color: $color-primary; font-weight: 700; text-transform: uppercase;
+			font-family: $font-inter;
+			font-size: 22px;
+			line-height: 26px;
+			color: $color-primary;
+			font-weight: 700;
+			text-transform: uppercase;
 		}
+
 		ul {
 			li {
 				margin-bottom: 8px;
-				font-family: $font-primary; font-size: 20px; line-height: 24px; font-weight: 400; white-space: nowrap;
+				font-family: $font-inter;
+				font-size: 20px;
+				line-height: 24px;
+				font-weight: 400;
+				white-space: nowrap;
+
 				a {
 					color: $color-grey;
 					@include transition(color 300ms ease-in-out);
+
 					&:hover {
 						color: $color-white;
 					}
 				}
 			}
 		}
+
 		a {
 			img {
 				height: 65px;

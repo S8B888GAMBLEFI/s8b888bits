@@ -22,7 +22,6 @@ class StakingPage extends React.Component {
                     config.ENVIRONMENT_SITE === "LIVE" &&
                     <>
                         <br />
-                        Staking
                         <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                         <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                         <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

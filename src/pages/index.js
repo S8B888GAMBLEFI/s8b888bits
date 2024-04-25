@@ -19,13 +19,11 @@ class IndexPage extends React.Component {
 
         <div className="portals">
 
-          <div className="center">
+          <div className="full-width">
             <FundsRaisingRounds />
 
-          </div>
-          <div className="full-width">
-
             <InvestorsSafety />
+
           </div>
 
         </div>

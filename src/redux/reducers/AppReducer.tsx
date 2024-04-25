@@ -4,8 +4,7 @@ import { combineReducers } from 'redux';
 
 // IMPORT REDUCERS
 
-//import { CookieConsentReducer } from './cookieConsent/CookieConsentReducer';
-//import { AuthenticatedPlayerDialogStatusReducer } from './authenticatedPlayerDialog/AuthenticatedPlayerDialogReducer';
+import { SessionReducer } from './session/SessionReducer';
 import { LoggedInSubmenuDialogStatusReducer } from './loggedInSubmenuDialog/LoggedInSubmenuDialogReducer';
 import { MetamaskConfigurationReducer } from './metamaskConfiguration/MetamaskConfigurationReducer';
 import { SubmenuDialogStatusReducer } from './submenuDialog/SubmenuDialogReducer';
@@ -14,8 +13,7 @@ import { AccountInformationReducer } from './accountInformation/AccountInformati
 
 export const AppReducer = combineReducers({
 
-    //cookieConsent: CookieConsentReducer,
-    //authenticatedPlayerDialogStatus: AuthenticatedPlayerDialogStatusReducer,
+    session: SessionReducer,
     loggedInSubmenuDialogStatus: LoggedInSubmenuDialogStatusReducer,
     metamaskConfiguration: MetamaskConfigurationReducer,
     submenuDialogStatus: SubmenuDialogStatusReducer,

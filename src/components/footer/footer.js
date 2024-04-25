@@ -58,7 +58,7 @@ class Footer extends React.Component {
     return (
       <footer>
 
-        <div className="footer-wrapper">
+        <div className="footer-wrapper block">
 
           <div className="footer-cols">
 
@@ -66,9 +66,9 @@ class Footer extends React.Component {
               <div className="page-nav">
                 <div className="col-narrow">
 
-                  <p className="title">
-                    <FormattedMessage id="Contact Us" />
-                  </p>
+                  <Link to="/" className="logo" title={config.casinoName}>
+                    <img src="/pictures/logo/888logoPrimary.svg" alt={config.casinoName} loading="lazy" />
+                  </Link>
 
                   <ul className="social-menu">
                     <li>
@@ -100,9 +100,6 @@ class Footer extends React.Component {
                     </li>
                   </ul>
 
-                  <Link to="/" className="logo" title={config.casinoName}>
-                    <img src="/pictures/logo/888logoPrimary.svg" alt={config.casinoName} loading="lazy" />
-                  </Link>
                 </div>
               </div>
             </div>
@@ -212,16 +209,12 @@ class Footer extends React.Component {
 
           </div>
 
-        </div>
-
-        <div className="footer-wrapper">
+          <hr />
 
           <div className="footer-cols">
 
             <div className="col-40">
-              <p>
-                <img src="/pictures/logo/888logoPrimary1.svg" height="30" alt={config.casinoName} loading="lazy" />
-              </p>
+
             </div>
             <div className="col-40">
               <p className="company-name">
@@ -229,6 +222,33 @@ class Footer extends React.Component {
               </p>
             </div>
           </div>
+
+          <hr />
+
+        </div>
+
+        <div className="footer-wrapper">
+          <p className="description-1">
+            Website 888BITS.COM is operated by SmartBits B.V., registration number 157320, at Pareraweg 45, Willemstad, Curaçao, license no. 1668/JAZ.
+            <br />
+            Spilux Enterprises ltd is a subsidiary of SmartBits B.V., registered in Cyprus at address 5 Galinis, Office 101, 1048 Nicosia,
+            Cyprus with registration number is HE 431701.
+            <br />
+            Spilux Enterprises ltd act as payment agent of SmartBits B.V. and It is the player’s sole responsibility to
+            inquire about the existing laws and regulations of the given jurisdiction for online gambling.
+          </p>
+
+          <p className="description-2">
+            In order to register for this website, the user is required to accept the <a href={config.CASINO_BASE_URL + "about/terms-and-conditions/"}>General Terms and Conditions</a>.
+            <br />
+            In the event the General Terms and Conditions are updated,  existing users may choose to discontinue using the products and services before the said update shall become effective,
+            <br />
+            which is a minimum of two weeks after it has been announced.
+          </p>
+
+          <p className="small app-version">
+            App ver. {config.APP_VERSION}
+          </p>
         </div>
 
       </footer>

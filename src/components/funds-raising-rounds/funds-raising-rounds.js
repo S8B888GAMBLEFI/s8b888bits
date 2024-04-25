@@ -10,6 +10,8 @@ import {
 import * as config from "../../configuration/Config";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { setMetamaskConfigurationAction, deleteMetamaskConfigurationAction } from "../../redux/actions/metamaskConfiguration/MetamaskConfigurationActions";
+import { setAccountInformationAction, deleteAccountInformationAction } from "../../redux/actions/accountInformation/AccountInformationActions";
+import { loginPlayerAction, logoutPlayerAction } from "../../redux/actions/session/SessionActions";
 
 import WalletCryptoCurrencyIcon from "../currency-icon/wallet-crypto-currency-icon";
 
@@ -70,17 +72,25 @@ class FundsRaisingRounds extends React.Component {
     }
 
     static propTypes = {
+        session: PropTypes.any,
         metamaskConfiguration: PropTypes.any,
+        accountInformation: PropTypes.object,
+
+        loginPlayerAction: PropTypes.func,
+        logoutPlayerAction: PropTypes.func,
 
         setMetamaskConfigurationAction: PropTypes.func,
         deleteMetamaskConfigurationAction: PropTypes.func,
 
         setSubmenuDialogStatusAction: PropTypes.func,
         deleteSubmenuDialogStatusAction: PropTypes.func,
+
+        setAccountInformationAction: PropTypes.func,
+        deleteAccountInformationAction: PropTypes.func,
     }
 
     static defaultProps = {
-
+        session: null,
     }
 
     refSeedRoundUSDC = null;
@@ -320,7 +330,6 @@ class FundsRaisingRounds extends React.Component {
 
             let loginStatus = accounts.length > 0;
 
-
             let metamaskConfigurationJSON = JSON.stringify(
                 {
                     accounts: accounts,
@@ -339,7 +348,17 @@ class FundsRaisingRounds extends React.Component {
                 balance: balance,
                 chainId: chainId,
             }, () => {
+                this.props.loginPlayerAction({
+                    loginStatus: loginStatus,
+                    accounts: accounts,
+                    chainId: chainId,
+                });
                 this.props.setMetamaskConfigurationAction(metamaskConfigurationJSON);
+                this.props.setAccountInformationAction({
+                    ...this.props.accountInformation,
+                    accounts: accounts,
+                    balance: balance,
+                });
 
                 window.ethereum.on('accountsChanged', this.accountsChanged);
                 window.ethereum.on('chainChanged', this.chainChanged)
@@ -353,7 +372,6 @@ class FundsRaisingRounds extends React.Component {
             }
             return;
         }
-
     }
 
     chainChanged = async (accounts) => {
@@ -471,114 +489,137 @@ class FundsRaisingRounds extends React.Component {
     render = () => {
         return (
             <section className="funds-raising-rounds">
-                <div className="header-section">
-                    <h2 className="title">
-                        Funds Raising Rounds
-                    </h2>
-                </div>
-                <hr />
-                <p className="description">
-                    We, open an exclusive opportunity to purchase tokens at a discounted rate before they are available to the wider public (TGE).
-                    This early access allows participants to become involved in a new project at its nascent stage, ahead of the official coin/token launch
-                    where the general public can invest.
-                    <br />
-                    As exclusive means granting early access privileges.
-                    <br />
-                    Engaging in a pre-sale enables investors to acquire tokens at a preferential 'early-bird' price, prior to their public release.
-                </p>
-
-                <div className="connect-with-us">
-
-                    <h2 className="title">
-                        Connect with us
-                    </h2>
-
-                    <div className="list-channels">
-                        <a href="https://t.me/officialchat888bits" className="item">
-                            <img src="/pictures/connect-with-us/telegram.svg" alt="Telegram" loading="lazy" />
-                            <span>
-                                Telegram
-                            </span>
-                        </a>
-                        <a href="http://twitter.com/BITS888" className="item">
-                            <img src="/pictures/connect-with-us/twitter.svg" alt="Twitter" loading="lazy" />
-                            <span>
-                                Twitter
-                            </span>
-                        </a>
-                        <a href="https://docs.888bits.com" className="item">
-                            <img src="/pictures/connect-with-us/gitbook.svg" alt="Gitbook" loading="lazy" />
-                            <span>
-                                Gitbook
-                            </span>
-                        </a>
-                        <a href="https://s8b.888bits.com/static/pdf/s8b-pitchdeck.pdf" className="item">
-                            <img src="/pictures/connect-with-us/pitch-deck.svg" alt="Pitch Deck" loading="lazy" />
-                            <span>
-                                Pitch Deck
-                            </span>
-                        </a>
-                        <a href="https://s8b.888bits.com/static/pdf/s8b-whitepaper.pdf" className="item">
-                            <img src="/pictures/connect-with-us/whitepaper.svg" alt="WhitePaper" loading="lazy" />
-                            <span>
-                                Whitepaper
-                            </span>
-                        </a>
+                <div className="section">
+                    <div className="header-section">
+                        <h2 className="title">
+                            Funds Raising Rounds
+                        </h2>
                     </div>
-                </div>
+                    <hr />
+                    <p className="description">
+                        We, open an exclusive opportunity to purchase tokens at a discounted rate before they are available to the wider public (TGE).
+                        <br />
+                        This early access allows participants to become involved in a new project at its nascent stage, ahead of the official coin/token launch
+                        where the general public can invest.
+                        <br />
+                        As exclusive means granting early access privileges.
+                        <br />
+                        Engaging in a pre-sale enables investors to acquire tokens at a preferential 'early-bird' price, prior to their public release.
+                    </p>
 
-                <hr />
+                    <p className="restriction-description">
+                        Tokens purchased during the presale rounds are subject to a various cliff and vesting schedules.
+                        <br />
+                        Immediately following the Token Generation Event (TGE), 25.81% of total supply are released to their respective holders,
+                        <br />
+                        the remaining are gradually distributed according to a predetermined cliff and vesting schedule depends on investment seed.
+                    </p>
 
-                <div className="realtime-statistic-section seed-presale-round">
-                    <div className="content">
-                        <div className="message-status">
-                            {this.state.seedPresaleRound.tokenPriceText}
-                        </div>
-                        <div className="current-status">
-                            {this.state.seedPresaleRound.currentStatus}
-                        </div>
+                    <p className="description-2">
+                        For public round presale, 50% will be released at TGE, with vesting of 1 months.
+                        <br />
+                        For strategic round presale, 23% will be released at TGE, with vesting of 3 months.
+                        <br />
+                        For seed round presale, 18% will be released at TGE, with vesting of 5 months.
+                    </p>
 
-                        <div className={"token-status " + this.state.seedPresaleRound.status}>
-                            {this.state.seedPresaleRound.statusText}
-                        </div>
+                    <hr />
 
-                        <div className="raised">
-                            {this.state.seedPresaleRound.raisedText}
+                    <div className="connect-with-us">
+
+                        <h2 className="title">
+                            Connect with us
+                        </h2>
+
+                        <hr />
+
+                        <div className="list-channels">
+                            <a href="https://t.me/officialchat888bits" className="item">
+                                <img src="/pictures/connect-with-us/telegram.svg" alt="Telegram" loading="lazy" />
+                                <span>
+                                    Telegram
+                                </span>
+                            </a>
+                            <a href="http://twitter.com/BITS888" className="item">
+                                <img src="/pictures/connect-with-us/twitter.svg" alt="Twitter" loading="lazy" />
+                                <span>
+                                    Twitter
+                                </span>
+                            </a>
+                            <a href="https://docs.888bits.com" className="item">
+                                <img src="/pictures/connect-with-us/gitbook.svg" alt="Gitbook" loading="lazy" />
+                                <span>
+                                    Gitbook
+                                </span>
+                            </a>
+                            <a href="https://s8b.888bits.com/static/pdf/s8b-pitchdeck.pdf" className="item">
+                                <img src="/pictures/connect-with-us/pitch-deck.svg" alt="Pitch Deck" loading="lazy" />
+                                <span>
+                                    Pitch Deck
+                                </span>
+                            </a>
+                            <a href="https://s8b.888bits.com/static/pdf/s8b-whitepaper.pdf" className="item">
+                                <img src="/pictures/connect-with-us/whitepaper.svg" alt="WhitePaper" loading="lazy" />
+                                <span>
+                                    Whitepaper
+                                </span>
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <div className="seed-section">
                     <h2 className="title">
-                        Seed round
+                        Seed round: <span className="status finished">Finished.</span>
                     </h2>
 
                     <div className="round-price">
                         Seed round price: 1 S8B = ${this.state.seedRoundS8BInUSD}
                     </div>
 
-                    <p className="description">
+                    <p className="description-2">
                         This initial phase is designed for early backers who believe in the potential of our project from the outset.
+                        <br />
                         Investments made during this round are at the most favorable terms, recognizing the early commitment and trust of our investors.
                     </p>
 
-                    <p className="description-2">
+                    <p className="description-3">
                         The seed presale round is allocated 7% of the total token supply, which amounts to 62,222,222.22 $S8B tokens.
+                        <br />
                         In this round, each wallet is limited to a maximum investment of $5,555.56, equivalent to 2,222,220.00 $S8B tokens,
                         representing 0.25% of the total token supply.
                     </p>
 
-                    <hr />
-
-                    <div className="message">
-                        To participate in initial seed round you need to fill the form below
+                    <div className="message large">
+                        Initial seed round is filled.
                     </div>
 
                     <a href="https://forms.gle/R2D5nQ2UEbbM3bHQ7">
                         $S8B - GambleFi Casino Experience - Seed presale round form
                     </a>
 
+                    <div className="message notice">
+                        Prior to the Token Generation Event (TGE), you will be allocated a number of $S8B tokens, accompanied by a 20% bonus in USDC, to be utilized within the casino.
+                    </div>
+
                     <hr />
+
+                    <div className="realtime-statistic-section seed-presale-round">
+                        <div className="content">
+                            <div className="message-status">
+                                {this.state.seedPresaleRound.tokenPriceText}
+                            </div>
+                            <div className="current-status">
+                                {this.state.seedPresaleRound.currentStatus}
+                            </div>
+
+                            <div className={"token-status " + this.state.seedPresaleRound.status} dangerouslySetInnerHTML={{ __html: this.state.seedPresaleRound.statusText }}>
+                            </div>
+
+                            <div className="raised" dangerouslySetInnerHTML={{ __html: this.state.seedPresaleRound.raisedText }}>
+                            </div>
+                        </div>
+                    </div>
 
                     {/*
                     <div className="message small">
@@ -693,34 +734,9 @@ class FundsRaisingRounds extends React.Component {
                     */}
                 </div>
 
-                <hr />
-
-                <div className="realtime-statistic-section strategic-presale-round">
-                    <div className="content">
-                        <div className="message-status">
-                            {this.state.strategicPresaleRound.tokenPriceText}
-                        </div>
-                        <div className="current-status">
-                            <span>
-                                {this.state.strategicPresaleRound.currentStatus}
-                            </span>
-                        </div>
-
-                        <div className={"token-status " + this.state.strategicPresaleRound.status}>
-                            <span>
-                                {this.state.strategicPresaleRound.statusText}
-                            </span>
-                        </div>
-
-                        <div className="raised">
-                            {this.state.strategicPresaleRound.raisedText}
-                        </div>
-                    </div>
-                </div>
-
                 <div className="seed-section">
                     <h2 className="title">
-                        Strategic round Roundup: Opening Soon!
+                        Strategic presale round: Active
                     </h2>
 
                     <div className="round-price">
@@ -729,19 +745,19 @@ class FundsRaisingRounds extends React.Component {
 
                     <p className="description">
                         In this phase, we welcome investors who bring not only capital but also strategic value to our project.
+                        <br />
                         This round is ideal for those who can offer expertise, partnerships, or resources that align with our long-term vision.
                     </p>
 
-                    <p className="description-2">
-                        The seed presale round is allocated 9% of the total token supply, which amounts to 79,999,999.92 $S8B tokens.
+                    <p className="description-3">
+                        The strategic presale round is allocated 9% of the total token supply, which amounts to 79,999,999.92 $S8B tokens.
+                        <br />
                         In this round, each wallet is limited to a maximum investment of $5,000.00, equivalent to 1,333,333.00 $S8B tokens,
                         representing 0.15% of the total token supply.
                     </p>
 
-                    <hr />
-
                     <div className="message small">
-                        Enter the amount you are investing in this round in the following currencies
+                        Please enter the amount you are investing in this round in the following currencies
                     </div>
 
                     <div className="check-currency-section">
@@ -811,18 +827,9 @@ class FundsRaisingRounds extends React.Component {
                             </div>
                         </div>
 
-                    </div>
-
-                    <hr />
-
-                    <div className="message small">
-                        The amount of $S8B tokens you'll obtain prior to the Token Generation Event (TGE).
-                    </div>
-
-                    <div className="receive-currency-section">
-                        <div className="enter-amount">
+                        <div className="receive-amount">
                             <div className="currency">
-                                <WalletCryptoCurrencyIcon currency="S8B" width={30} height={30} />
+                                <WalletCryptoCurrencyIcon currency="S8B-red" width={30} height={30} />
                                 <div className="name">
                                     S8B
                                 </div>
@@ -847,46 +854,40 @@ class FundsRaisingRounds extends React.Component {
                                     }}></input>
                             </div>
                         </div>
+
                     </div>
-                </div>
 
-                <hr />
+                    <div className="button-section">
+                        <button type="button" className="btn send-funds">SEND FUNDS</button>
+                    </div>
 
-                <div className="realtime-statistic-section public-presale-round">
-                    <div className="content">
-                        {
-                            (!this.state.isMobile && !this.state?.loginStatus && this.state.isMetaMaskSupported) &&
-                            <button type="button" className="btn connect-wallet" onClick={(event) => {
-                                this.loginMetaMask();
-                            }}>
-                                Connect Wallet
-                            </button>
-                        }
-                        <div className="message-status">
-                            {this.state.publicPresaleRound.tokenPriceText}
-                        </div>
-                        <div className="current-status">
-                            <span>
-                                {this.state.publicPresaleRound.currentStatus}
-                            </span>
+                    <div className="message notice">
+                        Prior to the Token Generation Event (TGE), you will be allocated a number of $S8B tokens, accompanied by a 20% bonus in USDC, to be utilized within the casino.
+                    </div>
 
-                        </div>
+                    <div className="realtime-statistic-section strategic-presale-round">
+                        <div className="content">
+                            <div className="message-status">
+                                {this.state.strategicPresaleRound.tokenPriceText}
+                            </div>
+                            <div className="current-status">
+                                <span>
+                                    {this.state.strategicPresaleRound.currentStatus}
+                                </span>
+                            </div>
 
-                        <div className={"token-status " + this.state.publicPresaleRound.status}>
-                            <span>
-                                {this.state.publicPresaleRound.statusText}
-                            </span>
-                        </div>
+                            <div className={"token-status " + this.state.strategicPresaleRound.status} dangerouslySetInnerHTML={{ __html: this.state.strategicPresaleRound.statusText }}>
+                            </div>
 
-                        <div className="raised">
-                            {this.state.publicPresaleRound.raisedText}
+                            <div className="raised" dangerouslySetInnerHTML={{ __html: this.state.strategicPresaleRound.raisedText }}>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div className="seed-section">
                     <h2 className="title">
-                        Public round Roundup: Opening Soon!
+                        Public round round: <span className="status not-active">Not Active.</span>
                     </h2>
 
                     <div className="round-price">
@@ -894,18 +895,21 @@ class FundsRaisingRounds extends React.Component {
                     </div>
 
                     <p className="description">
-                        This is the final stage before our public launch, open to a broader audience. It's a chance for the general public to invest and be a part of our exciting journey.
+                        This is the final stage before our public launch, open to a broader audience.
+                        <br /><br />
+                        It's a chance for the general public to invest and be a part of our exciting journey.
                     </p>
 
-                    <p className="description-2">
+                    <p className="description-3">
                         The seed presale round is allocated 10% of the total token supply, which amounts to 88,888,88.88 $S8B tokens.
+                        <br />
                         In this round, each wallet is limited to a maximum investment of $4,444.00, equivalent to 8.888,888.88 $S8B tokens, representing 0.10% of the total token supply.
                     </p>
 
                     <hr />
 
                     <div className="message small">
-                        Enter the amount you are investing in this round in the following currencies
+                        Please enter the amount you are investing in this round in the following currencies
                     </div>
 
                     <div className="check-currency-section">
@@ -974,18 +978,9 @@ class FundsRaisingRounds extends React.Component {
                             </div>
                         </div>
 
-                    </div>
-
-                    <hr />
-
-                    <div className="message small">
-                        The amount of $S8B tokens you'll obtain prior to the Token Generation Event (TGE).
-                    </div>
-
-                    <div className="receive-currency-section">
-                        <div className="enter-amount">
+                        <div className="receive-amount">
                             <div className="currency">
-                                <WalletCryptoCurrencyIcon currency="S8B" width={30} height={30} />
+                                <WalletCryptoCurrencyIcon currency="S8B-red" width={30} height={30} />
                                 <div className="name">
                                     S8B
                                 </div>
@@ -1010,28 +1005,41 @@ class FundsRaisingRounds extends React.Component {
                                     }}></input>
                             </div>
                         </div>
+
+                    </div>
+
+                    <div className="button-section">
+                        <button type="button" className="btn send-funds">SEND FUNDS</button>
+                    </div>
+
+                    <div className="realtime-statistic-section public-presale-round">
+                        <div className="content">
+                            {
+                                (!this.state.isMobile && !this.state?.loginStatus && this.state.isMetaMaskSupported) &&
+                                <button type="button" className="btn connect-wallet" onClick={(event) => {
+                                    this.loginMetaMask();
+                                }}>
+                                    Connect Wallet
+                                </button>
+                            }
+                            <div className="message-status">
+                                {this.state.publicPresaleRound.tokenPriceText}
+                            </div>
+                            <div className="current-status">
+                                <span>
+                                    {this.state.publicPresaleRound.currentStatus}
+                                </span>
+
+                            </div>
+
+                            <div className={"token-status " + this.state.publicPresaleRound.status} dangerouslySetInnerHTML={{ __html: this.state.publicPresaleRound.statusText }}>
+                            </div>
+
+                            <div className="raised" dangerouslySetInnerHTML={{ __html: this.state.publicPresaleRound.raisedText }}>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <hr />
-
-                <div className="footer-description">
-                    Each phase of investment has its unique terms and benefits, tailored to suit the diverse needs and contributions of our investors.
-                    On this page, you can track the current investment totals, remaining tokens available for each round, and the progress towards our next milestones.
-                    <br />
-                    By investing in our pre-sale, you are not just buying tokens; you are becoming a pivotal part of a community that shapes the future of our project.
-                    Join us in this exciting venture and be a part of our growth story.
-                </div>
-
-                <div className="footer-description-1">
-                    Tokens purchased during the presale rounds are subject to a various cliff and vesting schedules.
-                    <br />
-                    Immediately following the Token Generation Event (TGE), 25.81% of total supply are released to their respective holders, the remaining are gradually distributed according to a predetermined cliff and vesting schedule depends on investment seed.
-                    <br />
-                    For public round presale, 50% will be released at TGE, with vesting of 1 months.
-                </div>
-
-                <hr />
 
             </section>
         );
@@ -1040,17 +1048,27 @@ class FundsRaisingRounds extends React.Component {
 
 const mapStateToProps = state => {
 
+    const { session } = state.session;
     const { metamaskConfiguration } = state.metamaskConfiguration;
+    const { accountInformation } = state.accountInformation;
 
     return {
+        session,
         metamaskConfiguration,
+        accountInformation,
     };
 }
 
 const mapDispatchToProps = dispatch => (
     bindActionCreators({
+        loginPlayerAction,
+        logoutPlayerAction,
+
         setMetamaskConfigurationAction,
         deleteMetamaskConfigurationAction,
+
+        setAccountInformationAction,
+        deleteAccountInformationAction,
     }, dispatch)
 );
 

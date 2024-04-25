@@ -14,7 +14,6 @@ class WhitepaperPage extends React.Component {
                 </>
 
                 <br />
-                Whitepaper
                 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
                 <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
