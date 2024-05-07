@@ -42,7 +42,9 @@ class SignupEmailForUpdates extends React.Component {
         <div>
           <form>
             <div className="input-container">
+              {/*
               <img alt="Email" src="/pictures/image-icons/icon-email.svg" loading="lazy" />
+              */}
               <input type="email" placeholder="Enter email" />
               <button type="button" className="btn signup-email">Sign Up</button>
 

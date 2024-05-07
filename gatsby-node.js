@@ -19,8 +19,9 @@ here's what we want to do:
 // note: optimally you would grab slugs from the fs or via graphql
 const slugs = [
   // about
-  "claim-revenue-share",
-  "wheel-of-fortune"
+  "staking",
+  "revenue-dividend-share",
+  "wheel-of-dragon"
 ];
 
 exports.onCreatePage = async ({

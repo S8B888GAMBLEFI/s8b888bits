@@ -4,6 +4,7 @@ import { Link, changeLocale, injectIntl, FormattedMessage } from "gatsby-plugin-
 import * as config from "../../configuration/Config";
 import Clock from "./parts/clock";
 import moment from "moment";
+import WalletCryptoCurrencyIcon from "../currency-icon/wallet-crypto-currency-icon";
 
 class Footer extends React.Component {
 
@@ -99,6 +100,15 @@ class Footer extends React.Component {
                       </a>
                     </li>
                   </ul>
+
+                  <div className="casino-gamblefied-experience">
+                    <div>
+                      <WalletCryptoCurrencyIcon currency="S8B" />
+                    </div>
+                    <div>
+                      S8B Gamblefied Casino Experience
+                    </div>
+                  </div>
 
                 </div>
               </div>
@@ -228,6 +238,16 @@ class Footer extends React.Component {
         </div>
 
         <div className="footer-wrapper">
+
+          {/*
+            config.ENVIRONMENT_SITE === "LIVE" &&
+            <p className="casino-license">
+              <a href="https://verification.curacao-egaming.com/validateview.aspx?domain=888bits.com" target="_blank">
+                <img src="https://verification.curacao-egaming.com/validate.ashx?domain=888bits.com" alt="" width="100" />
+              </a>
+              <br />
+            </p>
+          */}
           <p className="description-1">
             Website 888BITS.COM is operated by SmartBits B.V., registration number 157320, at Pareraweg 45, Willemstad, Curaçao, license no. 1668/JAZ.
             <br />

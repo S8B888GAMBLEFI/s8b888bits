@@ -134,7 +134,7 @@ class StrategicRoundBuyTokens extends React.Component {
         }, () => {
             if (this.state?.accounts && this.state?.balance && this.state?.loginStatus) {
                 window.ethereum.on('accountsChanged', this.accountsChanged);
-                window.ethereum.on('chainChanged', this.chainChanged)
+                //window.ethereum.on('chainChanged', this.chainChanged)
             }
         });
     }
@@ -147,9 +147,6 @@ class StrategicRoundBuyTokens extends React.Component {
             }
 
             this.setState({
-                //provider: provider,
-                //isMetaMaskSupported: isMetaMaskSupported,
-
                 accounts: metamaskConfiguration?.accounts || null,
                 balance: metamaskConfiguration?.balance || null,
                 loginStatus: metamaskConfiguration?.loginStatus || null,
@@ -158,7 +155,7 @@ class StrategicRoundBuyTokens extends React.Component {
             }, () => {
                 if (this.state?.accounts && this.state?.balance && this.state?.loginStatus) {
                     window.ethereum.on('accountsChanged', this.accountsChanged);
-                    window.ethereum.on('chainChanged', this.chainChanged)
+                    //window.ethereum.on('chainChanged', this.chainChanged)
                 }
             });
         }
@@ -177,58 +174,18 @@ class StrategicRoundBuyTokens extends React.Component {
         }
         //console.log(chainId);
         try {
-            if (config.ENVIRONMENT_SITE === "LIVE") {
-                if (chainId !== config.CHAINS.MAINNET.hex) { //if not main eth network
-                    try {
-                        await window.ethereum.request({
-                            method: "wallet_switchEthereumChain",
-                            params: [
-                                {
-                                    chainId: config.CHAINS.MAINNET.hex.toString()
-                                }
-                            ]
-                        });
-                    } catch (error) {
-                        return;
-                    }
-                }
-            }
-
-            if (config.ENVIRONMENT_SITE === "LOCAL") {
-                if (chainId !== config.CHAINS.SEPOLIA.hex) { //sepolia
-                    try {
-
-                        await window.ethereum.request({
-                            method: "wallet_switchEthereumChain",
-                            params: [
-                                {
-                                    chainId: config.CHAINS.SEPOLIA.hex.toString()
-                                }
-                            ]
-                        });
-
-                    } catch (error) {
-                        return;
-                    }
-                }
-            }
-
-            if (config.ENVIRONMENT_SITE === "DEV") {
-                if (chainId !== config.CHAINS.SEPOLIA.hex) { //sepolia
-                    try {
-
-                        await window.ethereum.request({
-                            method: "wallet_switchEthereumChain",
-                            params: [
-                                {
-                                    chainId: config.CHAINS.SEPOLIA.hex.toString()
-                                }
-                            ]
-                        });
-
-                    } catch (error) {
-                        return;
-                    }
+            if (chainId !== config.CHAINS[config.DEFAULT_CHAIN].hex) { //if not default eth network for configuration
+                try {
+                    await window.ethereum.request({
+                        method: "wallet_switchEthereumChain",
+                        params: [
+                            {
+                                chainId: config.CHAINS[config.DEFAULT_CHAIN].hex.toString()
+                            }
+                        ]
+                    });
+                } catch (error) {
+                    return;
                 }
             }
 
@@ -413,17 +370,19 @@ class StrategicRoundBuyTokens extends React.Component {
                                 let playerAddress = this.state.accounts[0];
 
 
-
-                                console.log("player address=" + playerAddress);
+                                if (config.DEBUG_CONSOLE) {
+                                    console.log("player address=" + playerAddress);
+                                }
 
                                 //console.log(JSON.parse(this.s8b_token_contract_abi));
 
                                 let s8bTokenContract = new this.state.web3Instance.eth.Contract(this.s8b_token_contract_abi, this.s8b_token_contract_address, { from: playerAddress, gas: 10_000_000 });
 
-                                console.log(await window.ethereum.request({
-                                    method: 'eth_requestAccounts',
-                                }));
-
+                                if (config.DEBUG_CONSOLE) {
+                                    console.log(await window.ethereum.request({
+                                        method: 'eth_requestAccounts',
+                                    }));
+                                }
 
                                 let owner = await s8bTokenContract.methods.owner()
                                     .call({
@@ -431,7 +390,9 @@ class StrategicRoundBuyTokens extends React.Component {
                                         gas: 1_000_000
                                     });
 
-                                console.log("OWNER = " + owner);
+                                if (config.DEBUG_CONSOLE) {
+                                    console.log("OWNER = " + owner);
+                                }
 
                                 let devWallet = await s8bTokenContract.methods.devWallet()
                                     .call({
@@ -439,7 +400,9 @@ class StrategicRoundBuyTokens extends React.Component {
                                         gas: 1_000_000
                                     });
 
-                                console.log("devWallet = " + devWallet);
+                                if (config.DEBUG_CONSOLE) {
+                                    console.log("devWallet = " + devWallet);
+                                }
 
                                 let decimals = await s8bTokenContract.methods.decimals()
                                     .call({
@@ -447,7 +410,9 @@ class StrategicRoundBuyTokens extends React.Component {
                                         gas: 1_000_000
                                     });
 
-                                console.log("decimals=" + decimals);
+                                if (config.DEBUG_CONSOLE) {
+                                    console.log("decimals=" + decimals);
+                                }
 
 
                                 await s8bTokenContract.methods.approve(this.s8b_token_contract_address, ethers.parseUnits(tokenAmount, decimals))
@@ -456,7 +421,10 @@ class StrategicRoundBuyTokens extends React.Component {
                                         gas: 1_000_000
                                     })
                                     .then(async (response) => {
-                                        console.log(response);
+
+                                        if (config.DEBUG_CONSOLE) {
+                                            console.log(response);
+                                        }
 
                                         await s8bTokenContract.methods.transferFrom(owner, playerAddress, ethers.parseUnits(tokenAmount, decimals))
                                             .send({
@@ -464,7 +432,9 @@ class StrategicRoundBuyTokens extends React.Component {
                                                 gas: 1_000_000
                                             })
                                             .then((response) => {
-                                                console.log(response);
+                                                if (config.DEBUG_CONSOLE) {
+                                                    console.log(response);
+                                                }
                                             })
                                             .catch((error) => {
                                                 console.error(error);
@@ -498,7 +468,7 @@ class StrategicRoundBuyTokens extends React.Component {
                                     })
                                     .then(async (response) => {
                                         console.log(response);
-
+ 
                                         await s8bTokenContract.methods.transferFrom(this.s8b_token_contract_address, playerAddress, ethers.parseEther(tokenAmount))
                                             .send({
                                                 from: this.s8b_token_contract_address,

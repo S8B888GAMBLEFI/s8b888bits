@@ -10,8 +10,10 @@ class InvestorsSafety extends React.Component {
                     </h2>
                 </div>
 
+                <hr />
+
                 <p className="mini-title">
-                    Investor safety.
+                    Investor safety
                 </p>
 
                 <p className="description">
@@ -19,30 +21,14 @@ class InvestorsSafety extends React.Component {
                 </p>
 
                 <p className="mini-title">
-                    Peace of mind.
+                    Peace of mind
                 </p>
 
                 <p className="description">
                     Investors can rest assured that your contract has been reviewed and audited by the best engineers in the business — SourceHat former Solidity Finance.
                 </p>
 
-                <hr />
-
                 <div className="content">
-                    <a href="https://www.proofplatform.io" className="item">
-                        <img src="/pictures/background/investors-safety-1.png" alt="Proof Platform" width="260" height="208" loading="lazy" />
-
-                        <div className="title-level-1">
-                            Proof platform
-                        </div>
-                        <div className="title-level-2">
-                            Battle tested bullet proof launch
-                        </div>
-                        <div className="description">
-                            Proof platform crafted a full suite of tried and tested tools for launching your token, custom designed to maximize your chance of success.
-                            PROOF has you covered all.
-                        </div>
-                    </a>
 
                     <a href="https://www.sourcehat.com" className="item">
                         <img src="/pictures/background/investors-safety-2.png" alt="Audited" width="260" height="208" loading="lazy" />
@@ -87,6 +73,22 @@ class InvestorsSafety extends React.Component {
                             888BITS.COM is licensed and regulated by CyberLuck Curaçao N.V., Pareraweg 45, Willemstad, Curaçao, license no. 8048/JAZ1668-022.
                         </div>
                     </a>
+
+                    <a href="https://www.proofplatform.io" className="item">
+                        <img src="/pictures/background/investors-safety-1.png" alt="Proof Platform" width="260" height="208" loading="lazy" />
+
+                        <div className="title-level-1">
+                            Proof platform
+                        </div>
+                        <div className="title-level-2">
+                            Battle tested bullet proof launch
+                        </div>
+                        <div className="description">
+                            Proof platform crafted a full suite of tried and tested tools for launching your token, custom designed to maximize your chance of success.
+                            PROOF has you covered all.
+                        </div>
+                    </a>
+
                 </div>
 
             </section >

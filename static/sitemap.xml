@@ -10,18 +10,18 @@
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
-	<url>
+    <url>
         <loc>https://s8b.888bits.com/staking/</loc>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://s8b.888bits.com/claim-revenue-share/</loc>
+        <loc>https://s8b.888bits.com/revenue-dividend-share/</loc>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
-        <loc>https://s8b.888bits.com/wheel-of-fortune/</loc>
+        <loc>https://s8b.888bits.com/wheel-of-dragon/</loc>
         <changefreq>daily</changefreq>
         <priority>0.7</priority>
     </url>

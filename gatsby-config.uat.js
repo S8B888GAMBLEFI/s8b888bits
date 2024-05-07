@@ -147,7 +147,8 @@ module.exports = {
       options: {
         precachePages: [
           `/*`,
-          `/claim-revenue-share/*`, `/wheel-of-fortune/*`
+          '/staking/*',
+          `/revenue-dividend-share/*`, `/wheel-of-dragon/*`
         ],
       },
     }

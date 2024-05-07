@@ -33,8 +33,8 @@ class Header extends React.Component {
     selectedMenu: {
       selectedLaunchpad: false,
       selectedStaking: false,
-      selectedClaimRevenueShare: false,
-      selectedWheelOfFortune: false,
+      selectedRevenueDividendShare: false,
+      selectedWheelOfDragon: false,
     }
   }
 
@@ -63,13 +63,6 @@ class Header extends React.Component {
 
   constructor(props, context) {
     super(props, context);
-    /*
-    const provider = detectEthereumProvider({ silent: true })
-    let isMetaMaskSupported = false;
-    if (provider) {
-      isMetaMaskSupported = (typeof window && typeof window.ethereum !== 'undefined') && window?.ethereum?.isMetaMask;
-    }
-    */
 
     let metamaskConfiguration = null;
     if (this.props?.metamaskConfiguration) {
@@ -78,9 +71,6 @@ class Header extends React.Component {
 
     this.state = {
       isMobile: isMobile,
-
-      //provider: provider,
-      //isMetaMaskSupported: isMetaMaskSupported,
 
       accounts: metamaskConfiguration?.accounts || null,
       balance: metamaskConfiguration?.balance || null,
@@ -92,8 +82,8 @@ class Header extends React.Component {
       selectedMenu: {
         selectedLaunchpad: false,
         selectedStaking: false,
-        selectedClaimRevenueShare: false,
-        selectedWheelOfFortune: false,
+        selectedRevenueDividendShare: false,
+        selectedWheelOfDragon: false,
       }
     };
   }
@@ -131,8 +121,8 @@ class Header extends React.Component {
       selectedMenu: {
         selectedLaunchpad: typeof window !== 'undefined' && (window.location.pathname === "/") ? true : false,
         selectedStaking: typeof window !== 'undefined' && (window.location.pathname.includes("whitepaper")) ? true : false,
-        selectedClaimRevenueShare: typeof window !== 'undefined' && (window.location.pathname.includes("claim-rewards")) ? true : false,
-        selectedWheelOfFortune: typeof window !== 'undefined' && (window.location.pathname.includes("wheel-of-fortune")) ? true : false,
+        selectedRevenueDividendShare: typeof window !== 'undefined' && (window.location.pathname.includes("claim-rewards")) ? true : false,
+        selectedWheelOfDragon: typeof window !== 'undefined' && (window.location.pathname.includes("wheel-of-fortune")) ? true : false,
       }
 
     }, () => {
@@ -163,9 +153,6 @@ class Header extends React.Component {
 
       this.setState({
         isMobile: isMobile,
-
-        //provider: provider,
-        //isMetaMaskSupported: isMetaMaskSupported,
 
         accounts: metamaskConfiguration?.accounts || null,
         balance: metamaskConfiguration?.balance || null,
@@ -198,60 +185,24 @@ class Header extends React.Component {
     } catch (error) {
 
     }
-    //console.log(chain_id);
+
+    //console.log(chainId);
+    //console.log(config.CHAINS[config.DEFAULT_CHAIN].hex);
+
     try {
-      if (config.ENVIRONMENT_SITE === "LIVE") {
-        if (chainId !== config.CHAINS.MAINNET.hex) { //if not main eth network
-          try {
-            await window.ethereum.request({
-              method: "wallet_switchEthereumChain",
-              params: [
-                {
-                  chainId: config.CHAINS.MAINNET.hex.toString()
-                }
-              ]
-            });
-          } catch (error) {
-            return;
-          }
-        }
-      }
 
-      if (config.ENVIRONMENT_SITE === "LOCAL") {
-        if (chainId !== config.CHAINS.SEPOLIA.hex) { //sepolia
-          try {
-
-            await window.ethereum.request({
-              method: "wallet_switchEthereumChain",
-              params: [
-                {
-                  chainId: config.CHAINS.SEPOLIA.hex.toString()
-                }
-              ]
-            });
-
-          } catch (error) {
-            return;
-          }
-        }
-      }
-
-      if (config.ENVIRONMENT_SITE === "DEV") {
-        if (chainId !== config.CHAINS.SEPOLIA.hex) { //sepolia
-          try {
-
-            await window.ethereum.request({
-              method: "wallet_switchEthereumChain",
-              params: [
-                {
-                  chainId: config.CHAINS.SEPOLIA.hex.toString()
-                }
-              ]
-            });
-
-          } catch (error) {
-            return;
-          }
+      if (chainId !== config.CHAINS[config.DEFAULT_CHAIN].hex) { //if not default eth network for configuration
+        try {
+          await window.ethereum.request({
+            method: "wallet_switchEthereumChain",
+            params: [
+              {
+                chainId: config.CHAINS[config.DEFAULT_CHAIN].hex.toString()
+              }
+            ]
+          });
+        } catch (error) {
+          return;
         }
       }
 
@@ -314,61 +265,20 @@ class Header extends React.Component {
         params: []
       })
 
-      if (config.ENVIRONMENT_SITE === "LIVE") {
-        if (chainId !== config.CHAINS.MAINNET.hex) { //if not main eth network
-          try {
-            await window.ethereum.request({
-              method: "wallet_switchEthereumChain",
-              params: [
-                {
-                  chainId: config.CHAINS.MAINNET.hex.toString()
-                }
-              ]
-            });
-          } catch (error) {
-            return;
-          }
+      if (chainId !== config.CHAINS[config.DEFAULT_CHAIN].hex) { //if not default eth network for configuration
+        try {
+          await window.ethereum.request({
+            method: "wallet_switchEthereumChain",
+            params: [
+              {
+                chainId: config.CHAINS[config.DEFAULT_CHAIN].hex.toString()
+              }
+            ]
+          });
+        } catch (error) {
+          return;
         }
       }
-
-      if (config.ENVIRONMENT_SITE === "LOCAL") {
-        if (chainId !== config.CHAINS.SEPOLIA.hex) { //sepolia
-          try {
-
-            await window.ethereum.request({
-              method: "wallet_switchEthereumChain",
-              params: [
-                {
-                  chainId: config.CHAINS.SEPOLIA.hex.toString()
-                }
-              ]
-            });
-
-          } catch (error) {
-            return;
-          }
-        }
-      }
-
-      if (config.ENVIRONMENT_SITE === "DEV") {
-        if (chainId !== config.CHAINS.SEPOLIA.hex) { //sepolia
-          try {
-
-            await window.ethereum.request({
-              method: "wallet_switchEthereumChain",
-              params: [
-                {
-                  chainId: config.CHAINS.SEPOLIA.hex.toString()
-                }
-              ]
-            });
-
-          } catch (error) {
-            return;
-          }
-        }
-      }
-
     } catch (error) {
       return;
     }
@@ -447,15 +357,11 @@ class Header extends React.Component {
   disconnectMetaMask = () => {
     //console.log("call disconnect metamask");
     this.setState({
-      //web3Instance: null,
-      //accounts: null,
-      //balance: null,
       loginStatus: false
     }, () => {
       this.props.logoutPlayerAction();
       this.props.deleteMetamaskConfigurationAction();
       this.props.deleteAccountInformationAction();
-      //window.ethereum?.removeListener('accountsChanged', this.refreshAccounts);
     })
   }
 
@@ -470,7 +376,6 @@ class Header extends React.Component {
 
   formatBalance = (rawBalance) => {
     if (!this.state?.web3Instance) return;
-    //const balance = (parseInt(rawBalance) / 1000000000000000000).toFixed(config.getMinimumFractionDigits("ETH"))
     if (rawBalance === "0x0") return "0.00";
     const balance = this.state.web3Instance.utils.fromWei(rawBalance, 'ether');
     return balance;
@@ -524,8 +429,8 @@ class Header extends React.Component {
                         selectedMenu: {
                           selectedLaunchpad: true,
                           selectedStaking: false,
-                          selectedClaimRevenueShare: false,
-                          selectedWheelOfFortune: false,
+                          selectedRevenueDividendShare: false,
+                          selectedWheelOfDragon: false,
                         }
                       })
                     }}>
@@ -541,8 +446,8 @@ class Header extends React.Component {
                         selectedMenu: {
                           selectedLaunchpad: false,
                           selectedStaking: true,
-                          selectedClaimRevenueShare: false,
-                          selectedWheelOfFortune: false,
+                          selectedRevenueDividendShare: false,
+                          selectedWheelOfDragon: false,
                         }
                       })
                     }}
@@ -551,41 +456,39 @@ class Header extends React.Component {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/claim-revenue-share/" title="Claim Revenue Share"
-                    className={this.state?.selectedMenu?.selectedClaimRevenueShare ? "active" : null}
+                  <Link to="/revenue-dividend-share/" title="Revenue Dividend Share"
+                    className={this.state?.selectedMenu?.selectedRevenueDividendShare ? "active" : null}
                     onClick={(event) => {
                       this.props.deleteSubmenuDialogStatusAction();
                       this.setState({
                         selectedMenu: {
                           selectedLaunchpad: false,
                           selectedStaking: false,
-                          selectedClaimRevenueShare: true,
-                          selectedWheelOfFortune: false,
+                          selectedRevenueDividendShare: true,
+                          selectedWheelOfDragon: false,
                         }
                       })
                     }}>
-                    <FormattedMessage id="Claim Revenue Share" />
+                    <FormattedMessage id="Revenue Dividend Share" />
                   </Link>
                 </li>
                 <li>
-                  <Link to="/wheel-of-fortune/" title="Wheel of Fortune"
-                    className={this.state?.selectedMenu?.selectedWheelOfFortune ? "active" : null}
+                  <Link to="/wheel-of-dragon/" title="Wheel of Dragon"
+                    className={this.state?.selectedMenu?.selectedWheelOfDragon ? "active" : null}
                     onClick={(event) => {
                       this.props.deleteSubmenuDialogStatusAction();
                       this.setState({
                         selectedMenu: {
                           selectedLaunchpad: false,
                           selectedStaking: false,
-                          selectedClaimRevenueShare: false,
-                          selectedWheelOfFortune: true,
+                          selectedRevenueDividendShare: false,
+                          selectedWheelOfDragon: true,
                         }
                       })
                     }}>
-                    <FormattedMessage id="Wheel of Fortune" />
+                    <FormattedMessage id="Wheel of Dragon" />
                   </Link>
                 </li>
-
-
                 <li>
                   <a href={config.CASINO_BASE_URL} title="Back to casino" className="back">
                     <FormattedMessage id="Back to casino" />
@@ -594,20 +497,18 @@ class Header extends React.Component {
               </ul>
             </nav>
           </div>
-
           <div className="header-right">
             {
               <ul className={!this.props?.session?.loginStatus ? "sec-nav" : "sec-nav logged-in"}>
                 {
                   (!this.state.isMobile && !this.props?.session?.loginStatus && this.state.isMetaMaskSupported) &&
                   <li>
-                    <button type="button" aria-label="Connect Wallet" className="btn connect-wallet" onClick={
+                    <button type="button" aria-label="Connect Wallet" className="btn connect-wallet small" onClick={
                       (event) => {
                         event.preventDefault();
                         this.loginMetaMask();
                       }
                     }>
-                      <FormattedMessage id="Connect Wallet" />
                     </button>
                   </li>
                 }
@@ -627,7 +528,6 @@ class Header extends React.Component {
                     </span>
                   </li>
                 }
-
                 {
                   (this.props?.session?.loginStatus && this.state?.isMetaMaskSupported && this.state?.accounts?.[0]) &&
                   <li className="account">
@@ -651,7 +551,6 @@ class Header extends React.Component {
                     </button>
                   </li>
                 }
-
                 {
                   (this.props?.session?.loginStatus && this.state?.isMetaMaskSupported) &&
                   <li className="logout">
@@ -664,11 +563,28 @@ class Header extends React.Component {
                   </li>
                 }
 
+                {/*
+                  (!this.props?.session?.loginStatus && this.state?.isMetaMaskSupported) &&
+                  <li>
+                    <button type="button" className="btn login-trigger">
+                      Log In
+                    </button>
+                  </li>
+              */}
+                {/*
+                  (!this.props?.session?.loginStatus && this.state?.isMetaMaskSupported) &&
+                  <li>
+                    <button type="button" className="btn signup-trigger">
+                      Sign Up
+                    </button>
+                  </li>
+            */}
+
               </ul>
             }
           </div>
-        </div>
-      </header>
+        </div >
+      </header >
     );
   }
 }

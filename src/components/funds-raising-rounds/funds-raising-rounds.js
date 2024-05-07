@@ -12,9 +12,8 @@ import detectEthereumProvider from "@metamask/detect-provider";
 import { setMetamaskConfigurationAction, deleteMetamaskConfigurationAction } from "../../redux/actions/metamaskConfiguration/MetamaskConfigurationActions";
 import { setAccountInformationAction, deleteAccountInformationAction } from "../../redux/actions/accountInformation/AccountInformationActions";
 import { loginPlayerAction, logoutPlayerAction } from "../../redux/actions/session/SessionActions";
-
+import { ethers } from "ethers";
 import WalletCryptoCurrencyIcon from "../currency-icon/wallet-crypto-currency-icon";
-
 
 class FundsRaisingRounds extends React.Component {
 
@@ -208,7 +207,6 @@ class FundsRaisingRounds extends React.Component {
         }, () => {
             if (this.state?.accounts && this.state?.balance && this.state?.loginStatus) {
                 window.ethereum.on('accountsChanged', this.accountsChanged);
-                window.ethereum.on('chainChanged', this.chainChanged)
             }
         });
     }
@@ -232,7 +230,6 @@ class FundsRaisingRounds extends React.Component {
             }, () => {
                 if (this.state?.accounts && this.state?.balance && this.state?.loginStatus) {
                     window.ethereum.on('accountsChanged', this.accountsChanged);
-                    window.ethereum.on('chainChanged', this.chainChanged)
                 }
             });
         }
@@ -246,58 +243,18 @@ class FundsRaisingRounds extends React.Component {
                 params: []
             })
 
-            if (config.ENVIRONMENT_SITE === "LIVE") {
-                if (chainId !== config.CHAINS.MAINNET.hex) { //if not main eth network
-                    try {
-                        await window.ethereum.request({
-                            method: "wallet_switchEthereumChain",
-                            params: [
-                                {
-                                    chainId: config.CHAINS.MAINNET.hex.toString()
-                                }
-                            ]
-                        });
-                    } catch (error) {
-                        return;
-                    }
-                }
-            }
-
-            if (config.ENVIRONMENT_SITE === "LOCAL") {
-                if (chainId !== config.CHAINS.SEPOLIA.hex) { //sepolia
-                    try {
-
-                        await window.ethereum.request({
-                            method: "wallet_switchEthereumChain",
-                            params: [
-                                {
-                                    chainId: config.CHAINS.SEPOLIA.hex.toString()
-                                }
-                            ]
-                        });
-
-                    } catch (error) {
-                        return;
-                    }
-                }
-            }
-
-            if (config.ENVIRONMENT_SITE === "DEV") {
-                if (chainId !== config.CHAINS.SEPOLIA.hex) { //sepolia
-                    try {
-
-                        await window.ethereum.request({
-                            method: "wallet_switchEthereumChain",
-                            params: [
-                                {
-                                    chainId: config.CHAINS.SEPOLIA.hex.toString()
-                                }
-                            ]
-                        });
-
-                    } catch (error) {
-                        return;
-                    }
+            if (chainId !== config.CHAINS[config.DEFAULT_CHAIN].hex) { //if not default eth network for configuration
+                try {
+                    await window.ethereum.request({
+                        method: "wallet_switchEthereumChain",
+                        params: [
+                            {
+                                chainId: config.CHAINS[config.DEFAULT_CHAIN].hex.toString()
+                            }
+                        ]
+                    });
+                } catch (error) {
+                    return;
                 }
             }
         } catch (error) {
@@ -361,7 +318,6 @@ class FundsRaisingRounds extends React.Component {
                 });
 
                 window.ethereum.on('accountsChanged', this.accountsChanged);
-                window.ethereum.on('chainChanged', this.chainChanged)
             })
         } catch (error) {
 
@@ -387,58 +343,19 @@ class FundsRaisingRounds extends React.Component {
         }
         //console.log(chainId);
         try {
-            if (config.ENVIRONMENT_SITE === "LIVE") {
-                if (chainId !== config.CHAINS.MAINNET.hex) { //if not main eth network
-                    try {
-                        await window.ethereum.request({
-                            method: "wallet_switchEthereumChain",
-                            params: [
-                                {
-                                    chainId: config.CHAINS.MAINNET.hex.toString()
-                                }
-                            ]
-                        });
-                    } catch (error) {
-                        return;
-                    }
-                }
-            }
 
-            if (config.ENVIRONMENT_SITE === "LOCAL") {
-                if (chainId !== config.CHAINS.SEPOLIA.hex) { //sepolia
-                    try {
-
-                        await window.ethereum.request({
-                            method: "wallet_switchEthereumChain",
-                            params: [
-                                {
-                                    chainId: config.CHAINS.SEPOLIA.hex.toString()
-                                }
-                            ]
-                        });
-
-                    } catch (error) {
-                        return;
-                    }
-                }
-            }
-
-            if (config.ENVIRONMENT_SITE === "DEV") {
-                if (chainId !== config.CHAINS.SEPOLIA.hex) { //sepolia
-                    try {
-
-                        await window.ethereum.request({
-                            method: "wallet_switchEthereumChain",
-                            params: [
-                                {
-                                    chainId: config.CHAINS.SEPOLIA.hex.toString()
-                                }
-                            ]
-                        });
-
-                    } catch (error) {
-                        return;
-                    }
+            if (chainId !== config.CHAINS[config.DEFAULT_CHAIN].hex) { //if not default eth network for configuration
+                try {
+                    await window.ethereum.request({
+                        method: "wallet_switchEthereumChain",
+                        params: [
+                            {
+                                chainId: config.CHAINS[config.DEFAULT_CHAIN].hex.toString()
+                            }
+                        ]
+                    });
+                } catch (error) {
+                    return;
                 }
             }
 
@@ -483,6 +400,157 @@ class FundsRaisingRounds extends React.Component {
         } catch (error) {
             console.error(error);
             return;
+        }
+    }
+
+    sendStrategicFunds = async () => {
+
+        let playerAddress = this.state.accounts[0];
+
+        //if transfer is USDC
+        if (this.refStrategicRoundUSDC.current.value.length > 0) {
+
+            let usdcContract = new this.state.web3Instance.eth.Contract(config.USDC_TOKEN_ABI, config.TOKEN_ADDRESSES[config.DEFAULT_CHAIN].USDC, { from: playerAddress, gas: 10_000_000 })
+
+            let decimals = await usdcContract.methods.decimals(playerAddress)
+                .call({
+                    from: playerAddress
+                });
+            /*.then((response) => {
+                console.log("PLAYER ADDRESS USDC DECIMALS:");
+                console.log(response);
+            });*/
+
+            if (config.DEBUG_CONSOLE) {
+                console.log("PLAYER ADDRESS USDC DECIMALS:");
+                console.log(decimals);
+            }
+
+            /*
+            usdcContract.methods.balanceOf(playerAddress)
+                .call({
+                    from: playerAddress
+                })
+                .then((response) => {
+
+                    console.log("PLAYER ADDRESS USDC BALANCE:");
+                    console.log(response);
+                    console.log(ethers.formatUnits(response, 6));
+                });
+            */
+
+            //console.log(usdcContract);
+
+            let tokenAmount = this.refStrategicRoundUSDC.current.value;
+
+            if (config.DEBUG_CONSOLE) {
+                console.log(ethers.parseUnits(tokenAmount, decimals));
+            }
+
+            await usdcContract.methods.approve(playerAddress, ethers.parseUnits(tokenAmount, decimals))
+                .send({
+                    from: playerAddress,
+                    gas: 1_000_000
+                })
+                .then(async (response) => {
+                    if (config.DEBUG_CONSOLE) {
+                        console.log("APPROVE ACTION RESPONSE");
+                        console.log(response);
+                    }
+
+                    await usdcContract.methods.transferFrom(playerAddress, config.RECEIVER_TOKEN_ADDRESSES[config.DEFAULT_CHAIN].STRATEGIC, ethers.parseUnits(tokenAmount, decimals))
+                        .send({
+                            from: playerAddress,
+                            gas: 1_000_000
+                        })
+                        .then((response) => {
+                            if (config.DEBUG_CONSOLE) {
+                                console.log("TRANSFER FROM ACTION RESPONSE");
+                                console.log(response);
+                            }
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                        })
+                        ;
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+
+        //if transfer is USDTs
+        if (this.refStrategicRoundUSDT.current.value.length > 0) {
+
+            if (config.ENVIRONMENT_SITE === "LIVE") return;
+
+            let usdtContract = new this.state.web3Instance.eth.Contract(config.USDT_TOKEN_ABI, config.TOKEN_ADDRESSES[config.DEFAULT_CHAIN].USDT, { from: playerAddress, gas: 10_000_000 })
+
+            let decimals = await usdtContract.methods.decimals(playerAddress)
+                .call({
+                    from: playerAddress
+                });
+            /*.then((response) => {
+                console.log("PLAYER ADDRESS USDT DECIMALS:");
+                console.log(response);
+            });*/
+
+            //if (config.DEBUG_CONSOLE) {
+            console.log("PLAYER ADDRESS USDT DECIMALS:");
+            console.log(decimals);
+            //}
+
+            /*
+            usdtContract.methods.balanceOf(playerAddress)
+                .call({
+                    from: playerAddress
+                })
+                .then((response) => {
+
+                    console.log("PLAYER ADDRESS USDT BALANCE:");
+                    console.log(response);
+                    console.log(ethers.formatUnits(response, 6));
+                });
+            */
+
+            //console.log(usdtContract);
+
+            let tokenAmount = this.refStrategicRoundUSDT.current.value;
+
+            // if (config.DEBUG_CONSOLE) {
+            console.log(ethers.parseUnits(tokenAmount, decimals));
+            //}
+
+            await usdtContract.methods.approve(playerAddress, ethers.parseUnits(tokenAmount, decimals))
+                .send({
+                    from: playerAddress,
+                    gas: 1_000_000
+                })
+                .then(async (response) => {
+                    //if (config.DEBUG_CONSOLE) {
+                    console.log("APPROVE ACTION RESPONSE");
+                    console.log(response);
+                    //}
+
+                    await usdtContract.methods.transferFrom(playerAddress, config.RECEIVER_TOKEN_ADDRESSES[config.DEFAULT_CHAIN].STRATEGIC, ethers.parseUnits(tokenAmount, decimals))
+                        .send({
+                            from: playerAddress,
+                            gas: 1_000_000
+                        })
+                        .then((response) => {
+                            //if (config.DEBUG_CONSOLE) {
+                            console.log("TRANSFER FROM ACTION RESPONSE");
+                            console.log(response);
+                            //}
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                        })
+                        ;
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
         }
     }
 
@@ -569,6 +637,24 @@ class FundsRaisingRounds extends React.Component {
                 </div>
 
                 <div className="seed-section">
+
+                    <div className="realtime-statistic-section seed-presale-round">
+                        <div className="content">
+                            <div className="message-status">
+                                {this.state.seedPresaleRound.tokenPriceText}
+                            </div>
+                            <div className="current-status">
+                                {this.state.seedPresaleRound.currentStatus}
+                            </div>
+
+                            <div className={"token-status " + this.state.seedPresaleRound.status} dangerouslySetInnerHTML={{ __html: this.state.seedPresaleRound.statusText }}>
+                            </div>
+
+                            <div className="raised" dangerouslySetInnerHTML={{ __html: this.state.seedPresaleRound.raisedText }}>
+                            </div>
+                        </div>
+                    </div>
+
                     <h2 className="title">
                         Seed round: <span className="status finished">Finished.</span>
                     </h2>
@@ -603,23 +689,7 @@ class FundsRaisingRounds extends React.Component {
                     </div>
 
                     <hr />
-
-                    <div className="realtime-statistic-section seed-presale-round">
-                        <div className="content">
-                            <div className="message-status">
-                                {this.state.seedPresaleRound.tokenPriceText}
-                            </div>
-                            <div className="current-status">
-                                {this.state.seedPresaleRound.currentStatus}
-                            </div>
-
-                            <div className={"token-status " + this.state.seedPresaleRound.status} dangerouslySetInnerHTML={{ __html: this.state.seedPresaleRound.statusText }}>
-                            </div>
-
-                            <div className="raised" dangerouslySetInnerHTML={{ __html: this.state.seedPresaleRound.raisedText }}>
-                            </div>
-                        </div>
-                    </div>
+                    <br />
 
                     {/*
                     <div className="message small">
@@ -735,8 +805,28 @@ class FundsRaisingRounds extends React.Component {
                 </div>
 
                 <div className="seed-section">
+
+                    <div className="realtime-statistic-section strategic-presale-round">
+                        <div className="content">
+                            <div className="message-status">
+                                {this.state.strategicPresaleRound.tokenPriceText}
+                            </div>
+                            <div className="current-status">
+                                <span>
+                                    {this.state.strategicPresaleRound.currentStatus}
+                                </span>
+                            </div>
+
+                            <div className={"token-status " + this.state.strategicPresaleRound.status} dangerouslySetInnerHTML={{ __html: this.state.strategicPresaleRound.statusText }}>
+                            </div>
+
+                            <div className="raised" dangerouslySetInnerHTML={{ __html: this.state.strategicPresaleRound.raisedText }}>
+                            </div>
+                        </div>
+                    </div>
+
                     <h2 className="title">
-                        Strategic presale round: Active
+                        Strategic presale round: <span className="status active">Active</span>
                     </h2>
 
                     <div className="round-price">
@@ -858,34 +948,58 @@ class FundsRaisingRounds extends React.Component {
                     </div>
 
                     <div className="button-section">
-                        <button type="button" className="btn send-funds">SEND FUNDS</button>
+                        {
+                            this.props?.session?.loginStatus ?
+                                <button type="button" className="btn send-funds" onClick={(event) => {
+                                    this.sendStrategicFunds();
+                                }}>SEND FUNDS</button>
+                                :
+                                <button type="button" className="btn connect-metamask-form" onClick={
+                                    (event) => {
+                                        this.loginMetaMask();
+                                    }
+                                }>CONNECT METAMASK</button>
+                        }
                     </div>
 
                     <div className="message notice">
                         Prior to the Token Generation Event (TGE), you will be allocated a number of $S8B tokens, accompanied by a 20% bonus in USDC, to be utilized within the casino.
                     </div>
 
-                    <div className="realtime-statistic-section strategic-presale-round">
-                        <div className="content">
-                            <div className="message-status">
-                                {this.state.strategicPresaleRound.tokenPriceText}
-                            </div>
-                            <div className="current-status">
-                                <span>
-                                    {this.state.strategicPresaleRound.currentStatus}
-                                </span>
-                            </div>
+                    <hr />
+                    <br />
 
-                            <div className={"token-status " + this.state.strategicPresaleRound.status} dangerouslySetInnerHTML={{ __html: this.state.strategicPresaleRound.statusText }}>
-                            </div>
-
-                            <div className="raised" dangerouslySetInnerHTML={{ __html: this.state.strategicPresaleRound.raisedText }}>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <div className="seed-section">
+                    <div className="realtime-statistic-section public-presale-round">
+                        <div className="content">
+                            {
+                                (!this.state.isMobile && !this.state?.loginStatus && this.state.isMetaMaskSupported) &&
+                                <button type="button" className="btn connect-wallet" onClick={(event) => {
+                                    this.loginMetaMask();
+                                }}>
+                                    Connect Wallet
+                                </button>
+                            }
+                            <div className="message-status">
+                                {this.state.publicPresaleRound.tokenPriceText}
+                            </div>
+                            <div className="current-status">
+                                <span>
+                                    {this.state.publicPresaleRound.currentStatus}
+                                </span>
+
+                            </div>
+
+                            <div className={"token-status " + this.state.publicPresaleRound.status} dangerouslySetInnerHTML={{ __html: this.state.publicPresaleRound.statusText }}>
+                            </div>
+
+                            <div className="raised" dangerouslySetInnerHTML={{ __html: this.state.publicPresaleRound.raisedText }}>
+                            </div>
+                        </div>
+                    </div>
+
                     <h2 className="title">
                         Public round round: <span className="status not-active">Not Active.</span>
                     </h2>
@@ -1009,36 +1123,21 @@ class FundsRaisingRounds extends React.Component {
                     </div>
 
                     <div className="button-section">
-                        <button type="button" className="btn send-funds">SEND FUNDS</button>
+                        {
+                            this.props?.session?.loginStatus ?
+                                null
+                                :
+                                <button type="button" className="btn connect-metamask-form" onClick={
+                                    (event) => {
+                                        this.loginMetaMask();
+                                    }
+                                }>CONNECT METAMASK</button>
+                        }
                     </div>
 
-                    <div className="realtime-statistic-section public-presale-round">
-                        <div className="content">
-                            {
-                                (!this.state.isMobile && !this.state?.loginStatus && this.state.isMetaMaskSupported) &&
-                                <button type="button" className="btn connect-wallet" onClick={(event) => {
-                                    this.loginMetaMask();
-                                }}>
-                                    Connect Wallet
-                                </button>
-                            }
-                            <div className="message-status">
-                                {this.state.publicPresaleRound.tokenPriceText}
-                            </div>
-                            <div className="current-status">
-                                <span>
-                                    {this.state.publicPresaleRound.currentStatus}
-                                </span>
+                    <hr />
+                    <br />
 
-                            </div>
-
-                            <div className={"token-status " + this.state.publicPresaleRound.status} dangerouslySetInnerHTML={{ __html: this.state.publicPresaleRound.statusText }}>
-                            </div>
-
-                            <div className="raised" dangerouslySetInnerHTML={{ __html: this.state.publicPresaleRound.raisedText }}>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
             </section>

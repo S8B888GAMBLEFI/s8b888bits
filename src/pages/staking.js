@@ -7,7 +7,7 @@ import * as config from "../configuration/Config";
 import Account from "../components/shared/account/account";
 import Wallet from "../components/shared/wallet/wallet"
 import Staking from "../components/staking/staking";
-
+import SignupEmailForUpdates from "../components/signup-email-for-updates/signup-email-for-updates";
 
 class StakingPage extends React.Component {
 
@@ -19,7 +19,7 @@ class StakingPage extends React.Component {
                 </>
 
                 {
-                    config.ENVIRONMENT_SITE === "LIVE" &&
+                    (config.ENVIRONMENT_SITE === "LIVE" || config.ENVIRONMENT_SITE === "UAT") &&
                     <>
                         <br />
                         <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
@@ -30,18 +30,21 @@ class StakingPage extends React.Component {
 
 
                 {
-                    (config.ENVIRONMENT_SITE === "DEV" || config.ENVIRONMENT_SITE === "UAT") &&
-                    <div className="portals">
+                    (config.ENVIRONMENT_SITE === "DEV") &&
+                    <>
+                        <div className="portals">
 
-                        <div className="left">
-                            <Account />
-                            <Wallet />
-                        </div>
+                            <div className="left">
+                                <Account />
+                                <Wallet />
+                            </div>
 
-                        <div className="center">
-                            <Staking />
+                            <div className="center">
+                                <Staking />
+                            </div>
                         </div>
-                    </div>
+                        <SignupEmailForUpdates />
+                    </>
                 }
 
             </Layout>

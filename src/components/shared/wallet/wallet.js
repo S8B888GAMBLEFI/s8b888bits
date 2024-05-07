@@ -54,7 +54,6 @@ class Wallet extends React.Component {
 
             })
 
-
         window.addEventListener('resize', () => {
             this.setState({
                 isMobile: isMobile

@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import { injectIntl, FormattedNumber } from "gatsby-plugin-react-intl"
 import BalanceCryptoCurrencyIcon from "../currency-icon/balance-crypto-currency-icon";
 import CurrencyName from "../currency-symbol/currency-name";
-import BuyTokens from "../buy-tokens/buy-tokens";
+//import BuyTokens from "../buy-tokens/buy-tokens";
 //import TransactionTypeStatus from "../transaction_type/transaction-type-status";
-import StrategicRoundBuyTokens from "../strategic-round-buy-tokens/strategic-round-buy-tokens";
+//import StrategicRoundBuyTokens from "../strategic-round-buy-tokens/strategic-round-buy-tokens";
 import RecentActivities from "../recent-activities/recent-activities";
 import Web3 from "web3";
 import * as config from "../../configuration/Config";
@@ -106,7 +106,7 @@ class Staking extends React.Component {
         }, () => {
             if (this.state?.accounts && this.state?.balance && this.state?.loginStatus) {
                 window.ethereum.on('accountsChanged', this.accountsChanged);
-                window.ethereum.on('chainChanged', this.chainChanged);
+                //window.ethereum.on('chainChanged', this.chainChanged);
             }
             this.refreshData();
             //this.refreshInterval = setInterval(() => this.refreshData(), 10000);
@@ -131,7 +131,7 @@ class Staking extends React.Component {
                 //this.accountsChanged();
                 if (this.state?.accounts && this.state?.balance && this.state?.loginStatus) {
                     window.ethereum.on('accountsChanged', this.accountsChanged);
-                    window.ethereum.on('chainChanged', this.chainChanged);
+                    //window.ethereum.on('chainChanged', this.chainChanged);
                 }
                 this.refreshData();
                 //this.refreshInterval = setInterval(() => this.refreshData(), 10000);
@@ -318,58 +318,19 @@ class Staking extends React.Component {
 
         }
         try {
-            if (config.ENVIRONMENT_SITE === "LIVE") {
-                if (chainId !== config.CHAINS.MAINNET.hex) { //if not main eth network
-                    try {
-                        await window.ethereum.request({
-                            method: "wallet_switchEthereumChain",
-                            params: [
-                                {
-                                    chainId: config.CHAINS.MAINNET.hex.toString()
-                                }
-                            ]
-                        });
-                    } catch (error) {
-                        return;
-                    }
-                }
-            }
 
-            if (config.ENVIRONMENT_SITE === "LOCAL") {
-                if (chainId !== config.CHAINS.SEPOLIA.hex) { //sepolia
-                    try {
-
-                        await window.ethereum.request({
-                            method: "wallet_switchEthereumChain",
-                            params: [
-                                {
-                                    chainId: config.CHAINS.SEPOLIA.hex.toString()
-                                }
-                            ]
-                        });
-
-                    } catch (error) {
-                        return;
-                    }
-                }
-            }
-
-            if (config.ENVIRONMENT_SITE === "DEV") {
-                if (chainId !== config.CHAINS.SEPOLIA.hex) { //sepolia
-                    try {
-
-                        await window.ethereum.request({
-                            method: "wallet_switchEthereumChain",
-                            params: [
-                                {
-                                    chainId: config.CHAINS.SEPOLIA.hex.toString()
-                                }
-                            ]
-                        });
-
-                    } catch (error) {
-                        return;
-                    }
+            if (chainId !== config.CHAINS[config.DEFAULT_CHAIN].hex) { //if not default eth network for configuration
+                try {
+                    await window.ethereum.request({
+                        method: "wallet_switchEthereumChain",
+                        params: [
+                            {
+                                chainId: config.CHAINS[config.DEFAULT_CHAIN].hex.toString()
+                            }
+                        ]
+                    });
+                } catch (error) {
+                    return;
                 }
             }
 
@@ -508,6 +469,32 @@ class Staking extends React.Component {
                 console.error(error);
             })
             ;
+
+
+        /*
+        let usdcContract = new this.state.web3Instance.eth.Contract(config.USDC_TOKEN_ABI, config.TOKEN_ADDRESSES.SEPOLIA.USDC, { from: this.playerAddress, gas: 10000000 })
+
+        usdcContract.methods.decimals(playerAddress)
+            .call({
+                from: playerAddress
+            })
+            .then((response) => {
+                console.log(response);
+            })
+
+        usdcContract.methods.balanceOf(playerAddress)
+            .call({
+                from: playerAddress
+            })
+            .then((response) => {
+
+                console.log(response);
+                console.log(ethers.formatUnits(response, 6));
+            });
+
+
+        console.log(usdcContract);
+        */
     }
 
     render = () => {

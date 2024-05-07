@@ -38,8 +38,20 @@ body {
 		padding-top: 90px;
 	}
 
+	@include breakpoint(1280) {
+		padding-top: 110px;
+	}
+
+	@include breakpoint(1024) {
+		padding-top: 110px;
+	}
+
+	@include breakpoint(960) {
+		padding-top: 70px;
+	}
+
 	@include breakpoint(640) {
-		padding-top: 90px;
+		padding-top: 110px;
 	}
 }
 

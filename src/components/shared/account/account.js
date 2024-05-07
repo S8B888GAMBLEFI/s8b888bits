@@ -7,6 +7,7 @@ import Web3 from "web3";
 import * as config from "../../../configuration/Config";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { setMetamaskConfigurationAction, deleteMetamaskConfigurationAction } from "../../../redux/actions/metamaskConfiguration/MetamaskConfigurationActions";
+import { setAccountInformationAction, deleteAccountInformationAction } from "../../../redux/actions/accountInformation/AccountInformationActions";
 import { ethers } from "ethers";
 
 class Account extends React.Component {
@@ -28,6 +29,9 @@ class Account extends React.Component {
 
         setMetamaskConfigurationAction: PropTypes.func,
         deleteMetamaskConfigurationAction: PropTypes.func,
+
+        setAccountInformationAction: PropTypes.func,
+        deleteAccountInformationAction: PropTypes.func,
     }
 
     static defaultPropTypes = {
@@ -64,10 +68,10 @@ class Account extends React.Component {
             web3Instance: new Web3(window.ethereum),
             accountInformation: this.props.accountInformation,
         }, () => {
-            /*if (this.state?.accounts && this.state?.balance && this.state?.loginStatus) {
+            if (this.state?.accounts && this.state?.balance && this.state?.loginStatus) {
                 window.ethereum.on('accountsChanged', this.accountsChanged);
-                window.ethereum.on('chainChanged', this.chainChanged);
-            }*/
+                //window.ethereum.on('chainChanged', this.chainChanged);
+            }
         });
 
     }
@@ -93,6 +97,99 @@ class Account extends React.Component {
         }
     }
 
+    chainChanged = async (accounts) => {
+
+        //console.log("chainChanged");
+
+        let chainId = null;
+        try {
+            chainId = await window.ethereum.request({
+                method: "eth_chainId",
+                params: []
+            })
+        } catch (error) {
+
+        }
+        try {
+
+            if (chainId !== config.CHAINS[config.DEFAULT_CHAIN].hex) { //if not default eth network for configuration
+                try {
+                    await window.ethereum.request({
+                        method: "wallet_switchEthereumChain",
+                        params: [
+                            {
+                                chainId: config.CHAINS[config.DEFAULT_CHAIN].hex.toString()
+                            }
+                        ]
+                    });
+                } catch (error) {
+                    return;
+                }
+            }
+
+            let web3Instance = new Web3(window.ethereum);
+
+            this.setState({
+                web3Instance: web3Instance,
+                chainId: chainId,
+            }, () => {
+                this.refreshAccounts(accounts);
+            })
+        } catch (error) {
+
+        }
+    }
+
+    accountsChanged = async () => {
+        await this.refreshAccounts(this.state.accounts);
+    }
+
+    refreshAccounts = async (accounts) => {
+
+        //console.log("refreshAccounts");
+        //console.log(accounts);
+
+        try {
+            if (this.state.web3Instance?.eth) {
+                await this.state.web3Instance.eth.getAccounts().then(async (result) => {
+                    if (result && result.length > 0) {
+                        //console.log(result[0]);
+                        const balance = await window.ethereum.request({
+                            method: 'eth_getBalance',
+                            params: [result[0], "latest"]
+                        });
+                        this.setState({
+                            accounts: result,
+                            balance: balance,//this.formatBalance(balance)
+                        })
+                        if (!this.state?.accountInformation) {
+                            this.props.setAccountInformationAction({
+                                ...this.props.accountInformation,
+                                accounts: result,
+                                balance: balance,
+                            })
+                        }
+                    }
+                })
+
+                if (!accounts || accounts.length === 0) {
+                    this.setState({
+                        accounts: null,
+                        chainId: null,
+                        loginStatus: null,
+
+                        balance: null,
+                    }, () => {
+                    });
+                    return;
+                }
+            }
+        } catch (error) {
+            console.error(error);
+            return;
+        }
+    }
+
     render = () => {
         return (
             <div className="account">
@@ -107,6 +204,7 @@ class Account extends React.Component {
                                 Please login
                             </div>
                         </div>
+                        {/*
                         <div className="col centered">
                             <button type="button" className="btn login">
                                 Log In
@@ -120,6 +218,25 @@ class Account extends React.Component {
                         <div className="col centered">
                             <button type="button" className="btn signup">
                                 Sign Up
+                            </button>
+                        </div>
+                        */}
+                        <div className="col centered">
+                            <button type="button" className="btn add-token" onClick={async (event) => {
+                                await window.ethereum.request({
+                                    method: "wallet_watchAsset",
+                                    params: {
+                                        type: "ERC20",
+                                        options: {
+                                            address: "0xaCf7501e653f127345Df1a4EacdF663FCB1DF292",
+                                            symbol: "S8TEST",
+                                            decimals: 5,
+                                            image: config.BASE_URL + "/pictures/wallet-crypto-currencies/icon-s8b.svg",
+                                        }
+                                    }
+                                });
+                            }}>
+                                Add Token
                             </button>
                         </div>
                     </div>
@@ -147,8 +264,31 @@ class Account extends React.Component {
                                 } ETH
                             </div>
                         </div>
+
+                        {
+                            config.ENVIRONMENT_SITE === "DEV" &&
+                            <div className="col centered">
+                                <button type="button" className="btn add-token" onClick={async (event) => {
+                                    await window.ethereum.request({
+                                        method: "wallet_watchAsset",
+                                        params: {
+                                            type: "ERC20",
+                                            options: {
+                                                address: config.TOKEN_ADDRESSES[config.DEFAULT_CHAIN].S8TEST,
+                                                symbol: "S8TEST",
+                                                decimals: 5,
+                                                image: config.BASE_URL + "/pictures/wallet-crypto-currencies/icon-s8b.svg",
+                                            }
+                                        }
+                                    });
+                                }}>
+                                    Add Token
+                                </button>
+                            </div>
+                        }
                     </div>
                 }
+
             </div>
         )
     }
@@ -171,6 +311,9 @@ const mapDispatchToProps = dispatch => (
     bindActionCreators({
         setMetamaskConfigurationAction,
         deleteMetamaskConfigurationAction,
+
+        setAccountInformationAction,
+        deleteAccountInformationAction
     }, dispatch)
 );
 

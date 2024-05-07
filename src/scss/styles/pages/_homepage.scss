@@ -396,6 +396,14 @@ hr {
 
 			width: 100%;
 
+			@include breakpoint(1600) {
+				flex: 1 1 auto;
+			}
+
+			@include breakpoint(1440) {
+				flex: 1;
+			}
+
 			@include breakpoint(1366) {
 				flex: 1 1 50%;
 			}
@@ -405,7 +413,7 @@ hr {
 			}
 
 			.title {
-				color: $color-10;
+				color: $color-41;
 				text-align: center;
 				font-family: $font-inter;
 				font-size: 28px;
@@ -476,6 +484,10 @@ hr {
 
 		@include breakpoint(1600) {
 			flex: 1 1 auto;
+		}
+
+		@include breakpoint(1440) {
+			flex: 1;
 		}
 
 		@include breakpoint(1366) {
@@ -1243,6 +1255,7 @@ hr {
 		justify-content: space-between;
 		align-items: center;
 		gap: 32px;
+		align-self: center;
 
 		@include breakpoint(960) {
 			flex-direction: column;
@@ -1376,22 +1389,23 @@ hr {
 		.title {
 			color: $color-primary;
 			font-family: $font-inter;
-			font-size: 24px;
+			font-size: 20px;
 			font-style: normal;
 			font-weight: 700;
 			line-height: normal;
 			margin-bottom: 20px;
 			padding-right: 10px;
 			padding-left: 10px;
+			text-align: center;
 
 			@include breakpoint(1440) {
-				font-size: 24px;
+				font-size: 20px;
 				line-height: normal;
 				padding-left: 8px;
 			}
 
 			@include breakpoint(1024) {
-				font-size: 22px;
+				font-size: 20px;
 				line-height: normal;
 				padding-left: 8px;
 			}
@@ -1410,9 +1424,9 @@ hr {
 
 		.list-channels {
 			@include flexbox();
-			justify-content: space-evenly;
+			justify-content: center;
 			align-items: center;
-			gap: 32px;
+			gap: 60px;
 			align-self: stretch;
 			flex-wrap: wrap;
 
@@ -1441,7 +1455,7 @@ hr {
 	}
 
 	.realtime-statistic-section {
-		border-radius: 5px;
+		//border-radius: 5px;
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-image: url('/pictures/background/private-sale-status.png');
@@ -1450,10 +1464,7 @@ hr {
 		position: relative;
 		@include flexbox();
 		align-items: stretch;
-		margin-top: 10px;
-		margin-right: 0px;
-		margin-bottom: 20px;
-		margin-left: 0px;
+		margin: 0px 0px 0px 0px;
 		align-self: stretch;
 
 		&.seed-presale-round {
@@ -1776,22 +1787,25 @@ hr {
 		margin-right: 0px;
 		margin-bottom: 16px;
 		margin-left: 0px;
-		padding: 16px;
+		padding: 0px; //16px;
 
+		/*
 		@include breakpoint(768) {
 			padding: 8px;
 		}
+		*/
 
 		.title {
 			color: $color-primary;
 			font-family: $font-inter;
-			font-size: 32px;
+			font-size: 28px;
 			font-style: normal;
 			font-weight: 800;
-			line-height: 40px;
+			line-height: normal;
 			padding: 16px 16px 16px 32px;
 			font-optical-sizing: auto;
 			font-stretch: normal;
+			align-self: center;
 
 			@include breakpoint(1440) {
 				font-size: 28px;
@@ -1812,7 +1826,10 @@ hr {
 			}
 
 			.status {
-				&.finished {
+
+				&.finished,
+				&.completed,
+				&.active {
 					color: $color-48;
 				}
 
@@ -1826,30 +1843,30 @@ hr {
 			color: $color-primary;
 			text-align: center;
 			font-family: $font-inter;
-			font-size: 28px;
+			font-size: 24px;
 			font-style: normal;
 			font-weight: 700;
 			line-height: 36px;
 			padding: 10px 20px;
-			border-top: 1px solid $color-46;
+			border-top: 1px solid $color-52;
 			margin: 0px;
 			align-self: stretch;
 
 			@include breakpoint(1440) {
-				font-size: 26px;
+				font-size: 24px;
 				line-height: normal;
 			}
 
 			@include breakpoint(1024) {
 				font-size: 22px;
 				line-height: normal;
-				padding: 0;
+				padding-top: 10px;
 			}
 
 			@include breakpoint(375) {
 				font-size: 18px;
 				line-height: normal;
-				padding: 0;
+				padding: 5px;
 			}
 		}
 
@@ -1860,7 +1877,7 @@ hr {
 			font-size: 16px;
 			font-style: normal;
 			font-weight: 700;
-			line-height: 18px;
+			line-height: 24px;
 			padding-right: 16px;
 			padding-left: 16px;
 			align-self: stretch;
@@ -2023,22 +2040,22 @@ hr {
 			color: $color-53;
 			text-align: center;
 			font-family: $font-inter;
-			font-size: 18px;
+			font-size: 20px;
 			font-style: normal;
 			font-weight: 700;
-			line-height: 32px;
+			line-height: 18px;
 			text-decoration-line: underline;
 			text-underline-offset: 3px;
 			align-self: stretch;
 
 			@include breakpoint(1440) {
 				font-size: 18px;
-				line-height: 32px;
+				line-height: 18px;
 			}
 
 			@include breakpoint(1024) {
 				font-size: 16px;
-				line-height: 24px;
+				line-height: 18px;
 			}
 
 			@include breakpoint(375) {
@@ -2650,7 +2667,7 @@ hr {
 	.header-section {
 		@include flexbox();
 		flex-direction: row;
-		justify-content: space-between;
+		justify-content: space-around;
 		align-items: center;
 
 		margin-bottom: 20px;
@@ -2658,18 +2675,18 @@ hr {
 		.title {
 			color: $color-primary;
 			font-family: $font-inter;
-			font-size: 32px;
+			font-size: 24px;
 			font-style: normal;
 			font-weight: 800;
-			line-height: 40px;
+			line-height: normal;
 
 			@include breakpoint(1440) {
-				font-size: 32px;
+				font-size: 24px;
 				line-height: normal;
 			}
 
 			@include breakpoint(1024) {
-				font-size: 26px;
+				font-size: 24px;
 				line-height: normal;
 			}
 
@@ -2683,31 +2700,33 @@ hr {
 	.mini-title {
 		color: $color-47;
 		font-family: $font-inter;
-		font-size: 22px;
+		font-size: 20px;
 		font-style: normal;
 		font-weight: 800;
-		line-height: 28px;
-		letter-spacing: -0.5px;
+		line-height: normal;
+		text-align: center;
+		margin-bottom: 15px;
 	}
 
 	.description {
 		color: $color-white;
 		font-family: $font-inter;
-		font-size: 18px;
+		font-size: 16px;
 		font-style: normal;
 		font-weight: 500;
-		line-height: 26px;
+		line-height: 24px;
 		letter-spacing: -0.25px;
-
 		margin-bottom: 20px;
 		padding-left: 0px;
+		text-align: center;
 	}
 
 	hr {
 		background-color: $color-52;
 		border: none;
 		height: 1px;
-		margin-bottom: 20px;
+		margin-top: 20px;
+		margin-bottom: 10px;
 	}
 
 	.content {
@@ -2717,6 +2736,10 @@ hr {
 		justify-content: flex-start;
 		gap: 30px;
 		padding-top: 10px;
+
+		@include breakpoint(1024) {
+			gap: 20px;
+		}
 
 		@include breakpoint(960) {
 			flex-direction: column;
@@ -2731,8 +2754,8 @@ hr {
 			gap: 16px;
 			flex-grow: 1;
 			flex-basis: 0;
-			border-radius: 20px;
-			background-color: $color-42;
+			border-radius: 16px;
+			background-color: $color-54;
 			padding-top: 0px;
 
 			img {
@@ -2753,7 +2776,7 @@ hr {
 				font-size: 18px;
 				font-style: normal;
 				font-weight: 700;
-				line-height: 22px;
+				line-height: 18px;
 				text-transform: uppercase;
 
 				padding-left: 20px;
@@ -2764,10 +2787,10 @@ hr {
 				color: $color-47;
 				text-align: center;
 				font-family: $font-inter;
-				font-size: 22px;
+				font-size: 20px;
 				font-style: normal;
-				font-weight: 800;
-				line-height: 28px;
+				font-weight: 700;
+				line-height: normal;
 				text-transform: uppercase;
 
 				padding-left: 20px;
@@ -3120,6 +3143,7 @@ hr {
 		@include breakpoint(1024) {
 			flex-wrap: wrap;
 			justify-content: space-evenly;
+			padding: 0px 10px;
 		}
 
 		@include breakpoint(640) {
@@ -3373,9 +3397,11 @@ hr {
 		gap: 20px;
 
 		background-color: $color-51;
-		border-radius: 5px;
+		border-radius: 20px;
 		padding: 20px;
 		box-shadow: none;
+
+		margin-bottom: 16px;
 
 		@include breakpoint(640) {
 			padding: 15px 8px;
@@ -3555,7 +3581,7 @@ hr {
 								font-style: normal;
 								font-weight: 400;
 								line-height: 16px;
-								padding: 5px 15px;
+								padding: 5px 10px;
 								min-width: 100px;
 								max-width: 120px;
 								margin: 0 auto;
@@ -3569,7 +3595,7 @@ hr {
 								font-style: normal;
 								font-weight: 400;
 								line-height: 16px;
-								padding: 5px 15px;
+								padding: 5px 10px;
 								min-width: 100px;
 								max-width: 120px;
 								margin: 0 auto;
@@ -3583,7 +3609,7 @@ hr {
 								font-style: normal;
 								font-weight: 400;
 								line-height: 16px;
-								padding: 5px 15px;
+								padding: 5px 10px;
 								min-width: 100px;
 								max-width: 120px;
 								margin: 0 auto;
@@ -3597,7 +3623,7 @@ hr {
 								font-style: normal;
 								font-weight: 400;
 								line-height: 16px;
-								padding: 5px 15px;
+								padding: 5px 10px;
 								min-width: 100px;
 								max-width: 120px;
 								margin: 0 auto;
@@ -3612,10 +3638,11 @@ hr {
 
 .signup-email-for-updates {
 
-	background: url('/pictures/background/seed-presale-round.png') lightgray 50%;
+	background: url('/pictures/background/seed-presale-round.png');
 	background-size: cover;
 	background-repeat: no-repeat;
-	background-color: $color-51;
+	background-color: #566573;
+	background-blend-mode: multiply;
 
 
 	@include flexbox();
@@ -3629,6 +3656,10 @@ hr {
 	padding: 8px 16px 8px 32px;
 	min-height: 96px;
 
+	@include breakpoint(640) {
+		padding: 8px 8px 8px 8px;
+		justify-content: flex-start;
+	}
 
 	@include breakpoint(375) {
 		padding: 8px 8px 8px 8px;
@@ -3680,7 +3711,7 @@ hr {
 
 			input[type="email"] {
 				background: transparent;
-				border: 3px solid $color-primary;
+				border: 2px solid $color-primary;
 				color: $color-white;
 				font-family: $font-inter;
 				font-size: 16px;
@@ -3688,7 +3719,7 @@ hr {
 				font-weight: 500;
 				height: 40px;
 				line-height: 20px;
-				border-radius: 15px;
+				border-radius: 5px;
 				text-align: center;
 				width: 330px;
 				margin-right: 10px;
@@ -3702,7 +3733,7 @@ hr {
 					font-style: normal;
 					font-weight: 500;
 					line-height: 20px;
-					//text-decoration-line: underline;
+					text-decoration-line: underline;
 				}
 
 				@include breakpoint(768) {

@@ -634,7 +634,6 @@ class BuyTokens extends React.Component {
         }, () => {
             if (this.state?.accounts && this.state?.balance && this.state?.loginStatus) {
                 window.ethereum.on('accountsChanged', this.accountsChanged);
-                window.ethereum.on('chainChanged', this.chainChanged)
             }
         });
     }
@@ -647,9 +646,6 @@ class BuyTokens extends React.Component {
             }
 
             this.setState({
-                //provider: provider,
-                //isMetaMaskSupported: isMetaMaskSupported,
-
                 accounts: metamaskConfiguration?.accounts || null,
                 balance: metamaskConfiguration?.balance || null,
                 loginStatus: metamaskConfiguration?.loginStatus || null,
@@ -658,7 +654,6 @@ class BuyTokens extends React.Component {
             }, () => {
                 if (this.state?.accounts && this.state?.balance && this.state?.loginStatus) {
                     window.ethereum.on('accountsChanged', this.accountsChanged);
-                    window.ethereum.on('chainChanged', this.chainChanged)
                 }
             });
         }
@@ -672,54 +667,21 @@ class BuyTokens extends React.Component {
                 params: []
             })
 
-            if (config.ENVIRONMENT_SITE === "LIVE") {
-                if (chainId !== config.CHAINS.MAINNET.hex) { //if not main eth network
-                    try {
-                        await window.ethereum.request({
-                            method: "wallet_switchEthereumChain",
-                            params: [
-                                {
-                                    chainId: config.CHAINS.MAINNET.hex.toString()
-                                }
-                            ]
-                        });
-                    } catch (error) {
-                        return;
-                    }
+            if (chainId !== config.CHAINS[config.DEFAULT_CHAIN].hex) { //if not default eth network for configuration
+                try {
+                    await window.ethereum.request({
+                        method: "wallet_switchEthereumChain",
+                        params: [
+                            {
+                                chainId: config.CHAINS[config.DEFAULT_CHAIN].hex.toString()
+                            }
+                        ]
+                    });
+                } catch (error) {
+                    return;
                 }
             }
-            if (config.ENVIRONMENT_SITE === "LOCAL") {
-                if (chainId !== config.CHAINS.SEPOLIA.hex) { //sepolia eth network
-                    try {
-                        await window.ethereum.request({
-                            method: "wallet_switchEthereumChain",
-                            params: [
-                                {
-                                    chainId: config.CHAINS.SEPOLIA.hex
-                                }
-                            ]
-                        });
-                    } catch (error) {
-                        return;
-                    }
-                }
-            }
-            if (config.ENVIRONMENT_SITE === "DEV") {
-                if (chainId !== config.CHAINS.SEPOLIA.hex) { //sepolia eth network
-                    try {
-                        await window.ethereum.request({
-                            method: "wallet_switchEthereumChain",
-                            params: [
-                                {
-                                    chainId: config.CHAINS.SEPOLIA.hex.toString()
-                                }
-                            ]
-                        });
-                    } catch (error) {
-                        return;
-                    }
-                }
-            }
+
         } catch (error) {
             return;
         }
@@ -772,9 +734,6 @@ class BuyTokens extends React.Component {
                 })
                 .then((response) => {
                     //console.log(response);
-                    /*this.setState({
-                        tokenBalance: response
-                    })*/
                 })
                 .catch((error) => {
                     console.error(error);
@@ -793,7 +752,6 @@ class BuyTokens extends React.Component {
                 this.props.setMetamaskConfigurationAction(metamaskConfigurationJSON);
 
                 window.ethereum.on('accountsChanged', this.accountsChanged);
-                window.ethereum.on('chainChanged', this.chainChanged)
             })
         } catch (error) {
 
@@ -820,60 +778,19 @@ class BuyTokens extends React.Component {
         }
         //console.log(chainId);
         try {
-            if (config.ENVIRONMENT_SITE === "LIVE") {
-                if (chainId !== config.CHAINS.MAINNET.hex) { //if not main eth network
-                    try {
 
-                        await window.ethereum.request({
-                            method: "wallet_switchEthereumChain",
-                            params: [
-                                {
-                                    chainId: config.CHAINS.MAINNET.hex.toString()
-                                }
-                            ]
-                        });
-
-                    } catch (error) {
-                        return;
-                    }
-                }
-            }
-
-            if (config.ENVIRONMENT_SITE === "LOCAL") {
-                if (chainId !== config.CHAINS.SEPOLIA.hex) { //sepolia
-                    try {
-
-                        await window.ethereum.request({
-                            method: "wallet_switchEthereumChain",
-                            params: [
-                                {
-                                    chainId: config.CHAINS.SEPOLIA.hex
-                                }
-                            ]
-                        });
-
-                    } catch (error) {
-                        return;
-                    }
-                }
-            }
-
-            if (config.ENVIRONMENT_SITE === "DEV") {
-                if (chainId !== config.CHAINS.SEPOLIA.hex) { //sepolia
-                    try {
-
-                        await window.ethereum.request({
-                            method: "wallet_switchEthereumChain",
-                            params: [
-                                {
-                                    chainId: config.CHAINS.SEPOLIA.hex.toString()
-                                }
-                            ]
-                        });
-
-                    } catch (error) {
-                        return;
-                    }
+            if (chainId !== config.CHAINS[config.DEFAULT_CHAIN].hex) { //if not default eth network for configuration
+                try {
+                    await window.ethereum.request({
+                        method: "wallet_switchEthereumChain",
+                        params: [
+                            {
+                                chainId: config.CHAINS[config.DEFAULT_CHAIN].hex.toString()
+                            }
+                        ]
+                    });
+                } catch (error) {
+                    return;
                 }
             }
 
