@@ -1,0 +1,216 @@
+.investors-vip-nft {
+    order: 3;
+
+    padding: 30px;
+    background: $color-37;
+    box-shadow: 0px 5px 10px $color-black;
+    border-radius: 20px;
+
+    @include breakpoint(960) {
+        flex: 1;
+        padding: 0px;
+    }
+
+    .header-section {
+        @include flexbox();
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        margin-bottom: 20px;
+
+        @include breakpoint(960) {
+            flex-direction: column;
+        }
+
+        .title {
+            color: $color-41;
+            font-family: $font-inter;
+            font-size: 34px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 40px;
+            letter-spacing: -1px;
+        }
+    }
+
+    .description {
+        color: $color-white;
+        font-family: $font-inter;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 26px;
+        letter-spacing: -0.25px;
+
+        margin-bottom: 20px;
+    }
+
+    hr {
+        background-color: $color-52;
+        border: none;
+        height: 1px;
+        margin-bottom: 20px;
+    }
+
+    .vip-levels {
+        border-radius: 30px;
+        background-repeat: no-repeat;
+        //background-size: contain;
+        background-image: url('/pictures/background/vip-levels.webp');
+        height: 233px;
+
+        position: relative;
+
+        @include flexbox();
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+
+        margin-bottom: 20px;
+
+        @include breakpoint(960) {
+            height: auto;
+            background-image: none;
+        }
+
+        .content {
+            @include flexbox();
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 15px;
+
+            @include breakpoint(960) {
+                flex-direction: column;
+                align-self: center;
+            }
+
+            .item {
+                @include flexbox();
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                gap: 15px;
+
+                border-radius: 16px;
+                background: $color-42;
+                box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.08), 0px 6px 4px -4px rgba(0, 0, 0, 0.08);
+                padding: 15px 30px 20px 30px;
+
+                .price-range {
+                    color: $color-12;
+                    font-family: $font-inter;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 22px;
+                }
+
+                .vip-level {
+                    color: $color-white;
+                    font-family: $font-inter;
+                    font-size: 34px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 40px;
+                    letter-spacing: -1px;
+                }
+
+                .minted-info {
+                    color: $color-32;
+                    font-family: $font-inter;
+                    font-size: 28px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 32px;
+                    letter-spacing: -0.5px;
+                }
+
+                .dark-line {
+                    border-bottom: 3px solid $color-44;
+                    border-radius: 20px;
+                    width: 168px;
+                    height: 3px;
+                }
+
+                .light-line {
+                    border-bottom: 3px solid $color-quaternary;
+                    border-radius: 20px;
+                    width: 83px;
+                    height: 3px;
+                }
+            }
+        }
+    }
+
+    .visit-opensea-store {
+        border-radius: 30px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url('/pictures/background/visit-opensea-store.png');
+        height: 225px;
+
+        margin: 20px 100px 100px 100px;
+
+        @include breakpoint(960) {
+            margin: 0px 0px 50px 0px;
+        }
+
+        position: relative;
+
+        .avatar {
+            position: absolute;
+            bottom: -50px;
+            left: 48%;
+            border-radius: 35px;
+            width: 99px;
+            height: 99px;
+            border: 12px solid $color-42;
+            background-color: lightgray 50%;
+            background-repeat: no-repeat;
+            background-size: 99px 99px;
+            background-image: url('/pictures/background/avatar.png');
+
+            @include breakpoint(960) {
+                left: 33%;
+            }
+        }
+
+        .social-links {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            @include flexbox();
+            flex-direction: row;
+            align-items: center;
+            gap: 6px;
+
+            @include breakpoint(960) {
+                flex-direction: column;
+                right: 10px;
+            }
+
+
+            .item {
+                border-radius: 16px;
+                background-color: rgba(255, 8, 102, 0.70);
+                backdrop-filter: blur(18.5px);
+                width: 24px;
+                height: 24px;
+                padding: 12px;
+
+                button {
+                    width: 24px;
+                    height: 24px;
+                    background-color: transparent;
+                    border: none;
+                    outline: none;
+                    padding: 0;
+                    margin: 0;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

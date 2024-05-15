@@ -482,7 +482,7 @@ class FundsRaisingRounds extends React.Component {
         //if transfer is USDTs
         if (this.refStrategicRoundUSDT.current.value.length > 0) {
 
-            if (config.ENVIRONMENT_SITE === "LIVE") return;
+            //if (config.ENVIRONMENT_SITE === "LIVE") return;
 
             let usdtContract = new this.state.web3Instance.eth.Contract(config.USDT_TOKEN_ABI, config.TOKEN_ADDRESSES[config.DEFAULT_CHAIN].USDT, { from: playerAddress, gas: 10_000_000 })
 
@@ -495,10 +495,10 @@ class FundsRaisingRounds extends React.Component {
                 console.log(response);
             });*/
 
-            //if (config.DEBUG_CONSOLE) {
-            console.log("PLAYER ADDRESS USDT DECIMALS:");
-            console.log(decimals);
-            //}
+            if (config.DEBUG_CONSOLE) {
+                console.log("PLAYER ADDRESS USDT DECIMALS:");
+                console.log(decimals);
+            }
 
             /*
             usdtContract.methods.balanceOf(playerAddress)
@@ -517,9 +517,9 @@ class FundsRaisingRounds extends React.Component {
 
             let tokenAmount = this.refStrategicRoundUSDT.current.value;
 
-            // if (config.DEBUG_CONSOLE) {
-            console.log(ethers.parseUnits(tokenAmount, decimals));
-            //}
+            if (config.DEBUG_CONSOLE) {
+                console.log(ethers.parseUnits(tokenAmount, decimals));
+            }
 
             await usdtContract.methods.approve(playerAddress, ethers.parseUnits(tokenAmount, decimals))
                 .send({
@@ -527,10 +527,10 @@ class FundsRaisingRounds extends React.Component {
                     gas: 1_000_000
                 })
                 .then(async (response) => {
-                    //if (config.DEBUG_CONSOLE) {
-                    console.log("APPROVE ACTION RESPONSE");
-                    console.log(response);
-                    //}
+                    if (config.DEBUG_CONSOLE) {
+                        console.log("APPROVE ACTION RESPONSE");
+                        console.log(response);
+                    }
 
                     await usdtContract.methods.transferFrom(playerAddress, config.RECEIVER_TOKEN_ADDRESSES[config.DEFAULT_CHAIN].STRATEGIC, ethers.parseUnits(tokenAmount, decimals))
                         .send({
@@ -538,10 +538,10 @@ class FundsRaisingRounds extends React.Component {
                             gas: 1_000_000
                         })
                         .then((response) => {
-                            //if (config.DEBUG_CONSOLE) {
-                            console.log("TRANSFER FROM ACTION RESPONSE");
-                            console.log(response);
-                            //}
+                            if (config.DEBUG_CONSOLE) {
+                                console.log("TRANSFER FROM ACTION RESPONSE");
+                                console.log(response);
+                            }
                         })
                         .catch((error) => {
                             console.error(error);

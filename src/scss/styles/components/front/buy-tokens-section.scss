@@ -1,0 +1,241 @@
+.buy-tokens-section {
+    order: 1;
+
+    padding: 20px;
+    background: $color-49;
+    border-radius: 5px;
+
+    @include breakpoint(960) {
+        flex: 1;
+        padding: 0px;
+    }
+
+    .header-section {
+        @include flexbox();
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        @include breakpoint(960) {
+            flex-direction: column;
+        }
+
+        .title {
+            color: $color-41;
+            font-family: $font-inter;
+            font-size: 28px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 32px;
+            letter-spacing: -0.5px;
+        }
+    }
+
+    hr {
+        background-color: $color-52;
+        border: none;
+        height: 1px;
+        margin-bottom: 20px;
+    }
+
+    .main-section {
+        @include flexbox();
+        flex-direction: column;
+        gap: 20px;
+
+        .sale-price {
+            color: $color-32;
+            text-align: center;
+            font-family: $font-inter;
+            font-size: 28px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 32px;
+            letter-spacing: -0.5px;
+        }
+
+        .message {
+            color: $color-12;
+            text-align: center;
+            font-family: $font-inter;
+            font-size: 22px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 28px;
+            letter-spacing: -0.5px;
+        }
+
+        .check-currency-section {
+            @include flexbox();
+            flex-direction: row;
+            gap: 80px;
+            margin: 0 auto;
+
+            @include breakpoint(960) {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .enter-amount {
+                border-radius: 17px;
+                background-color: $color-6;
+
+                @include flexbox();
+                flex-direction: row;
+                flex-shrink: 0;
+                align-items: center;
+
+                .currency {
+                    @include flexbox();
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    border-radius: 17px;
+                    background-color: $color-black;
+
+                    color: $color-white;
+                    text-align: center;
+                    font-family: $font-inter;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 22px;
+
+                    padding: 0px 30px 0px 0px;
+
+                    .name {
+                        color: $color-white;
+                        text-align: center;
+                        font-family: $font-inter;
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: 22px;
+                        padding-left: 10px;
+                    }
+                }
+
+                .input-amount {
+                    min-width: 160px;
+
+                    input {
+                        background-color: transparent;
+                        outline: none;
+                        border: none;
+
+                        color: $color-white;
+                        text-align: center;
+                        font-family: $font-inter;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 20px;
+                        text-decoration-line: none;
+                        max-width: 150px;
+
+                        &::placeholder {
+                            color: $color-white;
+                            text-decoration-line: underline;
+                            text-underline-offset: 3px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .receive-currency-section {
+            @include flexbox();
+            flex-direction: row;
+            gap: 80px;
+            margin: 0 auto;
+
+            @include breakpoint(960) {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .enter-amount {
+                border-radius: 17px;
+                background-color: $color-brand;
+
+                @include flexbox();
+                flex-direction: row;
+                flex-shrink: 0;
+                align-items: center;
+
+                .currency {
+                    @include flexbox();
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    border-radius: 17px;
+                    background-color: $color-black;
+
+                    color: $color-white;
+                    text-align: center;
+                    font-family: $font-inter;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 22px;
+
+                    padding: 0px 30px 0px 0px;
+
+                    .name {
+                        color: $color-white;
+                        text-align: center;
+                        font-family: $font-inter;
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: 22px;
+                        padding-left: 10px;
+                    }
+                }
+
+                .input-amount {
+                    min-width: 180px;
+
+                    input {
+                        background-color: transparent;
+                        outline: none;
+                        border: none;
+
+                        color: $color-black;
+                        text-align: center;
+                        font-family: $font-inter;
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 24px;
+                        letter-spacing: -0.5px;
+                        text-decoration-line: none;
+                        max-width: 150px;
+
+                        &::placeholder {
+                            color: $color-black;
+                            text-decoration-line: underline;
+                            text-underline-offset: 3px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .listing-price {
+        color: $color-32;
+        text-align: center;
+        font-family: $font-inter;
+        font-size: 28px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 32px;
+        letter-spacing: -0.5px;
+
+        border-top: 1px solid $color-46;
+        padding-top: 10px;
+    }
+}

@@ -199,12 +199,12 @@ class Account extends React.Component {
                 {
                     !this.props?.session?.loginStatus &&
                     <div className="single-col">
+                        {/*
                         <div className="col centered">
                             <div className="message">
                                 Please login
                             </div>
                         </div>
-                        {/*
                         <div className="col centered">
                             <button type="button" className="btn login">
                                 Log In

@@ -1,0 +1,1058 @@
+.funds-raising-rounds {
+    order: 1;
+
+    padding: 0px;
+    border-radius: 5px;
+
+    @include breakpoint(960) {
+        flex: 1;
+        padding: 0px;
+    }
+
+    .section {
+        @include flexbox();
+        flex-direction: column;
+        gap: 16px;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 16px;
+        border-radius: 5px;
+        background-color: $color-51;
+        margin-bottom: 16px;
+    }
+
+    .header-section {
+        @include flexbox();
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 32px;
+        align-self: center;
+
+        @include breakpoint(960) {
+            flex-direction: column;
+        }
+
+        .title {
+            color: $color-primary;
+            font-family: $font-inter;
+            font-size: 28px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: normal;
+            padding: 32px 16px 0px 32px;
+
+            @include breakpoint(1440) {
+                font-size: 26px;
+                padding: 28px 12px 0px 12px;
+            }
+
+            @include breakpoint(1024) {
+                font-size: 24px;
+                padding: 24px 12px 0px 12px;
+            }
+
+            @include breakpoint(375) {
+                font-size: 20px;
+                font-weight: 700;
+                padding: 20px 8px 0px 8px;
+            }
+        }
+    }
+
+    hr {
+        background-color: $color-52;
+        border: none;
+        height: 1px;
+        margin-bottom: 5px;
+        width: 100%;
+    }
+
+    .description {
+        color: $color-white;
+        text-align: center;
+        font-family: $font-inter;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 24px;
+        margin-bottom: 10px;
+        align-self: center;
+
+        @include breakpoint(1440) {
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        @include breakpoint(1024) {
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        @include breakpoint(375) {
+            font-size: 14px;
+            line-height: 20px;
+        }
+    }
+
+    .restriction-description {
+        color: $color-white;
+        text-align: center;
+        font-family: $font-inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 20px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        align-self: center;
+
+        @include breakpoint(1440) {
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        @include breakpoint(1024) {
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        @include breakpoint(375) {
+            font-size: 14px;
+            line-height: 20px;
+        }
+    }
+
+    .description-2 {
+        color: $color-white;
+        text-align: center;
+        leading-trim: both;
+        text-edge: cap;
+        font-family: $font-inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        align-self: center;
+
+        @include breakpoint(1440) {
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        @include breakpoint(1024) {
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        @include breakpoint(375) {
+            font-size: 14px;
+            line-height: 20px;
+        }
+    }
+
+    .connect-with-us {
+
+        margin-bottom: 20px;
+        align-self: stretch;
+
+        .title {
+            color: $color-primary;
+            font-family: $font-inter;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            margin-bottom: 20px;
+            padding-right: 10px;
+            padding-left: 10px;
+            text-align: center;
+
+            @include breakpoint(1440) {
+                font-size: 20px;
+                line-height: normal;
+                padding-left: 8px;
+            }
+
+            @include breakpoint(1024) {
+                font-size: 20px;
+                line-height: normal;
+                padding-left: 8px;
+            }
+
+            @include breakpoint(375) {
+                font-size: 20px;
+                line-height: normal;
+                padding-left: 8px;
+            }
+        }
+
+        hr {
+            margin-top: 0px;
+            margin-bottom: 16px;
+        }
+
+        .list-channels {
+            @include flexbox();
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            align-self: stretch;
+            flex-wrap: wrap;
+
+            .item {
+                @include flexbox();
+                flex-direction: column;
+
+                img {
+                    width: 50px;
+                    height: 50px;
+                    margin: 0 auto;
+                }
+
+                span {
+                    color: $color-32;
+                    text-align: center;
+                    font-family: $font-inter;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 20px;
+                    margin-top: 5px;
+                }
+            }
+        }
+    }
+
+    .realtime-statistic-section {
+        //border-radius: 5px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url('/pictures/background/private-sale-status.png');
+        height: 300px;
+
+        position: relative;
+        @include flexbox();
+        align-items: stretch;
+        margin: 0px 0px 0px 0px;
+        align-self: stretch;
+
+        &.seed-presale-round {
+            background-image: url('/pictures/background/seed-presale-round.png');
+            //background-position: 0px -200px;
+
+            @include breakpoint(1280) {
+                background-image: url('/pictures/background/seed-presale-round.png');
+                background-size: 100% 100%;
+                background-position: 50%;
+            }
+
+            @include breakpoint(412) {
+                background-image: url('/pictures/background/seed-presale-round-m.png');
+            }
+        }
+
+        &.strategic-presale-round {
+            background-image: url('/pictures/background/strategic-presale-round.png');
+            //background-position: 0px -200px;
+
+            @include breakpoint(1280) {
+                background-size: 100% 100%;
+                background-position: 50%;
+            }
+
+            @include breakpoint(412) {
+                background-image: url('/pictures/background/strategic-presale-round-m.png');
+            }
+        }
+
+        &.public-presale-round {
+            background-image: url('/pictures/background/public-presale-round.png');
+            //background-position: 0px -200px;
+
+            @include breakpoint(1280) {
+                background-size: 100% 100%;
+                background-position: 50%;
+            }
+
+            @include breakpoint(412) {
+                background-image: url('/pictures/background/public-presale-round-m.png');
+            }
+        }
+
+        @include breakpoint(960) {
+            background-size: 100% 100%;
+            background-position: 50%;
+            height: inherit;
+        }
+
+        @include breakpoint(768) {
+            margin-right: 5px;
+            margin-left: 5px;
+        }
+
+        .content {
+            @include flexbox();
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 10px;
+            margin: 30px 20px 30px 20px;
+            width: 95%;
+
+            @include breakpoint(768) {
+                gap: 5px;
+                margin: 20px 10px 20px 10px;
+            }
+
+            .connect-wallet {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
+
+            .message-status {
+                color: $color-primary;
+                font-family: $font-inter;
+                font-size: 28px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 36px;
+                align-self: flex-start;
+
+                @include breakpoint(1440) {
+                    font-size: 28px;
+                    line-height: 36px;
+                }
+
+                @include breakpoint(1024) {
+                    font-size: 26px;
+                    line-height: normal;
+                }
+
+                @include breakpoint(375) {
+                    font-size: 24px;
+                    line-height: normal;
+                }
+            }
+
+            .current-status {
+                color: $color-47;
+                text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
+                font-family: $font-lexend;
+                font-size: 48px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 40px;
+
+                @include flexbox();
+                justify-content: space-between;
+                align-items: flex-start;
+                align-self: stretch;
+                flex-direction: row;
+
+                @include breakpoint(1440) {
+                    font-size: 48px;
+                    line-height: 40px;
+                }
+
+                @include breakpoint(1024) {
+                    font-size: 46px;
+                    line-height: 38px;
+                }
+
+                @include breakpoint(960) {
+                    font-size: 46px;
+                    line-height: 38px;
+                }
+
+                @include breakpoint(768) {
+                    font-size: 46px;
+                    line-height: 38px;
+                }
+
+                @include breakpoint(640) {
+                    flex-direction: column;
+                }
+
+                @include breakpoint(375) {
+                    font-size: 42px;
+                    line-height: 38px;
+                }
+            }
+
+            .token-status {
+                font-family: $font-inter;
+                font-size: 48px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 40px;
+                letter-spacing: -1px;
+                text-transform: none;
+                color: $color-7;
+                text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
+
+                @include breakpoint(768) {
+                    font-size: 24px;
+                    line-height: 26px;
+                }
+
+                &.filled,
+                &.completed {
+                    color: $color-47;
+                    font-size: 28px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 36px;
+                    letter-spacing: -1;
+                    text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
+
+                    @include breakpoint(768) {
+                        font-size: 24px;
+                        line-height: 26px;
+                    }
+                }
+
+                &.sold-out {
+                    color: $color-47;
+                    font-size: 28px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 36px;
+                    letter-spacing: -1;
+                    text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
+                    text-transform: uppercase;
+
+                    @include breakpoint(768) {
+                        font-size: 24px;
+                        line-height: 26px;
+                    }
+                }
+
+                &.in-progress {
+                    color: $color-47;
+                    text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
+                    font-family: $font-inter;
+                    font-size: 28px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 36px;
+                    letter-spacing: -1px;
+
+                    @include breakpoint(768) {
+                        font-size: 24px;
+                        line-height: 26px;
+                    }
+                }
+
+                &.not-started {
+                    color: $color-47;
+                    font-size: 28px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 36px;
+                    letter-spacing: -1;
+                    text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
+                    text-transform: none;
+
+                    @include breakpoint(768) {
+                        font-size: 24px;
+                        line-height: 26px;
+                    }
+                }
+
+                &.active {
+                    color: $color-48;
+                    font-size: 28px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 36px;
+                    letter-spacing: -1;
+                    text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
+                    text-transform: none;
+
+                    @include breakpoint(768) {
+                        font-size: 24px;
+                        line-height: 26px;
+                    }
+                }
+
+                &.default {
+                    color: $color-47;
+                    font-size: 28px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 36px;
+                    letter-spacing: -1;
+                    text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
+                    text-transform: none;
+
+                    @include breakpoint(768) {
+                        font-size: 24px;
+                        line-height: 26px;
+                    }
+                }
+
+                &.not-active {
+                    color: $color-53;
+                    font-size: 28px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 36px;
+                    letter-spacing: -1;
+                    text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
+                    text-transform: none;
+
+                    @include breakpoint(768) {
+                        font-size: 24px;
+                        line-height: 26px;
+                    }
+                }
+
+                @include flexbox();
+                justify-content: space-between;
+                align-items: flex-start;
+                align-self: stretch;
+                flex-direction: row;
+
+                @include breakpoint(640) {
+                    flex-direction: column;
+                }
+            }
+
+            .raised {
+                color: $color-12;
+                font-family: $font-inter;
+                font-size: 28px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 36px;
+
+                @include breakpoint(1024) {
+                    font-size: 26px;
+                    line-height: 34px;
+                }
+
+                @include breakpoint(960) {
+                    font-size: 22px;
+                    line-height: 26px;
+                }
+
+                @include breakpoint(768) {
+                    font-size: 24px;
+                    line-height: normal;
+                }
+            }
+        }
+    }
+
+    .seed-section {
+        @include flexbox();
+        flex-direction: column;
+        gap: 16px;
+        justify-content: center;
+        align-items: flex-start;
+        border-radius: 5px;
+        background-color: $color-51;
+        margin-top: 8px;
+        margin-right: 0px;
+        margin-bottom: 16px;
+        margin-left: 0px;
+        padding: 0px; //16px;
+
+        /*
+		@include breakpoint(768) {
+			padding: 8px;
+		}
+		*/
+
+        .title {
+            color: $color-primary;
+            font-family: $font-inter;
+            font-size: 28px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: normal;
+            padding: 16px 16px 16px 32px;
+            font-optical-sizing: auto;
+            font-stretch: normal;
+            align-self: center;
+
+            @include breakpoint(1440) {
+                font-size: 28px;
+                line-height: normal;
+                padding: 14px 14px 14px 32px;
+            }
+
+            @include breakpoint(1024) {
+                font-size: 24px;
+                line-height: normal;
+                padding: 12px 12px 12px 28px;
+            }
+
+            @include breakpoint(375) {
+                font-size: 18px;
+                line-height: normal;
+                padding: 8px 8px 8px 8px;
+            }
+
+            .status {
+
+                &.finished,
+                &.completed,
+                &.active {
+                    color: $color-48;
+                }
+
+                &.not-active {
+                    color: $color-53
+                }
+            }
+        }
+
+        .round-price {
+            color: $color-primary;
+            text-align: center;
+            font-family: $font-inter;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 36px;
+            padding: 10px 20px;
+            border-top: 1px solid $color-52;
+            margin: 0px;
+            align-self: stretch;
+
+            @include breakpoint(1440) {
+                font-size: 24px;
+                line-height: normal;
+            }
+
+            @include breakpoint(1024) {
+                font-size: 22px;
+                line-height: normal;
+                padding-top: 10px;
+            }
+
+            @include breakpoint(375) {
+                font-size: 18px;
+                line-height: normal;
+                padding: 5px;
+            }
+        }
+
+        .description {
+            color: $color-white;
+            text-align: center;
+            font-family: $font-inter;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 24px;
+            padding-right: 16px;
+            padding-left: 16px;
+            align-self: stretch;
+
+            @include breakpoint(1440) {
+                font-size: 14px;
+                line-height: normal;
+            }
+
+            @include breakpoint(1024) {
+                font-size: 14px;
+                line-height: normal;
+            }
+
+            @include breakpoint(375) {
+                font-size: 14px;
+                line-height: normal;
+            }
+        }
+
+        .description-2 {
+            color: $color-12;
+            text-align: center;
+            font-family: $font-inter;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 24px;
+            padding-right: 16px;
+            padding-left: 16px;
+            margin: 5px;
+            align-self: stretch;
+
+            @include breakpoint(1440) {
+                font-size: 14px;
+                line-height: 20px;
+            }
+
+            @include breakpoint(1024) {
+                font-size: 14px;
+                line-height: 20px;
+            }
+
+            @include breakpoint(375) {
+                font-size: 14px;
+                line-height: 20px;
+            }
+        }
+
+        .description-3 {
+            color: $color-12;
+            text-align: center;
+            font-family: $font-inter;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 24px;
+            padding-right: 16px;
+            padding-left: 16px;
+            margin: 5px;
+            align-self: stretch;
+
+            @include breakpoint(1440) {
+                font-size: 14px;
+                line-height: normal;
+            }
+
+            @include breakpoint(1024) {
+                font-size: 14px;
+                line-height: normal;
+            }
+
+            @include breakpoint(375) {
+                font-size: 14px;
+                line-height: normal;
+            }
+        }
+
+        .message {
+            color: $color-47;
+            text-align: center;
+            font-family: $font-inter;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: 24px;
+            letter-spacing: -0.5px;
+            margin-bottom: 20px;
+            padding-right: 10px;
+            padding-left: 10px;
+            align-self: stretch;
+
+            &.small {
+                font-size: 20px;
+                line-height: normal;
+                font-weight: 700;
+
+                @include breakpoint(1440) {
+                    font-size: 16px;
+                    line-height: 24px;
+                }
+
+                @include breakpoint(1024) {
+                    font-size: 16px;
+                    line-height: 24px;
+                }
+
+                @include breakpoint(375) {
+                    font-size: 16px;
+                    line-height: 24px;
+                }
+            }
+
+            &.large {
+                font-size: 28px;
+                line-height: 36px;
+
+                @include breakpoint(1440) {
+                    font-size: 26px;
+                    line-height: 34px;
+                }
+
+                @include breakpoint(1024) {
+                    font-size: 20px;
+                    line-height: 28px;
+                }
+
+                @include breakpoint(375) {
+                    font-size: 16px;
+                    line-height: 24px;
+                }
+            }
+
+            &.notice {
+                color: $color-48;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 24px;
+                margin-bottom: 0px;
+
+                @include breakpoint(1440) {
+                    font-size: 14px;
+                    line-height: 20px;
+                }
+
+                @include breakpoint(1024) {
+                    font-size: 14px;
+                    line-height: 20px;
+                }
+
+                @include breakpoint(375) {
+                    font-size: 14px;
+                    line-height: 20px;
+                }
+            }
+        }
+
+        a {
+            color: $color-53;
+            text-align: center;
+            font-family: $font-inter;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 18px;
+            text-decoration-line: underline;
+            text-underline-offset: 3px;
+            align-self: stretch;
+
+            @include breakpoint(1440) {
+                font-size: 18px;
+                line-height: 18px;
+            }
+
+            @include breakpoint(1024) {
+                font-size: 16px;
+                line-height: 18px;
+            }
+
+            @include breakpoint(375) {
+                font-size: 12px;
+                line-height: 16px;
+            }
+        }
+
+        hr {
+            background-color: $color-52;
+            border: none;
+            height: 1px;
+            width: 100%;
+        }
+
+        .check-currency-section {
+            @include flexbox();
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 80px;
+            margin: 0 auto;
+
+            @include breakpoint(1440) {
+                gap: 60px;
+            }
+
+            @include breakpoint(1024) {
+                gap: 40px;
+            }
+
+            @include breakpoint(640) {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .enter-amount,
+            .receive-amount {
+                border-radius: 17px;
+                background-color: $color-primary;
+
+                @include flexbox();
+                flex-direction: row;
+                flex-shrink: 0;
+                align-items: center;
+                min-width: 300px;
+
+                .currency {
+                    @include flexbox();
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    border-radius: 17px;
+                    background-color: $color-46;
+
+                    color: $color-white;
+                    text-align: center;
+                    font-family: $font-inter;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 18px;
+
+                    padding: 0px 30px 0px 0px;
+
+                    .name {
+                        color: $color-white;
+                        text-align: center;
+                        font-family: $font-inter;
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: 18px;
+                        padding-left: 10px;
+                    }
+                }
+
+                .input-amount {
+                    min-width: 165px;
+
+                    input {
+                        background-color: transparent;
+                        outline: none;
+                        border: none;
+
+                        color: $color-black;
+                        text-align: center;
+                        font-family: $font-inter;
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: 18px;
+                        text-decoration-line: none;
+
+                        max-width: 165px;
+
+                        &::placeholder {
+                            color: $color-black;
+                            text-decoration-line: none;
+                            //text-underline-offset: 3px;
+                        }
+                    }
+                }
+            }
+
+            .receive-amount {
+                background-color: $color-53;
+            }
+        }
+
+        .receive-currency-section {
+            @include flexbox();
+            flex-direction: row;
+            gap: 80px;
+            margin: 0 auto;
+
+            @include breakpoint(960) {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .enter-amount {
+                border-radius: 17px;
+                background-color: $color-primary;
+
+                @include flexbox();
+                flex-direction: row;
+                flex-shrink: 0;
+                align-items: center;
+
+                .currency {
+                    @include flexbox();
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    border-radius: 17px;
+                    background-color: $color-black;
+
+                    color: $color-white;
+                    text-align: center;
+                    font-family: $font-inter;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 22px;
+
+                    padding: 0px 30px 0px 0px;
+
+                    .name {
+                        color: $color-white;
+                        text-align: center;
+                        font-family: $font-inter;
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: 22px;
+                        padding-left: 10px;
+                    }
+                }
+
+                .input-amount {
+                    min-width: 180px;
+
+                    input {
+                        background-color: transparent;
+                        outline: none;
+                        border: none;
+
+                        color: $color-black;
+                        text-align: center;
+                        font-family: $font-inter;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: 24px;
+                        text-decoration-line: none;
+                        max-width: 150px;
+
+                        &::placeholder {
+                            color: $color-black;
+                            text-decoration-line: underline;
+                            text-underline-offset: 3px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .button-section {
+            @include flexbox();
+            flex-direction: row;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+    }
+
+    .footer-description {
+        color: $color-white;
+        text-align: center;
+        font-family: $font-inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 16px;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+    .footer-description-1 {
+        color: $color-white;
+        text-align: center;
+        font-family: $font-inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 18px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+}
