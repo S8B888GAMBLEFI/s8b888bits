@@ -46,6 +46,11 @@
                 line-height: normal;
             }
 
+            @include breakpoint(640) {
+                font-size: 22px;
+                line-height: normal;
+            }
+
             @include breakpoint(375) {
                 font-size: 20px;
                 line-height: normal;
@@ -95,9 +100,10 @@
 
         @include breakpoint(1024) {
             gap: 20px;
+            flex-wrap: wrap;
         }
 
-        @include breakpoint(960) {
+        @include breakpoint(768) {
             flex-direction: column;
         }
 
@@ -113,6 +119,52 @@
             border-radius: 16px;
             background-color: $color-54;
             padding-top: 0px;
+
+            .image {
+                height: 208px;
+                width: 100%;
+                border-top-left-radius: 16px;
+                border-top-right-radius: 16px;
+                background-size: cover;
+                background-repeat: no-repeat;
+
+                @include breakpoint(768) {
+                    height: 500px;
+                }
+
+                @include breakpoint(640) {
+                    height: 400px;
+                }
+
+                @include breakpoint(480) {
+                    height: 300px;
+                }
+
+                @include breakpoint(375) {
+                    height: 250px;
+                }
+
+                @include breakpoint(320) {
+                    height: 180px;
+                }
+
+                &.first {
+                    background-image: url("/pictures/background/investors-safety-2.webp");
+                }
+
+                &.second {
+                    background-image: url("/pictures/background/investors-safety-3.webp");
+                    background-position-y: -100px;
+                }
+
+                &.third {
+                    background-image: url("/pictures/background/investors-safety-4.webp");
+                }
+
+                &.fourth {
+                    background-image: url("/pictures/background/investors-safety-1.webp");
+                }
+            }
 
             img {
                 border-top-left-radius: 20px;

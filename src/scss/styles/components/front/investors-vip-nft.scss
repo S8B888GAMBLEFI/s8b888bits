@@ -148,7 +148,7 @@
         border-radius: 30px;
         background-repeat: no-repeat;
         background-size: cover;
-        background-image: url('/pictures/background/visit-opensea-store.png');
+        background-image: url('/pictures/background/visit-opensea-store.webp');
         height: 225px;
 
         margin: 20px 100px 100px 100px;
@@ -170,7 +170,7 @@
             background-color: lightgray 50%;
             background-repeat: no-repeat;
             background-size: 99px 99px;
-            background-image: url('/pictures/background/avatar.png');
+            background-image: url('/pictures/background/avatar.webp');
 
             @include breakpoint(960) {
                 left: 33%;

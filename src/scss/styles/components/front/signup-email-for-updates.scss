@@ -1,6 +1,6 @@
 .signup-email-for-updates {
 
-    background: url('/pictures/background/seed-presale-round.png');
+    background: url('/pictures/background/seed-presale-round.webp');
     background-size: cover;
     background-repeat: no-repeat;
     background-color: #566573;
@@ -62,6 +62,10 @@
             flex-wrap: wrap;
             align-items: stretch;
 
+            @include breakpoint(768) {
+                justify-content: center;
+            }
+
             img {
                 display: flex;
                 position: absolute;
@@ -114,7 +118,7 @@
                 }
 
                 @include breakpoint(320) {
-                    width: 300px;
+                    width: 270px;
                     margin-bottom: 10px;
                 }
             }

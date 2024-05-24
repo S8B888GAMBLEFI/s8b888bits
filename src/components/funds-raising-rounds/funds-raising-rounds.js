@@ -558,48 +558,30 @@ class FundsRaisingRounds extends React.Component {
         return (
             <section className="funds-raising-rounds">
                 <div className="section">
+
                     <div className="header-section">
                         <h2 className="title">
-                            Funds Raising Rounds
+                            S8B GAMBLEFI PLATFORM
                         </h2>
                     </div>
-                    <hr />
-                    <p className="description">
-                        We, open an exclusive opportunity to purchase tokens at a discounted rate before they are available to the wider public (TGE).
+
+                    <p className="large-description">
+                        S8BGambleFi is the core platform for decentralized applications that provide cryptocurrency-based betting services.
                         <br />
-                        This early access allows participants to become involved in a new project at its nascent stage, ahead of the official coin/token launch
-                        where the general public can invest.
+                        It represents the shift towards integrating online gambling onto the blockchain, targeting two user groups: traditional casino players and DeFi traders.
                         <br />
-                        As exclusive means granting early access privileges.
-                        <br />
-                        Engaging in a pre-sale enables investors to acquire tokens at a preferential 'early-bird' price, prior to their public release.
+                        Platform enhances the experience through rewards, benefits, and improved transparency and fairness, while overcoming numerous challenges traditionally faced by both players and casino operators.
                     </p>
 
-                    <p className="restriction-description">
-                        Tokens purchased during the presale rounds are subject to a various cliff and vesting schedules.
-                        <br />
-                        Immediately following the Token Generation Event (TGE), 25.81% of total supply are released to their respective holders,
-                        <br />
-                        the remaining are gradually distributed according to a predetermined cliff and vesting schedule depends on investment seed.
+                    <p className="large-description">
+                        Additionally, S8B token owners are entitled to dividends as a form of reward, providing passive income through the platform’s utility.
                     </p>
-
-                    <p className="description-2">
-                        For public round presale, 50% will be released at TGE, with vesting of 1 months.
-                        <br />
-                        For strategic round presale, 23% will be released at TGE, with vesting of 3 months.
-                        <br />
-                        For seed round presale, 18% will be released at TGE, with vesting of 5 months.
-                    </p>
-
-                    <hr />
 
                     <div className="connect-with-us">
 
                         <h2 className="title">
                             Connect with us
                         </h2>
-
-                        <hr />
 
                         <div className="list-channels">
                             <a href="https://t.me/officialchat888bits" className="item">
@@ -634,6 +616,53 @@ class FundsRaisingRounds extends React.Component {
                             </a>
                         </div>
                     </div>
+
+                    <hr />
+                    <div className="header-section">
+                        <h2 className="title">
+                            Funds Raising Rounds
+                        </h2>
+                    </div>
+                    <hr />
+                    <p className="description">
+                        We, open an exclusive opportunity to purchase tokens at a discounted rate before they are available to the wider public (TGE).
+                        <br />
+                        This early access allows participants to become involved in a new project at its nascent stage, ahead of the official coin/token launch
+                        where the general public can invest.
+                        <br />
+                        As exclusive means granting early access privileges.
+                        <br />
+                        Engaging in a pre-sale enables investors to acquire tokens at a preferential 'early-bird' price, prior to their public release.
+                    </p>
+
+                    <p className="description">
+                        Each phase of investment has its unique terms and benefits, tailored to suit the diverse needs and contributions of our investors.
+                        <br />
+                        On this page, you can track the current investment totals, remaining tokens available for each round, and the progress towards our next milestones.
+                        <br />
+                        By investing in our pre-sale, you are not just buying tokens; you are becoming a pivotal part of a community that shapes the future of our project.
+                        <br />
+                        Join us in this exciting venture and be a part of our growth story.
+                    </p>
+
+                    <p className="restriction-description">
+                        Tokens purchased during the presale rounds are subject to a various cliff and vesting schedules.
+                        <br />
+                        Immediately following the Token Generation Event (TGE), 25.81% of total supply are released to their respective holders,
+                        <br />
+                        the remaining are gradually distributed according to a predetermined cliff and vesting schedule depends on investment seed.
+                    </p>
+
+                    <p className="description-2">
+                        For public round presale, 50% will be released at TGE, with vesting of 1 months.
+                        <br />
+                        For strategic round presale, 23% will be released at TGE, with vesting of 3 months.
+                        <br />
+                        For seed round presale, 18% will be released at TGE, with vesting of 5 months.
+                    </p>
+
+                    <hr />
+
                 </div>
 
                 <div className="seed-section">
@@ -656,11 +685,13 @@ class FundsRaisingRounds extends React.Component {
                     </div>
 
                     <h2 className="title">
-                        Seed round: <span className="status finished">Finished.</span>
+                        Seed round: <span className="status finished">Completed.</span>
                     </h2>
 
                     <div className="round-price">
-                        Seed round price: 1 S8B = ${this.state.seedRoundS8BInUSD}
+                        Seed round price
+                        <br />
+                        1 S8B = ${this.state.seedRoundS8BInUSD}
                     </div>
 
                     <p className="description-2">
@@ -680,9 +711,9 @@ class FundsRaisingRounds extends React.Component {
                         Initial seed round is filled.
                     </div>
 
-                    <a href="https://forms.gle/R2D5nQ2UEbbM3bHQ7">
-                        $S8B - GambleFi Casino Experience - Seed presale round form
-                    </a>
+                    <div className="seed-round-form-closed-text">
+                        $S8B - GambleFi Casino Experience - Seed presale round form is closed.
+                    </div>
 
                     <div className="message notice">
                         Prior to the Token Generation Event (TGE), you will be allocated a number of $S8B tokens, accompanied by a 20% bonus in USDC, to be utilized within the casino.
@@ -830,7 +861,9 @@ class FundsRaisingRounds extends React.Component {
                     </h2>
 
                     <div className="round-price">
-                        Strategic round price: 1 S8B = ${this.state.strategicRoundS8BInUSD}
+                        Strategic round price
+                        <br />
+                        1 S8B = ${this.state.strategicRoundS8BInUSD}
                     </div>
 
                     <p className="description">
@@ -974,14 +1007,14 @@ class FundsRaisingRounds extends React.Component {
                 <div className="seed-section">
                     <div className="realtime-statistic-section public-presale-round">
                         <div className="content">
-                            {
+                            {/*
                                 (!this.state.isMobile && !this.state?.loginStatus && this.state.isMetaMaskSupported) &&
                                 <button type="button" className="btn connect-wallet" onClick={(event) => {
                                     this.loginMetaMask();
                                 }}>
                                     Connect Wallet
                                 </button>
-                            }
+                            */}
                             <div className="message-status">
                                 {this.state.publicPresaleRound.tokenPriceText}
                             </div>
@@ -1001,17 +1034,20 @@ class FundsRaisingRounds extends React.Component {
                     </div>
 
                     <h2 className="title">
-                        Public round round: <span className="status not-active">Not Active.</span>
+                        Public presale round: <span className="status not-active">Not Active.</span>
                     </h2>
 
                     <div className="round-price">
-                        Public round price: 1 S8B = ${this.state.publicPresaleRoundS8BInUSD}
+                        Public round price
+                        <br />
+                        1 S8B = ${this.state.publicPresaleRoundS8BInUSD}
                     </div>
 
                     <p className="description">
                         This is the final stage before our public launch, open to a broader audience.
-                        <br /><br />
+                        <br />
                         It's a chance for the general public to invest and be a part of our exciting journey.
+                        <br />
                     </p>
 
                     <p className="description-3">

@@ -1,0 +1,189 @@
+.roadmap {
+    order: 2;
+
+    padding: 0px;
+    background: $color-46;
+    box-shadow: none;
+    border-radius: 5px;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    @include breakpoint(960) {
+        flex: 1;
+        padding: 0px;
+    }
+
+    .header-section {
+        @include flexbox();
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        background: $color-51;
+        padding: 20px 20px 0px 20px;
+        border-radius: 5px;
+
+        @include breakpoint(960) {
+            flex-direction: column;
+        }
+
+        .title {
+            color: $color-primary;
+            font-family: $font-inter;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: normal;
+        }
+
+        hr {
+            background-color: $color-52;
+            border: none;
+            height: 1px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+    }
+
+    .roadmap-flex {
+        display: flex;
+        gap: 32px;
+        justify-content: center;
+        align-content: flex-start;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        background-color: $color-46;
+        padding: 16px 0px;
+
+        @include breakpoint(768) {
+            gap: 16px;
+            flex-direction: row;
+            justify-content: stretch;
+        }
+
+        .item {
+            background-color: $color-54;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+            gap: 16px;
+            grid-column: 3;
+            width: 360px;
+            height: 400px;
+            border-radius: 5px;
+            box-shadow: 0px 6px 4px -4px rgba(0, 0, 0, 0.08), 0px 0px 2px 0px rgba(0, 0, 0, 0.08);
+
+            @include breakpoint(768) {
+                width: -webkit-fill-available;
+                height: auto;
+            }
+
+            /*
+            @include breakpoint(375) {
+                width: 320px;
+                height: auto;
+            }
+
+            @include breakpoint(320) {
+                width: 280px;
+            }
+            */
+
+            .title {
+                text-align: center;
+                font-family: $font-inter;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 800;
+                line-height: normal;
+                color: $color-12;
+            }
+
+            .status {
+                text-align: center;
+                font-family: $font-inter;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 800;
+                line-height: normal;
+                text-transform: uppercase;
+
+                &.finished {
+                    color: $color-primary;
+                }
+
+                &.active {
+                    color: $color-48;
+                }
+
+                &.in-progress,
+                &.not-active,
+                &.tba {
+                    color: $color-47;
+                }
+            }
+
+            .description {
+                padding-right: 16px;
+                padding-left: 16px;
+
+                color: $color-white;
+                font-family: $font-inter;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 20px;
+                align-self: flex-start;
+
+                ul {
+                    font-family: $font-inter;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 20px;
+                    color: $color-white;
+
+                    li {
+                        list-style-type: disc;
+                        font-family: $font-inter;
+                        font-size: 14px;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: 20px;
+                        color: $color-white;
+                    }
+                }
+            }
+
+            background-repeat: no-repeat;
+            background-size: cover;
+
+            &:first-child {
+                background-image: url("/pictures/background/phase1.webp");
+            }
+
+            &:nth-child(2) {
+                background-image: url("/pictures/background/phase2.webp");
+            }
+
+            &:nth-child(3) {
+                background-image: url("/pictures/background/phase3.webp");
+            }
+
+            &:nth-child(4) {
+                background-image: url("/pictures/background/phase4.webp");
+            }
+
+            &:nth-child(5) {
+                background-image: url("/pictures/background/phase5.webp");
+            }
+
+            &:nth-child(6) {
+                background-image: url("/pictures/background/phase6.webp");
+            }
+        }
+    }
+}

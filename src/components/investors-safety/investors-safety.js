@@ -31,7 +31,12 @@ class InvestorsSafety extends React.Component {
                 <div className="content">
 
                     <a href="https://www.sourcehat.com" className="item">
-                        <img src="/pictures/background/investors-safety-2.png" alt="Audited" width="260" height="208" loading="lazy" />
+                        <div className="image first">
+
+                        </div>
+                        {/*
+                            <img src="/pictures/background/investors-safety-2.webp" alt="Audited" width="260" height="208" loading="lazy" />
+                        */}
 
                         <div className="title-level-1">
                             Built, Tested, Audited
@@ -46,7 +51,12 @@ class InvestorsSafety extends React.Component {
                     </a>
 
                     <a href="https://www.assuredefi.com" className="item">
-                        <img src="/pictures/background/investors-safety-3.png" alt="Kyc Verified" width="260" height="208" loading="lazy" />
+                        <div className="image second">
+
+                        </div>
+                        {/*
+                        <img src="/pictures/background/investors-safety-3.webp" alt="Kyc Verified" width="260" height="208" loading="lazy" />
+                        */}
 
                         <div className="title-level-1">
                             Kyc Verified
@@ -61,7 +71,12 @@ class InvestorsSafety extends React.Component {
                     </a>
 
                     <a href="https://www.curacao-egaming.com" className="item">
-                        <img src="/pictures/background/investors-safety-4.png" alt="Licensed Casino" width="260" height="208" loading="lazy" />
+                        <div className="image third">
+
+                        </div>
+                        {/*
+                        <img src="/pictures/background/investors-safety-4.webp" alt="Licensed Casino" width="260" height="208" loading="lazy" />
+                        */}
 
                         <div className="title-level-1">
                             Licensed Casino
@@ -75,7 +90,12 @@ class InvestorsSafety extends React.Component {
                     </a>
 
                     <a href="https://www.proofplatform.io" className="item">
-                        <img src="/pictures/background/investors-safety-1.png" alt="Proof Platform" width="260" height="208" loading="lazy" />
+                        <div className="image fourth">
+
+                        </div>
+                        {/*
+                        <img src="/pictures/background/investors-safety-1.webp" alt="Proof Platform" width="260" height="208" loading="lazy" />
+                        */}
 
                         <div className="title-level-1">
                             Proof platform

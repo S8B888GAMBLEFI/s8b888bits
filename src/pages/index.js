@@ -7,6 +7,7 @@ import * as config from "../configuration/Config";
 import FundsRaisingRounds from "../components/funds-raising-rounds/funds-raising-rounds";
 import InvestorsSafety from "../components/investors-safety/investors-safety";
 import SignupEmailForUpdates from "../components/signup-email-for-updates/signup-email-for-updates";
+import Roadmap from "../components/roadmap/roadmap";
 
 class IndexPage extends React.Component {
 
@@ -22,13 +23,19 @@ class IndexPage extends React.Component {
           <div className="full-width">
             <FundsRaisingRounds />
 
+            <Roadmap />
+
             <InvestorsSafety />
 
           </div>
 
         </div>
 
+        {/*
         <SignupEmailForUpdates />
+        */}
+
+
 
       </Layout>
     )
