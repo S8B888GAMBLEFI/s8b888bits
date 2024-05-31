@@ -407,7 +407,7 @@ class Header extends React.Component {
               <span></span>
             </button>
             <Link to="/" className="logo">
-              <img src="/pictures/logo/888logoPrimary.svg" alt={config.casinoName} loading="lazy" />
+              <img src="/pictures/logo/888logoPrimary.svg" alt={config.casinoName} loading="lazy" decoding="async" />
             </Link>
           </div>
 
@@ -501,7 +501,7 @@ class Header extends React.Component {
             {
               <ul className={!this.props?.session?.loginStatus ? "sec-nav" : "sec-nav logged-in"}>
                 {
-                  (!this.state.isMobile && !this.props?.session?.loginStatus && this.state.isMetaMaskSupported) &&
+                  (!this.props?.session?.loginStatus && this.state.isMetaMaskSupported) &&
                   <li>
                     <button type="button" aria-label="Connect Wallet" className="btn connect-wallet small" onClick={
                       (event) => {
@@ -513,7 +513,7 @@ class Header extends React.Component {
                   </li>
                 }
                 {
-                  (!this.state.isMobile && this.props?.session?.loginStatus === null && this.state.isMetaMaskSupported === null) &&
+                  (this.props?.session?.loginStatus === null && this.state.isMetaMaskSupported === null) &&
                   <li>
                     <span className="message">
                       <FormattedMessage id="Detecting Metamask ..." />
@@ -521,7 +521,7 @@ class Header extends React.Component {
                   </li>
                 }
                 {
-                  (!this.state.isMobile && !this.props?.session?.loginStatus && !this.state?.isMetaMaskSupported) &&
+                  (!this.props?.session?.loginStatus && !this.state?.isMetaMaskSupported) &&
                   <li>
                     <span className="message">
                       <FormattedMessage id="MetaMask is not installed" />
@@ -558,7 +558,7 @@ class Header extends React.Component {
                       event.preventDefault();
                       this.disconnectMetaMask();
                     }}>
-                      <img src="/pictures/icon-logout.svg" alt="Logout" loading="lazy"></img>
+                      <img src="/pictures/icon-logout.svg" alt="Logout" loading="lazy" decoding="async"></img>
                     </button>
                   </li>
                 }

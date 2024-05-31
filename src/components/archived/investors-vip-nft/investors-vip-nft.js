@@ -101,22 +101,22 @@ class InvestorsVipNft extends React.Component {
                     <div className="social-links">
                         <div className="item">
                             <button type="button">
-                                <img src="/pictures/image-icons/icon-ship.svg" alt="Ship" height={24} width={24} loading="lazy" />
+                                <img src="/pictures/image-icons/icon-ship.svg" alt="Ship" height={24} width={24} loading="lazy" decoding="async" />
                             </button>
                         </div>
                         <div className="item">
                             <button type="button">
-                                <img src="/pictures/image-icons/icon-share.svg" alt="Share" height={24} width={24} loading="lazy" />
+                                <img src="/pictures/image-icons/icon-share.svg" alt="Share" height={24} width={24} loading="lazy" decoding="async" />
                             </button>
                         </div>
                         <div className="item">
                             <button type="button">
-                                <img src="/pictures/image-icons/icon-more.svg" alt="More" height={24} width={24} loading="lazy" />
+                                <img src="/pictures/image-icons/icon-more.svg" alt="More" height={24} width={24} loading="lazy" decoding="async" />
                             </button>
                         </div>
                         <div className="item">
                             <button type="button">
-                                <img src="/pictures/image-icons/icon-star.svg" alt="Star" height={24} width={24} loading="lazy" />
+                                <img src="/pictures/image-icons/icon-star.svg" alt="Star" height={24} width={24} loading="lazy" decoding="async" />
                             </button>
                         </div>
                     </div>

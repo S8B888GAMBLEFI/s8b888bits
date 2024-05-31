@@ -585,31 +585,31 @@ class FundsRaisingRounds extends React.Component {
 
                         <div className="list-channels">
                             <a href="https://t.me/officialchat888bits" className="item">
-                                <img src="/pictures/connect-with-us/telegram.svg" alt="Telegram" loading="lazy" />
+                                <img src="/pictures/connect-with-us/telegram.svg" alt="Telegram" loading="lazy" decoding="async" />
                                 <span>
                                     Telegram
                                 </span>
                             </a>
                             <a href="http://twitter.com/BITS888" className="item">
-                                <img src="/pictures/connect-with-us/twitter.svg" alt="Twitter" loading="lazy" />
+                                <img src="/pictures/connect-with-us/twitter.svg" alt="Twitter" loading="lazy" decoding="async" />
                                 <span>
                                     Twitter
                                 </span>
                             </a>
                             <a href="https://docs.888bits.com" className="item">
-                                <img src="/pictures/connect-with-us/gitbook.svg" alt="Gitbook" loading="lazy" />
+                                <img src="/pictures/connect-with-us/gitbook.svg" alt="Gitbook" loading="lazy" decoding="async" />
                                 <span>
                                     Gitbook
                                 </span>
                             </a>
                             <a href="https://s8b.888bits.com/static/pdf/s8b-pitchdeck.pdf" className="item">
-                                <img src="/pictures/connect-with-us/pitch-deck.svg" alt="Pitch Deck" loading="lazy" />
+                                <img src="/pictures/connect-with-us/pitch-deck.svg" alt="Pitch Deck" loading="lazy" decoding="async" />
                                 <span>
                                     Pitch Deck
                                 </span>
                             </a>
                             <a href="https://s8b.888bits.com/static/pdf/s8b-whitepaper.pdf" className="item">
-                                <img src="/pictures/connect-with-us/whitepaper.svg" alt="WhitePaper" loading="lazy" />
+                                <img src="/pictures/connect-with-us/whitepaper.svg" alt="WhitePaper" loading="lazy" decoding="async" />
                                 <span>
                                     Whitepaper
                                 </span>
@@ -1008,7 +1008,7 @@ class FundsRaisingRounds extends React.Component {
                     <div className="realtime-statistic-section public-presale-round">
                         <div className="content">
                             {/*
-                                (!this.state.isMobile && !this.state?.loginStatus && this.state.isMetaMaskSupported) &&
+                                (!this.state?.loginStatus && this.state.isMetaMaskSupported) &&
                                 <button type="button" className="btn connect-wallet" onClick={(event) => {
                                     this.loginMetaMask();
                                 }}>

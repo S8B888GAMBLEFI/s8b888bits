@@ -245,7 +245,7 @@ class Account extends React.Component {
                     this.props?.session?.loginStatus &&
                     <div className="single-col">
                         <div className="col centered">
-                            <img src="/pictures/account/dashboard/profile-default.svg" alt="Profile" loading="lazy" />
+                            <img src="/pictures/account/dashboard/profile-default.svg" alt="Profile" loading="lazy" decoding="async" />
                         </div>
                         <div className="col centered">
                             <div className="username" title={this.state?.accountInformation?.accounts[0]}>

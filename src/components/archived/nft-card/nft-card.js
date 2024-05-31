@@ -51,12 +51,12 @@ class NftCard extends React.Component {
                     <div className="col centered">
                         <div className="sol-section">
                             <div className="sol-value">
-                                <img src="/pictures/wallet-crypto-currencies/icon-sol.svg" alt="SOL" width={30} height={30} loading="lazy" />
+                                <img src="/pictures/wallet-crypto-currencies/icon-sol.svg" alt="SOL" width={30} height={30} loading="lazy" decoding="async" />
                                 <div className="value">
                                     99.04 SOL
                                 </div>
                             </div>
-                            <img src="/pictures/account/dashboard/profile-default.svg" alt="Profile Default" width={40} height={40} loading="lazy" />
+                            <img src="/pictures/account/dashboard/profile-default.svg" alt="Profile Default" width={40} height={40} loading="lazy" decoding="async" />
                         </div>
                     </div>
                     <div className="col centered">
@@ -65,7 +65,7 @@ class NftCard extends React.Component {
                                 AmnesiaBits
                             </div>
 
-                            <img src="/pictures/image-icons/verification-status/kyc-verification-status.svg" alt="KYC" height={15} width={15} loading="lazy" />
+                            <img src="/pictures/image-icons/verification-status/kyc-verification-status.svg" alt="KYC" height={15} width={15} loading="lazy" decoding="async" />
 
                         </div>
                     </div>

@@ -393,7 +393,7 @@ class PresaleSeedRound extends React.Component {
                 <div className="main-section">
                     <div className="content">
                         {
-                            (!this.state.isMobile && !this.props?.session?.loginStatus && this.state.isMetaMaskSupported) &&
+                            (!this.props?.session?.loginStatus && this.state.isMetaMaskSupported) &&
                             <button type="button" className="btn connect-wallet" onClick={(event) => {
                                 this.loginMetaMask();
                             }}>

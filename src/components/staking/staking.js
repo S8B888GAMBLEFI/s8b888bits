@@ -503,7 +503,7 @@ class Staking extends React.Component {
 
                 <div className="header-section">
                     <div className="title">
-                        <img src="/pictures/image-icons/bank-line.svg" width="24" height="24" alt="Bank" />
+                        <img src="/pictures/image-icons/bank-line.svg" width="24" height="24" alt="Bank" loading="lazy" decoding="async" />
                         &nbsp;&nbsp;
                         $S8B Staking
                     </div>
@@ -519,7 +519,7 @@ class Staking extends React.Component {
 
                 <div className="balance-and-statistics">
                     <div className="item">
-                        <img src="/pictures/wallet-crypto-currencies/icon-s8b.svg" alt="S8B" width="48" height="48" />
+                        <img src="/pictures/wallet-crypto-currencies/icon-s8b.svg" alt="S8B" width="48" height="48" loading="lazy" decoding="async" />
                         <span className="description">
                             Balance
                         </span>
@@ -541,7 +541,7 @@ class Staking extends React.Component {
                         </span>
                     </div>
                     <div className="item">
-                        <img src="/pictures/wallet-crypto-currencies/icon-s8b.svg" alt="S8B" width="48" height="48" />
+                        <img src="/pictures/wallet-crypto-currencies/icon-s8b.svg" alt="S8B" width="48" height="48" loading="lazy" decoding="async" />
                         <span className="description">
                             Total Staked
                         </span>
@@ -563,7 +563,7 @@ class Staking extends React.Component {
                         </span>
                     </div>
                     <div className="item">
-                        <img src="/pictures/wallet-crypto-currencies/icon-s8b.svg" alt="S8B" width="48" height="48" />
+                        <img src="/pictures/wallet-crypto-currencies/icon-s8b.svg" alt="S8B" width="48" height="48" loading="lazy" decoding="async" />
                         <span className="description">
                             Daily APR
                         </span>
@@ -577,7 +577,7 @@ class Staking extends React.Component {
                         </span>
                     </div>
                     <div className="item">
-                        <img src="/pictures/wallet-crypto-currencies/icon-s8b.svg" alt="S8B" width="48" height="48" />
+                        <img src="/pictures/wallet-crypto-currencies/icon-s8b.svg" alt="S8B" width="48" height="48" loading="lazy" decoding="async" />
                         <span className="description">
                             APR
                         </span>

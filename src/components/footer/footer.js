@@ -68,7 +68,7 @@ class Footer extends React.Component {
                 <div className="col-narrow">
 
                   <Link to="/" className="logo" title={config.casinoName}>
-                    <img src="/pictures/logo/888logoPrimary.svg" alt={config.casinoName} loading="lazy" />
+                    <img src="/pictures/logo/888logoPrimary.svg" alt={config.casinoName} loading="lazy" decoding="async" />
                   </Link>
 
                   <ul className="social-menu">
@@ -204,13 +204,13 @@ class Footer extends React.Component {
               </p>
 
               <p className="casino-time">
-                <img src="/pictures/image-icons/time-icon.svg" alt="Current casino time" loading="lazy" />
+                <img src="/pictures/image-icons/time-icon.svg" alt="Current casino time" loading="lazy" decoding="async" />
                 &nbsp;&nbsp;
                 <Clock />
               </p>
 
               <p className="casino-date">
-                <img src="/pictures/image-icons/calendar-icon.svg" alt="Current casino date" loading="lazy" />
+                <img src="/pictures/image-icons/calendar-icon.svg" alt="Current casino date" loading="lazy" decoding="async" />
                 &nbsp;&nbsp;
                 {this.state.currentDate}
               </p>
