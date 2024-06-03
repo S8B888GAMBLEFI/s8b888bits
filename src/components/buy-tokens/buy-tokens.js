@@ -602,8 +602,11 @@ class BuyTokens extends React.Component {
         //console.log(provider);
         let isMetaMaskSupported = false;
 
-        if (provider) {
+        /*if (provider) {
             isMetaMaskSupported = (typeof window && typeof window.ethereum !== 'undefined') && window?.ethereum?.isMetaMask;
+        }*/
+        if (provider && provider === window.ethereum) {
+            isMetaMaskSupported = true;
         }
 
         let metamaskConfiguration = null;
