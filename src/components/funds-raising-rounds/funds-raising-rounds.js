@@ -19,6 +19,7 @@ class FundsRaisingRounds extends React.Component {
 
     state = {
         isMobile: isMobile,
+        isMetaMaskSupported: null,
         provider: null,
         web3Instance: null,
         accounts: null,
@@ -408,21 +409,17 @@ class FundsRaisingRounds extends React.Component {
 
     sendStrategicFunds = async () => {
 
-        let playerAddress = this.state.accounts[0];
+        const playerAddress = this.state.accounts[0];
 
         //if transfer is USDC
         if (this.refStrategicRoundUSDC.current.value.length > 0) {
 
-            let usdcContract = new this.state.web3Instance.eth.Contract(config.USDC_TOKEN_ABI, config.TOKEN_ADDRESSES[config.DEFAULT_CHAIN].USDC, { from: playerAddress, gas: 10_000_000 })
+            let usdcContract = new this.state.web3Instance.eth.Contract(config.USDC_TOKEN_ABI, config.TOKEN_ADDRESSES[config.DEFAULT_CHAIN].USDC, { from: playerAddress, gas: 10_000_000 });
 
-            let decimals = await usdcContract.methods.decimals(playerAddress)
+            const decimals = await usdcContract.methods.decimals(playerAddress)
                 .call({
                     from: playerAddress
                 });
-            /*.then((response) => {
-                console.log("PLAYER ADDRESS USDC DECIMALS:");
-                console.log(response);
-            });*/
 
             if (config.DEBUG_CONSOLE) {
                 console.log("PLAYER ADDRESS USDC DECIMALS:");
@@ -444,16 +441,20 @@ class FundsRaisingRounds extends React.Component {
 
             //console.log(usdcContract);
 
-            let tokenAmount = this.refStrategicRoundUSDC.current.value;
+            const tokenAmount = this.refStrategicRoundUSDC.current.value;
 
             if (config.DEBUG_CONSOLE) {
                 console.log(ethers.parseUnits(tokenAmount, decimals));
             }
 
+            let approveEstimatedGas = await usdcContract.methods.approve(playerAddress, ethers.parseUnits(tokenAmount, decimals)).estimateGas({ gas: 1_000_000 });
+
+            //console.log(approveEstimatedGas);
+
             await usdcContract.methods.approve(playerAddress, ethers.parseUnits(tokenAmount, decimals))
                 .send({
                     from: playerAddress,
-                    gas: 1_000_000
+                    gas: ethers.toBigInt(Math.ceil(ethers.toNumber(approveEstimatedGas) * 1.10))
                 })
                 .then(async (response) => {
                     if (config.DEBUG_CONSOLE) {
@@ -461,10 +462,12 @@ class FundsRaisingRounds extends React.Component {
                         console.log(response);
                     }
 
+                    let transferFromEstimatedGas = await usdcContract.methods.transferFrom(playerAddress, config.RECEIVER_TOKEN_ADDRESSES[config.DEFAULT_CHAIN].STRATEGIC, ethers.parseUnits(tokenAmount, decimals)).estimateGas({ gas: 1_000_000 });
+
                     await usdcContract.methods.transferFrom(playerAddress, config.RECEIVER_TOKEN_ADDRESSES[config.DEFAULT_CHAIN].STRATEGIC, ethers.parseUnits(tokenAmount, decimals))
                         .send({
                             from: playerAddress,
-                            gas: 1_000_000
+                            gas: ethers.toBigInt(Math.ceil(ethers.toNumber(transferFromEstimatedGas) * 1.10))
                         })
                         .then((response) => {
                             if (config.DEBUG_CONSOLE) {
@@ -474,8 +477,7 @@ class FundsRaisingRounds extends React.Component {
                         })
                         .catch((error) => {
                             console.error(error);
-                        })
-                        ;
+                        });
                 })
                 .catch((error) => {
                     console.error(error);
@@ -487,16 +489,12 @@ class FundsRaisingRounds extends React.Component {
 
             //if (config.ENVIRONMENT_SITE === "LIVE") return;
 
-            let usdtContract = new this.state.web3Instance.eth.Contract(config.USDT_TOKEN_ABI, config.TOKEN_ADDRESSES[config.DEFAULT_CHAIN].USDT, { from: playerAddress, gas: 10_000_000 })
+            let usdtContract = new this.state.web3Instance.eth.Contract(config.USDT_TOKEN_ABI, config.TOKEN_ADDRESSES[config.DEFAULT_CHAIN].USDT, { from: playerAddress, gas: 10_000_000 });
 
-            let decimals = await usdtContract.methods.decimals(playerAddress)
+            const decimals = await usdtContract.methods.decimals(playerAddress)
                 .call({
                     from: playerAddress
                 });
-            /*.then((response) => {
-                console.log("PLAYER ADDRESS USDT DECIMALS:");
-                console.log(response);
-            });*/
 
             if (config.DEBUG_CONSOLE) {
                 console.log("PLAYER ADDRESS USDT DECIMALS:");
@@ -518,16 +516,18 @@ class FundsRaisingRounds extends React.Component {
 
             //console.log(usdtContract);
 
-            let tokenAmount = this.refStrategicRoundUSDT.current.value;
+            const tokenAmount = this.refStrategicRoundUSDT.current.value;
 
             if (config.DEBUG_CONSOLE) {
                 console.log(ethers.parseUnits(tokenAmount, decimals));
             }
 
+            let approveEstimatedGas = await usdtContract.methods.approve(playerAddress, ethers.parseUnits(tokenAmount, decimals)).estimateGas({ gas: 1_000_000 });
+
             await usdtContract.methods.approve(playerAddress, ethers.parseUnits(tokenAmount, decimals))
                 .send({
                     from: playerAddress,
-                    gas: 1_000_000
+                    gas: ethers.toBigInt(Math.ceil(ethers.toNumber(approveEstimatedGas) * 1.10))
                 })
                 .then(async (response) => {
                     if (config.DEBUG_CONSOLE) {
@@ -535,10 +535,12 @@ class FundsRaisingRounds extends React.Component {
                         console.log(response);
                     }
 
+                    let transferFromEstimatedGas = await usdtContract.methods.transferFrom(playerAddress, config.RECEIVER_TOKEN_ADDRESSES[config.DEFAULT_CHAIN].STRATEGIC, ethers.parseUnits(tokenAmount, decimals)).estimateGas({ gas: 1_000_000 });
+
                     await usdtContract.methods.transferFrom(playerAddress, config.RECEIVER_TOKEN_ADDRESSES[config.DEFAULT_CHAIN].STRATEGIC, ethers.parseUnits(tokenAmount, decimals))
                         .send({
                             from: playerAddress,
-                            gas: 1_000_000
+                            gas: ethers.toBigInt(Math.ceil(ethers.toNumber(transferFromEstimatedGas) * 1.10))
                         })
                         .then((response) => {
                             if (config.DEBUG_CONSOLE) {
@@ -548,13 +550,21 @@ class FundsRaisingRounds extends React.Component {
                         })
                         .catch((error) => {
                             console.error(error);
-                        })
-                        ;
+                        });
                 })
                 .catch((error) => {
                     console.error(error);
                 });
         }
+    }
+
+    openMetaMaskUrl = (url) => {
+        const a = document.createElement("a");
+        a.href = url;
+        a.target = "_self";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
     }
 
     render = () => {
@@ -664,178 +674,16 @@ class FundsRaisingRounds extends React.Component {
                         For seed round presale, 18% will be released at TGE, with vesting of 5 months.
                     </p>
 
-                    <hr />
-
-                </div>
-
-                <div className="seed-section">
-
-                    <div className="realtime-statistic-section seed-presale-round">
-                        <div className="content">
-                            <div className="message-status">
-                                {this.state.seedPresaleRound.tokenPriceText}
-                            </div>
-                            <div className="current-status">
-                                {this.state.seedPresaleRound.currentStatus}
-                            </div>
-
-                            <div className={"token-status " + this.state.seedPresaleRound.status} dangerouslySetInnerHTML={{ __html: this.state.seedPresaleRound.statusText }}>
-                            </div>
-
-                            <div className="raised" dangerouslySetInnerHTML={{ __html: this.state.seedPresaleRound.raisedText }}>
-                            </div>
-                        </div>
-                    </div>
-
-                    <h2 className="title">
-                        Seed round: <span className="status finished">Completed.</span>
-                    </h2>
-
-                    <div className="round-price">
-                        Seed round price
-                        <br />
-                        1 S8B = ${this.state.seedRoundS8BInUSD}
-                    </div>
-
-                    <p className="description-2">
-                        This initial phase is designed for early backers who believe in the potential of our project from the outset.
-                        <br />
-                        Investments made during this round are at the most favorable terms, recognizing the early commitment and trust of our investors.
-                    </p>
-
                     <p className="description-3">
-                        The seed presale round is allocated 7% of the total token supply, which amounts to 62,222,222.22 $S8B tokens.
-                        <br />
-                        In this round, each wallet is limited to a maximum investment of $5,555.56, equivalent to 2,222,220.00 $S8B tokens,
-                        representing 0.25% of the total token supply.
+                        RISK WARNING: Trading Cryptocurrencies is highly speculative, carries a level of risk and may not be suitable for all investors.
+                        You may lose some or all of your invested capital, therefore you should not speculate with capital that you cannot afford to lose.
+                        The content on this site should not be considered investment advice.
+                        Investing is speculative. When investing your capital is at risk.
+                        We do not allow users of these countries to participate in the presale: The information on this site is not intended for residents of Afghanistan, Benin, Bhutan, China, Crimea region, Cuba, Iran, Iraq, Syria, USA, Vatican City, or for use by any person in any country or jurisdiction where such distribution or use would be contrary to local law or regulation.
                     </p>
 
-                    <div className="message large">
-                        Initial seed round is filled.
-                    </div>
-
-                    <div className="seed-round-form-closed-text">
-                        $S8B - GambleFi Casino Experience - Seed presale round form is closed.
-                    </div>
-
-                    <div className="message notice">
-                        Prior to the Token Generation Event (TGE), you will be allocated a number of $S8B tokens, accompanied by a 20% bonus in USDC, to be utilized within the casino.
-                    </div>
-
-                    <hr />
-                    <br />
-
-                    {/*
-                    <div className="message small">
-                        Enter the amount you are investing in this round in the following currencies
-                    </div>
-
-                    <div className="check-currency-section">
-                        <div className="enter-amount" onClick={
-                            (event) => {
-                                this.setState({
-                                    seedRoundCurrencyFrom: 'USDC'
-                                }, () => {
-                                    this.refSeedRoundUSDT.current.value = '';
-                                })
-                            }
-                        }>
-                            <div className="currency">
-                                <WalletCryptoCurrencyIcon currency="USDC" width={30} height={30} />
-                                <div className="name">
-                                    USDC
-                                </div>
-                            </div>
-                            <div className="input-amount">
-                                <input type="number" placeholder="Enter Amount"
-                                    ref={this.refSeedRoundUSDC}
-                                    onChange={(event) => {
-                                        let amountInToken = event.target.value * (this.state.usdcInUSD / this.state.seedRoundS8BInUSD);
-                                        this.setState({
-                                            seedRoundCurrencyFrom: 'USDC',
-                                            seedRoundS8BAmount: amountInToken,
-                                        }, () => {
-                                            this.refSeedRoundUSDT.current.value = '';
-                                            this.refSeedRoundS8B.current.value = amountInToken;
-                                        });
-
-                                    }}
-                                ></input>
-                            </div>
-                        </div>
-
-                        <div className="enter-amount" onClick={
-                            (event) => {
-                                this.setState({
-                                    seedRoundCurrencyFrom: 'USDT'
-                                }, () => {
-                                    this.refSeedRoundUSDC.current.value = '';
-                                })
-                            }
-                        }>
-                            <div className="currency">
-                                <WalletCryptoCurrencyIcon currency="USDT" width={30} height={30} />
-                                <div className="name">
-                                    USDT
-                                </div>
-                            </div>
-                            <div className="input-amount">
-                                <input type="number" placeholder="Enter Amount" ref={this.refSeedRoundUSDT}
-                                    onChange={(event) => {
-                                        let amountInToken = event.target.value * (this.state.usdtInUSD / this.state.seedRoundS8BInUSD);
-
-                                        this.setState({
-                                            seedRoundCurrencyFrom: 'USDT',
-                                            seedRoundS8BAmount: amountInToken,
-                                        }, () => {
-                                            this.refSeedRoundUSDC.current.value = '';
-
-                                            this.refSeedRoundS8B.current.value = amountInToken;
-                                        });
-
-                                    }}
-                                ></input>
-                            </div>
-                        </div>
-                    </div>
-
                     <hr />
 
-                    <div className="message small">
-                        The amount of $S8B tokens you'll obtain prior to the Token Generation Event (TGE).
-                    </div>
-
-                    <div className="receive-currency-section">
-                        <div className="enter-amount">
-                            <div className="currency">
-                                <WalletCryptoCurrencyIcon currency="S8B" width={30} height={30} />
-                                <div className="name">
-                                    S8B
-                                </div>
-                            </div>
-                            <div className="input-amount">
-                                <input type="number" placeholder="Amount to receive" ref={this.refSeedRoundS8B}
-                                    onChange={(event) => {
-                                        if (this.state?.seedRoundCurrencyFrom === 'USDT' && event.target.value) {
-
-                                            let amount = event.target.value / (this.state.usdtInUSD / this.state.seedRoundS8BInUSD);
-
-                                            this.refSeedRoundUSDC.current.value = '';
-                                            this.refSeedRoundUSDT.current.value = amount;
-                                        }
-
-                                        if (this.state?.seedRoundCurrencyFrom === 'USDC' && event.target.value) {
-                                            let amount = event.target.value / (this.state.usdcInUSD / this.state.seedRoundS8BInUSD);
-
-                                            this.refSeedRoundUSDC.current.value = amount;
-                                            this.refSeedRoundUSDT.current.value = '';
-                                        }
-                                    }}
-                                ></input>
-                            </div>
-                        </div>
-                    </div>
-                    */}
                 </div>
 
                 <div className="seed-section">
@@ -859,7 +707,7 @@ class FundsRaisingRounds extends React.Component {
                         </div>
                     </div>
 
-                    <h2 className="title">
+                    <h2 className="title active">
                         Strategic presale round: <span className="status active">Active</span>
                     </h2>
 
@@ -992,7 +840,19 @@ class FundsRaisingRounds extends React.Component {
                                 :
                                 <button type="button" className="btn connect-metamask-form" onClick={
                                     (event) => {
-                                        this.loginMetaMask();
+                                        event.preventDefault();
+                                        if (!this.state?.isMetaMaskSupported) {
+                                            if (config.ENVIRONMENT_SITE === "DEV") {
+                                                this.openMetaMaskUrl("https://metamask.app.link/dapp/dev.s8b.888bits.com");
+                                            } else if (config.ENVIRONMENT_SITE === "UAT") {
+                                                this.openMetaMaskUrl("https://metamask.app.link/dapp/uat.s8b.888bits.com");
+                                            } else if (config.ENVIRONMENT_SITE === "LIVE") {
+                                                this.openMetaMaskUrl("https://metamask.app.link/dapp/s8b.888bits.com");
+                                            }
+                                        }
+                                        else {
+                                            this.loginMetaMask();
+                                        }
                                     }
                                 }>CONNECT METAMASK</button>
                         }
@@ -1005,6 +865,176 @@ class FundsRaisingRounds extends React.Component {
                     <hr />
                     <br />
 
+                </div>
+
+                <div className="seed-section">
+
+                    <div className="realtime-statistic-section seed-presale-round">
+                        <div className="content">
+                            <div className="message-status">
+                                {this.state.seedPresaleRound.tokenPriceText}
+                            </div>
+                            <div className="current-status">
+                                {this.state.seedPresaleRound.currentStatus}
+                            </div>
+
+                            <div className={"token-status " + this.state.seedPresaleRound.status} dangerouslySetInnerHTML={{ __html: this.state.seedPresaleRound.statusText }}>
+                            </div>
+
+                            <div className="raised" dangerouslySetInnerHTML={{ __html: this.state.seedPresaleRound.raisedText }}>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 className="title completed">
+                        Seed round: <span className="status completed">Completed.</span>
+                    </h2>
+
+                    <div className="round-price completed">
+                        Seed round price
+                        <br />
+                        1 S8B = ${this.state.seedRoundS8BInUSD}
+                    </div>
+
+                    <p className="description-2">
+                        This initial phase is designed for early backers who believe in the potential of our project from the outset.
+                        <br />
+                        Investments made during this round are at the most favorable terms, recognizing the early commitment and trust of our investors.
+                    </p>
+
+                    <p className="description-3">
+                        The seed presale round is allocated 7% of the total token supply, which amounts to 62,222,222.22 $S8B tokens.
+                        <br />
+                        In this round, each wallet is limited to a maximum investment of $5,555.56, equivalent to 2,222,220.00 $S8B tokens,
+                        representing 0.25% of the total token supply.
+                    </p>
+
+                    <div className="message large completed">
+                        Initial seed round is filled.
+                    </div>
+
+                    <div className="seed-round-form-closed-text">
+                        $S8B - GambleFi Casino Experience - Seed presale round form is closed.
+                    </div>
+
+                    <div className="message notice">
+                        Prior to the Token Generation Event (TGE), you will be allocated a number of $S8B tokens, accompanied by a 20% bonus in USDC, to be utilized within the casino.
+                    </div>
+
+                    <hr />
+                    <br />
+
+                    {/*
+                    <div className="message small">
+                        Enter the amount you are investing in this round in the following currencies
+                    </div>
+
+                    <div className="check-currency-section">
+                        <div className="enter-amount" onClick={
+                            (event) => {
+                                this.setState({
+                                    seedRoundCurrencyFrom: 'USDC'
+                                }, () => {
+                                    this.refSeedRoundUSDT.current.value = '';
+                                })
+                            }
+                        }>
+                            <div className="currency">
+                                <WalletCryptoCurrencyIcon currency="USDC" width={30} height={30} />
+                                <div className="name">
+                                    USDC
+                                </div>
+                            </div>
+                            <div className="input-amount">
+                                <input type="number" placeholder="Enter Amount"
+                                    ref={this.refSeedRoundUSDC}
+                                    onChange={(event) => {
+                                        let amountInToken = event.target.value * (this.state.usdcInUSD / this.state.seedRoundS8BInUSD);
+                                        this.setState({
+                                            seedRoundCurrencyFrom: 'USDC',
+                                            seedRoundS8BAmount: amountInToken,
+                                        }, () => {
+                                            this.refSeedRoundUSDT.current.value = '';
+                                            this.refSeedRoundS8B.current.value = amountInToken;
+                                        });
+
+                                    }}
+                                ></input>
+                            </div>
+                        </div>
+
+                        <div className="enter-amount" onClick={
+                            (event) => {
+                                this.setState({
+                                    seedRoundCurrencyFrom: 'USDT'
+                                }, () => {
+                                    this.refSeedRoundUSDC.current.value = '';
+                                })
+                            }
+                        }>
+                            <div className="currency">
+                                <WalletCryptoCurrencyIcon currency="USDT" width={30} height={30} />
+                                <div className="name">
+                                    USDT
+                                </div>
+                            </div>
+                            <div className="input-amount">
+                                <input type="number" placeholder="Enter Amount" ref={this.refSeedRoundUSDT}
+                                    onChange={(event) => {
+                                        let amountInToken = event.target.value * (this.state.usdtInUSD / this.state.seedRoundS8BInUSD);
+
+                                        this.setState({
+                                            seedRoundCurrencyFrom: 'USDT',
+                                            seedRoundS8BAmount: amountInToken,
+                                        }, () => {
+                                            this.refSeedRoundUSDC.current.value = '';
+
+                                            this.refSeedRoundS8B.current.value = amountInToken;
+                                        });
+
+                                    }}
+                                ></input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div className="message small">
+                        The amount of $S8B tokens you'll obtain prior to the Token Generation Event (TGE).
+                    </div>
+
+                    <div className="receive-currency-section">
+                        <div className="enter-amount">
+                            <div className="currency">
+                                <WalletCryptoCurrencyIcon currency="S8B" width={30} height={30} />
+                                <div className="name">
+                                    S8B
+                                </div>
+                            </div>
+                            <div className="input-amount">
+                                <input type="number" placeholder="Amount to receive" ref={this.refSeedRoundS8B}
+                                    onChange={(event) => {
+                                        if (this.state?.seedRoundCurrencyFrom === 'USDT' && event.target.value) {
+
+                                            let amount = event.target.value / (this.state.usdtInUSD / this.state.seedRoundS8BInUSD);
+
+                                            this.refSeedRoundUSDC.current.value = '';
+                                            this.refSeedRoundUSDT.current.value = amount;
+                                        }
+
+                                        if (this.state?.seedRoundCurrencyFrom === 'USDC' && event.target.value) {
+                                            let amount = event.target.value / (this.state.usdcInUSD / this.state.seedRoundS8BInUSD);
+
+                                            this.refSeedRoundUSDC.current.value = amount;
+                                            this.refSeedRoundUSDT.current.value = '';
+                                        }
+                                    }}
+                                ></input>
+                            </div>
+                        </div>
+                    </div>
+                    */}
                 </div>
 
                 <div className="seed-section">
@@ -1036,11 +1066,11 @@ class FundsRaisingRounds extends React.Component {
                         </div>
                     </div>
 
-                    <h2 className="title">
+                    <h2 className="title not-active">
                         Public presale round: <span className="status not-active">Not Active.</span>
                     </h2>
 
-                    <div className="round-price">
+                    <div className="round-price not-active">
                         Public round price
                         <br />
                         1 S8B = ${this.state.publicPresaleRoundS8BInUSD}
@@ -1061,10 +1091,11 @@ class FundsRaisingRounds extends React.Component {
 
                     <hr />
 
-                    <div className="message small">
-                        Please enter the amount you are investing in this round in the following currencies
+                    <div className="message small not-active">
+                        Public presale round is not active.
                     </div>
 
+                    {/*
                     <div className="check-currency-section">
                         <div className="enter-amount" onClick={
                             (event) => {
@@ -1160,7 +1191,7 @@ class FundsRaisingRounds extends React.Component {
                         </div>
 
                     </div>
-
+                                
                     <div className="button-section">
                         {
                             this.props?.session?.loginStatus ?
@@ -1172,6 +1203,11 @@ class FundsRaisingRounds extends React.Component {
                                     }
                                 }>CONNECT METAMASK</button>
                         }
+                    </div>
+                    */}
+
+                    <div className="message notice">
+                        Prior to the Token Generation Event (TGE), you will be allocated a number of $S8B tokens, accompanied by a 20% bonus in USDC, to be utilized within the casino.
                     </div>
 
                     <hr />

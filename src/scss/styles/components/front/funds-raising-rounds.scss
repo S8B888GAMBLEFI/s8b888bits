@@ -181,6 +181,40 @@
         }
     }
 
+    .description-3 {
+        color: $color-white;
+        text-align: center;
+        font-family: $font-inter;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        padding-right: 16px;
+        padding-left: 16px;
+        margin: 5px;
+        align-self: stretch;
+
+        @include breakpoint(1440) {
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        @include breakpoint(1024) {
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        @include breakpoint(640) {
+            font-size: 14px;
+            line-height: 20px;
+        }
+
+        @include breakpoint(375) {
+            font-size: 14px;
+            line-height: 20px;
+        }
+    }
+
     .connect-with-us {
 
         margin-top: 20px;
@@ -433,8 +467,8 @@
                 }
 
                 @include breakpoint(320) {
-                    font-size: 26px;
-                    line-height: 30px;
+                    font-size: 24px;
+                    line-height: 28px;
                 }
             }
 
@@ -455,9 +489,23 @@
                 }
 
                 &.filled,
-                &.completed,
                 &.finished {
                     color: $color-47;
+                    font-size: 28px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 36px;
+                    letter-spacing: -1;
+                    text-shadow: 0px 4px 28px rgba(0, 0, 0, 0.66);
+
+                    @include breakpoint(768) {
+                        font-size: 24px;
+                        line-height: 26px;
+                    }
+                }
+
+                &.completed {
+                    color: $color-48;
                     font-size: 28px;
                     font-style: normal;
                     font-weight: 700;
@@ -663,12 +711,28 @@
                 font-size: 16px;
             }
 
+            &.finished,
+            &.active {
+                color: $color-48;
+            }
+
+            &.completed {
+                color: $color-primary;
+            }
+
+            &.not-active {
+                color: $color-53
+            }
+
             .status {
 
                 &.finished,
-                &.completed,
                 &.active {
                     color: $color-48;
+                }
+
+                &.completed {
+                    color: $color-primary;
                 }
 
                 &.not-active {
@@ -711,6 +775,14 @@
                 font-size: 18px;
                 line-height: normal;
                 padding: 5px;
+            }
+
+            &.completed {
+                color: $color-primary;
+            }
+
+            &.not-active {
+                color: $color-53;
             }
         }
 
@@ -907,6 +979,14 @@
                     font-size: 14px;
                     line-height: 20px;
                 }
+            }
+
+            &.completed {
+                color: $color-primary;
+            }
+
+            &.not-active {
+                color: $color-53;
             }
         }
 

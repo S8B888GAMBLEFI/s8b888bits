@@ -384,6 +384,15 @@ class Header extends React.Component {
     return balance;
   }
 
+  openMetaMaskUrl = (url) => {
+    const a = document.createElement("a");
+    a.href = url;
+    a.target = "_self";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
   render() {
     return (
       <header>
@@ -526,9 +535,19 @@ class Header extends React.Component {
                 {
                   (!this.props?.session?.loginStatus && !this.state?.isMetaMaskSupported) &&
                   <li>
-                    <span className="message">
-                      <FormattedMessage id="MetaMask is not installed" />
-                    </span>
+                    <button type="button" aria-label="Connect Wallet" className="btn connect-wallet small" onClick={
+                      (event) => {
+                        event.preventDefault();
+                        if (config.ENVIRONMENT_SITE === "DEV") {
+                          this.openMetaMaskUrl("https://metamask.app.link/dapp/dev.s8b.888bits.com");
+                        } else if (config.ENVIRONMENT_SITE === "UAT") {
+                          this.openMetaMaskUrl("https://metamask.app.link/dapp/uat.s8b.888bits.com");
+                        } else if (config.ENVIRONMENT_SITE === "LIVE") {
+                          this.openMetaMaskUrl("https://metamask.app.link/dapp/s8b.888bits.com");
+                        }
+                      }
+                    }>
+                    </button>
                   </li>
                 }
                 {
