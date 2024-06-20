@@ -1,21 +1,22 @@
 
-//DEV
+//WWW
 
-export const ENVIRONMENT_SITE = 'DEV';
+export const ENVIRONMENT_SITE = 'LIVE';
 export const IS_DEV_ENV = false;
-export const REST_SERVICE_BASE_URL = "https://dev.888bits.com/api/rest/index";
-export const BASE_URL = "https://dev.s8b.888bits.com/";
-export const CASINO_BASE_URL = "https://dev.888bits.com/";
+export const REST_SERVICE_BASE_URL = "https://www.888bits.com/api/rest/index";
+export const BASE_URL = "https://s8b.888bits.com/";
+export const CASINO_BASE_URL = "https://www.888bits.com/";
+export const API_BASE_URL = "https://s8b.888bits.com/api/";
 export const internetGroupId = '747872399';
 
 //local or session storage protection - player session in web site
 export const ENCRYPT_APP_STATE_TO_STORAGE = true;
 export const ENCRYPT_APP_STATE_TO_STORAGE_SECRET_KEY = 'ultraplus';
-export const APP_STATE_TO_STORAGE_NAME = 'dev_presale_888bits_com';
+export const APP_STATE_TO_STORAGE_NAME = 'www_presale_888bits_com';
 //GDPR cookie name for privacy policy modal dialog
-export const GDPR_COOKIE_NAME = 'GDPR_DEV_PRESALE_888BITS_COM';
+export const GDPR_COOKIE_NAME = 'GDPR_WWW_PRESALE_888BITS_COM';
 
-export const cryptoCurrencyList = ['LTC', 'LTCT', 'BTC', 'ETH', 'ZEC', 'XMR', 'USDT', 'DOGE', 'MBTC', 'METH', 'μBTC', 'μETH', 'mBTC', 'uBTC', 'mETH', 'BCH', 'USDTT', 'USDTE', 'S8B'];
+export const cryptoCurrencyList = ['LTC', 'LTCT', 'BTC', 'ETH', 'ZEC', 'XMR', 'USDT', 'DOGE', 'MBTC', 'METH', 'μBTC', 'μETH', 'mBTC', 'uBTC', 'mETH', 'BCH', 'USDTT', 'USDTE', 'S8B', 'SOL'];
 
 export const getMinimumFractionDigits = (currency: string) => {
     if (currency) {
@@ -28,6 +29,9 @@ export const getMinimumFractionDigits = (currency: string) => {
             return 2;
         }
         if (testCurrency === 'USDTT'.toUpperCase()) {
+            return 2;
+        }
+        if (testCurrency === 'SOL'.toUpperCase()) {
             return 2;
         }
         if (testCurrency === 'S8B'.toUpperCase()) {
@@ -61,6 +65,9 @@ export const getMinimumFractionDigits = (currency: string) => {
             return 2;
         }
         if (currency === 'USDTT') {
+            return 2;
+        }
+        if (currency === 'SOL') {
             return 2;
         }
         if (currency === 'S8B') {
@@ -115,7 +122,17 @@ export const MINIMUM_FRACTION_DIGITS = 6;
 
 export const APP_VERSION = "1.3.4";
 
-export const DEFAULT_CHAIN = "SEPOLIA";
+export const ETHERSCAN_ACCOUNT = "888bits";
+
+export const ETHERSCAN_PASSWORD = "44Q..NTR3$";
+
+export const ETHERSCAN_URL = "https://etherscan.io";
+
+export const ETHERSCAN_API_URL = "https://api.etherscan.io/api";
+
+export const ETHERSCAN_API_KEY_888bits = "FN7DR9TIGCSWHUIECFR8A8BARUB1G3U56D";
+
+export const DEFAULT_CHAIN = "MAINNET";
 
 export const CHAINS = {
     "MAINNET": {

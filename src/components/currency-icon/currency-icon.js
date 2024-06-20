@@ -36,6 +36,8 @@ class CurrencyIcon extends React.Component {
                 return <img loading="lazy" decoding="async" src="/pictures/icon-crypto-dodge.svg" alt="" />;
             case 'USD':
                 return <img loading="lazy" decoding="async" src="/pictures/icon-usd.svg" alt="" />;
+            case 'SOL':
+                return <img loading="lazy" decoding="async" src="/pictures/icon-sol.svg" alt="" />;
             default:
                 return null;
         }

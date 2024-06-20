@@ -7,8 +7,17 @@ import Web3 from "web3";
 import * as config from "../../../configuration/Config";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { setMetamaskConfigurationAction, deleteMetamaskConfigurationAction } from "../../../redux/actions/metamaskConfiguration/MetamaskConfigurationActions";
+import { setPhantomConfigurationAction, deletePhantomConfigurationAction } from "../../../redux/actions/phantomConfiguration/PhantomConfigurationActions";
 import { setAccountInformationAction, deleteAccountInformationAction } from "../../../redux/actions/accountInformation/AccountInformationActions";
 import { ethers } from "ethers";
+/*
+import {
+    clusterApiUrl,
+    Connection,
+    PublicKey,
+    LAMPORTS_PER_SOL,
+} from "@solana/web3.js";
+*/
 
 class Account extends React.Component {
 
@@ -25,10 +34,14 @@ class Account extends React.Component {
     static propTypes = {
         session: PropTypes.any,
         metamaskConfiguration: PropTypes.any,
+        phantomConfiguration: PropTypes.any,
         accountInformation: PropTypes.object,
 
         setMetamaskConfigurationAction: PropTypes.func,
         deleteMetamaskConfigurationAction: PropTypes.func,
+
+        setPhantomConfigurationAction: PropTypes.func,
+        deletePhantomConfigurationAction: PropTypes.func,
 
         setAccountInformationAction: PropTypes.func,
         deleteAccountInformationAction: PropTypes.func,
@@ -36,44 +49,80 @@ class Account extends React.Component {
 
     static defaultPropTypes = {
         session: null,
+        metamaskConfiguration: null,
+        phantomConfiguration: null,
         accountInformation: null
     }
 
-    constructor(props, context) {
-        super(props, context);
-
-
-    }
-
     componentDidMount = async () => {
-        const provider = await detectEthereumProvider({ silent: true })
+        let provider = await detectEthereumProvider({ silent: true })
         //console.log(provider);
         let isMetaMaskSupported = false;
+        let isPhantomSupported = false;
 
-        /*if (provider) {
-            isMetaMaskSupported = (typeof window && typeof window.ethereum !== 'undefined') && window?.ethereum?.isMetaMask;
-        }*/
         if (provider && provider === window.ethereum) {
             isMetaMaskSupported = true;
+            isPhantomSupported = false;
         }
 
+        /*
+        isPhantomSupported = window.phantom?.solana?.isPhantom;
+
+        if (isPhantomSupported) {
+            isMetaMaskSupported = false;
+        }
+
+        if (isPhantomSupported) {
+            if ('phantom' in window) {
+                provider = window.phantom?.solana;
+            }
+        }
+        */
+
         let metamaskConfiguration = null;
+        let configState = null;
         if (this.props?.metamaskConfiguration) {
             metamaskConfiguration = JSON.parse(this.props.metamaskConfiguration);
+            configState = {
+                accounts: metamaskConfiguration?.accounts || null,
+                balance: metamaskConfiguration?.balance || null,
+                loginStatus: metamaskConfiguration?.loginStatus || null,
+                chainId: metamaskConfiguration?.chainId || null,
+            }
         }
+
+        /*
+        let phantomConfiguration = null;
+        if (this.props?.phantomConfiguration) {
+            phantomConfiguration = JSON.parse(this.props.phantomConfiguration);
+            configState = {
+                accounts: phantomConfiguration?.accounts || null,
+                balance: phantomConfiguration?.balance || null,
+                loginStatus: phantomConfiguration?.loginStatus || null,
+                chainId: phantomConfiguration?.chainId || null,
+            }
+        }
+        */
 
         this.setState({
             provider: provider,
             isMetaMaskSupported: isMetaMaskSupported,
-            accounts: metamaskConfiguration?.accounts || null,
-            loginStatus: metamaskConfiguration?.loginStatus || null,
-            chainId: metamaskConfiguration?.chainId || null,
+            isPhantomSupported: isPhantomSupported,
+
+            ...configState,
+
             web3Instance: new Web3(window.ethereum),
             accountInformation: this.props.accountInformation,
         }, () => {
             if (this.state?.accounts && this.state?.balance && this.state?.loginStatus) {
-                window.ethereum.on('accountsChanged', this.accountsChanged);
-                //window.ethereum.on('chainChanged', this.chainChanged);
+                if (this.state.isMetaMaskSupported) {
+                    window.ethereum.on('accountsChanged', this.metaMaskAccountsChanged);
+                }
+                /*
+                if (this.state.isPhantomSupported) {
+                    this.state.provider.on('accountChanged', this.phantomAccountsChanged);
+                }
+                */
             }
         });
 
@@ -92,7 +141,7 @@ class Account extends React.Component {
     }
 
     shortUsername = (username) => {
-        if (username && username.length === 42) {
+        if (username && username.length >= 42) {
             //return username.slice(0, 20) + "...";
             return username.slice(0, 8) + "..." + username.slice(username.length - 7, username.length);
         } else {
@@ -100,7 +149,7 @@ class Account extends React.Component {
         }
     }
 
-    chainChanged = async (accounts) => {
+    metaMaskChainChanged = async (accounts) => {
 
         //console.log("chainChanged");
 
@@ -136,18 +185,18 @@ class Account extends React.Component {
                 web3Instance: web3Instance,
                 chainId: chainId,
             }, () => {
-                this.refreshAccounts(accounts);
+                this.refreshMetaMaskAccounts(accounts);
             })
         } catch (error) {
 
         }
     }
 
-    accountsChanged = async () => {
-        await this.refreshAccounts(this.state.accounts);
+    metaMaskAccountsChanged = async () => {
+        await this.refreshMetaMaskAccounts(this.state.accounts);
     }
 
-    refreshAccounts = async (accounts) => {
+    refreshMetaMaskAccounts = async (accounts) => {
 
         //console.log("refreshAccounts");
         //console.log(accounts);
@@ -192,6 +241,45 @@ class Account extends React.Component {
             return;
         }
     }
+
+    /*
+    phantomAccountsChanged = (publicKey) => {
+        //console.log("call phantomAccountsChanged");
+        this.refreshPhantomAccounts(publicKey);
+    }
+    */
+
+    /*
+    refreshPhantomAccounts = async (publicKey) => {
+        //console.log("call refreshPhantomAccounts");
+
+        try {
+
+            let accounts = publicKey;
+
+            let wallet = new PublicKey(publicKey);
+            const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+            let balance = await connection.getBalance(wallet);
+            balance = balance / LAMPORTS_PER_SOL;
+
+
+            this.setState({
+                accounts: accounts,
+                balance: balance, //this.formatBalance(balance)
+            }, () => {
+                this.props.setAccountInformationAction({
+                    ...this.props.accountInformation,
+                    accounts: accounts,
+                    balance: balance,
+                })
+                //this.loginPhantom();
+            })
+        } catch (error) {
+            console.error(error);
+            return;
+        }
+    }
+    */
 
     render = () => {
         return (
@@ -259,14 +347,29 @@ class Account extends React.Component {
                             </div>
                         </div>
 
-                        <div className="col centered">
-                            <div className="balance">
-                                {
-                                    this.state?.accountInformation?.balance &&
-                                    parseFloat(ethers.formatEther(this.state?.accountInformation?.balance)).toFixed(8)
-                                } ETH
+                        {
+                            this.state.isMetaMaskSupported &&
+                            <div className="col centered">
+                                <div className="balance">
+                                    {
+                                        this.state?.accountInformation?.balance &&
+                                        parseFloat(ethers.formatEther(this.state?.accountInformation?.balance)).toFixed(8)
+                                    } ETH
+                                </div>
                             </div>
-                        </div>
+                        }
+
+                        {/*
+                            this.state.isPhantomSupported &&
+                            <div className="col centered">
+                                <div className="balance">
+                                    {
+                                        this.state?.accountInformation?.balance &&
+                                        parseFloat(this.state?.accountInformation?.balance).toFixed(2)
+                                    } SOL
+                                </div>
+                            </div>
+                        */}
 
                         {
                             config.ENVIRONMENT_SITE === "DEV" &&
@@ -301,11 +404,13 @@ const mapStateToProps = state => {
 
     const { session } = state.session;
     const { metamaskConfiguration } = state.metamaskConfiguration;
+    const { phantomConfiguration } = state.phantomConfiguration;
     const { accountInformation } = state.accountInformation;
 
     return {
         session,
         metamaskConfiguration,
+        phantomConfiguration,
         accountInformation
     };
 }
@@ -314,6 +419,9 @@ const mapDispatchToProps = dispatch => (
     bindActionCreators({
         setMetamaskConfigurationAction,
         deleteMetamaskConfigurationAction,
+
+        setPhantomConfigurationAction,
+        deletePhantomConfigurationAction,
 
         setAccountInformationAction,
         deleteAccountInformationAction

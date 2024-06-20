@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { injectIntl } from "gatsby-plugin-react-intl"
+import { injectIntl, FormattedNumber } from "gatsby-plugin-react-intl"
 import Web3 from "web3";
 import {
     isMobile
@@ -14,12 +14,24 @@ import { setAccountInformationAction, deleteAccountInformationAction } from "../
 import { loginPlayerAction, logoutPlayerAction } from "../../redux/actions/session/SessionActions";
 import { ethers } from "ethers";
 import WalletCryptoCurrencyIcon from "../currency-icon/wallet-crypto-currency-icon";
+import { getTokenHoldingsForStrategicRoundService } from "../../redux/services/EtherscanService";
+//import ProgressBar from "@ramonak/react-progress-bar";
+import { deletePhantomConfigurationAction, setPhantomConfigurationAction } from "../../redux/actions/phantomConfiguration/PhantomConfigurationActions";
 
+/*
+import {
+    clusterApiUrl,
+    Connection,
+    PublicKey,
+    LAMPORTS_PER_SOL,
+} from "@solana/web3.js";
+*/
 class FundsRaisingRounds extends React.Component {
 
     state = {
         isMobile: isMobile,
         isMetaMaskSupported: null,
+        isPhantomSupported: null,
         provider: null,
         web3Instance: null,
         accounts: null,
@@ -68,12 +80,19 @@ class FundsRaisingRounds extends React.Component {
             status: "",
             statusText: "",
             raisedText: ""
+        },
+
+        strategicRoundProgressBar: {
+            strategicRoundTokenHoldingsTotalUSD: 0,
+            strategicRoundCompletedPercent: 0,
+            strategicRoundStatistic: null
         }
     }
 
     static propTypes = {
         session: PropTypes.any,
         metamaskConfiguration: PropTypes.any,
+        phantomConfiguration: PropTypes.any,
         accountInformation: PropTypes.object,
 
         loginPlayerAction: PropTypes.func,
@@ -81,6 +100,9 @@ class FundsRaisingRounds extends React.Component {
 
         setMetamaskConfigurationAction: PropTypes.func,
         deleteMetamaskConfigurationAction: PropTypes.func,
+
+        setPhantomConfigurationAction: PropTypes.func,
+        deletePhantomConfigurationAction: PropTypes.func,
 
         setSubmenuDialogStatusAction: PropTypes.func,
         deleteSubmenuDialogStatusAction: PropTypes.func,
@@ -91,7 +113,11 @@ class FundsRaisingRounds extends React.Component {
 
     static defaultProps = {
         session: null,
+        metamaskConfiguration: null,
+        phantomConfiguration: null,
     }
+
+    refStrategicRoundForm = null;
 
     refSeedRoundUSDC = null;
     refSeedRoundUSDT = null;
@@ -108,6 +134,8 @@ class FundsRaisingRounds extends React.Component {
     constructor(props, context) {
         super(props, context);
 
+        this.refStrategicRoundForm = React.createRef();
+
         this.refSeedRoundUSDC = React.createRef();
         this.refSeedRoundUSDT = React.createRef();
         this.refSeedRoundS8B = React.createRef();
@@ -122,21 +150,54 @@ class FundsRaisingRounds extends React.Component {
     }
 
     async componentDidMount() {
-        const provider = await detectEthereumProvider({ silent: true })
+        let provider = await detectEthereumProvider({ silent: true })
         //console.log(provider);
         let isMetaMaskSupported = false;
+        let isPhantomSupported = false;
 
-        /*if (provider) {
-            isMetaMaskSupported = (typeof window && typeof window.ethereum !== 'undefined') && window?.ethereum?.isMetaMask;
-        }*/
         if (provider && provider === window.ethereum) {
             isMetaMaskSupported = true;
+            isPhantomSupported = false;
         }
 
+        /*
+        isPhantomSupported = window.phantom?.solana?.isPhantom;
+
+        if (isPhantomSupported) {
+            isMetaMaskSupported = false;
+        }
+
+        if (isPhantomSupported) {
+            if ('phantom' in window) {
+                provider = window.phantom?.solana;
+            }
+        }
+        */
+
         let metamaskConfiguration = null;
+        let configState = null;
         if (this.props?.metamaskConfiguration) {
             metamaskConfiguration = JSON.parse(this.props.metamaskConfiguration);
+            configState = {
+                accounts: metamaskConfiguration?.accounts || null,
+                balance: metamaskConfiguration?.balance || null,
+                loginStatus: metamaskConfiguration?.loginStatus || null,
+                chainId: metamaskConfiguration?.chainId || null,
+            }
         }
+
+        /*
+        let phantomConfiguration = null;
+        if (this.props?.phantomConfiguration) {
+            phantomConfiguration = JSON.parse(this.props.phantomConfiguration);
+            configState = {
+                accounts: phantomConfiguration?.accounts || null,
+                balance: phantomConfiguration?.balance || null,
+                loginStatus: phantomConfiguration?.loginStatus || null,
+                chainId: phantomConfiguration?.chainId || null,
+            }
+        }
+        */
 
         let seedRoundS8BInUSD = null;
         let strategicRoundS8BInUSD = null;
@@ -190,15 +251,30 @@ class FundsRaisingRounds extends React.Component {
 
             })
 
+        let strategicRoundTokenHoldingsTotalUSD = 0;
+        let strategicRoundCompletedPercent = 0;
+        let strategicRoundStatistic = null;
+        await getTokenHoldingsForStrategicRoundService().then((response) => {
+            //console.log(response)
+            //response.forEach((value, index) => {
+            for (const [key, value] of Object.entries(response)) {
+                strategicRoundTokenHoldingsTotalUSD += value['usd_value'];
+            }
+            strategicRoundCompletedPercent = strategicRoundTokenHoldingsTotalUSD / 300_000;
+
+            strategicRoundStatistic = response;
+        }).catch(reason => {
+
+        })
+
         this.setState({
             isMobile: isMobile,
             provider: provider,
             isMetaMaskSupported: isMetaMaskSupported,
+            isPhantomSupported: isPhantomSupported,
 
-            accounts: metamaskConfiguration?.accounts || null,
-            balance: metamaskConfiguration?.balance || null,
-            loginStatus: metamaskConfiguration?.loginStatus || null,
-            chainId: metamaskConfiguration?.chainId || null,
+            ...configState,
+
             web3Instance: new Web3(window.ethereum),
 
             seedRoundS8BInUSD: seedRoundS8BInUSD,
@@ -206,12 +282,26 @@ class FundsRaisingRounds extends React.Component {
             publicPresaleRoundS8BInUSD: publicPresaleRoundS8BInUSD,
             ethInUSD: ethInUSD,
             usdtInUSD: usdtInUSD,
-            usdcInUSD: usdcInUSD
+            usdcInUSD: usdcInUSD,
+
+            strategicRoundProgressBar: {
+                strategicRoundTokenHoldingsTotalUSD: strategicRoundTokenHoldingsTotalUSD,
+                strategicRoundCompletedPercent: strategicRoundCompletedPercent,
+                strategicRoundStatistic: strategicRoundStatistic
+            }
 
         }, () => {
             if (this.state?.accounts && this.state?.balance && this.state?.loginStatus) {
-                window.ethereum.on('accountsChanged', this.accountsChanged);
+                if (window?.ethereum) {
+                    window?.ethereum.on('accountsChanged', this.metaMaskAccountsChanged);
+                }
             }
+
+            /*
+            if (this.state.isPhantomSupported) {
+                this.state.provider.on('accountChanged', this.phantomAccountsChanged);
+            }
+            */
         });
     }
 
@@ -233,10 +323,38 @@ class FundsRaisingRounds extends React.Component {
 
             }, () => {
                 if (this.state?.accounts && this.state?.balance && this.state?.loginStatus) {
-                    window.ethereum.on('accountsChanged', this.accountsChanged);
+                    if (window?.ethereum) {
+                        window?.ethereum.on('accountsChanged', this.metaMaskAccountsChanged);
+                    }
                 }
             });
         }
+
+        /*
+        if (JSON.stringify(this.props.phantomConfiguration) !== JSON.stringify(prevProps.phantomConfiguration)) {
+            let phantomConfiguration = null;
+            if (this.props?.phantomConfiguration) {
+                phantomConfiguration = JSON.parse(this.props.phantomConfiguration);
+            }
+
+            this.setState({
+                //provider: provider,
+                //isphantomSupported: isphantomSupported,
+
+                accounts: phantomConfiguration?.accounts || null,
+                balance: phantomConfiguration?.balance || null,
+                loginStatus: phantomConfiguration?.loginStatus || null,
+                chainId: phantomConfiguration?.chainId || null,
+
+            }, () => {
+                if (this.state?.accounts && this.state?.balance && this.state?.loginStatus) {
+                    if (window?.ethereum) {
+                        window?.ethereum.on('accountsChanged', this.phantomAccountsChanged);
+                    }
+                }
+            });
+        }
+        */
     }
 
     loginMetaMask = async () => {
@@ -321,7 +439,7 @@ class FundsRaisingRounds extends React.Component {
                     balance: balance,
                 });
 
-                window.ethereum.on('accountsChanged', this.accountsChanged);
+                window?.ethereum.on('accountsChanged', this.metaMaskAccountsChanged);
             })
         } catch (error) {
 
@@ -334,8 +452,79 @@ class FundsRaisingRounds extends React.Component {
         }
     }
 
-    chainChanged = async (accounts) => {
-        //console.log("call chainChanged");
+    /*
+    loginPhantom = async () => {
+        let chainId = null;
+
+        let accounts = [];
+        let balance = null;
+        let web3Instance = null;
+
+        try {
+
+            try {
+                const resp = await this.state.provider.connect();
+                const publicKey = resp.publicKey.toString();
+                //console.log(resp.publicKey.toString());
+
+                let wallet = new PublicKey(publicKey);
+                const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+                balance = await connection.getBalance(wallet);
+                balance = balance / LAMPORTS_PER_SOL;
+                //console.log(balance);
+            } catch (error) {
+                console.error(error);
+                return;
+            }
+
+            let loginStatus = accounts.length > 0;
+
+            let phantomConfigurationJSON = JSON.stringify(
+                {
+                    accounts: accounts,
+                    balance: balance,
+                    loginStatus: loginStatus,
+                    chainId: chainId,
+                }
+            );
+
+            //console.log(metamaskConfigurationJSON);
+
+            this.setState({
+                accounts: accounts,
+                loginStatus: loginStatus,
+                web3Instance: web3Instance,
+                balance: balance,
+                chainId: chainId,
+            }, () => {
+                this.props.loginPlayerAction({
+                    loginStatus: loginStatus,
+                    accounts: accounts,
+                    chainId: chainId,
+                });
+                this.props.setPhantomConfigurationAction(phantomConfigurationJSON);
+                this.props.setAccountInformationAction({
+                    ...this.props.accountInformation,
+                    accounts: accounts,
+                    balance: balance,
+                });
+
+                this.state.provider.on('accountChanged', this.phantomAccountsChanged);
+            })
+        } catch (error) {
+
+            if (error.code === 4001) {
+                alert(error.message);
+            } else {
+                console.error(error);
+            }
+            return;
+        }
+    }
+    */
+
+    metaMaskChainChanged = async (accounts) => {
+        //console.log("call metaMaskhainChanged");
         let chainId = null;
         try {
             chainId = await window.ethereum.request({
@@ -369,21 +558,20 @@ class FundsRaisingRounds extends React.Component {
                 web3Instance: web3Instance,
                 chainId: chainId,
             }, () => {
-                this.refreshAccounts(accounts);
+                this.refreshMetaMaskAccounts(accounts);
             })
         } catch (error) {
 
         }
     }
 
-    accountsChanged = (accounts) => {
-        //console.log("call accountsChanged");
-
-        this.refreshAccounts(accounts);
+    metaMaskAccountsChanged = (accounts) => {
+        //console.log("call metaMaskAccountsChanged");
+        this.refreshMetaMaskAccounts(accounts);
     }
 
-    refreshAccounts = async (accounts) => {
-        //console.log("call refreshAccounts");
+    refreshMetaMaskAccounts = async (accounts) => {
+        //console.log("call refreshMetaMaskAccounts");
 
         try {
             if (this.state.web3Instance?.eth) {
@@ -406,6 +594,44 @@ class FundsRaisingRounds extends React.Component {
             return;
         }
     }
+
+    /*
+    phantomAccountsChanged = (publicKey) => {
+        //console.log("call phantomAccountsChanged");
+        this.refreshPhantomAccounts(publicKey);
+    }
+    */
+
+    /*
+    refreshPhantomAccounts = async (publicKey) => {
+        //console.log("call refreshPhantomAccounts");
+
+        try {
+
+            let accounts = publicKey;
+            let wallet = new PublicKey(publicKey);
+            const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+            let balance = await connection.getBalance(wallet);
+            balance = balance / LAMPORTS_PER_SOL;
+
+
+            this.setState({
+                accounts: accounts,
+                balance: balance, //this.formatBalance(balance)
+            }, () => {
+                this.props.setAccountInformationAction({
+                    ...this.props.accountInformation,
+                    accounts: accounts,
+                    balance: balance,
+                })
+                this.loginPhantom();
+            })
+        } catch (error) {
+            console.error(error);
+            return;
+        }
+    }
+    */
 
     sendStrategicFunds = async () => {
 
@@ -632,9 +858,17 @@ class FundsRaisingRounds extends React.Component {
 
                     <hr />
                     <div className="header-section">
+                        {
+                        /*
                         <h2 className="title">
                             Funds Raising Rounds
                         </h2>
+                        */}
+                        <button className="join-presale" onClick={(event) => {
+                            this.refStrategicRoundForm.current.scrollIntoView({ behavior: "instant", block: "center", inline: "center" });
+                        }}>
+                            Act Now: Join The Presale
+                        </button>
                     </div>
                     <hr />
                     <p className="description">
@@ -734,7 +968,7 @@ class FundsRaisingRounds extends React.Component {
                         Please enter the amount you are investing in this round in the following currencies
                     </div>
 
-                    <div className="check-currency-section">
+                    <div className="check-currency-section" ref={this.refStrategicRoundForm}>
                         <div className="enter-amount" onClick={
                             (event) => {
                                 this.setState({
@@ -833,30 +1067,95 @@ class FundsRaisingRounds extends React.Component {
 
                     <div className="button-section">
                         {
-                            this.props?.session?.loginStatus ?
-                                <button type="button" className="btn send-funds" onClick={(event) => {
-                                    this.sendStrategicFunds();
-                                }}>SEND FUNDS</button>
-                                :
-                                <button type="button" className="btn connect-metamask-form" onClick={
-                                    (event) => {
-                                        event.preventDefault();
-                                        if (!this.state?.isMetaMaskSupported) {
-                                            if (config.ENVIRONMENT_SITE === "DEV") {
-                                                this.openMetaMaskUrl("https://metamask.app.link/dapp/dev.s8b.888bits.com");
-                                            } else if (config.ENVIRONMENT_SITE === "UAT") {
-                                                this.openMetaMaskUrl("https://metamask.app.link/dapp/uat.s8b.888bits.com");
-                                            } else if (config.ENVIRONMENT_SITE === "LIVE") {
-                                                this.openMetaMaskUrl("https://metamask.app.link/dapp/s8b.888bits.com");
-                                            }
-                                        }
-                                        else {
-                                            this.loginMetaMask();
+                            (this.props?.session?.loginStatus && this.state.isMetaMaskSupported) &&
+                            <button type="button" className="btn send-funds" onClick={(event) => {
+                                this.sendStrategicFunds();
+                            }}>SEND FUNDS</button>
+                        }
+                        {
+                            (!this.props?.session?.loginStatus /*&& (this.state.isMetaMaskSupported && !this.state.isPhantomSupported)*/) &&
+                            <button type="button" className="btn connect-metamask-form" onClick={
+                                (event) => {
+                                    event.preventDefault();
+                                    if (!this.state?.isMetaMaskSupported && !this.state?.isPhantomSupported) {
+                                        if (config.ENVIRONMENT_SITE === "DEV") {
+                                            this.openMetaMaskUrl("https://metamask.app.link/dapp/dev.s8b.888bits.com");
+                                        } else if (config.ENVIRONMENT_SITE === "UAT") {
+                                            this.openMetaMaskUrl("https://metamask.app.link/dapp/uat.s8b.888bits.com");
+                                        } else if (config.ENVIRONMENT_SITE === "LIVE") {
+                                            this.openMetaMaskUrl("https://metamask.app.link/dapp/s8b.888bits.com");
                                         }
                                     }
-                                }>CONNECT METAMASK</button>
+                                    else {
+                                        this.loginMetaMask();
+                                    }
+                                }
+                            }>CONNECT METAMASK</button>
                         }
+
+                        {/*
+                            this.state?.strategicRoundProgressBar?.strategicRoundTokenHoldingsTotalUSD &&
+                            <ProgressBar
+                                completed={this.state.strategicRoundProgressBar.strategicRoundCompletedPercent}
+                                maxCompleted={100}
+                                width="100%"
+                                height="50px"
+                                borderRadius="5px"
+                                //bgColor="#6a1b9a"
+                                bgColor="#FF0066"
+                                baseBgColor="#e0e0de"
+                            />
+                        */}
                     </div>
+
+                    {
+                        this.state?.strategicRoundProgressBar?.strategicRoundTokenHoldingsTotalUSD &&
+                        <p className="description-3">
+                            Total Token Holdings:
+                            &nbsp;
+                            $<FormattedNumber value={this.state?.strategicRoundProgressBar?.strategicRoundTokenHoldingsTotalUSD}
+                                locale={this.props.intl.locale}
+                                minimumFractionDigits={2}
+                                maximumFractionDigits={2}
+                                style="decimal"
+                            />
+                            <br />
+                            USDT:
+                            &nbsp;
+                            <FormattedNumber value={this.state?.strategicRoundProgressBar?.strategicRoundStatistic?.USDT?.real_value}
+                                locale={this.props.intl.locale}
+                                minimumFractionDigits={2}
+                                maximumFractionDigits={config.getMinimumFractionDigits("USDT")}
+                                style="decimal"
+                            />
+                            &nbsp;
+                            ($<FormattedNumber value={this.state?.strategicRoundProgressBar?.strategicRoundStatistic?.USDT?.usd_value}
+                                locale={this.props.intl.locale}
+                                minimumFractionDigits={2}
+                                maximumFractionDigits={config.getMinimumFractionDigits("USDT")}
+                                style="decimal"
+                            />
+                            )
+
+                            <br />
+                            USDC:
+                            &nbsp;
+                            <FormattedNumber value={this.state?.strategicRoundProgressBar?.strategicRoundStatistic?.USDC?.real_value}
+                                locale={this.props.intl.locale}
+                                minimumFractionDigits={2}
+                                maximumFractionDigits={config.getMinimumFractionDigits("USDC")}
+                                style="decimal"
+                            />
+                            &nbsp;
+                            ($<FormattedNumber value={this.state?.strategicRoundProgressBar?.strategicRoundStatistic?.USDC?.usd_value}
+                                locale={this.props.intl.locale}
+                                minimumFractionDigits={2}
+                                maximumFractionDigits={config.getMinimumFractionDigits("USDC")}
+                                style="decimal"
+                            />
+                            )
+                        </p>
+                    }
 
                     <div className="message notice">
                         Prior to the Token Generation Event (TGE), you will be allocated a number of $S8B tokens, accompanied by a 20% bonus in USDC, to be utilized within the casino.
@@ -1224,11 +1523,13 @@ const mapStateToProps = state => {
 
     const { session } = state.session;
     const { metamaskConfiguration } = state.metamaskConfiguration;
+    const { phantomConfiguration } = state.phantomConfiguration;
     const { accountInformation } = state.accountInformation;
 
     return {
         session,
         metamaskConfiguration,
+        phantomConfiguration,
         accountInformation,
     };
 }
@@ -1240,6 +1541,9 @@ const mapDispatchToProps = dispatch => (
 
         setMetamaskConfigurationAction,
         deleteMetamaskConfigurationAction,
+
+        setPhantomConfigurationAction,
+        deletePhantomConfigurationAction,
 
         setAccountInformationAction,
         deleteAccountInformationAction,

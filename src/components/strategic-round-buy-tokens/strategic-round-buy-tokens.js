@@ -6,10 +6,6 @@ import { injectIntl } from "gatsby-plugin-react-intl"
 import Web3 from "web3";
 import * as config from "../../configuration/Config";
 import detectEthereumProvider from "@metamask/detect-provider";
-import {
-    STAKE_TOKEN_ADDRESSES, STAKE_TOKEN_ABI,
-    STAKE_CONTRACT_ABI, STAKE_CONTRACT_ADDRESSES
-} from "../../configuration/Config";
 import { setMetamaskConfigurationAction, deleteMetamaskConfigurationAction } from "../../redux/actions/metamaskConfiguration/MetamaskConfigurationActions";
 import { ethers } from "ethers";
 import WalletCryptoCurrencyIcon from "../currency-icon/wallet-crypto-currency-icon";
@@ -342,7 +338,7 @@ class StrategicRoundBuyTokens extends React.Component {
                                     onChange={(event) => {
                                         if (this.state?.strategicRoundCurrencyFrom === 'USDT' && event.target.value) {
 
-                                            let amount = event.target.value / (this.state.usdtInUSD / this.state.strategicRoundS8BInUSD);
+                                            //et amount = event.target.value / (this.state.usdtInUSD / this.state.strategicRoundS8BInUSD);
 
                                             this.refStrategicRoundUSDC.current.value = '';
                                             //this.refStrategicRoundUSDT.current.value = amount.toFixed(config.getMinimumFractionDigits('USDT'));;
@@ -363,7 +359,7 @@ class StrategicRoundBuyTokens extends React.Component {
                         <button type="button" className="btn buy-tokens" onClick={async (event) => {
                             event.preventDefault();
 
-                            let usdcAmount = this.refStrategicRoundUSDC.current.value;
+                            //let usdcAmount = this.refStrategicRoundUSDC.current.value;
                             let tokenAmount = this.refStrategicRoundS8B.current.value;
 
                             //console.log("BUY TOKENS");

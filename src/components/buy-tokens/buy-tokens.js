@@ -7,8 +7,7 @@ import Web3 from "web3";
 import * as config from "../../configuration/Config";
 import detectEthereumProvider from "@metamask/detect-provider";
 import {
-    STAKE_TOKEN_ADDRESSES, STAKE_TOKEN_ABI,
-    STAKE_CONTRACT_ABI, STAKE_CONTRACT_ADDRESSES
+    STAKE_TOKEN_ADDRESSES, STAKE_TOKEN_ABI
 } from "../../configuration/Config";
 import { setMetamaskConfigurationAction, deleteMetamaskConfigurationAction } from "../../redux/actions/metamaskConfiguration/MetamaskConfigurationActions";
 import { setAccountInformationAction, deleteAccountInformationAction } from "../../redux/actions/accountInformation/AccountInformationActions";

@@ -10,9 +10,18 @@ import {
 import Web3 from "web3";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { setMetamaskConfigurationAction, deleteMetamaskConfigurationAction } from "../../redux/actions/metamaskConfiguration/MetamaskConfigurationActions";
+import { setPhantomConfigurationAction, deletePhantomConfigurationAction } from "../../redux/actions/phantomConfiguration/PhantomConfigurationActions";
 import { setSubmenuDialogStatusAction, deleteSubmenuDialogStatusAction } from "../../redux/actions/submenuDialog/SubmenuDialogActions";
 import { setAccountInformationAction, deleteAccountInformationAction } from "../../redux/actions/accountInformation/AccountInformationActions";
 import { loginPlayerAction, logoutPlayerAction } from "../../redux/actions/session/SessionActions";
+/*
+import {
+  clusterApiUrl,
+  Connection,
+  PublicKey,
+  LAMPORTS_PER_SOL,
+} from "@solana/web3.js";
+*/
 
 class Header extends React.Component {
 
@@ -21,6 +30,7 @@ class Header extends React.Component {
   state = {
     isMobile: isMobile,
     isMetaMaskSupported: null,
+    isPhantomSupported: null,
     loginStatus: null,
     provider: null,
     web3Instance: null,
@@ -41,6 +51,7 @@ class Header extends React.Component {
   static propTypes = {
     session: PropTypes.any,
     metamaskConfiguration: PropTypes.any,
+    phantomConfiguration: PropTypes.any,
     submenuDialogStatus: PropTypes.object,
     accountInformation: PropTypes.object,
 
@@ -49,6 +60,9 @@ class Header extends React.Component {
 
     setMetamaskConfigurationAction: PropTypes.func,
     deleteMetamaskConfigurationAction: PropTypes.func,
+
+    setPhantomConfigurationAction: PropTypes.func,
+    deletePhantomConfigurationAction: PropTypes.func,
 
     setSubmenuDialogStatusAction: PropTypes.func,
     deleteSubmenuDialogStatusAction: PropTypes.func,
@@ -59,23 +73,45 @@ class Header extends React.Component {
 
   static defaultProps = {
     session: null,
+    metamaskConfiguration: null,
+    phantomConfiguration: null,
+    accountInformation: null,
   }
 
   constructor(props, context) {
     super(props, context);
 
     let metamaskConfiguration = null;
+    let configState = null;
     if (this.props?.metamaskConfiguration) {
       metamaskConfiguration = JSON.parse(this.props.metamaskConfiguration);
+
+      configState = {
+        accounts: metamaskConfiguration?.accounts || null,
+        balance: metamaskConfiguration?.balance || null,
+        loginStatus: metamaskConfiguration?.loginStatus || null,
+        chainId: metamaskConfiguration?.chainId || null,
+      }
     }
+
+    /*
+    let phantomConfiguration = null;
+    if (this.props?.phantomConfiguration) {
+      phantomConfiguration = JSON.parse(this.props.phantomConfiguration);
+
+      configState = {
+        accounts: phantomConfiguration?.accounts || null,
+        balance: phantomConfiguration?.balance || null,
+        loginStatus: phantomConfiguration?.loginStatus || null,
+        chainId: phantomConfiguration?.chainId || null,
+      }
+    }
+    */
 
     this.state = {
       isMobile: isMobile,
 
-      accounts: metamaskConfiguration?.accounts || null,
-      balance: metamaskConfiguration?.balance || null,
-      loginStatus: metamaskConfiguration?.loginStatus || null,
-      chainId: metamaskConfiguration?.chainId || null,
+      ...configState,
 
       submenuDialogStatus: props.submenuDialogStatus,
 
@@ -91,32 +127,63 @@ class Header extends React.Component {
   async componentDidMount() {
     this._isMounted = true;
 
-    const provider = await detectEthereumProvider({ silent: true })
+    let provider = await detectEthereumProvider({ silent: true })
     //console.log(provider);
     let isMetaMaskSupported = false;
+    let isPhantomSupported = false;
 
-    /*if (provider) {
-      isMetaMaskSupported = (typeof window && typeof window.ethereum !== 'undefined') && window?.ethereum?.isMetaMask;
-    }*/
     if (provider && provider === window.ethereum) {
       isMetaMaskSupported = true;
+      isPhantomSupported = false;
     }
 
+    /*
+    if (!isMetaMaskSupported) {
+      isPhantomSupported = window.phantom?.solana?.isPhantom;
+
+      if (isPhantomSupported) {
+        //isMetaMaskSupported = false;
+
+        if ('phantom' in window) {
+          provider = window.phantom?.solana;
+        }
+      }
+    }
+    */
+
     let metamaskConfiguration = null;
+    let configState = null;
     if (this.props?.metamaskConfiguration) {
       metamaskConfiguration = JSON.parse(this.props.metamaskConfiguration);
+      configState = {
+        accounts: metamaskConfiguration?.accounts || null,
+        balance: metamaskConfiguration?.balance || null,
+        loginStatus: metamaskConfiguration?.loginStatus || null,
+        chainId: metamaskConfiguration?.chainId || null,
+      }
     }
+
+    /*
+    let phantomConfiguration = null;
+    if (this.props?.phantomConfiguration) {
+      phantomConfiguration = JSON.parse(this.props.phantomConfiguration);
+      configState = {
+        accounts: phantomConfiguration?.accounts || null,
+        balance: phantomConfiguration?.balance || null,
+        loginStatus: phantomConfiguration?.loginStatus || null,
+        chainId: phantomConfiguration?.chainId || null,
+      }
+    }
+    */
 
     this.setState({
       isMobile: isMobile,
 
       provider: provider,
       isMetaMaskSupported: isMetaMaskSupported,
+      //isPhantomSupported: isPhantomSupported,
 
-      accounts: metamaskConfiguration?.accounts || null,
-      balance: metamaskConfiguration?.balance || null,
-      loginStatus: metamaskConfiguration?.loginStatus || null,
-      chainId: metamaskConfiguration?.chainId || null,
+      ...configState,
       web3Instance: new Web3(window.ethereum),
 
       submenuDialogStatus: this.props.submenuDialogStatus,
@@ -130,8 +197,15 @@ class Header extends React.Component {
 
     }, () => {
       if (this.state?.accounts && this.state?.balance && this.state?.loginStatus) {
-        window.ethereum.on('accountsChanged', this.accountsChanged);
-        window.ethereum.on('chainChanged', this.chainChanged)
+        if (this.state.isMetaMaskSupported) {
+          window?.ethereum.on('accountsChanged', this.metaMaskAccountsChanged);
+          window?.ethereum.on('chainChanged', this.metaMaskChainChanged)
+        }
+        /*
+        if (this.state.isPhantomSupported) {
+          this.state.provider.on('accountChanged', this.phantomAccountsChanged);
+        }
+        */
       }
     });
 
@@ -164,11 +238,38 @@ class Header extends React.Component {
 
       }, () => {
         if (this.state?.accounts && this.state?.balance && this.state?.loginStatus) {
-          window.ethereum.on('accountsChanged', this.accountsChanged);
-          window.ethereum.on('chainChanged', this.chainChanged)
+          if (this.state.isMetaMaskSupported) {
+            window?.ethereum.on('accountsChanged', this.metaMaskAccountsChanged);
+            window?.ethereum.on('chainChanged', this.metaMaskChainChanged)
+          }
         }
       });
     }
+
+    /*
+    if (JSON.stringify(this.props.phantomConfiguration) !== JSON.stringify(prevProps.phantomConfiguration)) {
+      let phantomConfiguration = null;
+      if (this.props?.phantomConfiguration) {
+        phantomConfiguration = JSON.parse(this.props.phantomConfiguration);
+      }
+
+      this.setState({
+        isMobile: isMobile,
+
+        accounts: phantomConfiguration?.accounts || null,
+        balance: phantomConfiguration?.balance || null,
+        loginStatus: phantomConfiguration?.loginStatus || null,
+        chainId: phantomConfiguration?.chainId || null,
+
+      }, () => {
+        if (this.state?.accounts && this.state?.balance && this.state?.loginStatus) {
+          if (this.state.isPhantomSupported) {
+            this.state.provider.on('accountChanged', this.phantomAccountsChanged);
+          }
+        }
+      });
+    }
+    */
 
     if ((JSON.stringify(prevProps.submenuDialogStatus) !== JSON.stringify(this.props.submenuDialogStatus))) {
       this.setState({
@@ -177,8 +278,8 @@ class Header extends React.Component {
     }
   }
 
-  chainChanged = async (accounts) => {
-    //console.log("call chainChanged");
+  metaMaskChainChanged = async (accounts) => {
+    //console.log("call metaMaskChainChanged");
     let chainId = null;
     try {
       chainId = await window.ethereum.request({
@@ -215,21 +316,20 @@ class Header extends React.Component {
         web3Instance: web3Instance,
         chainId: chainId,
       }, () => {
-        this.refreshAccounts(accounts);
+        this.refreshMetaMaskAccounts(accounts);
       })
     } catch (error) {
 
     }
   }
 
-
-  accountsChanged = (accounts) => {
-    //console.log("call accountsChanged");
-    this.refreshAccounts(accounts);
+  metaMaskAccountsChanged = (accounts) => {
+    //console.log("call metaMaskAccountsChanged");
+    this.refreshMetaMaskAccounts(accounts);
   }
 
-  refreshAccounts = async (accounts) => {
-    //console.log("call refreshAccounts");
+  refreshMetaMaskAccounts = async (accounts) => {
+    //console.log("call refreshMetaMaskAccounts");
 
     try {
       if (this.state.web3Instance?.eth) {
@@ -260,6 +360,45 @@ class Header extends React.Component {
     }
   }
 
+  /*
+  phantomAccountsChanged = (publicKey) => {
+    //console.log("call phantomAccountsChanged");
+    this.refreshPhantomAccounts(publicKey);
+  }
+  */
+
+  /*
+  refreshPhantomAccounts = async (publicKey) => {
+    //console.log("call refreshPhantomAccounts");
+
+    try {
+
+      let accounts = publicKey;
+
+      let wallet = new PublicKey(publicKey);
+      //accounts[0] = publicKey;
+      const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+      let balance = await connection.getBalance(wallet);
+      balance = balance / LAMPORTS_PER_SOL;
+
+      this.setState({
+        accounts: accounts,
+        balance: balance, //this.formatBalance(balance)
+      }, () => {
+        this.props.setAccountInformationAction({
+          ...this.props.accountInformation,
+          accounts: accounts,
+          balance: balance,
+        })
+        this.loginPhantom();
+      })
+    } catch (error) {
+      console.error(error);
+      return;
+    }
+  }
+  */
+
   loginMetaMask = async () => {
     let chainId = null;
     try {
@@ -267,6 +406,8 @@ class Header extends React.Component {
         method: "eth_chainId",
         params: []
       })
+
+      //console.log("loginMetaMask chainId=" + chainId);
 
       if (chainId !== config.CHAINS[config.DEFAULT_CHAIN].hex) { //if not default eth network for configuration
         try {
@@ -279,10 +420,13 @@ class Header extends React.Component {
             ]
           });
         } catch (error) {
+          console.error(error);
           return;
         }
       }
+      //console.log("loginMetaMask chainId=" + chainId);
     } catch (error) {
+      console.error(error);
       return;
     }
 
@@ -342,8 +486,8 @@ class Header extends React.Component {
           balance: balance,
         });
 
-        window.ethereum.on('accountsChanged', this.accountsChanged);
-        window.ethereum.on('chainChanged', this.chainChanged);
+        window?.ethereum.on('accountsChanged', this.metaMaskAccountsChanged);
+        window?.ethereum.on('chainChanged', this.metaMaskChainChanged);
       })
     } catch (error) {
 
@@ -357,6 +501,83 @@ class Header extends React.Component {
 
   }
 
+  /*
+  loginPhantom = async () => {
+    let chainId = null;
+
+    let accounts = [];
+    let balance = null;
+    let web3Instance = null;
+    try {
+
+      try {
+        const resp = await this.state.provider.connect();
+        const publicKey = resp.publicKey.toString();
+        //console.log(resp.publicKey.toString());
+
+        accounts[0] = publicKey;
+
+        let wallet = new PublicKey(publicKey);
+        const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
+        try {
+          balance = await connection.getBalance(wallet);
+        } catch (error) {
+          console.error(error);
+          return;
+        }
+        balance = balance / LAMPORTS_PER_SOL;
+        //console.log(balance);
+      } catch (error) {
+        console.error(error);
+        return;
+      }
+
+      let loginStatus = accounts.length > 0;
+
+      let phantomConfigurationJSON = JSON.stringify(
+        {
+          accounts: accounts,
+          balance: balance,
+          loginStatus: loginStatus,
+          chainId: chainId,
+        }
+      );
+
+      //console.log(metamaskConfigurationJSON);
+
+      this.setState({
+        accounts: accounts,
+        loginStatus: loginStatus,
+        web3Instance: web3Instance,
+        balance: balance,
+        chainId: chainId,
+      }, () => {
+        this.props.loginPlayerAction({
+          loginStatus: loginStatus,
+          accounts: accounts,
+          chainId: chainId,
+        });
+        this.props.setPhantomConfigurationAction(phantomConfigurationJSON);
+        this.props.setAccountInformationAction({
+          ...this.props.accountInformation,
+          accounts: accounts,
+          balance: balance,
+        });
+
+        this.state.provider.on('accountChanged', this.phantomAccountsChanged);
+      })
+    } catch (error) {
+
+      if (error.code === 4001) {
+        alert(error.message);
+      } else {
+        console.error(error);
+      }
+      return;
+    }
+  }
+  */
+
   disconnectMetaMask = () => {
     //console.log("call disconnect metamask");
     this.setState({
@@ -364,12 +585,25 @@ class Header extends React.Component {
     }, () => {
       this.props.logoutPlayerAction();
       this.props.deleteMetamaskConfigurationAction();
+      this.props.deletePhantomConfigurationAction();
+      this.props.deleteAccountInformationAction();
+    })
+  }
+
+  disconnectPhantom = () => {
+    //console.log("call disconnect phantom");
+    this.setState({
+      loginStatus: false
+    }, () => {
+      this.props.logoutPlayerAction();
+      this.props.deletePhantomConfigurationAction();
+      this.props.deleteMetamaskConfigurationAction();
       this.props.deleteAccountInformationAction();
     })
   }
 
   shortUsername = (username) => {
-    if (username && username.length === 42) {
+    if (username && username.length >= 42) {
       //return username.slice(0, 20) + "...";
       return username.slice(0, 8) + "..." + username.slice(username.length - 7, username.length);
     } else {
@@ -515,27 +749,43 @@ class Header extends React.Component {
                 {
                   (!this.props?.session?.loginStatus && this.state.isMetaMaskSupported) &&
                   <li>
-                    <button type="button" aria-label="Connect Wallet" className="btn connect-wallet small" onClick={
+                    <button type="button" aria-label="Connect MetaMask Wallet" className="btn connect-metamask-wallet small" onClick={
                       (event) => {
                         event.preventDefault();
-                        this.loginMetaMask();
+                        if (this.state.isMetaMaskSupported) {
+                          this.loginMetaMask();
+                        }
                       }
                     }>
                     </button>
                   </li>
                 }
+                {/*
+                  (!this.props?.session?.loginStatus && this.state.isPhantomSupported) &&
+                  <li>
+                    <button type="button" aria-label="Connect Phantom Wallet" className="btn connect-phantom-wallet small" onClick={
+                      (event) => {
+                        event.preventDefault();
+                        if (this.state.isPhantomSupported) {
+                          this.loginPhantom();
+                        }
+                      }
+                    }>
+                    </button>
+                  </li>
+                */}
                 {
-                  (this.props?.session?.loginStatus === null && this.state.isMetaMaskSupported === null) &&
+                  /*(this.props?.session?.loginStatus === null && this.state.isMetaMaskSupported === null) &&
                   <li>
                     <span className="message">
                       <FormattedMessage id="Detecting Metamask ..." />
                     </span>
-                  </li>
+                  </li>*/
                 }
                 {
-                  (!this.props?.session?.loginStatus && !this.state?.isMetaMaskSupported) &&
+                  (!this.props?.session?.loginStatus && (!this.state?.isMetaMaskSupported && !this.state?.isPhantomSupported)) &&
                   <li>
-                    <button type="button" aria-label="Connect Wallet" className="btn connect-wallet small" onClick={
+                    <button type="button" aria-label="Connect MetaMask Wallet" className="btn connect-metamask-wallet small" onClick={
                       (event) => {
                         event.preventDefault();
                         if (config.ENVIRONMENT_SITE === "DEV") {
@@ -573,6 +823,29 @@ class Header extends React.Component {
                     </button>
                   </li>
                 }
+                {/*
+                  (this.props?.session?.loginStatus && this.state?.isPhantomSupported && this.state?.accounts?.[0]) &&
+                  <li className="account">
+                    <button type="button" className="account-trigger active">
+                      <span className="username" title={this.state.accounts[0]}>
+                        {this.shortUsername(this.state.accounts[0])}
+                      </span>
+                      <br />
+                      <span className="balance">
+                        {
+                          <FormattedNumber value={this.state.balance}
+                            locale={this.props.intl.locale}
+                            minimumFractionDigits={2}
+                            maximumFractionDigits={config.getMinimumFractionDigits("SOL")}
+                            style="decimal"
+                          />
+                        }
+                        &nbsp;
+                        SOL
+                      </span>
+                    </button>
+                  </li>
+                */}
                 {
                   (this.props?.session?.loginStatus && this.state?.isMetaMaskSupported) &&
                   <li className="logout">
@@ -584,6 +857,17 @@ class Header extends React.Component {
                     </button>
                   </li>
                 }
+                {/*
+                  (this.props?.session?.loginStatus && this.state?.isPhantomSupported) &&
+                  <li className="logout">
+                    <button type="button" aria-label="Logout" onClick={(event) => {
+                      event.preventDefault();
+                      this.disconnectPhantom();
+                    }}>
+                      <img src="/pictures/icon-logout.svg" alt="Logout" loading="lazy" decoding="async"></img>
+                    </button>
+                  </li>
+                */}
 
                 {/*
                   (!this.props?.session?.loginStatus && this.state?.isMetaMaskSupported) &&
@@ -615,12 +899,14 @@ const mapStateToProps = state => {
 
   const { session } = state.session;
   const { metamaskConfiguration } = state.metamaskConfiguration;
+  const { phantomConfiguration } = state.phantomConfiguration;
   const { submenuDialogStatus } = state.submenuDialogStatus;
   const { accountInformation } = state.accountInformation;
 
   return {
     session,
     metamaskConfiguration,
+    phantomConfiguration,
     submenuDialogStatus,
     accountInformation
   };
@@ -633,6 +919,9 @@ const mapDispatchToProps = dispatch => (
 
     setMetamaskConfigurationAction,
     deleteMetamaskConfigurationAction,
+
+    setPhantomConfigurationAction,
+    deletePhantomConfigurationAction,
 
     setSubmenuDialogStatusAction,
     deleteSubmenuDialogStatusAction,

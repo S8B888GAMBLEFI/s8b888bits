@@ -82,6 +82,7 @@ class TransactionTypeStatus extends React.Component {
             case 'PL_DOC_VERIF':
             case 'PL_STATUS_VERIF':
             case 'CryptoCurrency':
+            case "COMPLETED":
                 return (
                     <div className="completed">
                         Completed
@@ -94,6 +95,7 @@ class TransactionTypeStatus extends React.Component {
             case 'WITHDRAW_FEE_DECLINED':
             case 'WITHDRAW_DECLINED_BANK':
             case 'WITHDRAW_DECLINED':
+            case "DECLINED":
                 //case 'OLCT_HANG_PAY_OUT_FEE_CANCEL':
                 //case 'PROMOTION_CANCEL':
                 return (
@@ -101,10 +103,18 @@ class TransactionTypeStatus extends React.Component {
                         Declined
                     </div>);
 
+            case "ERROR":
+                return (
+                    <div className="error">
+                        Error
+                    </div>
+                );
+
             case 'WITHDRAW_FEE_REQUEST_POSTPONE':
             case 'WITHDRAW_REQUEST_POSTPONE':
             case 'WITHDRAW_REQUEST':
             case 'WITHDRAW_FEE_REQUEST':
+            case "PENDING":
                 return (
                     <div className="pending">
                         Pending
@@ -115,6 +125,7 @@ class TransactionTypeStatus extends React.Component {
             case 'BONUS_WIN_CANCEL':
             case 'OLCT_HANG_PAY_OUT_FEE_CANCEL':
             case 'PROMOTION_CANCEL':
+            case "CANCELED":
                 return (
                     <div className="canceled">
                         Canceled

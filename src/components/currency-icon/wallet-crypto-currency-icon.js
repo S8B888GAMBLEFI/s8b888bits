@@ -46,6 +46,8 @@ class WalletCryptoCurrencyIcon extends React.Component {
                 return <img loading="lazy" decoding="async" src="/pictures/wallet-crypto-currencies/icon-s8b.svg" alt={this.props.currency} width={this.props.width} height={this.props.height} />;
             case 'S8B-red':
                 return <img loading="lazy" decoding="async" src="/pictures/wallet-crypto-currencies/icon-s8b-red.svg" alt={this.props.currency} width={this.props.width} height={this.props.height} />;
+            case 'SOL':
+                return <img loading="lazy" decoding="async" src="/pictures/wallet-crypto-currencies/icon-sol.svg" alt={this.props.currency} width={this.props.width} height={this.props.height} />;
             default:
                 return this.props.currency;
         }

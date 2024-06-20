@@ -355,7 +355,7 @@
 
         .block-recent-activities {
             display: block;
-            max-width: 800px;
+            //max-width: 800px;
             max-height: 800px;
 
             @include breakpoint(1440) {
@@ -483,6 +483,16 @@
                             vertical-align: middle;
                             text-wrap: nowrap;
 
+                            a {
+                                color: $color-white;
+                                font-family: $font-inter;
+                                font-size: 14px;
+                                font-style: normal;
+                                font-weight: 400;
+                                line-height: 16px;
+                                letter-spacing: -0.25px;
+                            }
+
                             &:nth-child(2) {
                                 @include flexbox();
                                 flex-direction: column;
@@ -511,6 +521,7 @@
                             .completed {
                                 border-radius: 12px;
                                 background-color: $color-48;
+                                color: $color-white;
                                 font-family: $font-inter;
                                 font-size: 14px;
                                 font-style: normal;
@@ -519,12 +530,13 @@
                                 padding: 5px 10px;
                                 min-width: 100px;
                                 max-width: 120px;
-                                margin: 0 auto;
+                                margin: 5px auto;
                             }
 
                             .pending {
                                 border-radius: 12px;
                                 background-color: $color-39;
+                                color: $color-white;
                                 font-family: $font-inter;
                                 font-size: 14px;
                                 font-style: normal;
@@ -533,12 +545,13 @@
                                 padding: 5px 10px;
                                 min-width: 100px;
                                 max-width: 120px;
-                                margin: 0 auto;
+                                margin: 5px auto;
                             }
 
                             .declined {
                                 border-radius: 12px;
                                 background-color: $color-50;
+                                color: $color-white;
                                 font-family: $font-inter;
                                 font-size: 14px;
                                 font-style: normal;
@@ -547,12 +560,28 @@
                                 padding: 5px 10px;
                                 min-width: 100px;
                                 max-width: 120px;
-                                margin: 0 auto;
+                                margin: 5px auto;
+                            }
+
+                            .error {
+                                border-radius: 12px;
+                                background-color: $color-40;
+                                color: $color-white;
+                                font-family: $font-inter;
+                                font-size: 14px;
+                                font-style: normal;
+                                font-weight: 400;
+                                line-height: 16px;
+                                padding: 5px 10px;
+                                min-width: 100px;
+                                max-width: 120px;
+                                margin: 5px auto;
                             }
 
                             .canceled {
                                 border-radius: 12px;
                                 background-color: $color-primary;
+                                color: $color-white;
                                 font-family: $font-inter;
                                 font-size: 14px;
                                 font-style: normal;
@@ -561,7 +590,7 @@
                                 padding: 5px 10px;
                                 min-width: 100px;
                                 max-width: 120px;
-                                margin: 0 auto;
+                                margin: 5px auto;
                             }
                         }
                     }
