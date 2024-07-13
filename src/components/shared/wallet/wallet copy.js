@@ -132,15 +132,16 @@ class Wallet extends React.Component {
             }
         });
 
-        await fetch(config.API_BASE_URL + "get-exchange-pair/fromCurrency/ETH/toCurrency/USD")
+
+        await fetch("/localdb/funds-raising-rounds.json")
             .then(response => response.json())
             .then(json => {
                 this.setState({
-                    ethInUSD: json.rate
+                    ethInUSD: json.ethInUSD
                 })
             }).catch(reason => {
 
-            });
+            })
 
         window.addEventListener('resize', () => {
             this.setState({
@@ -314,12 +315,10 @@ class Wallet extends React.Component {
                                 this.state?.isMetaMaskSupported &&
                                 <WalletCryptoCurrencyIcon currency="ETH" width={40} height={40} />
                             }
-                            {
-                                /*
-                                    this.state?.isPhantomSupported &&
-                                    <WalletCryptoCurrencyIcon currency="SOL" width={40} height={40} />
-                                */
-                            }
+                            {/*
+                                this.state?.isPhantomSupported &&
+                                <WalletCryptoCurrencyIcon currency="SOL" width={40} height={40} />
+                            */}
                         </div>
                         <div className="account-balance">
                             Account Balance
@@ -357,7 +356,74 @@ class Wallet extends React.Component {
                             }
                         </div>
                     </div>
-
+                    {
+                        this.state?.accountInformation?.stakeTokenBalance &&
+                        <div className="col centered">
+                            <div>
+                                <WalletCryptoCurrencyIcon currency="S8B" width={40} height={40} />
+                            </div>
+                            <div className="account-balance">
+                                Token Balance
+                            </div>
+                            <div className="account-balance-value">
+                                {
+                                    this.state?.accountInformation?.stakeTokenBalance &&
+                                    this.state?.accountInformation?.stakeTokenBalance
+                                }
+                            </div>
+                        </div>
+                    }
+                    {
+                        this.state?.accountInformation?.rewardTokenBalance &&
+                        <div className="col centered">
+                            <div>
+                                <WalletCryptoCurrencyIcon currency="S8B" width={40} height={40} />
+                            </div>
+                            <div className="account-balance">
+                                Reward Collected
+                            </div>
+                            <div className="account-balance-value">
+                                {
+                                    this.state?.accountInformation?.rewardTokenBalance &&
+                                    this.state?.accountInformation?.rewardTokenBalance
+                                }
+                            </div>
+                        </div>
+                    }
+                    {
+                        this.state?.accountInformation?.totalStakedBalance &&
+                        <div className="col centered">
+                            <div>
+                                <WalletCryptoCurrencyIcon currency="S8B" width={40} height={40} />
+                            </div>
+                            <div className="account-balance">
+                                Tokens Staked
+                            </div>
+                            <div className="account-balance-value">
+                                {
+                                    this.state?.accountInformation?.totalStakedBalance &&
+                                    this.state?.accountInformation?.totalStakedBalance
+                                }
+                            </div>
+                        </div>
+                    }
+                    {
+                        this.state?.accountInformation?.rewardsStakedBalance &&
+                        <div className="col centered">
+                            <div>
+                                <WalletCryptoCurrencyIcon currency="S8B" width={40} height={40} />
+                            </div>
+                            <div className="account-balance">
+                                Reward to claim
+                            </div>
+                            <div className="account-balance-value">
+                                {
+                                    this.state?.accountInformation?.rewardsStakedBalance &&
+                                    this.state?.accountInformation?.rewardsStakedBalance
+                                }
+                            </div>
+                        </div>
+                    }
                     <div className="col centered">
                         <button className="btn deposit-tab" onClick={(event) => {
 

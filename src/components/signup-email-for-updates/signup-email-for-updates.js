@@ -1,9 +1,9 @@
-import { injectIntl } from "gatsby-plugin-react-intl";
-import PropTypes from "prop-types";
 import React from "react";
+import PropTypes from "prop-types";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
+import { injectIntl } from "gatsby-plugin-react-intl";
+import { saveSignupEmailService } from "../../redux/services/ApiService";
 class SignupEmailForUpdates extends React.Component {
 
   state = {
@@ -15,6 +15,13 @@ class SignupEmailForUpdates extends React.Component {
   }
 
   _isMounted = false;
+  refEmail = null;
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.refEmail = React.createRef();
+  }
 
   componentDidMount() {
     this._isMounted = true;
@@ -23,7 +30,6 @@ class SignupEmailForUpdates extends React.Component {
   componentWillUnmount() {
     this._isMounted = false;
   }
-
 
   render() {
     return (
@@ -45,8 +51,22 @@ class SignupEmailForUpdates extends React.Component {
               {/*
               <img alt="Email" src="/pictures/image-icons/icon-email.svg" loading="lazy" />
               */}
-              <input type="email" placeholder="Enter email" />
-              <button type="button" className="btn signup-email">Sign Up</button>
+              <input type="email" placeholder="Enter email" ref={this.refEmail} />
+              <button type="button" className="btn signup-email" onClick={(event) => {
+                event.preventDefault();
+                if (this.refEmail.current.value !== "") {
+                  saveSignupEmailService({ email: this.refEmail.current.value })
+                    .then((response) => {
+                      if (response === "1") {
+                        this.refEmail.current.value = '';
+                        this.refEmail.value = '';
+                      }
+                    })
+                    .catch((reason) => {
+
+                    });
+                }
+              }}>Sign Up</button>
 
             </div>
           </form>

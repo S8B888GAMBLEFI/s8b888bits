@@ -38,10 +38,10 @@ class Staking extends React.Component {
         stakeAmount: null,
         unstakeAmount: null,
 
-        dailyApr: null,
-        apr: null,
+        dailyApr: 0,
+        apr: 0,
 
-        ethInUSD: null
+        ethInUSD: 0
 
     }
 
@@ -88,6 +88,9 @@ class Staking extends React.Component {
             metamaskConfiguration = JSON.parse(this.props.metamaskConfiguration);
         }
 
+        let ethInUSD = 0;
+
+        /*
         await fetch("/localdb/funds-raising-rounds.json")
             .then(response => response.json())
             .then(json => {
@@ -97,6 +100,15 @@ class Staking extends React.Component {
             }).catch(reason => {
 
             })
+        */
+
+        await fetch(config.API_BASE_URL + "get-exchange-pair/fromCurrency/ETH/toCurrency/USD")
+            .then(response => response.json())
+            .then(json => {
+                ethInUSD = json.rate;
+            }).catch(reason => {
+
+            });
 
         this.setState({
             provider: provider,
@@ -106,6 +118,7 @@ class Staking extends React.Component {
             chainId: metamaskConfiguration?.chainId || null,
             web3Instance: new Web3(window.ethereum),
             accountInformation: this.props.accountInformation,
+            ethInUSD: ethInUSD
         }, () => {
             if (this.state?.accounts && this.state?.balance && this.state?.loginStatus) {
                 window.ethereum.on('accountsChanged', this.accountsChanged);
@@ -230,76 +243,6 @@ class Staking extends React.Component {
                     return;
                 }
 
-                let playerAddress = accounts[0];
-
-                let stakeTokenContract = new this.state.web3Instance.eth.Contract(STAKE_TOKEN_ABI, STAKE_TOKEN_ADDRESSES, { from: playerAddress, gas: 10000000 })
-
-                await stakeTokenContract.methods.balanceOf(playerAddress)
-                    .call({
-                        from: playerAddress
-                    })
-                    .then((response) => {
-                        //console.log("STAKE TOKEN BALANCE: " + response);
-                        this.setState({
-                            stakeTokenBalance: ethers.formatEther(response)
-                        })
-                        this.props.setAccountInformationAction({
-                            ...this.props.accountInformation,
-                            accounts: accounts,
-                            stakeTokenBalance: ethers.formatEther(response)
-                        })
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                    })
-                    ;
-
-
-                let rewardTokenContract = new this.state.web3Instance.eth.Contract(REWARD_TOKEN_ABI, REWARD_TOKEN_ADDRESSES, { from: playerAddress, gas: 10000000 })
-
-                await rewardTokenContract.methods.balanceOf(playerAddress)
-                    .call({
-                        from: playerAddress
-                    })
-                    .then((response) => {
-                        //console.log("REWARD TOKEN BALANCE: " + response);
-                        this.setState({
-                            rewardTokenBalance: ethers.formatEther(response) //this.formatBalance(response)
-                        })
-                        this.props.setAccountInformationAction({
-                            ...this.props.accountInformation,
-                            rewardTokenBalance: ethers.formatEther(response)
-                        })
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                    })
-                    ;
-
-
-                let stakeContract = new this.state.web3Instance.eth.Contract(STAKE_CONTRACT_ABI, STAKE_CONTRACT_ADDRESSES, { from: playerAddress, gas: 10000000 })
-
-                await stakeContract.methods.getStakeInfo(playerAddress)
-                    .call({
-                        from: playerAddress
-                    })
-                    .then((response) => {
-                        //console.log(response);
-                        //_tokensStaked, _rewards
-                        this.setState({
-                            totalStakedBalance: ethers.formatEther(response._tokensStaked), //this.formatBalance(response._tokensStaked)
-                            rewardsStakedBalance: ethers.formatEther(response._rewards),
-                        })
-                        this.props.setAccountInformationAction({
-                            ...this.props.accountInformation,
-                            totalStakedBalance: ethers.formatEther(response._tokensStaked),
-                            rewardsStakedBalance: ethers.formatEther(response._rewards),
-                        })
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                    })
-                    ;
             }
         } catch (error) {
             console.error(error);
@@ -373,131 +316,6 @@ class Staking extends React.Component {
             return;
         }
 
-        let playerAddress = this.state.accounts[0];
-
-        let stakeTokenContract = new this.state.web3Instance.eth.Contract(STAKE_TOKEN_ABI, STAKE_TOKEN_ADDRESSES, { from: playerAddress, gas: 10000000 })
-
-        stakeTokenContract.methods.balanceOf(playerAddress)
-            .call({
-                from: playerAddress
-            })
-            .then((response) => {
-                //console.log("STAKE TOKEN BALANCE: " + response);
-                this.setState({
-                    stakeTokenBalance: ethers.formatEther(response)
-                });
-
-                if (this.props?.accountInformation) {
-                    this.props.setAccountInformationAction({
-                        ...this.props.accountInformation,
-                        stakeTokenBalance: ethers.formatEther(response)
-                    })
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-            })
-            ;
-
-        let rewardTokenContract = new this.state.web3Instance.eth.Contract(REWARD_TOKEN_ABI, REWARD_TOKEN_ADDRESSES, { from: playerAddress, gas: 10000000 })
-
-        rewardTokenContract.methods.balanceOf(playerAddress)
-            .call({
-                from: playerAddress
-            })
-            .then((response) => {
-                //console.log("REWARD TOKEN BALANCE: " + response);
-                this.setState({
-                    rewardTokenBalance: ethers.formatEther(response) //this.formatBalance(response)
-                });
-
-                if (this.props?.accountInformation) {
-                    this.props.setAccountInformationAction({
-                        ...this.props.accountInformation,
-                        rewardTokenBalance: ethers.formatEther(response)
-                    })
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-            })
-            ;
-
-        let stakeContract = new this.state.web3Instance.eth.Contract(STAKE_CONTRACT_ABI, STAKE_CONTRACT_ADDRESSES, { from: this.playerAddress, gas: 10000000 })
-
-        stakeContract.methods.getStakeInfo(playerAddress)
-            .call({
-                from: playerAddress
-            })
-            .then((response) => {
-                //console.log(response);
-                //_tokensStaked, _rewards
-
-                let apr = 0.00;
-
-                if (response._rewards === 0n) {
-                    apr = 0.00;
-                }
-                else if (response._tokensStaked === 0n) {
-                    apr = 0.00;
-                }
-                else {
-                    apr = ((ethers.formatEther(response._rewards) / ethers.formatEther(response._tokensStaked)) * 100) + "";
-                }
-
-                apr = apr + "";
-
-                apr = apr.substring(0, apr.indexOf(".") + 3);
-
-                //console.log(apr);
-
-                this.setState({
-                    totalStakedBalance: ethers.formatEther(response._tokensStaked),
-                    rewardsStakedBalance: ethers.formatEther(response._rewards),
-                    dailyApr: apr,
-                    apr: apr,
-                });
-
-                if (this.props?.accountInformation) {
-                    this.props.setAccountInformationAction({
-                        ...this.props.accountInformation,
-                        totalStakedBalance: ethers.formatEther(response._tokensStaked),
-                        rewardsStakedBalance: ethers.formatEther(response._rewards),
-                        dailyApr: apr,
-                        apr: apr,
-                    })
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-            })
-            ;
-
-
-        /*
-        let usdcContract = new this.state.web3Instance.eth.Contract(config.USDC_TOKEN_ABI, config.TOKEN_ADDRESSES.SEPOLIA.USDC, { from: this.playerAddress, gas: 10000000 })
-
-        usdcContract.methods.decimals(playerAddress)
-            .call({
-                from: playerAddress
-            })
-            .then((response) => {
-                console.log(response);
-            })
-
-        usdcContract.methods.balanceOf(playerAddress)
-            .call({
-                from: playerAddress
-            })
-            .then((response) => {
-
-                console.log(response);
-                console.log(ethers.formatUnits(response, 6));
-            });
-
-
-        console.log(usdcContract);
-        */
     }
 
     render = () => {
@@ -539,8 +357,7 @@ class Staking extends React.Component {
                                 minimumFractionDigits={2}
                                 maximumFractionDigits={config.getMinimumFractionDigits("USD")}
                                 style="decimal"
-                            />
-                            )
+                            />)
                         </span>
                     </div>
                     <div className="item">
@@ -561,8 +378,7 @@ class Staking extends React.Component {
                                 minimumFractionDigits={2}
                                 maximumFractionDigits={config.getMinimumFractionDigits("USD")}
                                 style="decimal"
-                            />
-                            )
+                            />)
                         </span>
                     </div>
                     <div className="item">
@@ -572,7 +388,6 @@ class Staking extends React.Component {
                         </span>
                         <span className="balance">
                             {
-                                this.state.dailyApr &&
                                 <>
                                     {this.state.dailyApr} %
                                 </>
@@ -586,7 +401,6 @@ class Staking extends React.Component {
                         </span>
                         <span className="balance">
                             {
-                                this.state.apr &&
                                 <>
                                     {this.state.apr} %
                                 </>
@@ -645,12 +459,6 @@ class Staking extends React.Component {
 
                                 if (!this.state.stakeTokenBalance) return;
 
-                                this.setState({
-                                    stakeAmount: this.state.stakeTokenBalance
-                                }, () => {
-                                    this.refreshData();
-                                });
-
                             }}>
                                 Stake Max
                             </button>
@@ -658,30 +466,6 @@ class Staking extends React.Component {
                                 event.preventDefault();
 
                                 if (!this.state.stakeAmount) return;
-
-                                let playerAddress = this.state.accounts[0];
-                                let stakeTokenContract = new this.state.web3Instance.eth.Contract(STAKE_TOKEN_ABI, STAKE_TOKEN_ADDRESSES, { from: playerAddress, gas: 10000000 })
-                                let stakeContract = new this.state.web3Instance.eth.Contract(STAKE_CONTRACT_ABI, STAKE_CONTRACT_ADDRESSES, { from: playerAddress, gas: 10000000 })
-
-                                //console.log(this.state.stakeAmount);
-                                //console.log(playerAddress);
-                                //console.log(stakeTokenContract);
-
-                                await stakeTokenContract.methods.approve(STAKE_CONTRACT_ADDRESSES, ethers.parseEther(this.state.stakeAmount))
-                                    .send({
-                                        from: playerAddress,
-                                        gas: 1_000_000
-                                    });
-
-                                //console.log(stakeContract);
-
-                                await stakeContract.methods.stake(ethers.parseUnits(this.state.stakeAmount, "ether"))
-                                    .send({
-                                        from: playerAddress,
-                                        gas: 1_000_000
-                                    });
-
-                                this.refreshData();
 
                             }}>
                                 Approve
@@ -691,17 +475,6 @@ class Staking extends React.Component {
 
                                 if (!this.state.rewardsStakedBalance) return;
 
-                                let playerAddress = this.state.accounts[0];
-                                //let stakeTokenContract = new this.state.web3Instance.eth.Contract(STAKE_TOKEN_ABI, STAKE_TOKEN_ADDRESSES, { from: playerAddress, gas: 10000000 })
-                                let stakeContract = new this.state.web3Instance.eth.Contract(STAKE_CONTRACT_ABI, STAKE_CONTRACT_ADDRESSES, { from: playerAddress, gas: 10000000 })
-
-                                await stakeContract.methods.claimRewards()
-                                    .send({
-                                        from: playerAddress,
-                                        gas: 1_000_000
-                                    });
-
-                                this.refreshData();
                             }}>
                                 Details
                             </button>
@@ -751,10 +524,6 @@ class Staking extends React.Component {
 
                                 if (!this.state.totalStakedBalance) return;
 
-                                this.setState({
-                                    unstakeAmount: this.state.totalStakedBalance
-                                });
-
                             }}>
                                 Unstake Max
                             </button>
@@ -762,18 +531,6 @@ class Staking extends React.Component {
                                 event.preventDefault();
 
                                 if (!this.state.unstakeAmount) return;
-
-                                let playerAddress = this.state.accounts[0];
-                                //let stakeTokenContract = new this.state.web3Instance.eth.Contract(STAKE_TOKEN_ABI, STAKE_TOKEN_ADDRESSES, { from: playerAddress, gas: 10000000 })
-                                let stakeContract = new this.state.web3Instance.eth.Contract(STAKE_CONTRACT_ABI, STAKE_CONTRACT_ADDRESSES, { from: playerAddress, gas: 10000000 })
-
-                                await stakeContract.methods.withdraw(ethers.parseUnits(this.state.unstakeAmount, "ether"))
-                                    .send({
-                                        from: playerAddress,
-                                        gas: 1_000_000
-                                    });
-
-                                this.refreshData();
 
                             }}>
                                 Approve
@@ -783,34 +540,12 @@ class Staking extends React.Component {
 
                                 if (!this.state.rewardsStakedBalance) return;
 
-                                let playerAddress = this.state.accounts[0];
-                                //let stakeTokenContract = new this.state.web3Instance.eth.Contract(STAKE_TOKEN_ABI, STAKE_TOKEN_ADDRESSES, { from: playerAddress, gas: 10000000 })
-                                let stakeContract = new this.state.web3Instance.eth.Contract(STAKE_CONTRACT_ABI, STAKE_CONTRACT_ADDRESSES, { from: playerAddress, gas: 10000000 })
-
-                                await stakeContract.methods.claimRewards()
-                                    .send({
-                                        from: playerAddress,
-                                        gas: 1_000_000
-                                    });
-
-                                this.refreshData();
-
                             }}>
                                 Details
                             </button>
                         </div>
                     </div>
                 </div>
-
-                {/*
-                <hr />
-
-                <BuyTokens />
-
-                <hr />
-
-                <StrategicRoundBuyTokens />
-                */}
 
                 <hr />
 

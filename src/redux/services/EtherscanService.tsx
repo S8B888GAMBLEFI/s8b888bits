@@ -73,32 +73,8 @@ const getTokenBalanceForAddress = (address, contractAddress) => {
         });
 }
 
-const getTokenHoldingsForStrategicRoundService = () => {
-
-    let axiosConfig = {
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    };
-
-    return fetch(config.API_BASE_URL + "public/api/get-token-holdings-for-strategic-round", {
-        method: 'GET',
-        headers: axiosConfig.headers,
-    })
-        .then((response) => {
-            return response.json();
-        })
-        .catch((error) => {
-            //console.error(error);
-            return {
-                status: 'NOK',
-                message: 'Error in server request'
-            };
-        });
-}
 
 export {
     getNormalTransactionsByAddress,
     getTokenBalanceForAddress,
-    getTokenHoldingsForStrategicRoundService,
 };

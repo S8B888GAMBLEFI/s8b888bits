@@ -653,7 +653,7 @@ class Header extends React.Component {
               <span></span>
             </button>
             <Link to="/" className="logo">
-              <img src="/pictures/logo/888logoPrimary.svg" alt={config.casinoName} loading="lazy" decoding="async" />
+              <img src="/pictures/logo/888logoPrimary.svg" alt={config.casinoName} loading="lazy" decoding="async" width="195" height="70" />
             </Link>
           </div>
 

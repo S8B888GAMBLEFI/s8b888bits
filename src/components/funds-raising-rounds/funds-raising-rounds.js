@@ -14,10 +14,9 @@ import { setAccountInformationAction, deleteAccountInformationAction } from "../
 import { loginPlayerAction, logoutPlayerAction } from "../../redux/actions/session/SessionActions";
 import { ethers } from "ethers";
 import WalletCryptoCurrencyIcon from "../currency-icon/wallet-crypto-currency-icon";
-import { getTokenHoldingsForStrategicRoundService } from "../../redux/services/EtherscanService";
+import { getTokenHoldingsForStrategicRoundService } from "../../redux/services/ApiService";
 //import ProgressBar from "@ramonak/react-progress-bar";
 import { deletePhantomConfigurationAction, setPhantomConfigurationAction } from "../../redux/actions/phantomConfiguration/PhantomConfigurationActions";
-
 /*
 import {
     clusterApiUrl,
@@ -249,7 +248,31 @@ class FundsRaisingRounds extends React.Component {
                 usdcInUSD = json.usdcInUSD;
             }).catch(reason => {
 
-            })
+            });
+
+        await fetch(config.API_BASE_URL + "get-exchange-pair/fromCurrency/ETH/toCurrency/USD")
+            .then(response => response.json())
+            .then(json => {
+                ethInUSD = json.rate;
+            }).catch(reason => {
+
+            });
+
+        await fetch(config.API_BASE_URL + "get-exchange-pair/fromCurrency/USDTE/toCurrency/USD")
+            .then(response => response.json())
+            .then(json => {
+                usdtInUSD = json.rate;
+            }).catch(reason => {
+
+            });
+
+        await fetch(config.API_BASE_URL + "get-exchange-pair/fromCurrency/USDC/toCurrency/USD")
+            .then(response => response.json())
+            .then(json => {
+                usdcInUSD = json.rate;
+            }).catch(reason => {
+
+            });
 
         let strategicRoundTokenHoldingsTotalUSD = 0;
         let strategicRoundCompletedPercent = 0;
@@ -829,8 +852,8 @@ class FundsRaisingRounds extends React.Component {
                                     Telegram
                                 </span>
                             </a>
-                            <a href="http://twitter.com/BITS888" className="item">
-                                <img src="/pictures/connect-with-us/twitter.svg" alt="Twitter" loading="lazy" decoding="async" />
+                            <a href="https://x.com/S8B888BITS" className="item">
+                                <img src="/pictures/connect-with-us/twitter.svg" alt="X (Twitter)" loading="lazy" decoding="async" />
                                 <span>
                                     Twitter
                                 </span>
