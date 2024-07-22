@@ -65,8 +65,16 @@ class InvestorsSafety extends React.Component {
                             The verification gold Standard&reg;
                         </div>
                         <div className="description">
-                            Assure DeFi® is the market leader and pioneer of project KYC Verification and Code Audits.
-                            Add Trust, Credibility and boost your visibility by getting verified today.
+                            Assure DeFi® continues to lead the market
+                            with cutting-edge KYC Verification and
+                            Code Audits services. Boost trust, credibility,
+                            and visibility by completing our verification
+                            process in the coming days.
+                            <br />
+                            Assure DeFI has been engaged to conduct a
+                            secondary audit on contracts developed by
+                            SourceHat, ensuring dApps are KYC-compliant
+                            for Spilux Innovative's Project S8B and casino dApps.
                         </div>
                     </a>
 
