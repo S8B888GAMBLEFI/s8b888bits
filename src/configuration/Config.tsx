@@ -4,7 +4,7 @@
 export const ENVIRONMENT_SITE = 'LIVE';
 export const IS_DEV_ENV = false;
 export const REST_SERVICE_BASE_URL = "https://www.888bits.com/api/rest/index";
-export const BASE_URL = "https://s8b.888bits.com/";
+export const BASE_URL = "https://s8b888bits.vercel.app/";
 export const CASINO_BASE_URL = "https://www.888bits.com/";
 export const API_BASE_URL = "https://s8b.888bits.com/api/";
 export const internetGroupId = '747872399';

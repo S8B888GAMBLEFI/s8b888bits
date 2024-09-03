@@ -918,17 +918,17 @@ class FundsRaisingRounds extends React.Component {
                     <p className="restriction-description">
                         Tokens purchased during the presale rounds are subject to a various cliff and vesting schedules.
                         <br />
-                        Immediately following the Token Generation Event (TGE), 25.81% of total supply are released to their respective holders,
+                        Immediately following the Token Generation Event (TGE), 24.46% of total supply are released to their respective holders
                         <br />
-                        the remaining are gradually distributed according to a predetermined cliff and vesting schedule depends on investment seed.
+                        the remaining are linear distributed according to a predetermined cliff and vesting schedule depends on investment seed.
                     </p>
 
                     <p className="description-2">
-                        For public round presale, 50% will be released at TGE, with vesting of 1 months.
+                        For public round presale, 18% will be released at TGE, with vesting of 5 months.
                         <br />
-                        For strategic round presale, 23% will be released at TGE, with vesting of 3 months.
+                        For strategic round presale, 10% will be released at TGE, with vesting of 10 months.
                         <br />
-                        For seed round presale, 18% will be released at TGE, with vesting of 5 months.
+                        For seed round presale, 50% will be released at TGE, with vesting of 1 months.
                     </p>
 
                     <p className="description-3">
@@ -977,14 +977,13 @@ class FundsRaisingRounds extends React.Component {
                     <p className="description">
                         In this phase, we welcome investors who bring not only capital but also strategic value to our project.
                         <br />
-                        This round is ideal for those who can offer expertise, partnerships, or resources that align with our long-term vision.
+                        This round is open to VC funding for those who can offer expertise, or resources that align with our long-term vision.
                     </p>
 
                     <p className="description-3">
-                        The strategic presale round is allocated 9% of the total token supply, which amounts to 79,999,999.92 $S8B tokens.
+                        The strategic presale round is allocated 9% of the total token supply, which amounts to 79,999,999.92 $S8B tokens, equivalent to 1,333,333.00 $S8B tokens, representing 0.15% of the total token supply.
                         <br />
-                        In this round, each wallet is limited to a maximum investment of $5,000.00, equivalent to 1,333,333.00 $S8B tokens,
-                        representing 0.15% of the total token supply.
+                        In this round, each personal wallet is limited to a maximum investment of $5,000.00, VC funding on request.
                     </p>
 
                     <div className="message small">

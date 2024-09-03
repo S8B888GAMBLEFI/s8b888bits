@@ -71,8 +71,8 @@ class Roadmap extends React.Component {
                                 <li>Announce Partnerships and Collaborations</li>
                                 - Forge partnerships with relevant projects, influencers, and industry players.
                                 - Collaborate on joint initiatives, events or marketing campaigns to expand the token's reach.
-                                <li>Announce First Wheel Of Dragon</li>
-                                First Burn Supply Event with Mega Price in USDC
+                                <li>Announcing Utils and Benefits</li>
+                                Wheel of Dragon - First Burn Supply Event, Prize pool in USDC and more...
                             </ul>
                         </div>
                     </div>
